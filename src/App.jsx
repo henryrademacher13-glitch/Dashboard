@@ -1,127 +1,120 @@
-import { useState } from 'react';
-import { Plus, ChevronLeft, ChevronRight, LayoutGrid, CalendarDays, BarChart2 } from 'lucide-react';
-import { useHabitStore } from './store';
-import HabitCard from './components/HabitCard';
-import WeekView from './components/WeekView';
-import StatsPanel from './components/StatsPanel';
-import AddHabitModal from './components/AddHabitModal';
+import { useState, useEffect, useCallback } from 'react';
+import { CheckSquare, Calendar, StickyNote, Timer, LayoutDashboard, Play } from 'lucide-react';
+import StoreProvider from './StoreProvider';
+import { useStore, timerRemaining } from './store';
+import TodayView from './views/TodayView';
+import TasksView from './views/TasksView';
+import CalendarView from './views/CalendarView';
+import NotesView from './views/NotesView';
+import FocusView from './views/FocusView';
 import './App.css';
 
-function formatDate(d) {
-  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+const NAV = [
+  { id: 'today', label: 'Today', icon: LayoutDashboard },
+  { id: 'tasks', label: 'Tasks', icon: CheckSquare },
+  { id: 'calendar', label: 'Calendar', icon: Calendar },
+  { id: 'notes', label: 'Notes', icon: StickyNote },
+  { id: 'focus', label: 'Focus', icon: Timer },
+];
+
+function fmtClock(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-export default function App() {
-  const [view, setView] = useState('today');
-  const [showAdd, setShowAdd] = useState(false);
-  const [weekOffset, setWeekOffset] = useState(0);
-  const store = useHabitStore();
+function Shell() {
+  const { state, dispatch } = useStore();
+  const [route, setRoute] = useState({ view: 'today' });
+  const [toast, setToast] = useState(null);
+  const [tick, setTick] = useState(0);
 
-  const today = new Date();
-  const completedToday = store.habits.filter(h => store.isComplete(h.id)).length;
+  const navigate = useCallback((view, params = {}) => setRoute({ view, ...params }), []);
+
+  // Global timer heartbeat: ticks every second while a timer runs, completes it
+  // from any view, and mirrors the countdown into the document title.
+  const timer = state.timer;
+  useEffect(() => {
+    if (!timer) {
+      document.title = 'Momentum';
+      return;
+    }
+    const id = setInterval(() => {
+      const remaining = timerRemaining(timer);
+      setTick(t => t + 1);
+      if (!timer.pausedAt) {
+        document.title = `${fmtClock(remaining)} · ${timer.mode === 'focus' ? 'Focus' : 'Break'} — Momentum`;
+      }
+      if (remaining <= 0 && !timer.pausedAt) {
+        dispatch({ type: 'timer/complete' });
+        setToast(timer.mode === 'focus' ? 'Focus session complete — nice work! 🎉' : 'Break over — ready for another round?');
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, [timer, dispatch]);
+
+  useEffect(() => {
+    if (!toast) return;
+    const id = setTimeout(() => setToast(null), 5000);
+    return () => clearTimeout(id);
+  }, [toast]);
+
+  const remaining = timerRemaining(timer);
+  const timerTask = timer?.taskId ? state.tasks.find(t => t.id === timer.taskId) : null;
 
   return (
     <div className="app">
-      <header className="app-header">
-        <div className="header-left">
-          <h1>Habit Tracker</h1>
-          <span className="today-label">{formatDate(today)}</span>
+      <aside className="sidebar">
+        <div className="brand">
+          <span className="brand-mark">◆</span>
+          <span className="brand-name">Momentum</span>
         </div>
-        <div className="header-right">
-          <div className="progress-pill">
-            {completedToday}/{store.habits.length} today
-          </div>
-          <button className="add-btn" onClick={() => setShowAdd(true)}>
-            <Plus size={18} /> Add Habit
+        <nav className="side-nav">
+          {NAV.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              className={route.view === id ? 'nav-item active' : 'nav-item'}
+              onClick={() => navigate(id)}
+              data-nav={id}
+            >
+              <Icon size={17} />
+              <span>{label}</span>
+              {id === 'tasks' && state.tasks.filter(t => !t.done).length > 0 && (
+                <span className="nav-badge">{state.tasks.filter(t => !t.done).length}</span>
+              )}
+            </button>
+          ))}
+        </nav>
+        {timer && route.view !== 'focus' && (
+          <button className="timer-pill" onClick={() => navigate('focus')} data-testid="timer-pill">
+            <Play size={13} />
+            <span className="timer-pill-time">{fmtClock(remaining)}</span>
+            <span className="timer-pill-label">{timerTask ? timerTask.title : timer.mode === 'focus' ? 'Focusing' : 'Break'}</span>
           </button>
-        </div>
-      </header>
-
-      <nav className="tab-nav">
-        <button className={view === 'today' ? 'active' : ''} onClick={() => setView('today')}>
-          <LayoutGrid size={15} /> Today
-        </button>
-        <button className={view === 'week' ? 'active' : ''} onClick={() => setView('week')}>
-          <CalendarDays size={15} /> Week
-        </button>
-        <button className={view === 'stats' ? 'active' : ''} onClick={() => setView('stats')}>
-          <BarChart2 size={15} /> Stats
-        </button>
-      </nav>
-
-      <main className="app-main">
-        {view === 'today' && (
-          <section>
-            {store.habits.length === 0 ? (
-              <div className="empty-state">
-                <span>No habits yet.</span>
-                <button className="primary-btn" onClick={() => setShowAdd(true)}>Add your first habit</button>
-              </div>
-            ) : (
-              <div className="habit-list">
-                {store.habits.map(h => (
-                  <HabitCard
-                    key={h.id}
-                    habit={h}
-                    isComplete={store.isComplete(h.id)}
-                    streak={store.getStreak(h.id)}
-                    rate={store.getCompletionRate(h.id)}
-                    onToggle={store.toggleCompletion}
-                    onDelete={store.deleteHabit}
-                  />
-                ))}
-              </div>
-            )}
-          </section>
         )}
+      </aside>
 
-        {view === 'week' && (
-          <section>
-            <div className="week-nav">
-              <button className="icon-btn" onClick={() => setWeekOffset(w => w - 1)}>
-                <ChevronLeft size={18} />
-              </button>
-              <span>{weekOffset === 0 ? 'This week' : weekOffset === -1 ? 'Last week' : `${Math.abs(weekOffset)} weeks ago`}</span>
-              <button className="icon-btn" onClick={() => setWeekOffset(w => w + 1)} disabled={weekOffset >= 0}>
-                <ChevronRight size={18} />
-              </button>
-            </div>
-            <WeekView
-              habits={store.habits}
-              completions={store.completions}
-              onToggle={store.toggleCompletion}
-              weekOffset={weekOffset}
-            />
-          </section>
-        )}
-
-        {view === 'stats' && (
-          <section>
-            <StatsPanel habits={store.habits} getDailyTotals={store.getDailyTotals} />
-            <div className="stats-cards">
-              {store.habits.map(h => (
-                <div key={h.id} className="stat-card" style={{ '--accent': h.color }}>
-                  <span className="stat-emoji">{h.emoji}</span>
-                  <span className="stat-name">{h.name}</span>
-                  <div className="stat-row">
-                    <span className="stat-label">30-day rate</span>
-                    <span className="stat-value">{store.getCompletionRate(h.id)}%</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${store.getCompletionRate(h.id)}%` }} />
-                  </div>
-                  <div className="stat-row">
-                    <span className="stat-label">Streak</span>
-                    <span className="stat-value">{store.getStreak(h.id)}d 🔥</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+      <main className="content" data-tick={tick}>
+        {route.view === 'today' && <TodayView navigate={navigate} />}
+        {route.view === 'tasks' && <TasksView navigate={navigate} />}
+        {route.view === 'calendar' && <CalendarView navigate={navigate} initialDate={route.date} />}
+        {route.view === 'notes' && <NotesView navigate={navigate} initialNoteId={route.noteId} />}
+        {route.view === 'focus' && <FocusView initialTaskId={route.taskId} />}
       </main>
 
-      {showAdd && <AddHabitModal onAdd={store.addHabit} onClose={() => setShowAdd(false)} />}
+      {toast && (
+        <div className="toast" data-testid="toast" onClick={() => setToast(null)}>
+          {toast}
+        </div>
+      )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <StoreProvider>
+      <Shell />
+    </StoreProvider>
   );
 }
