@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scalia — Marketing systems for auto detailers</title>
-<meta name="description" content="Scalia runs Meta lead generation ads, instant SMS follow-up, and high-converting websites for auto detailers and local service businesses. One operator, a complete system.">
+<title>Results — Scalia</title>
+<meta name="description" content="Real results from auto detailing clients running Scalia's full stack: Meta ads, instant SMS follow-up, and booking-first websites.">
 <style>
 /* ============================================================
    SCALIA — single-file brand site
@@ -515,23 +515,98 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
 .foot-links a{font-size:.85rem;font-weight:600;color:var(--ink-soft);text-decoration:none}
 .foot-links a:hover{color:var(--blue)}
 </style>
+<style>
+/* ---------- subpage components ---------- */
+.page-hero{padding:82px 0 66px;position:relative;overflow:hidden}
+.page-hero::before{
+  content:"";position:absolute;inset:-40% -30% auto auto;width:75%;height:130%;
+  background:radial-gradient(ellipse at 70% 30%,rgba(46,107,255,.10),transparent 62%);
+  pointer-events:none;animation:washDrift 16s ease-in-out infinite alternate;
+}
+.page-hero h1{font-size:clamp(2.3rem,4.8vw,3.4rem);font-weight:800;margin:18px 0;max-width:15em}
+.page-hero .lede{font-size:1.12rem;color:var(--ink-soft);max-width:36em;position:relative}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.split-copy h2{margin-top:14px}
+.split-copy p{color:var(--ink-soft);margin-bottom:16px;max-width:34em}
+.split.flip .split-copy{order:2}
+.ticks{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.ticks li{display:flex;gap:10px;align-items:baseline;color:var(--ink-soft);font-size:.95rem}
+.ticks li::before{content:"\2192";color:var(--g1);font-weight:700;flex:none}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+.fact{border:1px solid var(--ice-line);border-radius:12px;padding:20px 22px;font-size:.9rem;color:var(--ink-soft);background:#fff}
+.fact strong{display:block;font-family:var(--display);color:var(--ink);font-size:1.05rem;margin-bottom:5px}
+.nurt{list-style:none;border-left:2px solid var(--ice-line);margin-left:8px;display:flex;flex-direction:column}
+.nurt li{padding:15px 0 15px 28px;position:relative}
+.nurt li::before{content:"";position:absolute;left:-8px;top:22px;width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid var(--g1)}
+.nurt li:last-child::before{background:var(--grad);border-color:transparent}
+.nurt .when{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.1em;color:var(--blue);text-transform:uppercase;display:block;margin-bottom:4px}
+.nurt strong{font-family:var(--display);font-size:1.02rem;display:block;margin-bottom:3px}
+.nurt p{font-size:.88rem;color:var(--ink-soft)}
+html.js .nurt li{opacity:0;transform:translateX(18px);transition:opacity .5s ease,transform .5s ease}
+html.js .nurt.in li{opacity:1;transform:none}
+html.js .nurt.in li:nth-child(2){transition-delay:.12s}
+html.js .nurt.in li:nth-child(3){transition-delay:.24s}
+html.js .nurt.in li:nth-child(4){transition-delay:.36s}
+html.js .nurt.in li:nth-child(5){transition-delay:.48s}
+html.js .nurt.in li:nth-child(6){transition-delay:.6s}
+.browser{border:1px solid var(--ice-line);border-radius:16px;overflow:hidden;background:#fff;
+  box-shadow:0 30px 70px -30px rgba(10,46,122,.30),0 4px 18px -6px rgba(10,46,122,.10)}
+.browser-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;background:var(--ice);border-bottom:1px solid var(--ice-line)}
+.browser-bar i{width:9px;height:9px;border-radius:50%;background:var(--ice-line)}
+.browser-url{margin-left:8px;flex:1;background:#fff;border-radius:99px;padding:5px 14px;font-family:var(--mono);font-size:.68rem;color:var(--ink-faint)}
+.bpage-hero{background:var(--grad);color:#fff;padding:30px 20px;text-align:center}
+.bpage-hero .t{font-family:var(--display);font-weight:900;font-size:1.25rem;letter-spacing:-.01em}
+.bpage-hero .s{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#C6D6FF;display:block;margin-top:6px}
+.bpage-hero .b{display:inline-block;margin-top:12px;background:#fff;color:var(--g2);font-family:var(--display);font-weight:700;font-size:.74rem;padding:8px 16px;border-radius:8px}
+.bpage-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:16px}
+.bpage-row i{height:46px;border-radius:9px;background:var(--ice)}
+.scorez{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.score{text-align:center;border:1px solid var(--ice-line);border-radius:12px;padding:15px 6px;background:#fff}
+.score .n{font-family:var(--display);font-weight:800;font-size:1.55rem;color:var(--blue);font-variant-numeric:tabular-nums;display:block}
+.score span{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.case{border:1px solid var(--ice-line);border-radius:var(--radius);padding:38px;background:linear-gradient(180deg,#fff 0%,var(--ice) 170%);margin-bottom:28px}
+.case-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+.case-top .who{font-family:var(--display);font-weight:800;font-size:1.3rem;letter-spacing:-.01em}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;color:var(--blue);background:var(--ice);border:1px solid var(--ice-line);padding:5px 11px;border-radius:99px}
+.case blockquote{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.01em;margin:14px 0 6px;max-width:30em}
+.case blockquote::before{content:"\201C";color:var(--g1)}
+.case blockquote::after{content:"\201D";color:var(--g1)}
+.case .attr{font-family:var(--mono);font-size:.68rem;color:var(--ink-faint);letter-spacing:.05em}
+.case-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 18px}
+.cstat{background:var(--ice);border-radius:12px;padding:17px 19px}
+.cstat .n{font-family:var(--display);font-weight:800;font-size:1.75rem;font-variant-numeric:tabular-nums;display:block;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.cstat span{font-size:.78rem;color:var(--ink-soft)}
+.case>p{color:var(--ink-soft);font-size:.96rem;max-width:44em}
+.op-card{background:#fff;border:1px solid var(--ice-line);border-radius:var(--radius);padding:34px;text-align:left}
+.op-face{width:74px;height:74px;border-radius:22px;background:var(--grad);display:grid;place-items:center;
+  color:#fff;font-family:var(--display);font-weight:900;font-size:1.7rem;box-shadow:var(--shadow-blue);margin-bottom:18px}
+.op-card h3{font-size:1.3rem;font-weight:800}
+.op-card .role{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:4px 0 16px}
+.op-card p{font-size:.92rem;color:var(--ink-soft)}
+.nav-links a.here{color:var(--blue)}
+@media(max-width:900px){
+  .split{grid-template-columns:1fr;gap:42px}
+  .split.flip .split-copy{order:0}
+  .facts,.case-stats{grid-template-columns:1fr}
+  .scorez{grid-template-columns:repeat(2,1fr)}
+  .case{padding:26px}
+}
+</style>
 </head>
 <body>
 
 <div class="progress" aria-hidden="true"><i id="pbar"></i></div>
 
-<!-- ======================= NAV ======================= -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="#top">
-      <span class="logo-mark">S</span>
-      Scalia
-    </a>
+    <a class="logo" href="index.html"><span class="logo-mark">S</span>Scalia</a>
     <nav aria-label="Main">
       <ul class="nav-links">
         <li><a href="services.html">Services</a></li>
-        <li><a href="#how">How it works</a></li>
-        <li><a href="results.html">Results</a></li>
+        <li><a href="index.html#how">How it works</a></li>
+        <li><a href="results.html" class="here">Results</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
     </nav>
@@ -539,396 +614,103 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
   </div>
 </header>
 
-<!-- ======================= HERO ======================= -->
 <main id="top">
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">Marketing systems for auto detailers</p>
-      <h1>Your leads get a text in <span class="grad-text">under a minute.</span> Your competitors call back tomorrow.</h1>
-      <p class="lede">Scalia runs your Meta ads, follows up with every lead instantly by SMS, and books jobs straight into your calendar — while you're in the bay working. One operator. A complete system. No agency bloat.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="contact.html">Book a free strategy call <span class="arrow">→</span></a>
-        <a class="btn btn-ghost" href="#how">See the system</a>
-      </div>
-      <p class="hero-note"><span class="dot"></span>Built for detailers. Works for any local service that books appointments.</p>
-    </div>
 
-    <div class="phone-zone rv">
-      <div class="phone" data-plx="0.045" aria-label="Example of an automated SMS conversation booking a detailing job">
-        <div class="phone-top">
-          <span class="avatar">PD</span>
-          <div class="who">
-            <strong>PrimeShine Detailing</strong>
-            <span>via Scalia · automated</span>
-          </div>
-        </div>
-        <p class="lead-pill">⚡ New lead — “Full Detail Special” ad</p>
-        <div class="thread" id="thread">
-          <div class="msg out">Hey Marcus! PrimeShine Detailing here — saw you grabbed the Full Detail Special. What are we working with, and roughly what year?<span class="t">2:14 PM · sent 41s after opt-in</span></div>
-          <div class="msg in">2019 Tahoe. Interior’s rough lol. How soon can you get it in?<span class="t">2:19 PM</span></div>
-          <div class="msg out">We can fix that 👍 I’ve got Thursday 10am or Friday 2pm open — which works better?<span class="t">2:19 PM</span></div>
-          <div class="msg in">Thursday works<span class="t">2:21 PM</span></div>
-          <div class="booked-chip">✓ Booked — Thu 10:00 AM · synced to calendar</div>
-        </div>
-      </div>
-      <div class="speed-badge" data-plx="0.12">
-        <strong class="grad-text">41s</strong>
-        first text after<br>the lead opts in
-      </div>
-    </div>
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Results</p>
+    <h1>The system, <span class="grad-text">in the wild.</span></h1>
+    <p class="lede">Numbers from detailing clients running the full Scalia stack &mdash; ads, follow-up, and a site that books.</p>
   </div>
 </section>
 
-<!-- ======================= MARQUEE ======================= -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="mq">MORE BOOKED JOBS<i>⚡</i><b>FIRST TEXT IN 60 SECONDS</b><i>⚡</i>META ADS THAT PULL<i>⚡</i><b>FOLLOW-UP ON AUTOPILOT</b><i>⚡</i>WEBSITES THAT CONVERT<i>⚡</i></span>
-    <span class="mq">MORE BOOKED JOBS<i>⚡</i><b>FIRST TEXT IN 60 SECONDS</b><i>⚡</i>META ADS THAT PULL<i>⚡</i><b>FOLLOW-UP ON AUTOPILOT</b><i>⚡</i>WEBSITES THAT CONVERT<i>⚡</i></span>
-  </div>
-</div>
-
-<!-- ======================= STATS STRIP ======================= -->
-<section class="stats-strip" aria-label="Why speed matters">
+<!-- ⚠️ PLACEHOLDER NUMBERS & QUOTES — replace everything on this page with real client results before launch. -->
+<section class="stats-strip" aria-label="Aggregate results">
   <div class="wrap">
     <div class="stats-grid">
-      <div class="stat rv">
-        <span class="num grad-text" data-count="78" data-suffix="%">78%</span>
-        <p>of customers buy from the business that responds to them first.</p>
-        <span class="src">SOURCE: LEAD RESPONSE INDUSTRY RESEARCH</span>
-      </div>
-      <div class="stat rv">
-        <span class="num grad-text" data-count="21" data-suffix="×">21×</span>
-        <p>more likely to qualify a lead when you reply within 5 minutes instead of 30.</p>
-        <span class="src">SOURCE: MIT / INSIDESALES LEAD RESPONSE STUDY</span>
-      </div>
-      <div class="stat rv">
-        <span class="num grad-text" data-count="100" data-suffix="%">100%</span>
-        <p>of your leads followed up — automatically, every time, even mid-polish on a Saturday.</p>
-        <span class="src">THE SCALIA SYSTEM</span>
-      </div>
+      <div class="stat rv"><span class="num grad-text" data-count="120" data-suffix="+">120+</span><p>jobs booked for clients in the last six months.</p><span class="src">ACROSS ALL ACTIVE CLIENTS</span></div>
+      <div class="stat rv"><span class="num grad-text" data-count="12" data-prefix="$">$12</span><p>typical cost per lead across detailing campaigns.</p><span class="src">RANGE: $9&ndash;14 BY MARKET</span></div>
+      <div class="stat rv"><span class="num grad-text" data-count="60" data-prefix="&lt;" data-suffix="s">&lt;60s</span><p>median first response to every lead, around the clock.</p><span class="src">THE SCALIA SYSTEM</span></div>
     </div>
   </div>
 </section>
 
-<!-- ======================= PROBLEM ======================= -->
 <section class="section">
   <div class="wrap">
     <div class="section-head rv">
-      <p class="eyebrow">The problem</p>
-      <h2>Every detailer tries ads eventually. Most burn the budget.</h2>
-      <p>The ads usually aren't the problem — what happens in the first five minutes after the lead comes in is.</p>
+      <p class="eyebrow">Case studies</p>
+      <h2>What it looks like per shop.</h2>
     </div>
-    <div class="problem-grid">
-      <div class="problem-card rv">
-        <span class="x-mark" aria-hidden="true">✗</span>
-        <h3>Leads go cold while you work</h3>
-        <p>You're elbow-deep in an interior. The lead who filled out your form 20 minutes ago already texted the next detailer on their feed.</p>
+
+    <article class="case rv">
+      <div class="case-top">
+        <span class="who">Mobile detailer &middot; single truck</span>
+        <div class="chips"><span class="chip">META ADS</span><span class="chip">SMS FOLLOW-UP</span><span class="chip">WEBSITE</span></div>
       </div>
-      <div class="problem-card rv">
-        <span class="x-mark" aria-hidden="true">✗</span>
-        <h3>Generic agencies don't know detailing</h3>
-        <p>They'll run the same template they sell dentists and roofers, charge a retainer that eats your margin, and report on "impressions."</p>
+      <blockquote>I stopped answering my phone in the middle of jobs. The calendar just fills.</blockquote>
+      <span class="attr">OWNER &mdash; PLACEHOLDER QUOTE</span>
+      <div class="case-stats">
+        <div class="cstat"><span class="n" data-count="38">38</span><span>jobs booked in the first 60 days</span></div>
+        <div class="cstat"><span class="n" data-count="11" data-prefix="$">$11</span><span>average cost per lead</span></div>
+        <div class="cstat"><span class="n" data-count="41" data-suffix="s">41s</span><span>median first-text time</span></div>
       </div>
-      <div class="problem-card rv">
-        <span class="x-mark" aria-hidden="true">✗</span>
-        <h3>No system = no follow-up</h3>
-        <p>Most booked jobs come from the 2nd–6th touch. If nothing is nurturing the leads who didn't answer, you paid for them twice — once in ad spend, once in lost work.</p>
+      <p>Started from zero paid traffic. A full-detail special campaign, instant SMS follow-up, and a one-page booking site &mdash; running on $30/day of ad spend inside a 15-mile radius.</p>
+    </article>
+
+    <article class="case rv">
+      <div class="case-top">
+        <span class="who">Detail studio &middot; two bays</span>
+        <div class="chips"><span class="chip">META ADS</span><span class="chip">SMS FOLLOW-UP</span></div>
       </div>
-    </div>
+      <blockquote>Ceramic coating inquiries used to sit in Messenger for days. Now they get answered in under a minute.</blockquote>
+      <span class="attr">OWNER &mdash; PLACEHOLDER QUOTE</span>
+      <div class="case-stats">
+        <div class="cstat"><span class="n" data-count="17">17</span><span>ceramic &amp; PPF consults booked in 45 days</span></div>
+        <div class="cstat"><span class="n" data-count="14" data-prefix="$">$14</span><span>cost per lead on a premium offer</span></div>
+        <div class="cstat"><span class="n" data-count="4" data-suffix="&times;">4&times;</span><span>more leads answered vs. manual follow-up</span></div>
+      </div>
+      <p>Higher-ticket services need more trust and more touches. The nurture sequence carried leads from &ldquo;just curious&rdquo; to a booked consult &mdash; without the owner touching his phone.</p>
+    </article>
+
+    <p class="hero-note rv" style="margin-top:6px"><span class="dot"></span>Every market is different. The call is where we work out what your numbers could look like.</p>
   </div>
 </section>
 
-<!-- ======================= SERVICES ======================= -->
-<section class="section" id="services">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">What Scalia runs for you</p>
-      <h2>Three pieces. One machine.</h2>
-      <p>Ads bring the leads in, automation books them, and your website closes the ones who want to check you out first. Each piece works alone — together they compound.</p>
-    </div>
-    <div class="svc-grid">
-      <article class="svc rv">
-        <span class="svc-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M3 11l18-7-7 18-2.5-7.5L3 11z"/></svg>
-        </span>
-        <h3>Meta Lead Generation</h3>
-        <p>Facebook &amp; Instagram campaigns built around detailing offers that actually pull — ceramic coating, interior resets, full-detail specials. You get names and numbers, not likes.</p>
-        <ul>
-          <li>Offer + creative built for your market</li>
-          <li>Targeted to your real service area</li>
-          <li>Straightforward weekly reporting: leads, cost per lead, booked jobs</li>
-        </ul>
-      </article>
-      <article class="svc rv">
-        <span class="svc-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"/></svg>
-        </span>
-        <h3>Instant Follow-Up Automation</h3>
-        <p>Every lead gets a personal text within a minute, then a nurture sequence until they book or say stop. Runs on GoHighLevel — built, tuned, and watched by me daily.</p>
-        <ul>
-          <li>First SMS in under 60 seconds, 24/7</li>
-          <li>AI-assisted conversation trained on your services and prices</li>
-          <li>Jobs booked straight into your calendar</li>
-        </ul>
-      </article>
-      <article class="svc rv">
-        <span class="svc-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg>
-        </span>
-        <h3>Websites That Book Jobs</h3>
-        <p>Fast, clean, single-page sites that load instantly on a phone and drive one action: booking. No page builders, no plugins, nothing to break.</p>
-        <ul>
-          <li>Designed and live within days, not months</li>
-          <li>Built mobile-first — where your customers actually are</li>
-          <li>Wired directly into your booking calendar and follow-up system</li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= HOW IT WORKS ======================= -->
-<section class="section" id="how">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">How it works</p>
-      <h2>From ad tap to booked bay — <span class="grad-text">on the clock.</span></h2>
-      <p>Keep scrolling — this is the exact sequence that runs after you say go, from building the campaign to a job in your bay. The timestamps are the whole point.</p>
-    </div>
-    <div class="scrolly">
-      <div class="s-stage-wrap" aria-hidden="true">
-        <div class="s-stage">
-          <div class="frame" id="frame">
-            <!-- scene 1: campaign build -->
-            <div class="scene active" data-scene="0">
-              <p class="mock-title">Meta Ads Manager · New campaign</p>
-              <div class="mrow"><span class="k">OBJECTIVE</span><span class="v">Leads<span class="ok">✓</span></span></div>
-              <div class="mrow"><span class="k">OFFER</span><span class="v">Full Detail Special<span class="ok">✓</span></span></div>
-              <div class="mrow"><span class="k">AUDIENCE</span><span class="v">15 mi around your shop<span class="ok">✓</span></span></div>
-              <div class="mrow"><span class="k">BUDGET</span><span class="v">$30 / day<span class="ok">✓</span></span></div>
-              <div class="mrow"><span class="k">FOLLOW-UP</span><span class="v">Wired before launch<span class="ok">✓</span></span></div>
-              <div class="mock-btn">Publish campaign</div>
-            </div>
-            <!-- scene 2: ad live in the feed -->
-            <div class="scene" data-scene="1">
-              <p class="mock-title">Instagram · your customer's feed</p>
-              <div class="post">
-                <div class="post-top">
-                  <span class="avatar">PD</span>
-                  <div><strong>PrimeShine Detailing</strong><span>Sponsored</span></div>
-                </div>
-                <div class="post-img">
-                  <div>
-                    <p class="big">FULL DETAIL<br>SPECIAL</p>
-                    <p class="sub">Interior + exterior · This week only</p>
-                  </div>
-                </div>
-                <div class="post-cta">Claim the offer <span class="pill">Book Now</span></div>
-              </div>
-              <span class="live-chip">Active · spending $30/day</span>
-            </div>
-            <!-- scene 3: lead form -->
-            <div class="scene" data-scene="2">
-              <p class="mock-title">Lead form · 2 taps, no website</p>
-              <div class="finp"><label>Name</label><span class="val">Marcus T.</span></div>
-              <div class="finp"><label>Phone</label><span class="val">(555) 214-8842</span></div>
-              <div class="finp"><label>Vehicle</label><span class="val">SUV / Truck</span></div>
-              <div class="mock-btn">Get my free quote</div>
-              <span class="lead-chip">⚡ Lead received · 2:13 PM</span>
-            </div>
-            <!-- scene 4: instant SMS -->
-            <div class="scene" data-scene="3">
-              <p class="mock-title">SMS · sent 41s after opt-in</p>
-              <div class="thread">
-                <div class="msg out">Hey Marcus! PrimeShine Detailing here — saw you grabbed the Full Detail Special. What are we working with?<span class="t">2:14 PM · automated</span></div>
-                <div class="msg in">2019 Tahoe. How soon can you get it in?<span class="t">2:19 PM</span></div>
-                <div class="msg out">Thursday 10am or Friday 2pm — which works better?<span class="t">2:19 PM</span></div>
-                <div class="msg in">Thursday works<span class="t">2:21 PM</span></div>
-              </div>
-            </div>
-            <!-- scene 5: booked -->
-            <div class="scene" data-scene="4">
-              <p class="mock-title">Your calendar · Thursday</p>
-              <div class="cal">
-                <div class="cal-head">Thursday <span>Bay 1</span></div>
-                <div class="slot"><span class="tm">9:00 AM</span> Open</div>
-                <div class="slot booked"><span class="tm">10:00 AM</span><span class="who">Marcus — Full Detail · 2019 Tahoe</span><span class="ok">✓</span></div>
-                <div class="slot"><span class="tm">1:30 PM</span> Open</div>
-              </div>
-              <span class="live-chip">Confirmed · reminders sent automatically</span>
-              <span class="lead-chip">Total time from ad tap to booked: 8 minutes</span>
-            </div>
-            <div class="s-dots" id="sdots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="s-steps" id="ssteps">
-        <div class="s-step active">
-          <div class="s-step-card">
-            <span class="s-tag">DAY 0 · BUILD</span>
-            <h3>I build the campaign</h3>
-            <p>The offer, the creative, and the targeting — written for your market, not a template. The follow-up system gets wired in before a single dollar of ad spend moves.</p>
-          </div>
-        </div>
-        <div class="s-step">
-          <div class="s-step-card">
-            <span class="s-tag">DAY 1 · LIVE</span>
-            <h3>Your ad hits the feed</h3>
-            <p>A detailing offer your neighbors actually stop scrolling for, shown only inside your service area, on a daily budget you control.</p>
-          </div>
-        </div>
-        <div class="s-step">
-          <div class="s-step-card">
-            <span class="s-tag">2:13 PM · LEAD IN</span>
-            <h3>A lead taps it</h3>
-            <p>Marcus wants his Tahoe fixed. Name, number, and vehicle captured in two taps — he never has to leave the app, and you don't need a website for this to work.</p>
-          </div>
-        </div>
-        <div class="s-step">
-          <div class="s-step-card">
-            <span class="s-tag">2:14 PM · 41s LATER</span>
-            <h3>The system texts him instantly</h3>
-            <p>By name, about the exact offer he tapped — while every other detailer he contacted is planning to "circle back tomorrow."</p>
-          </div>
-        </div>
-        <div class="s-step">
-          <div class="s-step-card">
-            <span class="s-tag">2:21 PM · BOOKED</span>
-            <h3>Straight into your calendar</h3>
-            <p>Confirmed, reminded, and in your bay Thursday at 10. You were polishing a hood the entire time. Leads that go quiet get nurtured automatically until they book.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= WHY SCALIA ======================= -->
-<section class="section" id="why">
-  <div class="wrap why-grid">
-    <div class="why-copy rv">
-      <p class="eyebrow">Why Scalia</p>
-      <h2>One operator. The whole system.</h2>
-      <p>Scalia is a one-person agency — on purpose. <strong>The person you talk to is the person who builds your ads, writes your follow-up, and checks your numbers every morning.</strong> No account managers, no handoffs, no "let me check with the team."</p>
-      <p>I build my own tools — a custom CRM, my own automation stack, the same speed-to-lead playbook I sell — and I run Scalia's own growth on it. If it doesn't work for me, it doesn't get sold to you.</p>
-      <p>Because it's just me, capacity is capped. I take on a limited number of clients and keep them.</p>
-    </div>
-    <aside class="stack-card rv" aria-label="What running your account actually involves">
-      <h3>Under the hood</h3>
-      <ul class="stack-list">
-        <li><span class="what">Campaigns</span><span class="how">Meta Ads Manager, hand-built</span></li>
-        <li><span class="what">Follow-up engine</span><span class="how">GoHighLevel + trained AI bot</span></li>
-        <li><span class="what">Pipeline &amp; reporting</span><span class="how">Custom-built CRM</span></li>
-        <li><span class="what">Workflow automation</span><span class="how">n8n orchestration</span></li>
-        <li><span class="what">Your website</span><span class="how">Hand-coded, single file, fast</span></li>
-      </ul>
-    </aside>
-  </div>
-</section>
-
-<!-- ======================= RESULTS ======================= -->
-<!-- ⚠️ PLACEHOLDER NUMBERS — replace all three tiles with real client results before launch. -->
-<section class="section" id="results">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">Results</p>
-      <h2>What the system produces.</h2>
-      <p>Recent numbers from detailing clients running the full Scalia stack.</p>
-    </div>
-    <div class="res-grid">
-      <div class="res rv">
-        <span class="num" data-count="38">38</span>
-        <h3>Jobs booked in 60 days</h3>
-        <p>Mobile detailer, single-truck operation, starting from zero paid traffic.</p>
-      </div>
-      <div class="res rv">
-        <span class="num" data-count="11" data-prefix="$">$11</span>
-        <h3>Average cost per lead</h3>
-        <p>Full-detail special campaign — each lead texted within the first minute.</p>
-      </div>
-      <div class="res rv">
-        <span class="num" data-count="60" data-prefix="<" data-suffix="s">&lt;60s</span>
-        <h3>Median first response</h3>
-        <p>Every lead, every hour of the day — including the ones that come in at 11 PM.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= FAQ ======================= -->
-<section class="section" id="faq">
-  <div class="wrap">
-    <div class="section-head rv">
-      <p class="eyebrow">FAQ</p>
-      <h2>Straight answers.</h2>
-    </div>
-    <div class="faq-list rv">
-      <details>
-        <summary>What does it cost?</summary>
-        <p>Pricing depends on which pieces you need — ads only, follow-up only, or the full system. We figure that out on the strategy call, and I'll tell you plainly if I don't think the numbers work for your business. No long-term contracts.</p>
-      </details>
-      <details>
-        <summary>How fast until I see leads?</summary>
-        <p>Ads are typically live within the first week. Leads usually start arriving within the first 48 hours of launch; booked jobs follow as the follow-up sequences do their work.</p>
-      </details>
-      <details>
-        <summary>Do I need a big ad budget?</summary>
-        <p>No. Most detailing clients start around $20–40/day in ad spend. The follow-up system is what makes a modest budget go far — you stop paying for leads that nobody answers.</p>
-      </details>
-      <details>
-        <summary>I'm not a detailer. Can you still help?</summary>
-        <p>If you're a local service business that books appointments — mobile mechanics, pressure washing, lawn care, cleaning — the same system applies. Detailing is where I've gone deepest, but the machine is the same.</p>
-      </details>
-      <details>
-        <summary>Who am I actually working with?</summary>
-        <p>Me. Scalia is a solo operation by design — one person who builds, runs, and answers for everything. You'll have a direct line, not a ticket queue.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= MARQUEE (reverse) ======================= -->
 <div class="marquee marquee-rev" aria-hidden="true">
   <div class="marquee-track">
-    <span class="mq"><b>BUILT FOR DETAILERS</b><i>⚡</i>ONE OPERATOR<i>⚡</i><b>NO AGENCY BLOAT</b><i>⚡</i>LEADS TEXTED, NURTURED, BOOKED<i>⚡</i><b>YOUR CALENDAR FILLS ITSELF</b><i>⚡</i></span>
-    <span class="mq"><b>BUILT FOR DETAILERS</b><i>⚡</i>ONE OPERATOR<i>⚡</i><b>NO AGENCY BLOAT</b><i>⚡</i>LEADS TEXTED, NURTURED, BOOKED<i>⚡</i><b>YOUR CALENDAR FILLS ITSELF</b><i>⚡</i></span>
+    <span class="mq"><b>BUILT FOR DETAILERS</b><i>&#9889;</i>ONE OPERATOR<i>&#9889;</i><b>NO AGENCY BLOAT</b><i>&#9889;</i>LEADS TEXTED, NURTURED, BOOKED<i>&#9889;</i><b>YOUR CALENDAR FILLS ITSELF</b><i>&#9889;</i></span>
+    <span class="mq"><b>BUILT FOR DETAILERS</b><i>&#9889;</i>ONE OPERATOR<i>&#9889;</i><b>NO AGENCY BLOAT</b><i>&#9889;</i>LEADS TEXTED, NURTURED, BOOKED<i>&#9889;</i><b>YOUR CALENDAR FILLS ITSELF</b><i>&#9889;</i></span>
   </div>
 </div>
 
-<!-- ======================= FINAL CTA ======================= -->
 <section class="cta-band" id="book">
   <div class="wrap">
     <div class="cta-inner rv">
       <p class="eyebrow">Next step</p>
-      <h2>Ready to fill the bay?</h2>
-      <p>Book a free 20-minute strategy call. We'll look at your market, your offers, and what the system would look like for your shop. If I can't help, I'll tell you — and point you somewhere that can.</p>
+      <h2>Want numbers like these?</h2>
+      <p>Book a free 20-minute strategy call. We'll look at your market, your offers, and what the system would produce for your shop &mdash; and I'll tell you honestly if it won't.</p>
       <div class="cta-actions">
         <!-- REPLACE: booking link (GHL calendar / Calendly URL) -->
-        <a class="btn btn-primary" href="contact.html">Book a free strategy call <span class="arrow">→</span></a>
+        <a class="btn btn-primary" href="contact.html">Book a free strategy call <span class="arrow">&#8594;</span></a>
         <!-- REPLACE: your real email -->
         <a class="btn btn-ghost" href="mailto:hello@scalia.agency">hello@scalia.agency</a>
       </div>
     </div>
   </div>
 </section>
+
 </main>
 
-<!-- ======================= FOOTER ======================= -->
 <footer>
   <div class="wrap foot">
-    <a class="logo" href="#top" style="font-size:1.1rem">
-      <span class="logo-mark" style="width:24px;height:24px;font-size:.8rem">S</span>
-      Scalia
-    </a>
+    <a class="logo" href="index.html" style="font-size:1.1rem"><span class="logo-mark" style="width:24px;height:24px;font-size:.8rem">S</span>Scalia</a>
     <ul class="foot-links">
       <li><a href="services.html">Services</a></li>
       <li><a href="results.html">Results</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <small>© 2026 Scalia · Marketing systems for local service businesses</small>
+    <small>&copy; 2026 Scalia &middot; Marketing systems for local service businesses</small>
   </div>
 </footer>
 
