@@ -93,6 +93,59 @@ h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;margin:14px 0 16px}
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
+/* staggered grid reveals */
+.problem-grid .rv:nth-child(2),.svc-grid .rv:nth-child(2),.res-grid .rv:nth-child(2),.stats-grid .rv:nth-child(2){transition-delay:.13s}
+.problem-grid .rv:nth-child(3),.svc-grid .rv:nth-child(3),.res-grid .rv:nth-child(3),.stats-grid .rv:nth-child(3){transition-delay:.26s}
+
+/* scroll progress bar */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none}
+.progress i{display:block;height:100%;background:var(--grad);transform-origin:0 50%;transform:scaleX(0)}
+
+/* parallax layers */
+[data-plx]{will-change:transform}
+
+/* nav shadow once scrolled */
+.nav.scrolled{box-shadow:0 10px 28px -18px rgba(10,46,122,.22)}
+
+/* marquee ticker */
+.marquee{overflow:hidden;padding:24px 0;border-top:1px solid var(--ice-line);border-bottom:1px solid var(--ice-line);background:#fff}
+.marquee-track{display:flex;width:max-content;animation:mq 38s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee-rev .marquee-track{animation-direction:reverse}
+.mq{
+  font-family:var(--display);font-weight:900;white-space:nowrap;
+  font-size:clamp(1.3rem,2.6vw,1.85rem);letter-spacing:-.01em;color:var(--ink);
+  padding-right:.6em;
+}
+.mq b{font-weight:900;color:transparent;-webkit-text-stroke:1.4px var(--g1)}
+.mq i{font-style:normal;color:var(--g1);padding:0 .45em}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ambient hero wash drift */
+@keyframes washDrift{
+  from{transform:translate3d(-2%,-2%,0) scale(1)}
+  to{transform:translate3d(2%,3%,0) scale(1.07)}
+}
+
+/* ambient CTA gradient shift */
+@keyframes ctaShift{
+  from{background-position:0% 0%}
+  to{background-position:100% 100%}
+}
+
+/* cascading child reveals */
+html.js .stack-list li{opacity:0;transform:translateX(18px);transition:opacity .5s ease,transform .5s ease}
+html.js .stack-card.in .stack-list li{opacity:1;transform:none}
+html.js .stack-card.in .stack-list li:nth-child(2){transition-delay:.1s}
+html.js .stack-card.in .stack-list li:nth-child(3){transition-delay:.2s}
+html.js .stack-card.in .stack-list li:nth-child(4){transition-delay:.3s}
+html.js .stack-card.in .stack-list li:nth-child(5){transition-delay:.4s}
+html.js .faq-list details{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+html.js .faq-list.in details{opacity:1;transform:none}
+html.js .faq-list.in details:nth-of-type(2){transition-delay:.1s}
+html.js .faq-list.in details:nth-of-type(3){transition-delay:.2s}
+html.js .faq-list.in details:nth-of-type(4){transition-delay:.3s}
+html.js .faq-list.in details:nth-of-type(5){transition-delay:.4s}
 
 /* ---------- nav ---------- */
 .nav{
@@ -126,6 +179,7 @@ h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;margin:14px 0 16px}
   content:"";position:absolute;inset:-40% -30% auto auto;width:75%;height:120%;
   background:radial-gradient(ellipse at 70% 30%,rgba(46,107,255,.10),transparent 62%);
   pointer-events:none;
+  animation:washDrift 16s ease-in-out infinite alternate;
 }
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;position:relative}
 .hero h1{font-size:clamp(2.5rem,5.2vw,3.7rem);font-weight:800;margin:20px 0 22px}
@@ -431,7 +485,10 @@ html.js .scene.active .msg:nth-child(4){transition-delay:1.45s}
 /* ---------- final CTA ---------- */
 .cta-band{padding:40px 0 110px}
 .cta-inner{
-  background:var(--grad);border-radius:24px;padding:clamp(48px,7vw,84px) clamp(28px,6vw,80px);
+  background:linear-gradient(135deg,var(--g1) 0%,var(--g2) 55%,var(--g1) 100%);
+  background-size:230% 230%;
+  animation:ctaShift 14s ease-in-out infinite alternate;
+  border-radius:24px;padding:clamp(48px,7vw,84px) clamp(28px,6vw,80px);
   color:#fff;position:relative;overflow:hidden;
 }
 .cta-inner::before{
@@ -460,6 +517,8 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
 </style>
 </head>
 <body>
+
+<div class="progress" aria-hidden="true"><i id="pbar"></i></div>
 
 <!-- ======================= NAV ======================= -->
 <header class="nav">
@@ -498,7 +557,7 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
     </div>
 
     <div class="phone-zone rv">
-      <div class="phone" aria-label="Example of an automated SMS conversation booking a detailing job">
+      <div class="phone" data-plx="0.045" aria-label="Example of an automated SMS conversation booking a detailing job">
         <div class="phone-top">
           <span class="avatar">PD</span>
           <div class="who">
@@ -515,7 +574,7 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
           <div class="booked-chip">✓ Booked — Thu 10:00 AM · synced to calendar</div>
         </div>
       </div>
-      <div class="speed-badge">
+      <div class="speed-badge" data-plx="0.12">
         <strong class="grad-text">41s</strong>
         first text after<br>the lead opts in
       </div>
@@ -523,22 +582,30 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
   </div>
 </section>
 
+<!-- ======================= MARQUEE ======================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq">MORE BOOKED JOBS<i>⚡</i><b>FIRST TEXT IN 60 SECONDS</b><i>⚡</i>META ADS THAT PULL<i>⚡</i><b>FOLLOW-UP ON AUTOPILOT</b><i>⚡</i>WEBSITES THAT CONVERT<i>⚡</i></span>
+    <span class="mq">MORE BOOKED JOBS<i>⚡</i><b>FIRST TEXT IN 60 SECONDS</b><i>⚡</i>META ADS THAT PULL<i>⚡</i><b>FOLLOW-UP ON AUTOPILOT</b><i>⚡</i>WEBSITES THAT CONVERT<i>⚡</i></span>
+  </div>
+</div>
+
 <!-- ======================= STATS STRIP ======================= -->
 <section class="stats-strip" aria-label="Why speed matters">
   <div class="wrap">
     <div class="stats-grid">
       <div class="stat rv">
-        <span class="num grad-text">78%</span>
+        <span class="num grad-text" data-count="78" data-suffix="%">78%</span>
         <p>of customers buy from the business that responds to them first.</p>
         <span class="src">SOURCE: LEAD RESPONSE INDUSTRY RESEARCH</span>
       </div>
       <div class="stat rv">
-        <span class="num grad-text">21×</span>
+        <span class="num grad-text" data-count="21" data-suffix="×">21×</span>
         <p>more likely to qualify a lead when you reply within 5 minutes instead of 30.</p>
         <span class="src">SOURCE: MIT / INSIDESALES LEAD RESPONSE STUDY</span>
       </div>
       <div class="stat rv">
-        <span class="num grad-text">100%</span>
+        <span class="num grad-text" data-count="100" data-suffix="%">100%</span>
         <p>of your leads followed up — automatically, every time, even mid-polish on a Saturday.</p>
         <span class="src">THE SCALIA SYSTEM</span>
       </div>
@@ -774,17 +841,17 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
     </div>
     <div class="res-grid">
       <div class="res rv">
-        <span class="num">38</span>
+        <span class="num" data-count="38">38</span>
         <h3>Jobs booked in 60 days</h3>
         <p>Mobile detailer, single-truck operation, starting from zero paid traffic.</p>
       </div>
       <div class="res rv">
-        <span class="num">$11</span>
+        <span class="num" data-count="11" data-prefix="$">$11</span>
         <h3>Average cost per lead</h3>
         <p>Full-detail special campaign — each lead texted within the first minute.</p>
       </div>
       <div class="res rv">
-        <span class="num">&lt;60s</span>
+        <span class="num" data-count="60" data-prefix="<" data-suffix="s">&lt;60s</span>
         <h3>Median first response</h3>
         <p>Every lead, every hour of the day — including the ones that come in at 11 PM.</p>
       </div>
@@ -823,6 +890,14 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
     </div>
   </div>
 </section>
+
+<!-- ======================= MARQUEE (reverse) ======================= -->
+<div class="marquee marquee-rev" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq"><b>BUILT FOR DETAILERS</b><i>⚡</i>ONE OPERATOR<i>⚡</i><b>NO AGENCY BLOAT</b><i>⚡</i>LEADS TEXTED, NURTURED, BOOKED<i>⚡</i><b>YOUR CALENDAR FILLS ITSELF</b><i>⚡</i></span>
+    <span class="mq"><b>BUILT FOR DETAILERS</b><i>⚡</i>ONE OPERATOR<i>⚡</i><b>NO AGENCY BLOAT</b><i>⚡</i>LEADS TEXTED, NURTURED, BOOKED<i>⚡</i><b>YOUR CALENDAR FILLS ITSELF</b><i>⚡</i></span>
+  </div>
+</div>
 
 <!-- ======================= FINAL CTA ======================= -->
 <section class="cta-band" id="book">
@@ -920,6 +995,63 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
     });
   }, {rootMargin:'-45% 0px -45% 0px', threshold:0});
   steps.forEach(function(s){ io.observe(s); });
+})();
+
+/* scroll engine: progress bar, nav shadow, parallax */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bar = document.getElementById('pbar');
+  var nav = document.querySelector('.nav');
+  var plx = Array.prototype.slice.call(document.querySelectorAll('[data-plx]'));
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    if (bar) bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 8);
+    if (!reduce) {
+      var mid = window.innerHeight / 2;
+      plx.forEach(function(el){
+        var r = el.parentElement.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
+        var d = (r.top + r.height / 2) - mid;
+        el.style.transform = 'translate3d(0,' + (d * parseFloat(el.dataset.plx)).toFixed(1) + 'px,0)';
+      });
+    }
+  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+
+/* count-up numbers */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+  if (!els.length) return;
+  function run(el){
+    var end = parseFloat(el.dataset.count), pre = el.dataset.prefix||'', suf = el.dataset.suffix||'';
+    if (reduce){ el.textContent = pre + el.dataset.count + suf; return; }
+    var t0 = null, dur = 1300;
+    function frame(t){
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / dur, 1);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + Math.round(end * p) + suf;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  if (reduce || !('IntersectionObserver' in window)){ els.forEach(run); return; }
+  els.forEach(function(el){ el.textContent = (el.dataset.prefix||'') + '0' + (el.dataset.suffix||''); });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ run(e.target); io.unobserve(e.target); }
+    });
+  }, {threshold:.6});
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
 </body>
