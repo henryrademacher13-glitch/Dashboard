@@ -250,27 +250,126 @@ h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;margin:14px 0 16px}
 .svc li::before{content:"→";color:var(--g1);font-weight:700;flex:none}
 @media(max-width:860px){.svc-grid{grid-template-columns:1fr}}
 
-/* ---------- pipeline ---------- */
-.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
-.pipe::before{
-  content:"";position:absolute;top:23px;left:8%;right:8%;height:2px;
-  background:linear-gradient(90deg,var(--g1),var(--g2));opacity:.28;
+/* ---------- scrollytelling: how it works ---------- */
+.scrolly{display:grid;grid-template-columns:1fr 1.05fr;gap:56px}
+.s-stage-wrap{grid-column:2;grid-row:1}
+.s-steps{grid-column:1;grid-row:1;display:flex;flex-direction:column}
+.s-step{min-height:76vh;display:flex;align-items:center;padding:20px 0}
+.s-step:last-child{min-height:100vh}
+.s-step-card{max-width:26em}
+html.js .s-step{opacity:.28;transition:opacity .4s ease}
+html.js .s-step.active{opacity:1}
+.s-tag{
+  font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  color:var(--blue);background:var(--ice);border:1px solid var(--ice-line);
+  padding:5px 12px;border-radius:99px;display:inline-block;margin-bottom:16px;
 }
-.step{padding:0 20px;position:relative;text-align:left}
-.step .tick{
-  width:46px;height:46px;border-radius:50%;background:#fff;
-  border:2px solid var(--g1);display:grid;place-items:center;
-  font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--blue);
-  margin-bottom:18px;position:relative;z-index:1;letter-spacing:0;
+.s-step h3{font-size:1.55rem;font-weight:800;margin-bottom:10px}
+.s-step p{color:var(--ink-soft)}
+.s-stage{position:sticky;top:0;height:100vh;display:grid;place-items:center}
+.frame{
+  width:min(430px,100%);height:min(600px,82vh);position:relative;
+  background:#fff;border:1px solid var(--ice-line);border-radius:26px;
+  box-shadow:0 30px 70px -30px rgba(10,46,122,.30),0 4px 18px -6px rgba(10,46,122,.10);
+  overflow:hidden;
 }
-.step:last-child .tick{background:var(--grad);color:#fff;border-color:transparent}
-.step h3{font-size:1.02rem;font-weight:700;margin-bottom:7px}
-.step p{font-size:.88rem;color:var(--ink-soft)}
-@media(max-width:860px){
-  .pipe{grid-template-columns:1fr;gap:34px}
-  .pipe::before{top:0;bottom:0;left:23px;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--g1),var(--g2))}
-  .step{display:grid;grid-template-columns:46px 1fr;gap:0 18px;padding:0}
-  .step .tick{margin:0;grid-row:1/3}
+.scene{
+  position:absolute;inset:0;padding:26px 26px 46px;
+  display:flex;flex-direction:column;gap:13px;
+  opacity:0;pointer-events:none;transition:opacity .35s ease;
+}
+.scene.active{opacity:1;pointer-events:auto}
+html.js .scene>*{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+html.js .scene.active>*{opacity:1;transform:none}
+html.js .scene.active>*:nth-child(2){transition-delay:.1s}
+html.js .scene.active>*:nth-child(3){transition-delay:.2s}
+html.js .scene.active>*:nth-child(4){transition-delay:.3s}
+html.js .scene.active>*:nth-child(5){transition-delay:.4s}
+html.js .scene.active>*:nth-child(6){transition-delay:.5s}
+html.js .scene.active>*:nth-child(7){transition-delay:.62s}
+html.js .scene.active>*:nth-child(8){transition-delay:.74s}
+.mock-title{
+  font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-faint);
+  display:flex;align-items:center;gap:8px;
+}
+.mock-title::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--grad);flex:none}
+.mrow{
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:13px 15px;background:var(--ice);border-radius:11px;font-size:.88rem;
+}
+.mrow .k{color:var(--ink-faint);font-size:.76rem;font-family:var(--mono);letter-spacing:.04em}
+.mrow .v{font-weight:600;text-align:right}
+.mrow .v .ok{color:#0B9B54;font-weight:700;margin-left:6px}
+.mock-btn{
+  margin-top:auto;background:var(--grad);color:#fff;text-align:center;
+  font-family:var(--display);font-weight:700;font-size:.95rem;
+  padding:13px;border-radius:11px;box-shadow:var(--shadow-blue);
+}
+.post{border:1px solid var(--ice-line);border-radius:14px;overflow:hidden}
+.post-top{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.post-top strong{font-size:.88rem;display:block;line-height:1.2}
+.post-top span{font-size:.72rem;color:var(--ink-faint)}
+.post-img{
+  height:180px;background:var(--grad);position:relative;overflow:hidden;
+  display:grid;place-items:center;text-align:center;color:#fff;padding:18px;
+}
+.post-img::before{
+  content:"";position:absolute;inset:auto -20% -55% auto;width:75%;height:120%;
+  background:radial-gradient(ellipse,rgba(255,255,255,.16),transparent 65%);
+}
+.post-img .big{font-family:var(--display);font-weight:900;font-size:1.5rem;letter-spacing:-.01em;line-height:1.1;position:relative}
+.post-img .sub{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#C6D6FF;margin-top:8px;position:relative}
+.post-cta{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 14px;background:var(--ice);font-size:.85rem;font-weight:600;
+}
+.post-cta .pill{background:var(--ink);color:#fff;padding:8px 16px;border-radius:8px;font-size:.8rem;font-family:var(--display);font-weight:700}
+.live-chip,.lead-chip{
+  align-self:center;display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.03em;
+  padding:7px 14px;border-radius:99px;
+}
+.live-chip{color:#0B6B3A;background:#E9F9F0;border:1px solid #BFEBD2}
+.live-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:#12B76A}
+.lead-chip{color:var(--blue);background:var(--ice);border:1px solid var(--ice-line)}
+.finp{display:flex;flex-direction:column;gap:6px}
+.finp label{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.finp .val{border:1.5px solid var(--ice-line);border-radius:10px;padding:12px 14px;font-size:.92rem;font-weight:600;background:#fff}
+.scene .thread{min-height:0}
+.scene.active .msg{opacity:1;transform:none}
+html.js .scene.active .msg:nth-child(1){transition-delay:.25s}
+html.js .scene.active .msg:nth-child(2){transition-delay:.65s}
+html.js .scene.active .msg:nth-child(3){transition-delay:1.05s}
+html.js .scene.active .msg:nth-child(4){transition-delay:1.45s}
+.cal{border:1px solid var(--ice-line);border-radius:14px;overflow:hidden}
+.cal-head{
+  background:var(--grad);color:#fff;padding:13px 16px;
+  font-family:var(--display);font-weight:700;display:flex;justify-content:space-between;align-items:baseline;
+}
+.cal-head span{font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.1em;color:#C6D6FF;text-transform:uppercase}
+.slot{
+  display:flex;gap:14px;align-items:baseline;padding:12px 16px;
+  border-bottom:1px solid var(--ice);font-size:.86rem;color:var(--ink-faint);
+}
+.slot:last-child{border-bottom:0}
+.slot .tm{font-family:var(--mono);font-size:.72rem;flex:none;width:64px}
+.slot.booked{background:#E9F9F0;color:var(--ink)}
+.slot.booked .who{font-weight:700}
+.slot.booked .ok{color:#0B9B54;font-weight:700;margin-left:auto}
+.s-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:7px}
+.s-dots i{width:7px;height:7px;border-radius:50%;background:var(--ice-line);transition:background .3s ease,transform .3s ease}
+.s-dots i.on{background:var(--g1);transform:scale(1.3)}
+@media(max-width:900px){
+  .scrolly{display:block}
+  .s-stage-wrap{display:contents}
+  .s-stage{position:sticky;top:0;height:auto;z-index:5;padding:78px 0 10px;
+    background:linear-gradient(180deg,#fff 82%,rgba(255,255,255,0))}
+  .frame{height:min(480px,56vh);margin:0 auto}
+  .scene{padding:18px 18px 38px;gap:10px}
+  .post-img{height:130px}
+  .s-step{min-height:62vh}
+  .s-step h3{font-size:1.3rem}
 }
 
 /* ---------- why / operator ---------- */
@@ -530,28 +629,112 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
     <div class="section-head rv">
       <p class="eyebrow">How it works</p>
       <h2>From ad tap to booked bay — <span class="grad-text">on the clock.</span></h2>
-      <p>This is the actual sequence a lead moves through. The timestamps are the whole point.</p>
+      <p>Keep scrolling — this is the exact sequence that runs after you say go, from building the campaign to a job in your bay. The timestamps are the whole point.</p>
     </div>
-    <div class="pipe">
-      <div class="step rv">
-        <span class="tick">0:00</span>
-        <h3>Lead taps your ad</h3>
-        <p>They see your offer on Facebook or Instagram and drop their name and number in a lead form. No website required.</p>
+    <div class="scrolly">
+      <div class="s-stage-wrap" aria-hidden="true">
+        <div class="s-stage">
+          <div class="frame" id="frame">
+            <!-- scene 1: campaign build -->
+            <div class="scene active" data-scene="0">
+              <p class="mock-title">Meta Ads Manager · New campaign</p>
+              <div class="mrow"><span class="k">OBJECTIVE</span><span class="v">Leads<span class="ok">✓</span></span></div>
+              <div class="mrow"><span class="k">OFFER</span><span class="v">Full Detail Special<span class="ok">✓</span></span></div>
+              <div class="mrow"><span class="k">AUDIENCE</span><span class="v">15 mi around your shop<span class="ok">✓</span></span></div>
+              <div class="mrow"><span class="k">BUDGET</span><span class="v">$30 / day<span class="ok">✓</span></span></div>
+              <div class="mrow"><span class="k">FOLLOW-UP</span><span class="v">Wired before launch<span class="ok">✓</span></span></div>
+              <div class="mock-btn">Publish campaign</div>
+            </div>
+            <!-- scene 2: ad live in the feed -->
+            <div class="scene" data-scene="1">
+              <p class="mock-title">Instagram · your customer's feed</p>
+              <div class="post">
+                <div class="post-top">
+                  <span class="avatar">PD</span>
+                  <div><strong>PrimeShine Detailing</strong><span>Sponsored</span></div>
+                </div>
+                <div class="post-img">
+                  <div>
+                    <p class="big">FULL DETAIL<br>SPECIAL</p>
+                    <p class="sub">Interior + exterior · This week only</p>
+                  </div>
+                </div>
+                <div class="post-cta">Claim the offer <span class="pill">Book Now</span></div>
+              </div>
+              <span class="live-chip">Active · spending $30/day</span>
+            </div>
+            <!-- scene 3: lead form -->
+            <div class="scene" data-scene="2">
+              <p class="mock-title">Lead form · 2 taps, no website</p>
+              <div class="finp"><label>Name</label><span class="val">Marcus T.</span></div>
+              <div class="finp"><label>Phone</label><span class="val">(555) 214-8842</span></div>
+              <div class="finp"><label>Vehicle</label><span class="val">SUV / Truck</span></div>
+              <div class="mock-btn">Get my free quote</div>
+              <span class="lead-chip">⚡ Lead received · 2:13 PM</span>
+            </div>
+            <!-- scene 4: instant SMS -->
+            <div class="scene" data-scene="3">
+              <p class="mock-title">SMS · sent 41s after opt-in</p>
+              <div class="thread">
+                <div class="msg out">Hey Marcus! PrimeShine Detailing here — saw you grabbed the Full Detail Special. What are we working with?<span class="t">2:14 PM · automated</span></div>
+                <div class="msg in">2019 Tahoe. How soon can you get it in?<span class="t">2:19 PM</span></div>
+                <div class="msg out">Thursday 10am or Friday 2pm — which works better?<span class="t">2:19 PM</span></div>
+                <div class="msg in">Thursday works<span class="t">2:21 PM</span></div>
+              </div>
+            </div>
+            <!-- scene 5: booked -->
+            <div class="scene" data-scene="4">
+              <p class="mock-title">Your calendar · Thursday</p>
+              <div class="cal">
+                <div class="cal-head">Thursday <span>Bay 1</span></div>
+                <div class="slot"><span class="tm">9:00 AM</span> Open</div>
+                <div class="slot booked"><span class="tm">10:00 AM</span><span class="who">Marcus — Full Detail · 2019 Tahoe</span><span class="ok">✓</span></div>
+                <div class="slot"><span class="tm">1:30 PM</span> Open</div>
+              </div>
+              <span class="live-chip">Confirmed · reminders sent automatically</span>
+              <span class="lead-chip">Total time from ad tap to booked: 8 minutes</span>
+            </div>
+            <div class="s-dots" id="sdots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
-      <div class="step rv">
-        <span class="tick">0:47</span>
-        <h3>The system texts them</h3>
-        <p>By name, about the exact service they asked for — while your competitors are still waiting to "circle back."</p>
-      </div>
-      <div class="step rv">
-        <span class="tick">~5:00</span>
-        <h3>Conversation → time slot</h3>
-        <p>The automation qualifies the vehicle, answers common questions, and offers real openings from your calendar.</p>
-      </div>
-      <div class="step rv">
-        <span class="tick">✓</span>
-        <h3>Job booked</h3>
-        <p>Confirmed, reminded, and on your schedule. Leads that go quiet get nurtured automatically until they book.</p>
+
+      <div class="s-steps" id="ssteps">
+        <div class="s-step active">
+          <div class="s-step-card">
+            <span class="s-tag">DAY 0 · BUILD</span>
+            <h3>I build the campaign</h3>
+            <p>The offer, the creative, and the targeting — written for your market, not a template. The follow-up system gets wired in before a single dollar of ad spend moves.</p>
+          </div>
+        </div>
+        <div class="s-step">
+          <div class="s-step-card">
+            <span class="s-tag">DAY 1 · LIVE</span>
+            <h3>Your ad hits the feed</h3>
+            <p>A detailing offer your neighbors actually stop scrolling for, shown only inside your service area, on a daily budget you control.</p>
+          </div>
+        </div>
+        <div class="s-step">
+          <div class="s-step-card">
+            <span class="s-tag">2:13 PM · LEAD IN</span>
+            <h3>A lead taps it</h3>
+            <p>Marcus wants his Tahoe fixed. Name, number, and vehicle captured in two taps — he never has to leave the app, and you don't need a website for this to work.</p>
+          </div>
+        </div>
+        <div class="s-step">
+          <div class="s-step-card">
+            <span class="s-tag">2:14 PM · 41s LATER</span>
+            <h3>The system texts him instantly</h3>
+            <p>By name, about the exact offer he tapped — while every other detailer he contacted is planning to "circle back tomorrow."</p>
+          </div>
+        </div>
+        <div class="s-step">
+          <div class="s-step-card">
+            <span class="s-tag">2:21 PM · BOOKED</span>
+            <h3>Straight into your calendar</h3>
+            <p>Confirmed, reminded, and in your bay Thursday at 10. You were polishing a hood the entire time. Leads that go quiet get nurtured automatically until they book.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -713,6 +896,30 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
     }, {threshold:.35});
     tio.observe(thread);
   }
+})();
+
+/* scroll-driven ad-to-booked story */
+(function(){
+  document.documentElement.classList.add('js');
+  var steps  = Array.prototype.slice.call(document.querySelectorAll('.s-step'));
+  var scenes = Array.prototype.slice.call(document.querySelectorAll('.scene'));
+  var dots   = Array.prototype.slice.call(document.querySelectorAll('#sdots i'));
+  if (!steps.length || !scenes.length) return;
+
+  function setStage(i){
+    steps.forEach(function(s,j){ s.classList.toggle('active', j===i); });
+    scenes.forEach(function(s,j){ s.classList.toggle('active', j===i); });
+    dots.forEach(function(d,j){ d.classList.toggle('on', j===i); });
+  }
+  setStage(0);
+
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) setStage(steps.indexOf(e.target));
+    });
+  }, {rootMargin:'-45% 0px -45% 0px', threshold:0});
+  steps.forEach(function(s){ io.observe(s); });
 })();
 </script>
 </body>
