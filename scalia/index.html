@@ -1587,8 +1587,11 @@ html.js .nurt.in li:nth-child(6){transition-delay:.6s}
     about:'About \u2014 Scalia',
     contact:'Book a call \u2014 Scalia'
   };
+  var current = null; /* fallback state for sandboxed frames where location.hash is read-only */
+
   function route(){
-    var m = (location.hash || '#home').match(/^#\/?([a-z]+)(?:\/([\w-]+))?/);
+    var raw = current || location.hash || '#home';
+    var m = raw.match(/^#\/?([a-z]+)(?:\/([\w-]+))?/);
     var pg = (m && pages.indexOf(m[1]) > -1) ? m[1] : 'home';
     var anchor = m && m[2];
     pages.forEach(function(n){
@@ -1607,7 +1610,24 @@ html.js .nurt.in li:nth-child(6){transition-delay:.6s}
     }
     window.dispatchEvent(new Event('scroll'));
   }
-  window.addEventListener('hashchange', route);
+
+  function go(h){
+    current = h;
+    try { if (location.hash !== h) location.hash = h; } catch (e) { /* sandboxed frame: keep internal state only */ }
+    route();
+  }
+
+  /* intercept every in-page hash link so no real navigation ever happens
+     (sandboxed previews 403 on anchor navigation; this sidesteps it) */
+  document.addEventListener('click', function(e){
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var h = a.getAttribute('href') || '';
+    if (h.charAt(0) === '#'){ e.preventDefault(); go(h); }
+  });
+
+  window.addEventListener('hashchange', function(){ current = location.hash; route(); });
   route();
 })();
 </script>
