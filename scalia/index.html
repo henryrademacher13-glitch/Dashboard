@@ -515,32 +515,113 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
 .foot-links a{font-size:.85rem;font-weight:600;color:var(--ink-soft);text-decoration:none}
 .foot-links a:hover{color:var(--blue)}
 </style>
+<style>
+/* ---------- subpage components ---------- */
+.page-hero{padding:82px 0 66px;position:relative;overflow:hidden}
+.page-hero::before{
+  content:"";position:absolute;inset:-40% -30% auto auto;width:75%;height:130%;
+  background:radial-gradient(ellipse at 70% 30%,rgba(46,107,255,.10),transparent 62%);
+  pointer-events:none;animation:washDrift 16s ease-in-out infinite alternate;
+}
+.page-hero h1{font-size:clamp(2.3rem,4.8vw,3.4rem);font-weight:800;margin:18px 0;max-width:15em}
+.page-hero .lede{font-size:1.12rem;color:var(--ink-soft);max-width:36em;position:relative}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.split-copy h2{margin-top:14px}
+.split-copy p{color:var(--ink-soft);margin-bottom:16px;max-width:34em}
+.split.flip .split-copy{order:2}
+.ticks{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.ticks li{display:flex;gap:10px;align-items:baseline;color:var(--ink-soft);font-size:.95rem}
+.ticks li::before{content:"\2192";color:var(--g1);font-weight:700;flex:none}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+.fact{border:1px solid var(--ice-line);border-radius:12px;padding:20px 22px;font-size:.9rem;color:var(--ink-soft);background:#fff}
+.fact strong{display:block;font-family:var(--display);color:var(--ink);font-size:1.05rem;margin-bottom:5px}
+.nurt{list-style:none;border-left:2px solid var(--ice-line);margin-left:8px;display:flex;flex-direction:column}
+.nurt li{padding:15px 0 15px 28px;position:relative}
+.nurt li::before{content:"";position:absolute;left:-8px;top:22px;width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px solid var(--g1)}
+.nurt li:last-child::before{background:var(--grad);border-color:transparent}
+.nurt .when{font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.1em;color:var(--blue);text-transform:uppercase;display:block;margin-bottom:4px}
+.nurt strong{font-family:var(--display);font-size:1.02rem;display:block;margin-bottom:3px}
+.nurt p{font-size:.88rem;color:var(--ink-soft)}
+html.js .nurt li{opacity:0;transform:translateX(18px);transition:opacity .5s ease,transform .5s ease}
+html.js .nurt.in li{opacity:1;transform:none}
+html.js .nurt.in li:nth-child(2){transition-delay:.12s}
+html.js .nurt.in li:nth-child(3){transition-delay:.24s}
+html.js .nurt.in li:nth-child(4){transition-delay:.36s}
+html.js .nurt.in li:nth-child(5){transition-delay:.48s}
+html.js .nurt.in li:nth-child(6){transition-delay:.6s}
+.browser{border:1px solid var(--ice-line);border-radius:16px;overflow:hidden;background:#fff;
+  box-shadow:0 30px 70px -30px rgba(10,46,122,.30),0 4px 18px -6px rgba(10,46,122,.10)}
+.browser-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;background:var(--ice);border-bottom:1px solid var(--ice-line)}
+.browser-bar i{width:9px;height:9px;border-radius:50%;background:var(--ice-line)}
+.browser-url{margin-left:8px;flex:1;background:#fff;border-radius:99px;padding:5px 14px;font-family:var(--mono);font-size:.68rem;color:var(--ink-faint)}
+.bpage-hero{background:var(--grad);color:#fff;padding:30px 20px;text-align:center}
+.bpage-hero .t{font-family:var(--display);font-weight:900;font-size:1.25rem;letter-spacing:-.01em}
+.bpage-hero .s{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#C6D6FF;display:block;margin-top:6px}
+.bpage-hero .b{display:inline-block;margin-top:12px;background:#fff;color:var(--g2);font-family:var(--display);font-weight:700;font-size:.74rem;padding:8px 16px;border-radius:8px}
+.bpage-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:16px}
+.bpage-row i{height:46px;border-radius:9px;background:var(--ice)}
+.scorez{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.score{text-align:center;border:1px solid var(--ice-line);border-radius:12px;padding:15px 6px;background:#fff}
+.score .n{font-family:var(--display);font-weight:800;font-size:1.55rem;color:var(--blue);font-variant-numeric:tabular-nums;display:block}
+.score span{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.case{border:1px solid var(--ice-line);border-radius:var(--radius);padding:38px;background:linear-gradient(180deg,#fff 0%,var(--ice) 170%);margin-bottom:28px}
+.case-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+.case-top .who{font-family:var(--display);font-weight:800;font-size:1.3rem;letter-spacing:-.01em}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;color:var(--blue);background:var(--ice);border:1px solid var(--ice-line);padding:5px 11px;border-radius:99px}
+.case blockquote{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.01em;margin:14px 0 6px;max-width:30em}
+.case blockquote::before{content:"\201C";color:var(--g1)}
+.case blockquote::after{content:"\201D";color:var(--g1)}
+.case .attr{font-family:var(--mono);font-size:.68rem;color:var(--ink-faint);letter-spacing:.05em}
+.case-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 18px}
+.cstat{background:var(--ice);border-radius:12px;padding:17px 19px}
+.cstat .n{font-family:var(--display);font-weight:800;font-size:1.75rem;font-variant-numeric:tabular-nums;display:block;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.cstat span{font-size:.78rem;color:var(--ink-soft)}
+.case>p{color:var(--ink-soft);font-size:.96rem;max-width:44em}
+.op-card{background:#fff;border:1px solid var(--ice-line);border-radius:var(--radius);padding:34px;text-align:left}
+.op-face{width:74px;height:74px;border-radius:22px;background:var(--grad);display:grid;place-items:center;
+  color:#fff;font-family:var(--display);font-weight:900;font-size:1.7rem;box-shadow:var(--shadow-blue);margin-bottom:18px}
+.op-card h3{font-size:1.3rem;font-weight:800}
+.op-card .role{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:4px 0 16px}
+.op-card p{font-size:.92rem;color:var(--ink-soft)}
+.nav-links a.here{color:var(--blue)}
+@media(max-width:900px){
+  .split{grid-template-columns:1fr;gap:42px}
+  .split.flip .split-copy{order:0}
+  .facts,.case-stats{grid-template-columns:1fr}
+  .scorez{grid-template-columns:repeat(2,1fr)}
+  .case{padding:26px}
+}
+
+/* ---------- hash router ---------- */
+.pg{display:none}
+.pg.on{display:block;animation:pgIn .4s ease}
+@keyframes pgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.pg.on{animation:none}}
+</style>
 </head>
 <body>
 
 <div class="progress" aria-hidden="true"><i id="pbar"></i></div>
 
-<!-- ======================= NAV ======================= -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="#top">
-      <span class="logo-mark">S</span>
-      Scalia
-    </a>
+    <a class="logo" href="#/home"><span class="logo-mark">S</span>Scalia</a>
     <nav aria-label="Main">
       <ul class="nav-links">
-        <li><a href="services.html">Services</a></li>
-        <li><a href="#how">How it works</a></li>
-        <li><a href="results.html">Results</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="#/services" data-pg="services">Services</a></li>
+        <li><a href="#/home/how" data-pg="">How it works</a></li>
+        <li><a href="#/results" data-pg="results">Results</a></li>
+        <li><a href="#/about" data-pg="about">About</a></li>
       </ul>
     </nav>
-    <a class="btn btn-primary" href="contact.html">Book a call</a>
+    <a class="btn btn-primary" href="#/contact">Book a call</a>
   </div>
 </header>
 
-<!-- ======================= HERO ======================= -->
 <main id="top">
+<div class="pg on" id="pg-home">
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -548,8 +629,8 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
       <h1>Your leads get a text in <span class="grad-text">under a minute.</span> Your competitors call back tomorrow.</h1>
       <p class="lede">Scalia runs your Meta ads, follows up with every lead instantly by SMS, and books jobs straight into your calendar — while you're in the bay working. Two operators. A complete system. No agency bloat.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="contact.html">Book a free strategy call <span class="arrow">→</span></a>
-        <a class="btn btn-ghost" href="#how">See the system</a>
+        <a class="btn btn-primary" href="#/contact">Book a free strategy call <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="#/home/how">See the system</a>
       </div>
       <p class="hero-note"><span class="dot"></span>Built for detailers. Works for any local service that books appointments.</p>
     </div>
@@ -897,7 +978,7 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
 </div>
 
 <!-- ======================= FINAL CTA ======================= -->
-<section class="cta-band" id="book">
+<section class="cta-band">
   <div class="wrap">
     <div class="cta-inner rv">
       <p class="eyebrow">Next step</p>
@@ -905,29 +986,475 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
       <p>Book a free 20-minute strategy call. We'll look at your market, your offers, and what the system would look like for your shop. If we can't help, we'll tell you — and point you somewhere that can.</p>
       <div class="cta-actions">
         <!-- REPLACE: booking link (GHL calendar / Calendly URL) -->
-        <a class="btn btn-primary" href="contact.html">Book a free strategy call <span class="arrow">→</span></a>
+        <a class="btn btn-primary" href="#/contact">Book a free strategy call <span class="arrow">→</span></a>
         <!-- REPLACE: your real email -->
         <a class="btn btn-ghost" href="mailto:hello@scalia.agency">hello@scalia.agency</a>
       </div>
     </div>
   </div>
 </section>
+</div>
+<div class="pg" id="pg-services">
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Services</p>
+    <h1>Three pieces. <span class="grad-text">One machine.</span></h1>
+    <p class="lede">Each service works on its own. Together they compound &mdash; the ads bring leads in, the automation books them, and the website closes the ones who want to check you out first.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:40px">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy rv">
+        <p class="eyebrow">Meta lead generation</p>
+        <h2>Ads that pull bookings, not likes.</h2>
+        <p>Facebook and Instagram campaigns built around detailing offers that actually stop the scroll &mdash; ceramic coating, interior resets, full-detail specials. Every campaign runs in your ad account, targeted to your real service area.</p>
+        <ul class="ticks">
+          <li>Offer strategy and ad creative built for your market, not a template</li>
+          <li>Lead forms that capture name, number, and vehicle in two taps</li>
+          <li>Weekly plain-English reporting: leads, cost per lead, booked jobs</li>
+          <li>Budgets that start where you're comfortable &mdash; most begin at $20&ndash;40/day</li>
+        </ul>
+      </div>
+      <div class="rv" data-plx="0.05" style="max-width:400px;justify-self:center;width:100%">
+        <div class="post">
+          <div class="post-top">
+            <span class="avatar">PD</span>
+            <div><strong>PrimeShine Detailing</strong><span>Sponsored</span></div>
+          </div>
+          <div class="post-img">
+            <div>
+              <p class="big">FULL DETAIL<br>SPECIAL</p>
+              <p class="sub">Interior + exterior &middot; This week only</p>
+            </div>
+          </div>
+          <div class="post-cta">Claim the offer <span class="pill">Book Now</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact rv"><strong>Live in about a week</strong>From kickoff call to first leads &mdash; no months-long onboarding.</div>
+      <div class="fact rv"><strong>Your account, your data</strong>Everything runs in your Meta ad account. Leave anytime, keep everything.</div>
+      <div class="fact rv"><strong>Judged on booked jobs</strong>Impressions don't wash cars. The report you get counts appointments.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--ice)">
+  <div class="wrap">
+    <div class="split flip">
+      <div class="split-copy rv">
+        <p class="eyebrow">Follow-up automation</p>
+        <h2>The first text <span class="grad-text">wins the job.</span></h2>
+        <p>Most leads buy from whoever answers first. The system texts every lead within a minute of opting in &mdash; by name, about the exact offer they tapped &mdash; then keeps the conversation going until they book or say stop.</p>
+        <p>It runs on GoHighLevel with an AI assistant trained on your services, your prices, and your calendar. Built, tuned, and watched by us daily.</p>
+        <ul class="ticks">
+          <li>First SMS in under 60 seconds &mdash; nights and weekends included</li>
+          <li>Real openings offered straight from your calendar</li>
+          <li>Quiet leads get nurtured automatically, never spammed</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="nurt rv">
+          <li><span class="when">0:00 &mdash; opt-in</span><strong>Lead taps your ad</strong><p>Name, number, and vehicle land in the system.</p></li>
+          <li><span class="when">0:47</span><strong>First text goes out</strong><p>Personal, specific, and faster than any competitor.</p></li>
+          <li><span class="when">Day 1</span><strong>Gentle nudge if quiet</strong><p>&ldquo;Still want that interior sorted this week?&rdquo;</p></li>
+          <li><span class="when">Day 3</span><strong>Offer reminder</strong><p>The special they claimed, with real open slots attached.</p></li>
+          <li><span class="when">Day 7</span><strong>Last call</strong><p>One final touch &mdash; then the sequence stands down.</p></li>
+          <li><span class="when">Any time</span><strong>They reply &rarr; booked</strong><p>The moment they pick a slot, every sequence stops. No awkward double-texts.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy rv">
+        <p class="eyebrow">Websites</p>
+        <h2>One page. One job: <span class="grad-text">booking.</span></h2>
+        <p>Fast, clean, single-file sites that load instantly on a phone and drive one action. No page builders, no plugins, no monthly platform fees &mdash; nothing to break at 2 AM.</p>
+        <ul class="ticks">
+          <li>Designed and live within days, not months</li>
+          <li>Built mobile-first &mdash; where your customers actually are</li>
+          <li>Wired directly into your booking calendar and follow-up system</li>
+          <li>You own the file. Host it anywhere, forever.</li>
+        </ul>
+      </div>
+      <div class="rv" data-plx="0.05" style="width:100%">
+        <div class="browser">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">primeshinedetailing.com</span></div>
+          <div class="bpage-hero">
+            <p class="t">Your car. Showroom clean.</p>
+            <span class="s">Mobile detailing &middot; Serving your area</span>
+            <span class="b">Book my detail &#8594;</span>
+          </div>
+          <div class="bpage-row"><i></i><i></i><i></i></div>
+        </div>
+        <div class="scorez">
+          <div class="score"><span class="n" data-count="100">100</span><span>Performance</span></div>
+          <div class="score"><span class="n" data-count="100">100</span><span>Accessibility</span></div>
+          <div class="score"><span class="n" data-count="100">100</span><span>Best practices</span></div>
+          <div class="score"><span class="n" data-count="100">100</span><span>SEO</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq">MORE BOOKED JOBS<i>&#9889;</i><b>FIRST TEXT IN 60 SECONDS</b><i>&#9889;</i>META ADS THAT PULL<i>&#9889;</i><b>FOLLOW-UP ON AUTOPILOT</b><i>&#9889;</i>WEBSITES THAT CONVERT<i>&#9889;</i></span>
+    <span class="mq">MORE BOOKED JOBS<i>&#9889;</i><b>FIRST TEXT IN 60 SECONDS</b><i>&#9889;</i>META ADS THAT PULL<i>&#9889;</i><b>FOLLOW-UP ON AUTOPILOT</b><i>&#9889;</i>WEBSITES THAT CONVERT<i>&#9889;</i></span>
+  </div>
+</div>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-inner rv">
+      <p class="eyebrow">Next step</p>
+      <h2>Not sure which piece you need?</h2>
+      <p>That's what the call is for. We'll look at your market and your goals, and we'll tell you plainly which parts of the system make sense &mdash; and which don't yet.</p>
+      <div class="cta-actions">
+        <!-- REPLACE: booking link (GHL calendar / Calendly URL) -->
+        <a class="btn btn-primary" href="#/contact">Book a free strategy call <span class="arrow">&#8594;</span></a>
+        <!-- REPLACE: your real email -->
+        <a class="btn btn-ghost" href="mailto:hello@scalia.agency">hello@scalia.agency</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="pg" id="pg-results">
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Results</p>
+    <h1>The system, <span class="grad-text">in the wild.</span></h1>
+    <p class="lede">Live numbers pulled straight from client ad accounts in Meta Ads Manager &mdash; July 2026, lifetime campaign data. Not marketing-page math.</p>
+  </div>
+</section>
+
+<section class="stats-strip" aria-label="Aggregate results">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat rv"><span class="num grad-text" data-count="113">113</span><p>leads generated across Scalia lead campaigns for detailing and cleaning clients.</p><span class="src">META ADS MANAGER &middot; ALL CLIENT ACCOUNTS</span></div>
+      <div class="stat rv"><span class="num grad-text" data-count="6" data-prefix="$" data-suffix=".29">$6.29</span><p>blended cost per lead &mdash; total portfolio spend divided by every lead captured.</p><span class="src">$711 SPEND / 113 LEADS &middot; LIFETIME</span></div>
+      <div class="stat rv"><span class="num grad-text" data-count="28" data-suffix="&times;">28&times;</span><p>cheaper per lead than the same client&rsquo;s self-run campaign, in the same ad account.</p><span class="src">DA CLEANING BROS &middot; $4.91 VS $140.23</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">Case studies</p>
+      <h2>What it looks like per shop.</h2>
+      <p>Every number below comes from Meta Ads Manager, campaign-level, lifetime.</p>
+    </div>
+
+    <article class="case rv">
+      <div class="case-top">
+        <span class="who">Da Cleaning Bros &middot; detailing &amp; cleaning</span>
+        <div class="chips"><span class="chip">META ADS</span><span class="chip">SMS FOLLOW-UP</span></div>
+      </div>
+      <blockquote>From $140.23 per lead to $4.91 &mdash; same business, same ad account.</blockquote>
+      <span class="attr">META ADS MANAGER &middot; MAY 31 &ndash; JUL 7, 2026</span>
+      <div class="case-stats">
+        <div class="cstat"><span class="n" data-count="52">52</span><span>leads in 38 days</span></div>
+        <div class="cstat"><span class="n" data-count="4" data-prefix="$" data-suffix=".91">$4.91</span><span>cost per lead</span></div>
+        <div class="cstat"><span class="n" data-count="28" data-suffix="&times;">28&times;</span><span>cheaper than their self-run campaign</span></div>
+      </div>
+      <p>Before Scalia, their own lead-gen campaign spent $420.68 chasing website leads at $140.23 apiece. The Scalia campaign moved the same audience to instant lead forms wired into SMS follow-up &mdash; 52 leads at $4.91 in five and a half weeks.</p>
+    </article>
+
+    <article class="case rv">
+      <div class="case-top">
+        <span class="who">BM Detailz &middot; San Diego</span>
+        <div class="chips"><span class="chip">META ADS</span><span class="chip">SMS FOLLOW-UP</span></div>
+      </div>
+      <blockquote>Conversations don&rsquo;t book jobs. Captured leads do.</blockquote>
+      <span class="attr">META ADS MANAGER &middot; JAN 30 &ndash; JUL 7, 2026</span>
+      <div class="case-stats">
+        <div class="cstat"><span class="n" data-count="30">30</span><span>form leads captured</span></div>
+        <div class="cstat"><span class="n" data-count="5" data-prefix="$" data-suffix=".10">$5.10</span><span>cost per lead</span></div>
+        <div class="cstat"><span class="n" data-count="153" data-prefix="$">$153</span><span>total ad spend on the Scalia campaign</span></div>
+      </div>
+      <p>Months of engagement campaigns bought Messenger conversations at $3&ndash;9 each &mdash; every one needing a manual reply between jobs. The Scalia lead campaign captures name and number up front and hands them straight to automated follow-up: 30 booking-ready leads at $5.10.</p>
+    </article>
+
+    <article class="case rv">
+      <div class="case-top">
+        <span class="who">Aspect Car Detailing &middot; new launch</span>
+        <div class="chips"><span class="chip">META ADS</span><span class="chip">SMS FOLLOW-UP</span><span class="chip">NEW ACCOUNT</span></div>
+      </div>
+      <blockquote>Nine leads before the ad account was two weeks old.</blockquote>
+      <span class="attr">META ADS MANAGER &middot; JUN 23 &ndash; JUL 7, 2026</span>
+      <div class="case-stats">
+        <div class="cstat"><span class="n" data-count="9">9</span><span>leads in the first two weeks</span></div>
+        <div class="cstat"><span class="n" data-count="2" data-prefix="$" data-suffix=".19">$2.19</span><span>cost per lead</span></div>
+        <div class="cstat"><span class="n" data-count="4" data-suffix=".5%">4.5%</span><span>click-through rate &mdash; ~2&times; the portfolio norm</span></div>
+      </div>
+      <p>Brand-new ad account, $19.74 of total spend. The launch offer pulled a 4.50% click-through rate &mdash; roughly double what established detailing accounts in the same portfolio see &mdash; with leads landing at $2.19 each.</p>
+    </article>
+
+    <p class="hero-note rv" style="margin-top:6px"><span class="dot"></span>Lead counts are Meta lead-form results; booked jobs happen in the follow-up system on top of them. Every market is different &mdash; the call is where we work out yours.</p>
+  </div>
+</section>
+
+<div class="marquee marquee-rev" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq"><b>BUILT FOR DETAILERS</b><i>&#9889;</i>TWO OPERATORS<i>&#9889;</i><b>NO AGENCY BLOAT</b><i>&#9889;</i>LEADS TEXTED, NURTURED, BOOKED<i>&#9889;</i><b>YOUR CALENDAR FILLS ITSELF</b><i>&#9889;</i></span>
+    <span class="mq"><b>BUILT FOR DETAILERS</b><i>&#9889;</i>TWO OPERATORS<i>&#9889;</i><b>NO AGENCY BLOAT</b><i>&#9889;</i>LEADS TEXTED, NURTURED, BOOKED<i>&#9889;</i><b>YOUR CALENDAR FILLS ITSELF</b><i>&#9889;</i></span>
+  </div>
+</div>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-inner rv">
+      <p class="eyebrow">Next step</p>
+      <h2>Want numbers like these?</h2>
+      <p>Book a free 20-minute strategy call. We&rsquo;ll look at your market, your offers, and what the system would produce for your shop &mdash; and we&rsquo;ll tell you honestly if it won&rsquo;t.</p>
+      <div class="cta-actions">
+        <!-- REPLACE: booking link (GHL calendar / Calendly URL) -->
+        <a class="btn btn-primary" href="#/contact">Book a free strategy call <span class="arrow">&#8594;</span></a>
+        <!-- REPLACE: your real email -->
+        <a class="btn btn-ghost" href="mailto:hello@scalia.agency">hello@scalia.agency</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="pg" id="pg-about">
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">About</p>
+    <h1>Two operators. <span class="grad-text">Zero bloat.</span></h1>
+    <p class="lede">Scalia is a two-person partnership building marketing systems for auto detailers and local service businesses. Big enough to run the whole machine &mdash; small enough that you always know exactly who&rsquo;s running it.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:40px">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy rv">
+        <p class="eyebrow">The short version</p>
+        <h2>You talk to the people who do the work.</h2>
+        <p><strong style="color:var(--ink)">No account managers, no handoffs, no &ldquo;let me check with the team.&rdquo;</strong> The two people on your strategy call are the two people writing your ads, tuning your follow-up sequences, and reading your numbers every morning.</p>
+        <p>We build our own tools &mdash; a custom CRM, our own automation stack, the same speed-to-lead playbook we sell &mdash; and Scalia&rsquo;s own growth runs on it. If something doesn&rsquo;t work for our pipeline, it never reaches yours.</p>
+        <p>Because it&rsquo;s just the two of us, capacity is capped. We take a limited number of clients, and we keep them.</p>
+      </div>
+      <!-- REPLACE: both partners' names, photos, and the role split if it differs -->
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div class="op-card rv" data-plx="0.03">
+          <div class="op-face">S</div>
+          <h3>Partner &middot; Growth</h3>
+          <p class="role">Meta ads &middot; Offers &middot; Creative</p>
+          <p>Builds the campaigns: the offers that pull, the creative that stops the scroll, and the targeting that keeps every dollar inside your service area.</p>
+        </div>
+        <div class="op-card rv" data-plx="0.06">
+          <div class="op-face" style="background:linear-gradient(135deg,var(--g2) 0%,var(--g1) 100%)">S</div>
+          <h3>Partner &middot; Systems</h3>
+          <p class="role">Automation &middot; CRM &middot; Websites</p>
+          <p>Builds the machine behind the ads: the 60-second follow-up, the AI conversations, the booking flow, and the sites that close the skeptics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--ice)">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">Principles</p>
+      <h2>Three rules the whole operation runs on.</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card rv"><span class="x-mark" aria-hidden="true">1</span><h3>Speed is the product</h3><p>Every system we build is measured in seconds, not business days. The first text wins the job &mdash; so the first text is what gets engineered hardest.</p></div>
+      <div class="problem-card rv"><span class="x-mark" aria-hidden="true">2</span><h3>We run what we sell</h3><p>Scalia&rsquo;s own client acquisition runs on the same ads, automation, and follow-up stack you&rsquo;re buying. It gets tested on our money before it touches yours.</p></div>
+      <div class="problem-card rv"><span class="x-mark" aria-hidden="true">3</span><h3>Capped client list</h3><p>A two-person operation stays excellent by staying small. When the roster is full, there&rsquo;s a waitlist &mdash; not a drop in quality.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split flip">
+      <div class="split-copy rv">
+        <p class="eyebrow">A day on your account</p>
+        <h2>What &ldquo;managed&rdquo; <span class="grad-text">actually means.</span></h2>
+        <p>Marketing agencies love the word &ldquo;managed.&rdquo; Here&rsquo;s the literal version &mdash; what happens on a normal day while your campaign runs, split between the two of us.</p>
+        <ul class="ticks">
+          <li>Your numbers get read by a person, every single morning</li>
+          <li>Underperforming creative gets swapped, not left to burn budget</li>
+          <li>Stalled leads get flagged and re-engaged the same day</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="nurt rv">
+          <li><span class="when">7:30 AM</span><strong>Numbers check</strong><p>Every account&rsquo;s spend, leads, and cost per lead &mdash; before coffee&rsquo;s done.</p></li>
+          <li><span class="when">9:00 AM</span><strong>Creative &amp; copy</strong><p>New ad variants for whatever&rsquo;s fatiguing. Offers stay fresh.</p></li>
+          <li><span class="when">12:00 PM</span><strong>Lead flow watch</strong><p>Live check on follow-up conversations. The AI handles it; we verify it.</p></li>
+          <li><span class="when">3:00 PM</span><strong>Client check-ins</strong><p>Straight answers on what&rsquo;s working and what&rsquo;s being fixed.</p></li>
+          <li><span class="when">Any time</span><strong>Alerts</strong><p>If a lead stalls or a campaign misbehaves, we know within minutes &mdash; not at the monthly report.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq">MORE BOOKED JOBS<i>&#9889;</i><b>FIRST TEXT IN 60 SECONDS</b><i>&#9889;</i>META ADS THAT PULL<i>&#9889;</i><b>FOLLOW-UP ON AUTOPILOT</b><i>&#9889;</i>WEBSITES THAT CONVERT<i>&#9889;</i></span>
+    <span class="mq">MORE BOOKED JOBS<i>&#9889;</i><b>FIRST TEXT IN 60 SECONDS</b><i>&#9889;</i>META ADS THAT PULL<i>&#9889;</i><b>FOLLOW-UP ON AUTOPILOT</b><i>&#9889;</i>WEBSITES THAT CONVERT<i>&#9889;</i></span>
+  </div>
+</div>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-inner rv">
+      <p class="eyebrow">Next step</p>
+      <h2>Want a direct line?</h2>
+      <p>Book a free 20-minute strategy call &mdash; with the people who&rsquo;d actually run your account. If we can&rsquo;t help, we&rsquo;ll say so and point you somewhere that can.</p>
+      <div class="cta-actions">
+        <!-- REPLACE: booking link (GHL calendar / Calendly URL) -->
+        <a class="btn btn-primary" href="#/contact">Book a free strategy call <span class="arrow">&#8594;</span></a>
+        <!-- REPLACE: your real email -->
+        <a class="btn btn-ghost" href="mailto:hello@scalia.agency">hello@scalia.agency</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="pg" id="pg-contact">
+
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h1>Let's look at <span class="grad-text">your market.</span></h1>
+    <p class="lede">A free 20-minute strategy call. No slide deck, no pressure &mdash; we look at your area, your offers, and what the system would realistically produce. If we can't help, we'll tell you.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:30px">
+  <div class="wrap">
+    <div class="svc-grid">
+      <article class="svc rv">
+        <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+        <h3>Book the call</h3>
+        <p>Pick a slot that suits you. You'll get a confirmation and a reminder by text &mdash; the same system your leads would get.</p>
+        <ul>
+          <!-- REPLACE: point at your GHL calendar / Calendly URL -->
+          <li><a href="#/contact/book" style="color:var(--blue);font-weight:600">Open the calendar &#8594;</a></li>
+        </ul>
+      </article>
+      <article class="svc rv">
+        <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        <h3>Email</h3>
+        <p>Prefer to write first? Send a couple of lines about your business and your area &mdash; we answer everything ourselves, usually same day.</p>
+        <ul>
+          <!-- REPLACE: your real email -->
+          <li><a href="mailto:hello@scalia.agency" style="color:var(--blue);font-weight:600">hello@scalia.agency</a></li>
+        </ul>
+      </article>
+      <article class="svc rv">
+        <span class="svc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 11a8 8 0 0 1-8 8H5l-2 2V11a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg></span>
+        <h3>Text or DM</h3>
+        <p>Fastest lane &mdash; fitting, given the business. A text gets you a reply the same way your leads would: quickly.</p>
+        <ul>
+          <!-- REPLACE: your SMS number and Instagram handle -->
+          <li><a href="https://instagram.com/" rel="noopener" style="color:var(--blue);font-weight:600">@scalia.agency on Instagram</a></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--ice)">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy rv">
+        <p class="eyebrow">What happens next</p>
+        <h2>From this page to <span class="grad-text">leads in your phone.</span></h2>
+        <p>No six-week onboarding, no discovery workshops. The whole point of the system is speed &mdash; including at the start.</p>
+      </div>
+      <div>
+        <ul class="nurt rv">
+          <li><span class="when">Step 1 &middot; 20 min</span><strong>Strategy call</strong><p>Your market, your offers, your capacity. You'll get a straight answer on what the system would look like &mdash; and what it costs.</p></li>
+          <li><span class="when">Step 2 &middot; within 24h</span><strong>Plan &amp; quote</strong><p>A short written plan: the offer we'd run, the budget, and what to expect in the first 30 days.</p></li>
+          <li><span class="when">Step 3 &middot; within a week</span><strong>Live</strong><p>Ads running, follow-up wired, calendar connected. First leads typically inside 48 hours.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head rv">
+      <p class="eyebrow">Before you book</p>
+      <h2>Quick answers.</h2>
+    </div>
+    <div class="faq-list rv">
+      <details>
+        <summary>Is the call actually free?</summary>
+        <p>Yes &mdash; and it's useful either way. You'll leave knowing what a lead system for your market would look like, whether you build it with us or not.</p>
+      </details>
+      <details>
+        <summary>Do I need anything prepared?</summary>
+        <p>Just rough numbers: what a typical job is worth to you, and how many more per week you could handle. Everything else we work out together.</p>
+      </details>
+      <details>
+        <summary>What if I'm not a detailer?</summary>
+        <p>If you're a local service that books appointments &mdash; mobile mechanics, pressure washing, lawn care, cleaning &mdash; the same machine applies. Book the call.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mq">MORE BOOKED JOBS<i>&#9889;</i><b>FIRST TEXT IN 60 SECONDS</b><i>&#9889;</i>META ADS THAT PULL<i>&#9889;</i><b>FOLLOW-UP ON AUTOPILOT</b><i>&#9889;</i>WEBSITES THAT CONVERT<i>&#9889;</i></span>
+    <span class="mq">MORE BOOKED JOBS<i>&#9889;</i><b>FIRST TEXT IN 60 SECONDS</b><i>&#9889;</i>META ADS THAT PULL<i>&#9889;</i><b>FOLLOW-UP ON AUTOPILOT</b><i>&#9889;</i>WEBSITES THAT CONVERT<i>&#9889;</i></span>
+  </div>
+</div>
+
+<section class="cta-band" id="book">
+  <div class="wrap">
+    <div class="cta-inner rv">
+      <p class="eyebrow">Next step</p>
+      <h2>Ready when you are.</h2>
+      <p>One call. Twenty minutes. A straight answer about whether this works for your shop &mdash; from the people who'd be running it.</p>
+      <div class="cta-actions">
+        <!-- REPLACE: booking link (GHL calendar / Calendly URL) -->
+        <a class="btn btn-primary" href="#/contact">Book a free strategy call <span class="arrow">&#8594;</span></a>
+        <!-- REPLACE: your real email -->
+        <a class="btn btn-ghost" href="mailto:hello@scalia.agency">hello@scalia.agency</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
 </main>
 
-<!-- ======================= FOOTER ======================= -->
 <footer>
   <div class="wrap foot">
-    <a class="logo" href="#top" style="font-size:1.1rem">
-      <span class="logo-mark" style="width:24px;height:24px;font-size:.8rem">S</span>
-      Scalia
-    </a>
+    <a class="logo" href="#/home" style="font-size:1.1rem"><span class="logo-mark" style="width:24px;height:24px;font-size:.8rem">S</span>Scalia</a>
     <ul class="foot-links">
-      <li><a href="services.html">Services</a></li>
-      <li><a href="results.html">Results</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="#/services">Services</a></li>
+      <li><a href="#/results">Results</a></li>
+      <li><a href="#/about">About</a></li>
+      <li><a href="#/contact">Contact</a></li>
     </ul>
-    <small>© 2026 Scalia · Marketing systems for local service businesses</small>
+    <small>&copy; 2026 Scalia &middot; Marketing systems for local service businesses</small>
   </div>
 </footer>
 
@@ -1048,6 +1575,40 @@ footer{border-top:1px solid var(--ice-line);padding:36px 0;background:#fff}
     });
   }, {threshold:.6});
   els.forEach(function(el){ io.observe(el); });
+})();
+
+/* hash router: one file, five pages */
+(function(){
+  var pages = ['home','services','results','about','contact'];
+  var titles = {
+    home:'Scalia \u2014 Marketing systems for auto detailers',
+    services:'Services \u2014 Scalia',
+    results:'Results \u2014 Scalia',
+    about:'About \u2014 Scalia',
+    contact:'Book a call \u2014 Scalia'
+  };
+  function route(){
+    var m = (location.hash || '#/home').match(/^#\/([a-z]+)(?:\/([\w-]+))?/);
+    var pg = (m && pages.indexOf(m[1]) > -1) ? m[1] : 'home';
+    var anchor = m && m[2];
+    pages.forEach(function(n){
+      var el = document.getElementById('pg-' + n);
+      if (el) el.classList.toggle('on', n === pg);
+    });
+    document.querySelectorAll('.nav-links a[data-pg]').forEach(function(a){
+      a.classList.toggle('here', a.getAttribute('data-pg') === pg);
+    });
+    document.title = titles[pg] || titles.home;
+    if (anchor) {
+      var t = document.querySelector('#pg-' + pg + ' [id="' + anchor + '"]');
+      if (t) { t.scrollIntoView(); } else { window.scrollTo(0, 0); }
+    } else {
+      window.scrollTo(0, 0);
+    }
+    window.dispatchEvent(new Event('scroll'));
+  }
+  window.addEventListener('hashchange', route);
+  route();
 })();
 </script>
 </body>
