@@ -1,16 +1,37 @@
-# React + Vite
+# Scalia — Customer Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page dashboard for the Scalia agency to manage clients, review their
+Meta ads performance, and keep track of scheduled meetings in one place.
 
-Currently, two official plugins are available:
+## Views
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Overview** — headline KPIs (total clients, active clients, 30-day ad spend,
+  meetings this week), client growth over time, upcoming meetings, and the
+  newest clients.
+- **Clients** — add, search, filter, and remove clients; update each client's
+  status (active / onboarding / paused) and see their 30-day spend, ROAS, and
+  monthly budget at a glance.
+- **Ads Analytics** — per-client Meta ads metrics for a 7/14/30-day window:
+  spend, impressions, clicks, CTR, CPC, and ROAS, with daily spend and
+  conversion charts and a campaign-level breakdown table.
+- **Meetings** — schedule meetings against clients (kickoff, check-in,
+  performance review, strategy), grouped by day, with done/delete actions and
+  a collapsible history of past meetings.
 
-## React Compiler
+## Data
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Clients and meetings persist in `localStorage`. Ad metrics are currently
+generated deterministically per client (seeded from the client id) so the demo
+is stable across reloads — swap `getDailyAdMetrics` / `getCampaignBreakdown`
+in `src/store.js` for a Meta Marketing API integration to show real data.
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```sh
+npm install
+npm run dev     # local dev server
+npm run lint    # eslint
+npm run build   # production build
+```
+
+Built with React 19, Vite, Recharts, and lucide-react.
