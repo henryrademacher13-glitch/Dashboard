@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voiceflow"
+version = "0.1.0"
+description = "System-wide local voice dictation for macOS: hold a hotkey, speak, and the text is typed into whatever app is focused."
+requires-python = ">=3.10"
+dependencies = [
+    "faster-whisper>=1.0",
+    "sounddevice>=0.4.6",
+    "numpy>=1.24",
+    "pynput>=1.7.6",
+    "rumps>=0.4 ; sys_platform == 'darwin'",
+    "pyobjc-framework-Quartz>=9.0 ; sys_platform == 'darwin'",
+    "pyobjc-framework-Cocoa>=9.0 ; sys_platform == 'darwin'",
+    "pyobjc-framework-AVFoundation>=9.0 ; sys_platform == 'darwin'",
+    "pyobjc-framework-ApplicationServices>=9.0 ; sys_platform == 'darwin'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+voiceflow = "voiceflow.app:main"
+
+[tool.setuptools.packages.find]
+include = ["voiceflow*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
