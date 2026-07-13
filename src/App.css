@@ -493,6 +493,29 @@ body {
   .chart-pair { grid-template-columns: 1fr; }
 }
 
+.fee-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.fee-edit input {
+  width: 76px;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 3px 6px;
+}
+
+.fee-edit input:hover { border-color: var(--border); }
+.fee-edit input:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+
 /* ---------------------------------------------------------------- meetings */
 
 .meeting-list {

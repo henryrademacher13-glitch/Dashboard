@@ -6,7 +6,7 @@ export default function AddClientModal({ onAdd, onClose }) {
   const [contact, setContact] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('onboarding');
-  const [monthlyBudget, setMonthlyBudget] = useState('');
+  const [monthlyFee, setMonthlyFee] = useState('');
 
   const submit = (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ export default function AddClientModal({ onAdd, onClose }) {
       contact: contact.trim(),
       email: email.trim(),
       status,
-      monthlyBudget: Number(monthlyBudget) || 0,
+      monthlyFee: Number(monthlyFee) || 0,
     });
     onClose();
   };
@@ -51,8 +51,8 @@ export default function AddClientModal({ onAdd, onClose }) {
               </select>
             </label>
             <label className="field">
-              <span>Monthly ad budget ($)</span>
-              <input type="number" min="0" step="100" value={monthlyBudget} onChange={(e) => setMonthlyBudget(e.target.value)} placeholder="3000" />
+              <span>Monthly fee ($)</span>
+              <input type="number" min="0" step="100" value={monthlyFee} onChange={(e) => setMonthlyFee(e.target.value)} placeholder="3000" />
             </label>
           </div>
           <div className="modal-foot">

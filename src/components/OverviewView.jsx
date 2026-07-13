@@ -4,7 +4,7 @@ import StatTile from './StatTile';
 import ChartTooltip from './ChartTooltip';
 import StatusPill from './StatusPill';
 import { useChartTheme, fmt } from '../theme';
-import { getDailyAdMetrics, sumMetrics } from '../store';
+import { isPaying } from '../store';
 
 function formatMeetingDay(dateStr) {
   const today = new Date().toISOString().slice(0, 10);
@@ -22,7 +22,7 @@ export default function OverviewView({ store, onGoTo }) {
   const addedThisMonth = clients.filter((c) => c.addedAt >= monthStart).length;
   const activeClients = clients.filter((c) => c.status === 'active');
 
-  const spend30 = clients.reduce((total, c) => total + sumMetrics(getDailyAdMetrics(c, 30)).spend, 0);
+  const mrr = clients.filter(isPaying).reduce((total, c) => total + c.monthlyFee, 0);
 
   const today = new Date().toISOString().slice(0, 10);
   const weekEndDate = new Date(today + 'T00:00');
@@ -46,7 +46,7 @@ export default function OverviewView({ store, onGoTo }) {
           deltaGood={addedThisMonth >= 0}
         />
         <StatTile label="Active clients" value={activeClients.length} />
-        <StatTile label="Ad spend, last 30 days" value={fmt.money(spend30)} />
+        <StatTile label="Monthly recurring revenue" value={fmt.money(mrr)} />
         <StatTile label="Meetings this week" value={meetingsThisWeek} />
       </div>
 
@@ -127,7 +127,7 @@ export default function OverviewView({ store, onGoTo }) {
               <th>Client</th>
               <th>Contact</th>
               <th>Status</th>
-              <th className="num">Monthly budget</th>
+              <th className="num">Monthly fee</th>
               <th>Added</th>
             </tr>
           </thead>
@@ -140,7 +140,7 @@ export default function OverviewView({ store, onGoTo }) {
                   <td className="cell-strong">{c.name}</td>
                   <td>{c.contact}</td>
                   <td><StatusPill status={c.status} /></td>
-                  <td className="num">{c.monthlyBudget > 0 ? fmt.money(c.monthlyBudget) : '—'}</td>
+                  <td className="num">{c.monthlyFee > 0 ? fmt.money(c.monthlyFee) : '—'}</td>
                   <td>{new Date(c.addedAt + 'T00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
                 </tr>
               ))}

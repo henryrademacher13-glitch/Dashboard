@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Plus, LayoutGrid, Users, BarChart2, CalendarDays } from 'lucide-react';
+import { Plus, LayoutGrid, Users, DollarSign, CalendarDays } from 'lucide-react';
 import { useScaliaStore } from './store';
 import OverviewView from './components/OverviewView';
 import ClientsView from './components/ClientsView';
-import AnalyticsView from './components/AnalyticsView';
+import RevenueView from './components/RevenueView';
 import MeetingsView from './components/MeetingsView';
 import AddClientModal from './components/AddClientModal';
 import AddMeetingModal from './components/AddMeetingModal';
@@ -16,7 +16,7 @@ function formatDate(d) {
 const TABS = [
   { id: 'overview', label: 'Overview', Icon: LayoutGrid },
   { id: 'clients', label: 'Clients', Icon: Users },
-  { id: 'analytics', label: 'Ads Analytics', Icon: BarChart2 },
+  { id: 'revenue', label: 'Revenue', Icon: DollarSign },
   { id: 'meetings', label: 'Meetings', Icon: CalendarDays },
 ];
 
@@ -60,7 +60,7 @@ export default function App() {
       <main className="app-main">
         {view === 'overview' && <OverviewView store={store} onGoTo={setView} />}
         {view === 'clients' && <ClientsView store={store} onAddClient={() => setShowAddClient(true)} />}
-        {view === 'analytics' && <AnalyticsView store={store} />}
+        {view === 'revenue' && <RevenueView store={store} />}
         {view === 'meetings' && <MeetingsView store={store} onAddMeeting={() => setShowAddMeeting(true)} />}
       </main>
 

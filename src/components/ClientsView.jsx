@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Search, Trash2, Mail, CalendarDays, Plus } from 'lucide-react';
 import StatusPill from './StatusPill';
 import { fmt } from '../theme';
-import { getDailyAdMetrics, sumMetrics } from '../store';
+import { isPaying } from '../store';
 
 const STATUS_FILTERS = [
   { value: 'all', label: 'All' },
@@ -63,7 +63,7 @@ export default function ClientsView({ store, onAddClient }) {
       ) : (
         <div className="client-grid">
           {filtered.map((c) => {
-            const totals = sumMetrics(getDailyAdMetrics(c, 30));
+            const mrr = clients.filter(isPaying).reduce((a, cl) => a + cl.monthlyFee, 0);
             return (
               <div key={c.id} className="client-card">
                 <div className="client-card-head">
@@ -79,16 +79,18 @@ export default function ClientsView({ store, onAddClient }) {
                 </div>
                 <div className="client-stats">
                   <div>
-                    <span className="client-stat-label">30-day spend</span>
-                    <span className="client-stat-value">{fmt.money(totals.spend)}</span>
+                    <span className="client-stat-label">Monthly fee</span>
+                    <span className="client-stat-value">{c.monthlyFee > 0 ? fmt.money(c.monthlyFee) : '—'}</span>
                   </div>
                   <div>
-                    <span className="client-stat-label">ROAS</span>
-                    <span className="client-stat-value">{totals.spend > 0 ? totals.roas.toFixed(1) + 'x' : '—'}</span>
+                    <span className="client-stat-label">Share of MRR</span>
+                    <span className="client-stat-value">{isPaying(c) && mrr > 0 ? ((c.monthlyFee / mrr) * 100).toFixed(0) + '%' : '—'}</span>
                   </div>
                   <div>
-                    <span className="client-stat-label">Budget / mo</span>
-                    <span className="client-stat-value">{c.monthlyBudget > 0 ? fmt.money(c.monthlyBudget) : '—'}</span>
+                    <span className="client-stat-label">Client since</span>
+                    <span className="client-stat-value">
+                      {new Date(c.addedAt + 'T00:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                    </span>
                   </div>
                 </div>
                 <div className="client-card-foot">
