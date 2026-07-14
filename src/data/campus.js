@@ -7,11 +7,11 @@ export const MAP_H = 760
 
 export const CATEGORIES = {
   landmark: { label: 'Landmarks', color: '#c8102e' },
-  academic: { label: 'Academics', color: '#4a6fa5' },
-  residence: { label: 'Residences', color: '#c07f2f' },
-  dining: { label: 'Dining', color: '#6f8f3a' },
-  athletics: { label: 'Athletics', color: '#7e5ba6' },
-  transit: { label: 'Transit', color: '#2e8b8b' },
+  academic: { label: 'Academics', color: '#5e7ca6' },
+  residence: { label: 'Residences', color: '#bf8b4b' },
+  dining: { label: 'Dining', color: '#7d9750' },
+  athletics: { label: 'Athletics', color: '#8a6fb0' },
+  transit: { label: 'Transit', color: '#3a8f8f' },
   green: { label: 'Green spaces', color: '#4f8a4f' },
 }
 
@@ -66,14 +66,15 @@ export const PARKS = [
 // Southwest Corridor Park band (Orange Line runs alongside it).
 export const CORRIDOR = { x: 0, y: 578, w: 1000, h: 34 }
 
-// Non-clickable context buildings, drawn gray for orientation.
+// Non-clickable context buildings, drawn as quiet unlabeled shapes
+// (names appear on hover) so the map stays uncluttered.
 export const CONTEXT_BUILDINGS = [
-  { name: 'Churchill Hall', label: 'Churchill', x: 502, y: 302, w: 58, h: 40 },
-  { name: 'Cullinane Hall', label: 'Cullinane', x: 572, y: 302, w: 56, h: 44 },
-  { name: 'Dana Research Center', label: 'Dana', x: 470, y: 470, w: 56, h: 44 },
-  { name: 'Gainsborough Garage', label: 'Garage', x: 655, y: 380, w: 80, h: 44 },
-  { name: 'Huntington Ave YMCA', label: 'YMCA', x: 735, y: 240, w: 84, h: 44 },
-  { name: 'Forsyth Building', label: 'Forsyth Bldg', x: 296, y: 306, w: 54, h: 40 },
+  { name: 'Churchill Hall', x: 502, y: 302, w: 58, h: 40 },
+  { name: 'Cullinane Hall', x: 572, y: 302, w: 56, h: 44 },
+  { name: 'Dana Research Center', x: 470, y: 470, w: 56, h: 44 },
+  { name: 'Gainsborough Garage', x: 655, y: 380, w: 80, h: 44 },
+  { name: 'Huntington Ave YMCA', x: 735, y: 240, w: 84, h: 44 },
+  { name: 'Forsyth Building', x: 296, y: 306, w: 54, h: 40 },
 ]
 
 // Destinations. `route` is the walking path from East Village's door,
@@ -97,9 +98,9 @@ export const BUILDINGS = [
   {
     id: 'mass-ave-station',
     name: 'Massachusetts Ave Station (Orange Line)',
-    label: 'Mass Ave\nStation',
+    label: 'Mass Ave Station',
     category: 'transit',
-    x: 856, y: 596, w: 56, h: 40,
+    x: 876, y: 588, w: 16, h: 16, marker: true, noLabel: true,
     minutes: 5,
     desc: 'Orange Line stop on the Southwest Corridor — the quickest rapid transit from East Village for trips to Back Bay, Downtown, or Ruggles.',
     route: [A, [756, 437], [884, 437], [884, 596]],
@@ -127,7 +128,7 @@ export const BUILDINGS = [
   {
     id: 'curry',
     name: 'Curry Student Center',
-    label: 'Curry\nStudent Ctr',
+    label: 'Curry',
     category: 'landmark',
     x: 478, y: 362, w: 88, h: 56,
     minutes: 7,
@@ -231,7 +232,7 @@ export const BUILDINGS = [
   {
     id: 'snell-engineering',
     name: 'Snell Engineering Center',
-    label: 'Snell\nEngineering',
+    label: 'Snell Eng',
     category: 'academic',
     x: 356, y: 464, w: 84, h: 50,
     minutes: 10,
@@ -246,9 +247,9 @@ export const BUILDINGS = [
   {
     id: 'neu-station',
     name: 'Northeastern Station (Green Line E)',
-    label: 'Northeastern\nStation',
+    label: 'Northeastern Station',
     category: 'transit',
-    x: 442, y: 206, w: 56, h: 30,
+    x: 462, y: 214, w: 16, h: 16, marker: true, noLabel: true,
     minutes: 8,
     desc: 'Green Line E surface stop right at Krentzman Quad on Huntington Ave — your ride toward Symphony, Copley, and downtown.',
     route: [A, GB, GH, [490, 222]],
@@ -261,7 +262,7 @@ export const BUILDINGS = [
   {
     id: 'marino',
     name: 'Marino Recreation Center',
-    label: 'Marino\nRec Center',
+    label: 'Marino',
     category: 'athletics',
     x: 295, y: 240, w: 72, h: 52,
     minutes: 10,
@@ -380,7 +381,7 @@ export const BUILDINGS = [
   {
     id: 'wvh',
     name: 'West Village H (Khoury College)',
-    label: 'West\nVillage H',
+    label: 'WVH · Khoury',
     category: 'academic',
     x: 56, y: 470, w: 88, h: 58,
     minutes: 14,
@@ -395,7 +396,7 @@ export const BUILDINGS = [
   {
     id: 'west-village',
     name: 'West Village (A–G)',
-    label: 'West Village\nA–G',
+    label: 'West Village A–G',
     category: 'residence',
     x: 44, y: 536, w: 132, h: 52,
     minutes: 15,
@@ -425,9 +426,9 @@ export const BUILDINGS = [
   {
     id: 'squashbusters',
     name: 'SquashBusters (Badger & Rosen)',
-    label: 'Squash-\nBusters',
+    label: 'SquashBusters',
     category: 'athletics',
-    x: 452, y: 540, w: 62, h: 36,
+    x: 448, y: 540, w: 70, h: 36,
     minutes: 12,
     desc: 'Squash courts and community program center near Columbus Ave and World Series Way.',
     route: [A, GB, WE, WF, [286, 558], [448, 558], [452, 554]],
@@ -485,7 +486,7 @@ export const BUILDINGS = [
   {
     id: 'international-village',
     name: 'International Village',
-    label: 'International\nVillage',
+    label: 'Int’l Village',
     category: 'residence',
     x: 96, y: 652, w: 118, h: 58,
     minutes: 13,
@@ -500,7 +501,7 @@ export const BUILDINGS = [
   {
     id: 'ruggles',
     name: 'Ruggles Station (Orange Line / Commuter Rail)',
-    label: 'Ruggles\nStation',
+    label: 'Ruggles',
     category: 'transit',
     x: 240, y: 598, w: 84, h: 46,
     minutes: 12,
@@ -531,8 +532,7 @@ export const BUILDINGS = [
 
 // Transit markers on the Green Line (drawn as circles on Huntington).
 export const T_STOPS = [
-  { name: 'Northeastern (E)', at: [490, 222] },
-  { name: 'Symphony (E)', at: [800, 222] },
+  { name: 'Symphony (E)', at: [858, 222] },
 ]
 
 export function routeToPath(route) {
