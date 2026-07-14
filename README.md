@@ -1,16 +1,26 @@
-# React + Vite
+# Husky Navigator 🐾
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive guide to Northeastern University's Boston campus, built around
+**East Village (291 St. Botolph St)** as the starting point.
 
-Currently, two official plugins are available:
+- **Stylized campus map** (SVG) with 28 landmarks, academic buildings,
+  residence halls, dining spots, athletics facilities, and T stations —
+  plus green spaces like Krentzman Quad and Centennial Common.
+- **Walking routes from East Village** drawn on the map for every
+  destination, with an animated walker, walk-time and distance estimates,
+  and turn-by-turn directions.
+- **Search and category filters**, a walk-time-sorted place list,
+  scroll-to-zoom / drag-to-pan on the map, and a responsive mobile layout.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The map is hand-drawn and not to scale; walk times assume a casual pace.
 
-## React Compiler
+## Running it
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev      # dev server
+npm run build    # production build in dist/
+npm run preview  # serve the production build
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Built with React + Vite.
