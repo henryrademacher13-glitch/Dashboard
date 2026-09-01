@@ -30,8 +30,6 @@ Every editable value is wrapped in `[SQUARE BRACKETS]`. Open `index.html`, searc
 | `[PHONE-DIGITS]` | Digits only for `tel:` links, e.g. `5551234567` | 2 |
 | `[EMAIL]` | Contact email | 4 |
 | `[SERVICE AREA]` | e.g. `Denver Metro` or `Nationwide` | 2 |
-| `[BUILD FEE]` | One-time build price | 1 |
-| `[RETAINER]` | Monthly management fee | 1 |
 | `[GUARANTEE #]` | Booked estimates promised in 60 days | 1 |
 | `[$500k]`, `[2]` | Revenue floor, open slots this month | 2 |
 | `[CLIENT QUOTE 1–3]` | Real testimonials, with name, company, trade, city | 3 |
@@ -57,12 +55,12 @@ sed -i '' \
   whole `<section id="results">` block if you don't have any yet.
 - **The job math calculator (Sec. 04).** Visitors drag their own numbers and the sheet
   rebuilds live. What you set are the *starting* positions — the `value=""` on each
-  `<input type="range">` in `#calc-form`. Defaults are ad spend $3,000 ($100/day, the top of
-  your stated $50–$100 floor; the slider bottoms out at $1,500 = $50/day), management
-  $1,500 (set this to your real `[RETAINER]`), CPL $24, booking 40%, close 24%, ticket
-  $9,400, margin 35%. They're chosen so the whole example resolves cleanly to $90 per
-  booked estimate and 8.8× — if you change one, sanity-check the hero scorecard
-  (`.card-score`, which carries matching `data-target` values) so the two agree.
+  `<input type="range">` in `#calc-form`. Defaults are ad spend $3,000 — the slider floors
+  there, because $3,000/mo is the $100/day minimum — management $2,000 (your retainer),
+  CPL $24, booking 40%, close 24%, ticket $9,400, margin 35%. They resolve cleanly to
+  $100 per booked estimate and 7.9× return. **If you change any of them, sanity-check the
+  hero scorecard** (`.card-score`, which carries matching `data-target` values) so the two
+  still agree — right now both say $100 and 7.9×.
 
 ## Before you send traffic
 

@@ -19,8 +19,6 @@
   [PHONE-DIGITS]      tel: digits, e.g. 5551234567          (appears 2x)
   [EMAIL]             contact email                         (appears 4x)
   [SERVICE AREA]      e.g. "Denver Metro" or "Nationwide"   (appears 2x)
-  [BUILD FEE]         one-time build price, e.g. 1,500      (appears 1x)
-  [RETAINER]          monthly management fee, e.g. 1,500    (appears 1x)
   [GUARANTEE #]       booked estimates promised in 60 days
   [CLIENT QUOTE 1-3]  real testimonials only — do not invent these
   [YEAR]              footer copyright year
@@ -761,7 +759,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         </div>
         <div class="score-row">
           <span class="k">Cost per booked estimate</span>
-          <span class="v" data-fmt="money" data-target="90">$90</span>
+          <span class="v" data-fmt="money" data-target="100">$100</span>
         </div>
         <div class="score-row">
           <span class="k">Booked estimates</span>
@@ -773,7 +771,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         </div>
         <div class="score-row">
           <span class="k">Return on marketing spend</span>
-          <span class="v up" data-fmt="mult" data-target="8.8">8.8&times;</span>
+          <span class="v up" data-fmt="mult" data-target="7.9">7.9&times;</span>
         </div>
         <p class="score-foot">
           This is the report you get every Monday &mdash; not impressions, not reach.
@@ -953,11 +951,11 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               <span class="lbl">Your spend</span>
               <div class="field">
                 <div class="field-top"><label for="i-spend">Monthly ad spend</label><output id="o-spend" for="i-spend">$3,000 &middot; $100/day</output></div>
-                <input id="i-spend" name="spend" type="range" min="1500" max="15000" step="150" value="3000" />
+                <input id="i-spend" name="spend" type="range" min="3000" max="15000" step="150" value="3000" />
               </div>
               <div class="field">
-                <div class="field-top"><label for="i-mgmt">Management fee</label><output id="o-mgmt" for="i-mgmt">$1,500</output></div>
-                <input id="i-mgmt" name="mgmt" type="range" min="0" max="6000" step="100" value="1500" />
+                <div class="field-top"><label for="i-mgmt">Management fee</label><output id="o-mgmt" for="i-mgmt">$2,000</output></div>
+                <input id="i-mgmt" name="mgmt" type="range" min="0" max="6000" step="100" value="2000" />
               </div>
             </div>
 
@@ -996,7 +994,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
             <div class="kpis">
               <div class="kpi">
                 <span class="k">Cost per booked estimate</span>
-                <span class="v" id="k-cpbe" data-fmt="money">$90</span>
+                <span class="v" id="k-cpbe" data-fmt="money">$100</span>
                 <span class="s">Spend plus management</span>
               </div>
               <div class="kpi">
@@ -1011,7 +1009,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               </div>
               <div class="kpi lead-kpi">
                 <span class="k">Return on investment</span>
-                <span class="v" id="k-roi" data-fmt="mult">8.8&times;</span>
+                <span class="v" id="k-roi" data-fmt="mult">7.9&times;</span>
                 <span class="s">Gross profit &divide; spend</span>
               </div>
             </div>
@@ -1064,12 +1062,12 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               <tr>
                 <th scope="row">Management</th>
                 <td class="basis">Contractor.Ads retainer</td>
-                <td class="amt" id="t-mgmt" data-fmt="money">$1,500</td>
+                <td class="amt" id="t-mgmt" data-fmt="money">$2,000</td>
               </tr>
               <tr class="sum">
                 <th scope="row">Marketing investment</th>
                 <td class="basis">Spend + management</td>
-                <td class="amt" id="t-invest" data-fmt="money">$4,500</td>
+                <td class="amt" id="t-invest" data-fmt="money">$5,000</td>
               </tr>
               <tr>
                 <th scope="row">Cost per lead</th>
@@ -1088,8 +1086,8 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               </tr>
               <tr class="sum">
                 <th scope="row">Cost per booked estimate</th>
-                <td class="basis" id="b-cpbe">4,500 &divide; 50</td>
-                <td class="amt" id="t-cpbe" data-fmt="money">$90</td>
+                <td class="basis" id="b-cpbe">5,000 &divide; 50</td>
+                <td class="amt" id="t-cpbe" data-fmt="money">$100</td>
               </tr>
               <tr>
                 <th scope="row">Jobs closed</th>
@@ -1113,8 +1111,8 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               </tr>
               <tr class="total">
                 <th scope="row">Return on marketing investment</th>
-                <td class="basis" id="b-roi">39,480 &divide; 4,500</td>
-                <td class="amt" id="t-roi" data-fmt="mult">8.8&times;</td>
+                <td class="basis" id="b-roi">39,480 &divide; 5,000</td>
+                <td class="amt" id="t-roi" data-fmt="mult">7.9&times;</td>
               </tr>
             </tbody>
           </table>
@@ -1151,7 +1149,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               <li>Doing [$500k]+ a year and want the calendar full, not just busier</li>
               <li>Someone answers the phone during business hours &mdash; or will</li>
               <li>Crew capacity for 10&ndash;20 more estimates a month</li>
-              <li>Ad budget of at least $50 a day &mdash; about $1,500 a month &mdash; separate from our fee</li>
+              <li>Ad budget of at least $100 a day &mdash; about $3,000 a month &mdash; separate from our fee</li>
               <li>Licensed, insured, and proud enough of the work to put it on camera</li>
               <li>Willing to give it a full 90 days to compound</li>
             </ul>
@@ -1189,18 +1187,18 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         <div class="terms">
           <div class="term">
             <span class="k">Build &amp; launch</span>
-            <span class="v">$[BUILD FEE] <small>one time</small></span>
+            <span class="v">$500 <small>one time</small></span>
             <p>Offer, creative production, landing page, tracking, CRM and follow-up automations, campaign build.</p>
           </div>
           <div class="term">
             <span class="k">Management</span>
-            <span class="v">$[RETAINER] <small>/ month</small></span>
+            <span class="v">$2,000 <small>/ month</small></span>
             <p>Daily optimization, fresh creative every month, follow-up tuning, and the Monday scorecard.</p>
           </div>
           <div class="term">
             <span class="k">Ad spend</span>
-            <span class="v">$50&ndash;$100 <small>a day, minimum</small></span>
-            <p>Roughly $1,500&ndash;$3,000 a month, billed by Meta on your own card. Your ad account, your data, your audiences &mdash; you keep all of it.</p>
+            <span class="v">$100 <small>a day, minimum</small></span>
+            <p>About $3,000 a month, billed by Meta on your own card. Your ad account, your data, your audiences &mdash; you keep all of it.</p>
           </div>
         </div>
 
@@ -1269,7 +1267,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         <div class="faq">
           <details open>
             <summary>How much do I need to spend on ads?</summary>
-            <p class="a">$50 a day is the floor and $100 a day is where it starts moving &mdash; about $1,500 to $3,000 a month. That's a learning-speed number, not a greed number: below it Meta never gets enough conversions to optimize against, and you spend three months finding out what two weeks should have told you. High-ticket trades like roofing and remodeling usually settle above $100 a day once the math works.</p>
+            <p class="a">$100 a day &mdash; about $3,000 a month. That's a learning-speed number, not a greed number: below it Meta never gets enough conversions to optimize against, and you spend three months finding out what two weeks should have told you. It is also the point where the math works for you rather than just for us: at $100 a day a typical account books enough estimates to cover the retainer several times over. High-ticket trades like roofing and remodeling usually settle above it once they see the return.</p>
           </details>
           <details>
             <summary>Are the leads exclusive to me?</summary>

@@ -12,7 +12,7 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 | 1 | **Booking link** (Calendly / GoHighLevel / Acuity URL) | Every CTA on the page points at `[BOOKING LINK]` — 5 buttons. Without it the site has no conversion path at all. |
 | 2 | **Phone + email** | Second and third contact paths, and the click-to-call in the mobile dock. |
 | 3 | **Service area** | "Serving `[SERVICE AREA]`" — one metro, a state, a radius, or "Nationwide, remote". This also changes how the offer reads. |
-| 4 | **Pricing: build fee and monthly retainer** | Two numbers on the Terms section (ad spend minimum is set: $50–$100/day). If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
+| ~~4~~ | ~~Pricing~~ — **set**: $500 build, $2,000/mo retainer, $100/day ad spend minimum | Live on the Terms section. If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
 | 5 | **The guarantee** | Currently `[GUARANTEE #] booked estimates in 60 days, or management is free.` Confirm the number, the window, and the conditions — or tell me to cut it. **Only publish a guarantee you will actually honor**; contractors screenshot these. |
 | 6 | **Legal business name + year** | Footer line. "Contractor.Ads LLC"? Sole prop? |
 
@@ -20,8 +20,9 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 
 ## 2. Decisions I made for you — correct any that are wrong
 
-> **Settled so far:** ad spend minimum is $50–$100/day (~$1,500–$3,000/month), and your
-> in-house editor produces all creative from client-supplied footage against your shot list.
+> **Settled so far:** pricing is $500 to build, $2,000/month management, and a $100/day
+> (~$3,000/month) ad spend minimum. Your in-house editor produces all creative from
+> client-supplied footage against your shot list.
 > The remaining assumption there: the *client* still shoots the raw footage on a phone. If
 > your editor also films on site, say so — that's a stronger claim and it changes Sec. 02.
 
@@ -67,8 +68,9 @@ instead of testimonials). That's a rewrite of Sec. 07, not a patch.
 
 ## 4. Real numbers for the calculator
 
-The job-math calculator opens on an illustrative month: $3,000 spend, $24 CPL, 40% booking,
-24% close, $9,400 ticket, 35% margin → $90 per booked estimate, 8.8× return.
+The job-math calculator opens on an illustrative month: $3,000 spend ($100/day), your real
+$2,000 retainer, $24 CPL, 40% booking, 24% close, $9,400 ticket, 35% margin → $100 per
+booked estimate, 7.9× return. The spend and retainer are now real; the funnel rates are not.
 
 Those are plausible, not yours. Send the ranges you actually see and I'll set the defaults
 to something you can defend in a sales call:
@@ -113,8 +115,6 @@ Phone:
 Email:
 Service area:
 Legal business name:
-Build fee:
-Monthly retainer:
 Guarantee (number + window + conditions):
 Trades you actually want (or "all"):
 Slots open this month:
