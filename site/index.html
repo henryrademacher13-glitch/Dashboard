@@ -14,7 +14,7 @@
   ============================================================================
   C. ADS — PLACEHOLDERS TO REPLACE (search for the square brackets)
   ============================================================================
-  [BOOKING LINK]      your Calendly / GHL calendar URL      (appears 4x)
+  [BOOKING LINK]      your Calendly / GHL calendar URL      (appears 5x)
   [PHONE]             display phone number                  (appears 2x)
   [PHONE-DIGITS]      tel: digits, e.g. 5551234567          (appears 2x)
   [EMAIL]             contact email                         (appears 4x)
@@ -511,7 +511,191 @@ strong{ color:var(--white); font-weight:600; }
 .foot-base p{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); }
 
 /* ==========================================================================
-   19. Load-in — plays immediately, ends visible
+   19. Scroll furniture — progress rail, header state, section fill
+   ========================================================================== */
+.top{ transition:box-shadow .25s ease; }
+.top.is-stuck{ box-shadow:0 12px 34px rgba(0,0,0,.45); }
+.top-in{ transition:height .25s ease; }
+.top.is-stuck .top-in{ height:58px; }
+.top-progress{
+  position:absolute; left:0; right:0; bottom:-1px; height:2px;
+  pointer-events:none;
+}
+.top-progress i{
+  display:block; height:100%;
+  background:var(--rust);
+  transform:scaleX(0); transform-origin:0 50%;
+}
+.nav a.is-active{ color:var(--white); border-bottom-color:var(--rust); }
+.sec-mark .rule{ position:relative; overflow:hidden; }
+.sec-mark .rule i{
+  position:absolute; inset:0 auto 0 0;
+  width:0%;
+  background:var(--rust);
+}
+
+/* ==========================================================================
+   20. Reveal on scroll — only armed when JS runs, so no-JS keeps everything up
+   ========================================================================== */
+:root.js .reveal{ opacity:0; transform:translateY(16px); }
+:root.js .reveal.is-in{
+  opacity:1; transform:none;
+  transition:opacity .5s cubic-bezier(.2,.7,.3,1), transform .5s cubic-bezier(.2,.7,.3,1);
+  transition-delay:var(--d, 0ms);
+}
+
+/* ==========================================================================
+   21. Trades ticker
+   ========================================================================== */
+.ticker{ overflow:hidden; flex:1; min-width:0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 5%,#000 92%,transparent); }
+.ticker-track{ display:flex; width:max-content; animation:ticker 52s linear infinite; }
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track{ animation-play-state:paused; }
+.ticker ul{ display:flex; gap:0; }
+.ticker li{
+  font-family:var(--f-mono); font-size:0.82rem; color:var(--text);
+  padding-inline:22px; white-space:nowrap;
+  border-right:1px solid var(--line);
+}
+@keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* ==========================================================================
+   22. Build sequence — rail that fills as you pass each phase
+   ========================================================================== */
+.phases{ position:relative; }
+.phase-rail{ display:none; }
+@media (min-width:820px){
+  .phase{ grid-template-columns:78px 200px minmax(0,1fr); }
+  .phase-rail{
+    display:block; position:absolute; left:4px; top:38px; bottom:38px;
+    width:1px; background:var(--line);
+  }
+  .phase-rail i{ display:block; width:100%; height:0%; background:var(--rust); }
+  .phase .step{ padding-left:24px; position:relative; }
+  .phase .step::before{
+    content:""; position:absolute; left:0; top:8px;
+    width:9px; height:9px; box-sizing:border-box;
+    background:var(--ink); border:2px solid var(--line-2);
+    transition:background .3s ease, border-color .3s ease;
+  }
+  .phase.is-done .step::before{ background:var(--rust); border-color:var(--rust); }
+}
+.phase .step{ transition:color .3s ease; }
+.phase.is-done .step{ color:var(--muted); }
+
+/* ==========================================================================
+   23. Deliverable hover
+   ========================================================================== */
+.deliv li{ transition:background .2s ease; }
+.deliv li:hover{ background:var(--ink-3); }
+.deliv li .n{ transition:color .2s ease; }
+.deliv li:hover .n{ color:var(--rust-lift); }
+
+/* ==========================================================================
+   24. Job-math calculator
+   ========================================================================== */
+.calc{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+@media (min-width:960px){ .calc{ grid-template-columns:minmax(0,340px) minmax(0,1fr); } }
+.calc-inputs{ background:var(--ink-2); padding:24px; display:flex; flex-direction:column; gap:26px; }
+.calc-grp{ display:flex; flex-direction:column; gap:16px; }
+.field{ display:flex; flex-direction:column; gap:9px; }
+.field-top{ display:flex; justify-content:space-between; align-items:baseline; gap:14px; }
+.field-top label{ font-size:0.93rem; color:var(--muted); }
+.field-top output{
+  font-family:var(--f-mono); font-size:0.98rem; color:var(--white);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+input[type="range"]{
+  -webkit-appearance:none; appearance:none;
+  width:100%; height:2px; margin:8px 0;
+  background:var(--line-2); cursor:pointer;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none;
+  width:15px; height:15px; background:var(--rust);
+  border:0; border-radius:0; cursor:grab;
+  transition:background .15s ease, transform .15s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover{ background:var(--rust-lift); transform:scale(1.13); }
+input[type="range"]::-moz-range-thumb{
+  width:15px; height:15px; background:var(--rust);
+  border:0; border-radius:0; cursor:grab;
+}
+input[type="range"]::-moz-range-thumb:hover{ background:var(--rust-lift); }
+input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-offset:6px; }
+.reset{
+  align-self:flex-start;
+  font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;
+  background:none; border:1px solid var(--line-2); color:var(--muted);
+  padding:9px 14px; cursor:pointer;
+  transition:color .18s ease, border-color .18s ease;
+}
+.reset:hover{ color:var(--white); border-color:var(--muted); }
+
+.calc-out{ background:var(--ink-2); padding:24px; display:flex; flex-direction:column; gap:26px; }
+.kpis{ display:grid; gap:1px; background:var(--line); grid-template-columns:repeat(auto-fit, minmax(178px, 1fr)); }
+.kpi{ background:var(--ink-3); padding:18px; display:flex; flex-direction:column; gap:6px; }
+.kpi .k{ font-family:var(--f-mono); font-size:0.66rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); }
+.kpi .v{
+  font-family:var(--f-display); font-weight:800; font-size:1.9rem;
+  color:var(--white); letter-spacing:-0.03em; line-height:1.05;
+  font-variant-numeric:tabular-nums;
+}
+.kpi .s{ font-size:0.8rem; color:var(--muted); }
+.kpi.lead-kpi .v{ color:var(--rust-lift); }
+
+.calc-note{ font-size:0.9rem; color:var(--muted); max-width:60ch; margin-top:auto; padding-top:4px; }
+.funnel-fig{ margin:0; display:flex; flex-direction:column; gap:14px; }
+.funnel-fig figcaption{ font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); }
+.funnel{ display:flex; flex-direction:column; gap:2px; }
+.fbar{ display:grid; gap:4px 14px; align-items:center; padding:6px 0; }
+@media (min-width:600px){ .fbar{ grid-template-columns:170px minmax(0,1fr) 76px; } }
+.fbar-head{ display:flex; flex-direction:column; gap:2px; }
+.fbar-head .s{ font-size:0.92rem; color:var(--text); }
+.fbar-head .r{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); }
+.fbar .track{ height:30px; background:var(--ink-3); position:relative; }
+.fbar .track i{
+  position:absolute; inset:0 auto 0 0; height:100%;
+  background:var(--rust-deep);
+  border-radius:0 4px 4px 0;
+  transition:width .45s cubic-bezier(.2,.7,.3,1), background .18s ease;
+}
+.fbar:hover .track i{ background:var(--rust); }
+.fbar.final .track i{ background:var(--rust); }
+.fbar:hover.final .track i{ background:var(--rust-lift); }
+.fbar .val{
+  font-family:var(--f-mono); font-size:1.05rem; color:var(--white);
+  text-align:right; font-variant-numeric:tabular-nums;
+}
+.sheet .amt{ transition:color .35s ease; }
+.sheet tr td.amt.flash{ color:var(--rust-lift); }
+
+/* ==========================================================================
+   25. Mobile booking dock
+   ========================================================================== */
+.dock{
+  position:fixed; left:0; right:0; bottom:0; z-index:55;
+  display:flex; align-items:center; gap:14px;
+  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  background:rgba(27,30,35,0.97);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  transform:translateY(115%);
+  transition:transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.dock.is-up{ transform:none; }
+.dock p{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); line-height:1.4; }
+.dock .btn{ margin-left:auto; flex:none; }
+@media (min-width:900px){ .dock{ display:none; } }
+@media (max-width:899px){ .foot-base-in{ padding-bottom:72px; } }
+
+/* ==========================================================================
+   26. FAQ open animation
+   ========================================================================== */
+.faq details[open] .a{ animation:rise .32s cubic-bezier(.2,.7,.3,1) both; }
+
+/* ==========================================================================
+   27. Load-in — plays immediately, ends visible
    ========================================================================== */
 .rise{ animation:rise .6s cubic-bezier(.2,.7,.3,1) both; }
 .rise-2{ animation-delay:.09s; }
@@ -538,6 +722,7 @@ strong{ color:var(--white); font-weight:600; }
     </nav>
     <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
   </div>
+  <div class="top-progress" aria-hidden="true"><i></i></div>
 </header>
 
 <main id="top">
@@ -570,19 +755,19 @@ strong{ color:var(--white); font-weight:600; }
         </div>
         <div class="score-row">
           <span class="k">Cost per booked estimate</span>
-          <span class="v">$57</span>
+          <span class="v" data-fmt="money" data-target="90">$90</span>
         </div>
         <div class="score-row">
           <span class="k">Booked estimates</span>
-          <span class="v">50</span>
+          <span class="v" data-fmt="int" data-target="50">50</span>
         </div>
         <div class="score-row">
           <span class="k">Jobs closed</span>
-          <span class="v">12</span>
+          <span class="v" data-fmt="int" data-target="12">12</span>
         </div>
         <div class="score-row">
           <span class="k">Return on marketing spend</span>
-          <span class="v up">8.8&times;</span>
+          <span class="v up" data-fmt="mult" data-target="8.8">8.8&times;</span>
         </div>
         <p class="score-foot">
           This is the report you get every Monday &mdash; not impressions, not reach.
@@ -596,16 +781,12 @@ strong{ color:var(--white); font-weight:600; }
   <section class="trades" aria-label="Trades served">
     <div class="wrap trades-in">
       <span class="lbl">Built for</span>
-      <ul>
-        <li>Roofing</li>
-        <li>HVAC</li>
-        <li>Remodeling</li>
-        <li>Windows &amp; Siding</li>
-        <li>Concrete &amp; Flatwork</li>
-        <li>Hardscape &amp; Landscape</li>
-        <li>Solar</li>
-        <li>Plumbing &amp; Electrical</li>
-      </ul>
+      <div class="ticker">
+        <div class="ticker-track">
+          <ul><li>Roofing</li><li>HVAC</li><li>Remodeling</li><li>Windows &amp; Siding</li><li>Concrete &amp; Flatwork</li><li>Hardscape &amp; Landscape</li><li>Solar</li><li>Plumbing &amp; Electrical</li><li>Painting</li><li>Fencing &amp; Decks</li><li>Garage Doors</li><li>Foundation Repair</li></ul>
+          <ul aria-hidden="true"><li>Roofing</li><li>HVAC</li><li>Remodeling</li><li>Windows &amp; Siding</li><li>Concrete &amp; Flatwork</li><li>Hardscape &amp; Landscape</li><li>Solar</li><li>Plumbing &amp; Electrical</li><li>Painting</li><li>Fencing &amp; Decks</li><li>Garage Doors</li><li>Foundation Repair</li></ul>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -615,7 +796,7 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 01</span>
         <span class="nm">Existing conditions</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>Why the lead problem never actually gets solved</h2>
@@ -651,7 +832,7 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 02</span>
         <span class="nm">Scope of work</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>One channel, run properly</h2>
@@ -697,7 +878,7 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 03</span>
         <span class="nm">Sequence of work</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>How the first 90 days run</h2>
@@ -706,6 +887,7 @@ strong{ color:var(--white); font-weight:600; }
           a campaign in week one, and anyone who tells you otherwise is spending your money to find out.
         </p>
         <div class="phases">
+          <span class="phase-rail" aria-hidden="true"><i></i></span>
           <article class="phase">
             <span class="step">01</span>
             <div>
@@ -749,18 +931,117 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 04</span>
         <span class="nm">Job math</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>Run the numbers like you'd price a job</h2>
         <p class="lead">
-          You already cost jobs by the line. Advertising works the same way &mdash; every
-          number below is one you can check against your own books.
+          You already cost jobs by the line. Advertising works the same way. Drag your own
+          cost per lead, close rate and ticket into the sliders and watch the month rebuild
+          itself &mdash; every number here is one you can check against your own books.
         </p>
+
+        <div class="calc" id="calc">
+          <form class="calc-inputs" id="calc-form" autocomplete="off">
+            <div class="calc-grp">
+              <span class="lbl">Your spend</span>
+              <div class="field">
+                <div class="field-top"><label for="i-spend">Monthly ad spend</label><output id="o-spend" for="i-spend">$3,000</output></div>
+                <input id="i-spend" name="spend" type="range" min="1000" max="20000" step="250" value="3000" />
+              </div>
+              <div class="field">
+                <div class="field-top"><label for="i-mgmt">Management fee</label><output id="o-mgmt" for="i-mgmt">$1,500</output></div>
+                <input id="i-mgmt" name="mgmt" type="range" min="0" max="6000" step="100" value="1500" />
+              </div>
+            </div>
+
+            <div class="calc-grp">
+              <span class="lbl">Your funnel</span>
+              <div class="field">
+                <div class="field-top"><label for="i-cpl">Cost per lead</label><output id="o-cpl" for="i-cpl">$24</output></div>
+                <input id="i-cpl" name="cpl" type="range" min="8" max="150" step="1" value="24" />
+              </div>
+              <div class="field">
+                <div class="field-top"><label for="i-book">Leads that book an estimate</label><output id="o-book" for="i-book">40%</output></div>
+                <input id="i-book" name="book" type="range" min="10" max="80" step="1" value="40" />
+              </div>
+              <div class="field">
+                <div class="field-top"><label for="i-close">Estimates you close</label><output id="o-close" for="i-close">24%</output></div>
+                <input id="i-close" name="close" type="range" min="5" max="70" step="1" value="24" />
+              </div>
+            </div>
+
+            <div class="calc-grp">
+              <span class="lbl">Your job</span>
+              <div class="field">
+                <div class="field-top"><label for="i-ticket">Average ticket</label><output id="o-ticket" for="i-ticket">$9,400</output></div>
+                <input id="i-ticket" name="ticket" type="range" min="500" max="60000" step="100" value="9400" />
+              </div>
+              <div class="field">
+                <div class="field-top"><label for="i-margin">Gross margin</label><output id="o-margin" for="i-margin">35%</output></div>
+                <input id="i-margin" name="margin" type="range" min="10" max="70" step="1" value="35" />
+              </div>
+            </div>
+
+            <button class="reset" type="button" id="i-reset">Reset to example</button>
+          </form>
+
+          <div class="calc-out">
+            <div class="kpis">
+              <div class="kpi">
+                <span class="k">Cost per booked estimate</span>
+                <span class="v" id="k-cpbe" data-fmt="money">$90</span>
+                <span class="s">Spend plus management</span>
+              </div>
+              <div class="kpi">
+                <span class="k">Booked estimates</span>
+                <span class="v" id="k-booked" data-fmt="int">50</span>
+                <span class="s">Per month</span>
+              </div>
+              <div class="kpi">
+                <span class="k">Jobs closed</span>
+                <span class="v" id="k-jobs" data-fmt="int">12</span>
+                <span class="s">Per month</span>
+              </div>
+              <div class="kpi lead-kpi">
+                <span class="k">Return on investment</span>
+                <span class="v" id="k-roi" data-fmt="mult">8.8&times;</span>
+                <span class="s">Gross profit &divide; spend</span>
+              </div>
+            </div>
+
+            <figure class="funnel-fig">
+              <figcaption>Where the month goes &mdash; monthly volume by stage</figcaption>
+              <div class="funnel">
+                <div class="fbar">
+                  <div class="fbar-head"><span class="s">Leads</span><span class="r">Everyone who fills the form</span></div>
+                  <div class="track"><i id="f-leads" style="width:100%"></i></div>
+                  <div class="val" id="v-leads" data-fmt="int">125</div>
+                </div>
+                <div class="fbar">
+                  <div class="fbar-head"><span class="s">Booked estimates</span><span class="r" id="r-booked">40% of leads</span></div>
+                  <div class="track"><i id="f-booked" style="width:40%"></i></div>
+                  <div class="val" id="v-booked" data-fmt="int">50</div>
+                </div>
+                <div class="fbar final">
+                  <div class="fbar-head"><span class="s">Jobs closed</span><span class="r" id="r-jobs">24% of estimates</span></div>
+                  <div class="track"><i id="f-jobs" style="width:9.6%"></i></div>
+                  <div class="val" id="v-jobs" data-fmt="int">12</div>
+                </div>
+              </div>
+            </figure>
+
+            <p class="calc-note">
+              Move a slider and the sheet below rebuilds. Bring your real cost per lead,
+              booking rate, close rate and ticket to the call and we'll run this against
+              your books &mdash; if it doesn't clear, we'll tell you.
+            </p>
+          </div>
+        </div>
 
         <div class="sheet">
           <table>
-            <caption>Example estimate &mdash; monthly, one trade, one market</caption>
+            <caption>The same month, line by line</caption>
             <thead>
               <tr>
                 <th scope="col">Line item</th>
@@ -772,62 +1053,62 @@ strong{ color:var(--white); font-weight:600; }
               <tr>
                 <th scope="row">Ad spend</th>
                 <td class="basis">Paid direct to Meta</td>
-                <td class="amt">$3,000</td>
+                <td class="amt" id="t-spend" data-fmt="money">$3,000</td>
               </tr>
               <tr>
                 <th scope="row">Management</th>
                 <td class="basis">C. Ads retainer</td>
-                <td class="amt">$1,500</td>
+                <td class="amt" id="t-mgmt" data-fmt="money">$1,500</td>
               </tr>
               <tr class="sum">
                 <th scope="row">Marketing investment</th>
                 <td class="basis">Spend + management</td>
-                <td class="amt">$4,500</td>
+                <td class="amt" id="t-invest" data-fmt="money">$4,500</td>
               </tr>
               <tr>
                 <th scope="row">Cost per lead</th>
                 <td class="basis">Varies by trade and market</td>
-                <td class="amt">$24</td>
+                <td class="amt" id="t-cpl" data-fmt="money">$24</td>
               </tr>
               <tr>
                 <th scope="row">Leads</th>
-                <td class="basis">3,000 &divide; 24</td>
-                <td class="amt">125</td>
+                <td class="basis" id="b-leads">3,000 &divide; 24</td>
+                <td class="amt" id="t-leads" data-fmt="int">125</td>
               </tr>
               <tr>
                 <th scope="row">Booked estimates</th>
-                <td class="basis">40% of leads reached and scheduled</td>
-                <td class="amt">50</td>
+                <td class="basis" id="b-booked">40% of leads reached and scheduled</td>
+                <td class="amt" id="t-booked" data-fmt="int">50</td>
               </tr>
               <tr class="sum">
                 <th scope="row">Cost per booked estimate</th>
-                <td class="basis">4,500 &divide; 50</td>
-                <td class="amt">$90</td>
+                <td class="basis" id="b-cpbe">4,500 &divide; 50</td>
+                <td class="amt" id="t-cpbe" data-fmt="money">$90</td>
               </tr>
               <tr>
                 <th scope="row">Jobs closed</th>
-                <td class="basis">25% close rate at the kitchen table</td>
-                <td class="amt">12</td>
+                <td class="basis" id="b-jobs">24% close rate at the kitchen table</td>
+                <td class="amt" id="t-jobs" data-fmt="int">12</td>
               </tr>
               <tr>
                 <th scope="row">Average ticket</th>
                 <td class="basis">Your number &mdash; use your real one</td>
-                <td class="amt">$9,400</td>
+                <td class="amt" id="t-ticket" data-fmt="money">$9,400</td>
               </tr>
               <tr>
                 <th scope="row">Revenue booked</th>
-                <td class="basis">12 &times; 9,400</td>
-                <td class="amt">$112,800</td>
+                <td class="basis" id="b-revenue">12 &times; 9,400</td>
+                <td class="amt" id="t-revenue" data-fmt="money">$112,800</td>
               </tr>
               <tr>
                 <th scope="row">Gross profit</th>
-                <td class="basis">At a 35% gross margin</td>
-                <td class="amt">$39,480</td>
+                <td class="basis" id="b-profit">At a 35% gross margin</td>
+                <td class="amt" id="t-profit" data-fmt="money">$39,480</td>
               </tr>
               <tr class="total">
                 <th scope="row">Return on marketing investment</th>
-                <td class="basis">39,480 &divide; 4,500</td>
-                <td class="amt">8.8&times;</td>
+                <td class="basis" id="b-roi">39,480 &divide; 4,500</td>
+                <td class="amt" id="t-roi" data-fmt="mult">8.8&times;</td>
               </tr>
             </tbody>
           </table>
@@ -849,7 +1130,7 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 05</span>
         <span class="nm">Qualification</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>Who this works for, and who it doesn't</h2>
@@ -891,7 +1172,7 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 06</span>
         <span class="nm">Terms</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>Priced like a trade, not a mystery</h2>
@@ -942,7 +1223,7 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 07</span>
         <span class="nm">References</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>What clients say</h2>
@@ -975,7 +1256,7 @@ strong{ color:var(--white); font-weight:600; }
       <div class="sec-mark">
         <span class="num">SEC. 08</span>
         <span class="nm">Questions</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
         <h2>Straight answers</h2>
@@ -1072,6 +1353,250 @@ strong{ color:var(--white); font-weight:600; }
     </div>
   </div>
 </footer>
+
+<div class="dock" id="dock">
+  <p>Booking [2] contractor<br />slots this month</p>
+  <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  root.classList.add("js");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ------------------------------------------------------------------
+     Number formatting and animated value swaps
+     ------------------------------------------------------------------ */
+  var fmt = {
+    money: function (n) { return "$" + Math.round(n).toLocaleString("en-US"); },
+    int:   function (n) { return Math.round(n).toLocaleString("en-US"); },
+    mult:  function (n) { return (Math.round(n * 10) / 10).toFixed(1) + "×"; }
+  };
+
+  function setVal(el, value, flash) {
+    if (!el) return;
+    var f = fmt[el.getAttribute("data-fmt")] || fmt.int;
+    var from = parseFloat(el.getAttribute("data-raw"));
+    if (from === value) return;
+    el.setAttribute("data-raw", value);
+
+    if (flash) {
+      el.classList.add("flash");
+      clearTimeout(el._flash);
+      el._flash = setTimeout(function () { el.classList.remove("flash"); }, 460);
+    }
+    if (reduce || isNaN(from)) { el.textContent = f(value); return; }
+
+    var start = performance.now(), dur = 420;
+    if (el._raf) cancelAnimationFrame(el._raf);
+    (function step(now) {
+      var p = Math.min(1, (now - start) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = f(from + (value - from) * e);
+      if (p < 1) el._raf = requestAnimationFrame(step);
+    })(start);
+  }
+
+  function countIn(el) {
+    if (!el) return;
+    var target = parseFloat(el.getAttribute("data-target"));
+    if (isNaN(target)) return;
+    el.setAttribute("data-raw", 0);
+    setVal(el, target, false);
+  }
+
+  /* ------------------------------------------------------------------
+     Reveal on scroll. Armed only here, so a no-JS page stays fully visible.
+     ------------------------------------------------------------------ */
+  if (!reduce && "IntersectionObserver" in window) {
+    var groups = [
+      [".sec-body > h2", 0], [".sec-body > .lead", 0], [".disclaim", 0],
+      [".prob", 70], [".deliv li", 60], [".phase", 70], [".calc", 0],
+      [".sheet", 0], [".fit-col", 80], [".term", 80], [".stamp", 0],
+      [".notes", 0], [".quote", 80], [".faq details", 45],
+      [".close-in > div", 90], [".agenda li", 55]
+    ];
+    groups.forEach(function (g) {
+      var nodes = document.querySelectorAll(g[0]);
+      Array.prototype.forEach.call(nodes, function (n, i) {
+        n.classList.add("reveal");
+        if (g[1]) n.style.setProperty("--d", (i % 5) * g[1] + "ms");
+      });
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
+    Array.prototype.forEach.call(document.querySelectorAll(".reveal"), function (n) { io.observe(n); });
+  }
+
+  /* ------------------------------------------------------------------
+     One rAF-gated scroll pass: progress rail, header, section rules,
+     build-sequence rail, nav spy, mobile dock
+     ------------------------------------------------------------------ */
+  var top = document.querySelector(".top");
+  var bar = document.querySelector(".top-progress i");
+  var dock = $("dock");
+  var closeSec = $("book");
+  var phases = document.querySelector(".phases");
+  var phaseFill = document.querySelector(".phase-rail i");
+  var phaseEls = Array.prototype.slice.call(document.querySelectorAll(".phase"));
+  var secs = Array.prototype.slice.call(document.querySelectorAll(".sec"));
+  var spy = ["work", "build", "math", "terms", "faq"].map(function (id) {
+    return { el: $(id), link: document.querySelector('.nav a[href="#' + id + '"]') };
+  }).filter(function (o) { return o.el && o.link; });
+  var ticking = false, lastActive = null;
+
+  function pass() {
+    ticking = false;
+    var y = window.pageYOffset;
+    var vh = window.innerHeight;
+    var doc = document.documentElement.scrollHeight - vh;
+
+    if (bar) bar.style.transform = "scaleX(" + (doc > 0 ? Math.min(1, y / doc) : 0) + ")";
+    if (top) top.classList.toggle("is-stuck", y > 14);
+
+    /* each section's annotation rule fills as you read through it */
+    secs.forEach(function (sec) {
+      var line = sec.querySelector(".rule i");
+      if (!line) return;
+      var r = sec.getBoundingClientRect();
+      var p = (vh * 0.72 - r.top) / Math.max(1, r.height);
+      line.style.width = Math.max(0, Math.min(1, p)) * 100 + "%";
+    });
+
+    /* build sequence: rail fills, phases light as they pass the middle */
+    if (phases && phaseFill) {
+      var pr = phases.getBoundingClientRect();
+      var pp = (vh * 0.55 - pr.top) / Math.max(1, pr.height);
+      phaseFill.style.height = Math.max(0, Math.min(1, pp)) * 100 + "%";
+      phaseEls.forEach(function (el) {
+        el.classList.toggle("is-done", el.getBoundingClientRect().top < vh * 0.58);
+      });
+    }
+
+    /* nav spy */
+    var active = null;
+    spy.forEach(function (o) {
+      if (o.el.getBoundingClientRect().top <= 140) active = o;
+    });
+    if (active !== lastActive) {
+      spy.forEach(function (o) { o.link.classList.remove("is-active"); });
+      if (active) active.link.classList.add("is-active");
+      lastActive = active;
+    }
+
+    /* mobile dock — after the hero, and out of the way of the real CTA */
+    if (dock) {
+      var atClose = closeSec && closeSec.getBoundingClientRect().top < vh * 0.9;
+      dock.classList.toggle("is-up", y > vh * 0.75 && !atClose);
+    }
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(pass);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  pass();
+
+  /* ------------------------------------------------------------------
+     Job-math calculator
+     ------------------------------------------------------------------ */
+  var form = $("calc-form");
+  if (form) {
+    var keys = ["spend", "mgmt", "cpl", "book", "close", "ticket", "margin"];
+    var defaults = {};
+    keys.forEach(function (k) { defaults[k] = $("i-" + k).value; });
+
+    var outEls = ["k-cpbe", "k-booked", "k-jobs", "k-roi", "v-leads", "v-booked", "v-jobs"].map($);
+    var pct = function (n) { return n + "%"; };
+
+    function compute(flash) {
+      var v = {};
+      keys.forEach(function (k) { v[k] = parseFloat($("i-" + k).value); });
+
+      $("o-spend").value  = fmt.money(v.spend);
+      $("o-mgmt").value   = fmt.money(v.mgmt);
+      $("o-cpl").value    = fmt.money(v.cpl);
+      $("o-book").value   = pct(v.book);
+      $("o-close").value  = pct(v.close);
+      $("o-ticket").value = fmt.money(v.ticket);
+      $("o-margin").value = pct(v.margin);
+
+      var leads   = Math.round(v.spend / v.cpl);
+      var booked  = Math.round(leads * v.book / 100);
+      var jobs    = Math.round(booked * v.close / 100);
+      var invest  = v.spend + v.mgmt;
+      var cpbe    = booked > 0 ? invest / booked : 0;
+      var revenue = jobs * v.ticket;
+      var profit  = revenue * v.margin / 100;
+      var roi     = invest > 0 ? profit / invest : 0;
+
+      setVal($("k-cpbe"), cpbe);   setVal($("k-booked"), booked);
+      setVal($("k-jobs"), jobs);   setVal($("k-roi"), roi);
+      setVal($("v-leads"), leads); setVal($("v-booked"), booked); setVal($("v-jobs"), jobs);
+
+      var w = function (n) { return leads > 0 ? Math.max(n > 0 ? 2 : 0, n / leads * 100) : 0; };
+      $("f-booked").style.width = w(booked) + "%";
+      $("f-jobs").style.width = w(jobs) + "%";
+      $("r-booked").textContent = v.book + "% of leads";
+      $("r-jobs").textContent = v.close + "% of estimates";
+
+      setVal($("t-spend"), v.spend, flash);   setVal($("t-mgmt"), v.mgmt, flash);
+      setVal($("t-invest"), invest, flash);   setVal($("t-cpl"), v.cpl, flash);
+      setVal($("t-leads"), leads, flash);     setVal($("t-booked"), booked, flash);
+      setVal($("t-cpbe"), cpbe, flash);       setVal($("t-jobs"), jobs, flash);
+      setVal($("t-ticket"), v.ticket, flash); setVal($("t-revenue"), revenue, flash);
+      setVal($("t-profit"), profit, flash);   setVal($("t-roi"), roi, flash);
+
+      $("b-leads").textContent   = fmt.int(v.spend) + " ÷ " + fmt.int(v.cpl);
+      $("b-booked").textContent  = v.book + "% of leads reached and scheduled";
+      $("b-cpbe").textContent    = fmt.int(invest) + " ÷ " + fmt.int(booked);
+      $("b-jobs").textContent    = v.close + "% close rate at the kitchen table";
+      $("b-revenue").textContent = fmt.int(jobs) + " × " + fmt.int(v.ticket);
+      $("b-profit").textContent  = "At a " + v.margin + "% gross margin";
+      $("b-roi").textContent     = fmt.int(profit) + " ÷ " + fmt.int(invest);
+    }
+
+    form.addEventListener("input", function () { compute(true); });
+    $("i-reset").addEventListener("click", function () {
+      keys.forEach(function (k) { $("i-" + k).value = defaults[k]; });
+      compute(true);
+    });
+
+    /* count the headline figures up the first time the section is reached */
+    if (!reduce && "IntersectionObserver" in window) {
+      var kio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          kio.disconnect();
+          outEls.forEach(function (el) { if (el) el.setAttribute("data-raw", 0); });
+          compute(false);
+        });
+      }, { threshold: 0.25 });
+      kio.observe(document.querySelector(".kpis"));
+    }
+    compute(false);
+  }
+
+  /* hero scorecard counts up once the page has settled */
+  window.addEventListener("load", function () {
+    if (reduce) return;
+    setTimeout(function () {
+      Array.prototype.forEach.call(document.querySelectorAll(".card-score .v"), countIn);
+    }, 320);
+  });
+})();
+</script>
 
 </body>
 </html>
