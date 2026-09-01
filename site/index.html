@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>C. Ads — Meta Ads for Contractors</title>
+<meta name="description" content="C. Ads builds and runs Meta ad systems for contractors — exclusive leads, five-minute follow-up, and reporting on cost per booked estimate." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%2316181C'/%3E%3Crect%20x='9'%20y='9'%20width='14'%20height='14'%20fill='%23C5563B'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+
+<!--
+  ============================================================================
+  C. ADS — PLACEHOLDERS TO REPLACE (search for the square brackets)
+  ============================================================================
+  [BOOKING LINK]      your Calendly / GHL calendar URL      (appears 4x)
+  [PHONE]             display phone number                  (appears 2x)
+  [PHONE-DIGITS]      tel: digits, e.g. 5551234567          (appears 2x)
+  [EMAIL]             contact email                         (appears 4x)
+  [SERVICE AREA]      e.g. "Denver Metro" or "Nationwide"   (appears 2x)
+  [BUILD FEE]         one-time build price, e.g. 1,500      (appears 1x)
+  [RETAINER]          monthly management fee, e.g. 1,500    (appears 1x)
+  [MIN SPEND]         minimum monthly ad spend, e.g. 2,500  (appears 3x)
+  [GUARANTEE #]       booked estimates promised in 60 days
+  [CLIENT QUOTE 1-3]  real testimonials only — do not invent these
+  [YEAR]              footer copyright year
+  All figures in the "Job math" table are clearly labeled examples.
+  Replace them with your own CPL, close rate and average ticket.
+  ============================================================================
+-->
+
+<style>
+/* ==========================================================================
+   1. Tokens — palette pulled straight from the C. Ads mark
+   ========================================================================== */
+:root{
+  --ink:        #16181C;   /* logo ground */
+  --ink-2:      #1B1E23;   /* raised surface */
+  --ink-3:      #22262C;   /* card */
+  --line:       #2C313A;   /* hairline */
+  --line-2:     #3B424D;   /* stronger rule */
+  --white:      #FFFFFF;
+  --text:       #E4E7EA;
+  --muted:      #98A0AB;   /* cool grey, biased away from the rust */
+  --rust:       #C5563B;   /* the square in the logo */
+  --rust-lift:  #DD6C4E;
+  --rust-deep:  #7C3222;
+  --hivis:      #E9B949;   /* safety amber — used once, on the guarantee */
+
+  --w: 1200px;
+  --pad: clamp(20px, 4vw, 40px);
+  --gap: clamp(28px, 4vw, 56px);
+
+  --f-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:88px; -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+h1,h2,h3,h4{
+  font-family:var(--f-display);
+  font-weight:800;
+  letter-spacing:-0.025em;
+  line-height:1.04;
+  text-wrap:balance;
+  margin:0;
+}
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+strong{ color:var(--white); font-weight:600; }
+:focus-visible{ outline:2px solid var(--rust-lift); outline-offset:3px; }
+
+.wrap{ width:100%; max-width:var(--w); margin-inline:auto; padding-inline:var(--pad); }
+
+/* mono utility label used all over the page */
+.lbl{
+  font-family:var(--f-mono);
+  font-size:0.7rem;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ==========================================================================
+   3. The mark
+   ========================================================================== */
+.mark{
+  font-family:var(--f-display);
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:-0.035em;
+  color:var(--white);
+  display:inline-flex;
+  align-items:baseline;
+  line-height:1;
+  white-space:nowrap;
+}
+.mark-dot{
+  width:0.29em; height:0.29em;
+  background:var(--rust);
+  display:inline-block;
+  margin:0 0.24em 0 0.04em;
+  flex:none;
+}
+
+/* ==========================================================================
+   4. Header
+   ========================================================================== */
+.top{
+  position:sticky; top:0; z-index:50;
+  background:rgba(22,24,28,0.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.top-in{
+  display:flex; align-items:center; gap:28px;
+  height:68px;
+}
+.top .mark{ font-size:1.35rem; }
+.nav{ display:none; gap:26px; margin-left:auto; }
+.nav a{
+  font-family:var(--f-mono);
+  font-size:0.74rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  padding-block:6px;
+  border-bottom:1px solid transparent;
+  transition:color .18s ease, border-color .18s ease;
+}
+.nav a:hover{ color:var(--white); border-bottom-color:var(--rust); }
+.top .btn{ margin-left:auto; }
+@media (min-width:900px){
+  .nav{ display:flex; }
+  .top .btn{ margin-left:0; }
+}
+
+/* ==========================================================================
+   5. Buttons
+   ========================================================================== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:0.95rem;
+  letter-spacing:-0.01em;
+  padding:13px 22px;
+  background:var(--rust);
+  color:var(--white);
+  text-decoration:none;
+  border:1px solid var(--rust);
+  border-radius:2px;
+  transition:background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.btn:hover{ background:var(--rust-lift); border-color:var(--rust-lift); transform:translateY(-1px); }
+.btn-sm{ padding:9px 16px; font-size:0.85rem; }
+.btn-ghost{
+  background:transparent;
+  color:var(--text);
+  border-color:var(--line-2);
+}
+.btn-ghost:hover{ background:var(--ink-3); border-color:var(--muted); color:var(--white); }
+.btn-lg{ padding:17px 30px; font-size:1.05rem; }
+
+/* ==========================================================================
+   6. Hero
+   ========================================================================== */
+.hero{ border-bottom:1px solid var(--line); }
+.hero-in{
+  display:grid; gap:var(--gap);
+  padding-block:clamp(52px, 8vw, 96px);
+}
+@media (min-width:1000px){
+  .hero-in{ grid-template-columns:1.35fr 1fr; align-items:start; }
+}
+.eyebrow{ display:flex; align-items:center; gap:12px; margin-bottom:26px; }
+.eyebrow .tick{ width:26px; height:1px; background:var(--rust); flex:none; }
+.hero h1{
+  font-size:clamp(2.5rem, 6.2vw, 4.5rem);
+  margin-bottom:24px;
+}
+.hero h1 .hl{ color:var(--rust-lift); }
+.hero-sub{
+  font-size:clamp(1.05rem, 1.6vw, 1.22rem);
+  color:var(--muted);
+  max-width:60ch;
+  margin-bottom:34px;
+}
+.hero-cta{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+.hero-note{
+  margin-top:22px;
+  font-family:var(--f-mono);
+  font-size:0.78rem;
+  color:var(--muted);
+  display:flex; align-items:center; gap:9px;
+}
+.pulse{
+  width:7px; height:7px; background:var(--rust); border-radius:50%;
+  box-shadow:0 0 0 0 rgba(197,86,59,0.6);
+  animation:pulse 2.4s ease-out infinite;
+  flex:none;
+}
+@keyframes pulse{
+  0%{ box-shadow:0 0 0 0 rgba(197,86,59,0.55); }
+  70%{ box-shadow:0 0 0 9px rgba(197,86,59,0); }
+  100%{ box-shadow:0 0 0 0 rgba(197,86,59,0); }
+}
+
+/* scorecard panel */
+.card-score{
+  background:var(--ink-2);
+  border:1px solid var(--line);
+  border-top:2px solid var(--rust);
+}
+.score-head{
+  display:flex; justify-content:space-between; align-items:baseline; gap:12px;
+  padding:16px 20px;
+  border-bottom:1px solid var(--line);
+}
+.score-row{
+  display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+  padding:15px 20px;
+  border-bottom:1px solid var(--line);
+}
+.score-row .k{ font-size:0.94rem; color:var(--muted); }
+.score-row .v{
+  font-family:var(--f-mono);
+  font-size:1.45rem;
+  font-weight:500;
+  color:var(--white);
+  font-variant-numeric:tabular-nums;
+}
+.score-row .v.up{ color:var(--rust-lift); }
+.score-foot{ padding:14px 20px; font-size:0.8rem; color:var(--muted); line-height:1.5; }
+
+/* ==========================================================================
+   7. Trades strip
+   ========================================================================== */
+.trades{ border-bottom:1px solid var(--line); background:var(--ink-2); }
+.trades-in{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 26px; padding-block:20px; }
+.trades .lbl{ color:var(--muted); }
+.trades ul{ display:flex; flex-wrap:wrap; gap:10px 22px; }
+.trades li{
+  font-family:var(--f-mono);
+  font-size:0.82rem;
+  color:var(--text);
+}
+
+/* ==========================================================================
+   8. Section frame — the spec-sheet annotation margin
+   ========================================================================== */
+.sec{ border-bottom:1px solid var(--line); }
+.sec-in{
+  display:grid; gap:var(--gap);
+  padding-block:clamp(56px, 7vw, 92px);
+}
+@media (min-width:1000px){
+  .sec-in{ grid-template-columns:190px minmax(0,1fr); }
+}
+.sec-mark{ display:flex; flex-direction:column; gap:8px; }
+@media (min-width:1000px){
+  .sec-mark{ position:sticky; top:100px; align-self:start; }
+}
+.sec-mark .num{
+  font-family:var(--f-mono);
+  font-size:0.7rem;
+  letter-spacing:0.16em;
+  color:var(--rust);
+}
+.sec-mark .nm{
+  font-family:var(--f-mono);
+  font-size:0.7rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.sec-mark .rule{ height:1px; background:var(--line-2); margin-top:4px; }
+.sec-body{ display:flex; flex-direction:column; gap:34px; }
+.sec-body h2{ font-size:clamp(1.85rem, 3.3vw, 2.75rem); max-width:20ch; }
+.lead{ font-size:1.08rem; color:var(--muted); max-width:64ch; }
+
+/* ==========================================================================
+   9. Problem list
+   ========================================================================== */
+.probs{ display:flex; flex-direction:column; }
+.prob{
+  display:grid; gap:6px 22px;
+  padding:24px 0;
+  border-top:1px solid var(--line);
+}
+@media (min-width:720px){
+  .prob{ grid-template-columns:240px minmax(0,1fr); align-items:start; }
+}
+.prob:last-child{ border-bottom:1px solid var(--line); }
+.prob h3{ font-size:1.12rem; font-weight:700; letter-spacing:-0.01em; color:var(--white); }
+.prob p{ color:var(--muted); max-width:62ch; }
+
+/* ==========================================================================
+   10. Deliverables
+   ========================================================================== */
+.deliv{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+@media (min-width:760px){ .deliv{ grid-template-columns:1fr 1fr; } }
+.deliv li{
+  background:var(--ink-2);
+  padding:26px 24px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.deliv .n{ font-family:var(--f-mono); font-size:0.72rem; color:var(--rust); letter-spacing:0.14em; }
+.deliv h3{ font-size:1.1rem; font-weight:700; color:var(--white); }
+.deliv p{ color:var(--muted); font-size:0.97rem; }
+.deliv .wide{ grid-column:1 / -1; }
+
+/* ==========================================================================
+   11. Build phases — a genuine sequence, so it gets numbers
+   ========================================================================== */
+.phases{ display:flex; flex-direction:column; }
+.phase{
+  display:grid; gap:8px 24px;
+  padding:26px 0;
+  border-top:1px solid var(--line);
+  position:relative;
+}
+@media (min-width:820px){
+  .phase{ grid-template-columns:60px 200px minmax(0,1fr); align-items:start; }
+}
+.phase:last-child{ border-bottom:1px solid var(--line); }
+.phase .step{
+  font-family:var(--f-mono);
+  font-size:1.6rem;
+  font-weight:500;
+  color:var(--line-2);
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.phase h3{ font-size:1.15rem; font-weight:700; color:var(--white); }
+.phase .when{ font-family:var(--f-mono); font-size:0.74rem; color:var(--rust); letter-spacing:0.1em; text-transform:uppercase; margin-top:6px; }
+.phase p{ color:var(--muted); max-width:60ch; }
+
+/* ==========================================================================
+   12. Job math — set as a contractor's estimate sheet
+   ========================================================================== */
+.sheet{ border:1px solid var(--line); background:var(--ink-2); overflow-x:auto; }
+.sheet table{ width:100%; border-collapse:collapse; min-width:540px; }
+.sheet caption{
+  text-align:left;
+  padding:16px 20px;
+  border-bottom:1px solid var(--line);
+  font-family:var(--f-mono);
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.sheet th, .sheet td{ padding:12px 20px; text-align:left; border-bottom:1px solid var(--line); }
+.sheet thead th{
+  font-family:var(--f-mono);
+  font-size:0.68rem;
+  font-weight:500;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.sheet tbody th{ font-weight:500; color:var(--text); font-size:0.97rem; }
+.sheet .basis{ font-family:var(--f-mono); font-size:0.82rem; color:var(--muted); }
+.sheet .amt{
+  font-family:var(--f-mono);
+  font-size:1rem;
+  color:var(--white);
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.sheet tr.sum th, .sheet tr.sum td{ background:var(--ink-3); }
+.sheet tr.total th{ font-family:var(--f-display); font-weight:700; font-size:1.05rem; color:var(--white); }
+.sheet tr.total td{ font-size:1.3rem; color:var(--rust-lift); }
+.sheet tr.total th, .sheet tr.total td{ border-bottom:0; border-top:2px solid var(--rust); background:var(--ink-3); }
+.disclaim{ font-size:0.9rem; color:var(--muted); max-width:66ch; }
+
+/* ==========================================================================
+   13. Fit columns
+   ========================================================================== */
+.fit{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+@media (min-width:760px){ .fit{ grid-template-columns:1fr 1fr; } }
+.fit-col{ background:var(--ink-2); padding:26px 24px; display:flex; flex-direction:column; gap:16px; }
+.fit-col h3{ font-size:1.05rem; font-weight:700; color:var(--white); }
+.fit-col ul{ display:flex; flex-direction:column; gap:12px; }
+.fit-col li{ display:flex; gap:12px; align-items:flex-start; color:var(--muted); font-size:0.97rem; }
+.fit-col li::before{
+  font-family:var(--f-mono);
+  font-size:0.9rem;
+  line-height:1.6;
+  flex:none;
+}
+.fit-yes li::before{ content:"+"; color:var(--rust); }
+.fit-no li::before{ content:"\2014"; color:var(--line-2); }
+
+/* ==========================================================================
+   14. Terms + guarantee
+   ========================================================================== */
+.terms{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+@media (min-width:700px){ .terms{ grid-template-columns:repeat(3,1fr); } }
+.term{ background:var(--ink-2); padding:26px 24px; display:flex; flex-direction:column; gap:8px; }
+.term .k{ font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+.term .v{ font-family:var(--f-display); font-weight:800; font-size:1.75rem; color:var(--white); letter-spacing:-0.03em; line-height:1.12; }
+.term .v small{ display:block; margin-top:8px; font-family:var(--f-mono); font-size:0.78rem; font-weight:400; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; }
+.term p{ color:var(--muted); font-size:0.94rem; }
+
+.stamp{
+  border:1px solid var(--hivis);
+  border-left-width:4px;
+  background:linear-gradient(90deg, rgba(233,185,73,0.07), rgba(233,185,73,0));
+  padding:24px 26px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.stamp .k{ font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--hivis); }
+.stamp p{ font-family:var(--f-display); font-weight:700; font-size:clamp(1.15rem,2vw,1.5rem); color:var(--white); letter-spacing:-0.02em; line-height:1.3; }
+.stamp .fine{ font-family:var(--f-body); font-weight:400; font-size:0.9rem; color:var(--muted); letter-spacing:0; line-height:1.6; }
+.notes{ display:flex; flex-direction:column; gap:10px; }
+.notes li{ display:flex; gap:12px; color:var(--muted); font-size:0.97rem; }
+.notes li::before{ content:"//"; font-family:var(--f-mono); font-size:0.82rem; color:var(--line-2); flex:none; }
+
+/* ==========================================================================
+   15. Quotes (placeholders until real ones exist)
+   ========================================================================== */
+.quotes{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
+@media (min-width:820px){ .quotes{ grid-template-columns:repeat(3,1fr); } }
+.quote{ background:var(--ink-2); padding:26px 24px; display:flex; flex-direction:column; gap:16px; justify-content:space-between; }
+.quote blockquote{ margin:0; font-size:1rem; color:var(--text); line-height:1.6; }
+.quote .who{ font-family:var(--f-mono); font-size:0.76rem; color:var(--muted); line-height:1.7; }
+.quote .who b{ color:var(--white); font-weight:500; display:block; }
+
+/* ==========================================================================
+   16. FAQ
+   ========================================================================== */
+.faq{ border-top:1px solid var(--line); }
+.faq details{ border-bottom:1px solid var(--line); }
+.faq summary{
+  cursor:pointer;
+  list-style:none;
+  padding:20px 40px 20px 0;
+  position:relative;
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:1.06rem;
+  color:var(--white);
+  letter-spacing:-0.01em;
+}
+.faq summary::-webkit-details-marker{ display:none; }
+.faq summary::after{
+  content:"+";
+  position:absolute; right:6px; top:19px;
+  font-family:var(--f-mono);
+  font-size:1.2rem;
+  color:var(--rust);
+  transition:transform .2s ease;
+}
+.faq details[open] summary::after{ content:"\2212"; }
+.faq summary:hover{ color:var(--rust-lift); }
+.faq .a{ padding:0 0 22px; color:var(--muted); max-width:70ch; }
+
+/* ==========================================================================
+   17. Closing CTA
+   ========================================================================== */
+.close{ background:var(--ink-2); border-bottom:1px solid var(--line); }
+.close-in{
+  display:grid; gap:var(--gap);
+  padding-block:clamp(56px, 7vw, 96px);
+}
+@media (min-width:960px){ .close-in{ grid-template-columns:1.1fr 1fr; align-items:center; } }
+.close h2{ font-size:clamp(2rem, 4vw, 3.1rem); margin-bottom:18px; }
+.close p{ color:var(--muted); max-width:52ch; }
+.agenda{ border:1px solid var(--line); background:var(--ink); }
+.agenda li{ padding:16px 22px; border-bottom:1px solid var(--line); display:flex; gap:14px; font-size:0.97rem; color:var(--muted); }
+.agenda li:last-of-type{ border-bottom:0; }
+.agenda li span{ font-family:var(--f-mono); font-size:0.78rem; color:var(--rust); flex:none; padding-top:2px; }
+.agenda-cta{ padding:22px; display:flex; flex-direction:column; gap:12px; border-top:1px solid var(--line); }
+.agenda-cta .alt{ font-family:var(--f-mono); font-size:0.8rem; color:var(--muted); text-align:center; }
+.agenda-cta .alt a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line-2); }
+.agenda-cta .alt a:hover{ color:var(--rust-lift); border-color:var(--rust); }
+
+/* ==========================================================================
+   18. Footer
+   ========================================================================== */
+.foot-in{ display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-start; padding-block:44px; }
+.foot .mark{ font-size:1.5rem; margin-bottom:12px; }
+.foot p{ font-size:0.9rem; color:var(--muted); max-width:34ch; }
+.foot-cols{ display:flex; flex-wrap:wrap; gap:44px; }
+.foot-col{ display:flex; flex-direction:column; gap:10px; }
+.foot-col a{ font-size:0.92rem; color:var(--muted); text-decoration:none; }
+.foot-col a:hover{ color:var(--white); }
+.foot-base{ border-top:1px solid var(--line); }
+.foot-base-in{ display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between; padding-block:18px; }
+.foot-base p{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); }
+
+/* ==========================================================================
+   19. Load-in — plays immediately, ends visible
+   ========================================================================== */
+.rise{ animation:rise .6s cubic-bezier(.2,.7,.3,1) both; }
+.rise-2{ animation-delay:.09s; }
+.rise-3{ animation-delay:.18s; }
+@keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+  html{ scroll-behavior:auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="#top" aria-label="C. Ads — home"><span aria-hidden="true">C</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">What we run</a>
+      <a href="#build">The build</a>
+      <a href="#math">Job math</a>
+      <a href="#terms">Terms</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div class="rise">
+        <div class="eyebrow">
+          <span class="tick" aria-hidden="true"></span>
+          <span class="lbl">Meta ads for contractors &middot; [SERVICE AREA]</span>
+        </div>
+        <h1>You don't need more leads. You need <span class="hl">booked estimates.</span></h1>
+        <p class="hero-sub">
+          C. Ads builds and runs one thing for contractors: a Facebook and Instagram ad system
+          that puts your crew in front of homeowners in your service radius, gets them on the
+          phone in minutes, and reports on the only number that pays you — cost per booked estimate.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-lg" href="[BOOKING LINK]">Book a 20-minute call</a>
+          <a class="btn btn-lg btn-ghost" href="#math">See the job math</a>
+        </div>
+        <p class="hero-note"><span class="pulse" aria-hidden="true"></span> Taking [2] new contractor accounts this month &mdash; one per trade, per market.</p>
+      </div>
+
+      <aside class="card-score rise rise-2" aria-label="Example monthly scorecard">
+        <div class="score-head">
+          <span class="lbl">Monthly scorecard</span>
+          <span class="lbl">Example</span>
+        </div>
+        <div class="score-row">
+          <span class="k">Cost per booked estimate</span>
+          <span class="v">$57</span>
+        </div>
+        <div class="score-row">
+          <span class="k">Booked estimates</span>
+          <span class="v">50</span>
+        </div>
+        <div class="score-row">
+          <span class="k">Jobs closed</span>
+          <span class="v">12</span>
+        </div>
+        <div class="score-row">
+          <span class="k">Return on marketing spend</span>
+          <span class="v up">8.8&times;</span>
+        </div>
+        <p class="score-foot">
+          This is the report you get every Monday &mdash; not impressions, not reach.
+          Figures shown are an illustration of the model; yours replace them once campaigns run.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== TRADES ===================== -->
+  <section class="trades" aria-label="Trades served">
+    <div class="wrap trades-in">
+      <span class="lbl">Built for</span>
+      <ul>
+        <li>Roofing</li>
+        <li>HVAC</li>
+        <li>Remodeling</li>
+        <li>Windows &amp; Siding</li>
+        <li>Concrete &amp; Flatwork</li>
+        <li>Hardscape &amp; Landscape</li>
+        <li>Solar</li>
+        <li>Plumbing &amp; Electrical</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== PROBLEM ===================== -->
+  <section class="sec" id="problem">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 01</span>
+        <span class="nm">Existing conditions</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>Why the lead problem never actually gets solved</h2>
+        <p class="lead">
+          Nothing here is a marketing problem in the abstract. It's four specific leaks,
+          and every contractor we talk to has at least two of them.
+        </p>
+        <div class="probs">
+          <article class="prob">
+            <h3>Shared lead marketplaces</h3>
+            <p>Angi, Thumbtack and Networx sell the same homeowner to four contractors at once. You're not selling your workmanship, you're bidding against three guys who will go lower. The lead cost is the small part; the margin you give up to win it is the real bill.</p>
+          </article>
+          <article class="prob">
+            <h3>Referrals don't forecast</h3>
+            <p>Word of mouth builds a great business and a terrible calendar. It shows up when it shows up. January doesn't care how good your July was, and neither does payroll.</p>
+          </article>
+          <article class="prob">
+            <h3>Boosting posts isn't advertising</h3>
+            <p>A boosted job-site photo reaches people who already follow you. It does not reach the homeowner two zip codes over whose roof started leaking last week. Different objective, different audience, different campaign structure.</p>
+          </article>
+          <article class="prob">
+            <h3>Leads go cold in the truck</h3>
+            <p>Contact rates fall off a cliff after the first five minutes, and most contractors return calls at 7pm from the cab. Half of what looks like a bad lead source is really a follow-up problem &mdash; and it's the cheapest one on this list to fix.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCOPE ===================== -->
+  <section class="sec" id="work">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 02</span>
+        <span class="nm">Scope of work</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>One channel, run properly</h2>
+        <p class="lead">
+          We only run Meta &mdash; Facebook and Instagram. No SEO retainers, no six-service
+          bundle where five of them get ten minutes a week. Paid social is where homeowners
+          who weren't searching yet can still be sold, and it is the whole job here.
+        </p>
+        <ul class="deliv">
+          <li>
+            <span class="n">01</span>
+            <h3>Offer engineering</h3>
+            <p>"Free estimate" is not an offer &mdash; every competitor on the block gives one. We build something a homeowner has to think about: a financing angle, a seasonal tune-up at a real price, a no-breakdown guarantee, an inspection with a written report. The offer moves cost per estimate further than targeting ever will.</p>
+          </li>
+          <li>
+            <span class="n">02</span>
+            <h3>Job-site creative</h3>
+            <p>We script and edit ads from footage of your crews, your trucks and your finished work &mdash; shot on a phone, directed by us. Homeowners are hiring people they will let into their house, and stock photos don't get that job. New creative every month, because ad fatigue is what kills accounts in month three.</p>
+          </li>
+          <li>
+            <span class="n">03</span>
+            <h3>Radius and ticket targeting</h3>
+            <p>Campaigns built around your actual service radius, the zip codes with the housing stock and home values that match your ticket, and exclusions for the areas your crews hate driving to. Your leads, exclusively yours &mdash; never resold.</p>
+          </li>
+          <li>
+            <span class="n">04</span>
+            <h3>Speed-to-lead follow-up</h3>
+            <p>Automatic text and email the second a form comes in, then a call script for whoever picks up your phone, and reminders until the estimate is on the calendar. We wire it into your CRM or set one up.</p>
+          </li>
+          <li class="wide">
+            <span class="n">05</span>
+            <h3>Reporting on the number that pays you</h3>
+            <p>Conversion tracking installed properly, every lead tagged back to the ad that produced it, and a Monday report that reads: spend, leads, booked estimates, cost per booked estimate, and jobs closed once you tell us what closed. Clicks and impressions are diagnostics, not results, and we don't dress them up as results.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BUILD ===================== -->
+  <section class="sec" id="build">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 03</span>
+        <span class="nm">Sequence of work</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>How the first 90 days run</h2>
+        <p class="lead">
+          These phases are in order because each one needs the one before it. Nobody scales
+          a campaign in week one, and anyone who tells you otherwise is spending your money to find out.
+        </p>
+        <div class="phases">
+          <article class="phase">
+            <span class="step">01</span>
+            <div>
+              <h3>Offer &amp; market audit</h3>
+              <p class="when">Week 1</p>
+            </div>
+            <p>We go through your ticket sizes, close rate, service radius, capacity and what your competitors are already running in your market. Output is the offer, the audience, and the number we're driving to.</p>
+          </article>
+          <article class="phase">
+            <span class="step">02</span>
+            <div>
+              <h3>Creative production</h3>
+              <p class="when">Week 1&ndash;2</p>
+            </div>
+            <p>One shot list, one filming day on your job site &mdash; phone footage is fine. We cut it into a first batch of ads, write the copy, build the landing page and install tracking end to end.</p>
+          </article>
+          <article class="phase">
+            <span class="step">03</span>
+            <div>
+              <h3>Launch &amp; learn</h3>
+              <p class="when">Week 2&ndash;4</p>
+            </div>
+            <p>Campaigns go live and we test angles against each other on real spend. Follow-up automations turn on the same day. Expect the first booked estimates inside two weeks and volatile numbers until the account has enough data.</p>
+          </article>
+          <article class="phase">
+            <span class="step">04</span>
+            <div>
+              <h3>Scale what closed</h3>
+              <p class="when">Month 2 onward</p>
+            </div>
+            <p>Now we optimize against closed jobs instead of leads, kill the angles that book but never close, expand the radius or the budget where the margin is, and refresh creative monthly so the account doesn't fatigue.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MATH ===================== -->
+  <section class="sec" id="math">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 04</span>
+        <span class="nm">Job math</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>Run the numbers like you'd price a job</h2>
+        <p class="lead">
+          You already cost jobs by the line. Advertising works the same way &mdash; every
+          number below is one you can check against your own books.
+        </p>
+
+        <div class="sheet">
+          <table>
+            <caption>Example estimate &mdash; monthly, one trade, one market</caption>
+            <thead>
+              <tr>
+                <th scope="col">Line item</th>
+                <th scope="col">Basis</th>
+                <th scope="col" style="text-align:right;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Ad spend</th>
+                <td class="basis">Paid direct to Meta</td>
+                <td class="amt">$3,000</td>
+              </tr>
+              <tr>
+                <th scope="row">Management</th>
+                <td class="basis">C. Ads retainer</td>
+                <td class="amt">$1,500</td>
+              </tr>
+              <tr class="sum">
+                <th scope="row">Marketing investment</th>
+                <td class="basis">Spend + management</td>
+                <td class="amt">$4,500</td>
+              </tr>
+              <tr>
+                <th scope="row">Cost per lead</th>
+                <td class="basis">Varies by trade and market</td>
+                <td class="amt">$24</td>
+              </tr>
+              <tr>
+                <th scope="row">Leads</th>
+                <td class="basis">3,000 &divide; 24</td>
+                <td class="amt">125</td>
+              </tr>
+              <tr>
+                <th scope="row">Booked estimates</th>
+                <td class="basis">40% of leads reached and scheduled</td>
+                <td class="amt">50</td>
+              </tr>
+              <tr class="sum">
+                <th scope="row">Cost per booked estimate</th>
+                <td class="basis">4,500 &divide; 50</td>
+                <td class="amt">$90</td>
+              </tr>
+              <tr>
+                <th scope="row">Jobs closed</th>
+                <td class="basis">25% close rate at the kitchen table</td>
+                <td class="amt">12</td>
+              </tr>
+              <tr>
+                <th scope="row">Average ticket</th>
+                <td class="basis">Your number &mdash; use your real one</td>
+                <td class="amt">$9,400</td>
+              </tr>
+              <tr>
+                <th scope="row">Revenue booked</th>
+                <td class="basis">12 &times; 9,400</td>
+                <td class="amt">$112,800</td>
+              </tr>
+              <tr>
+                <th scope="row">Gross profit</th>
+                <td class="basis">At a 35% gross margin</td>
+                <td class="amt">$39,480</td>
+              </tr>
+              <tr class="total">
+                <th scope="row">Return on marketing investment</th>
+                <td class="basis">39,480 &divide; 4,500</td>
+                <td class="amt">8.8&times;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="disclaim">
+          <strong>These are illustrative figures, not a promise.</strong> Cost per lead swings with
+          trade, season and market; close rate is yours, not ours. On the call we rebuild this
+          table with your real ticket, margin and close rate before you spend a dollar &mdash;
+          and if the math doesn't clear, we'll say so.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIT ===================== -->
+  <section class="sec" id="fit">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 05</span>
+        <span class="nm">Qualification</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>Who this works for, and who it doesn't</h2>
+        <p class="lead">
+          We take a limited number of accounts and we don't run two contractors in the same
+          trade and market against each other. That means turning work down, so here's the line.
+        </p>
+        <div class="fit">
+          <div class="fit-col fit-yes">
+            <h3>Good fit</h3>
+            <ul>
+              <li>Doing [$500k]+ a year and want the calendar full, not just busier</li>
+              <li>Someone answers the phone during business hours &mdash; or will</li>
+              <li>Crew capacity for 10&ndash;20 more estimates a month</li>
+              <li>Ad budget of $[MIN SPEND]+ a month, separate from our fee</li>
+              <li>Licensed, insured, and proud enough of the work to put it on camera</li>
+              <li>Willing to give it a full 90 days to compound</li>
+            </ul>
+          </div>
+          <div class="fit-col fit-no">
+            <h3>Not a fit</h3>
+            <ul>
+              <li>Brand new with no crew and no jobs to show</li>
+              <li>Need booked work this week &mdash; a system takes two to four weeks to bite</li>
+              <li>Competing on being the cheapest bid in town</li>
+              <li>Leads will sit unanswered until the weekend</li>
+              <li>Looking for $5 leads or a per-lead pricing deal</li>
+              <li>Want six channels at once from one agency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TERMS ===================== -->
+  <section class="sec" id="terms">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 06</span>
+        <span class="nm">Terms</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>Priced like a trade, not a mystery</h2>
+        <p class="lead">
+          Two line items and your ad spend. No percentage of spend, no per-lead pricing,
+          no bill that grows just because your budget did.
+        </p>
+        <div class="terms">
+          <div class="term">
+            <span class="k">Build &amp; launch</span>
+            <span class="v">$[BUILD FEE] <small>one time</small></span>
+            <p>Offer, creative production, landing page, tracking, CRM and follow-up automations, campaign build.</p>
+          </div>
+          <div class="term">
+            <span class="k">Management</span>
+            <span class="v">$[RETAINER] <small>/ month</small></span>
+            <p>Daily optimization, fresh creative every month, follow-up tuning, and the Monday scorecard.</p>
+          </div>
+          <div class="term">
+            <span class="k">Ad spend</span>
+            <span class="v">$[MIN SPEND] <small>/ month min.</small></span>
+            <p>Billed by Meta on your own card. Your ad account, your data, your audiences &mdash; you keep all of it.</p>
+          </div>
+        </div>
+
+        <div class="stamp">
+          <span class="k">The guarantee</span>
+          <p>[GUARANTEE #] booked estimates in your first 60 days, or management is free until you get there.</p>
+          <p class="fine">
+            Conditions are simple and non-negotiable, because they're the difference between
+            working and not: leads get called back the same day, and the offer we agree to
+            is the offer that runs.
+          </p>
+        </div>
+
+        <ul class="notes">
+          <li>Month to month after the first 90 days &mdash; cancel with 30 days' notice.</li>
+          <li>One contractor per trade, per market. Your competitor doesn't get the same playbook.</li>
+          <li>Everything is built in your accounts. If we part ways, the ad account, page, pixel and creative stay with you.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== QUOTES ===================== -->
+  <section class="sec" id="results">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 07</span>
+        <span class="nm">References</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>What clients say</h2>
+        <p class="lead">
+          Replace the three blocks below with real quotes and real numbers from clients who
+          have given you permission to use them. Leaving them empty beats inventing them &mdash;
+          contractors check.
+        </p>
+        <div class="quotes">
+          <figure class="quote">
+            <blockquote>&ldquo;[CLIENT QUOTE 1 &mdash; paste a real testimonial here. The strongest ones name a number: estimates booked, jobs closed, or the month it turned around.]&rdquo;</blockquote>
+            <figcaption class="who"><b>[Name], [Company]</b>[Trade] &middot; [City, ST]</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>&ldquo;[CLIENT QUOTE 2 &mdash; paste a real testimonial here.]&rdquo;</blockquote>
+            <figcaption class="who"><b>[Name], [Company]</b>[Trade] &middot; [City, ST]</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>&ldquo;[CLIENT QUOTE 3 &mdash; paste a real testimonial here.]&rdquo;</blockquote>
+            <figcaption class="who"><b>[Name], [Company]</b>[Trade] &middot; [City, ST]</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="sec" id="faq">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">SEC. 08</span>
+        <span class="nm">Questions</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="sec-body">
+        <h2>Straight answers</h2>
+        <div class="faq">
+          <details open>
+            <summary>How much do I need to spend on ads?</summary>
+            <p class="a">$[MIN SPEND] a month is the floor, and that's about learning speed, not greed &mdash; below it Meta doesn't get enough conversions to optimize and you spend three months finding out what two weeks should have told you. High-ticket trades like roofing and remodeling usually settle higher once the math works.</p>
+          </details>
+          <details>
+            <summary>Are the leads exclusive to me?</summary>
+            <p class="a">Yes. They come from your own ad account and go straight into your CRM. Nothing is resold, and nobody else in your trade and market is running our campaigns against you.</p>
+          </details>
+          <details>
+            <summary>How fast will I see booked estimates?</summary>
+            <p class="a">First leads usually land within days of launch, first booked estimates inside two weeks. The number stabilizes around week four once the account has data, and month three is where it typically pays best. If you need work on the calendar this week, ads are the wrong tool &mdash; call your past customers.</p>
+          </details>
+          <details>
+            <summary>Do I need a website first?</summary>
+            <p class="a">No. We build a dedicated landing page for the campaign, which converts better than a homepage anyway. If you have a site, we'll use it where it helps and route ad traffic to the page built for it.</p>
+          </details>
+          <details>
+            <summary>Who makes the ads?</summary>
+            <p class="a">We do &mdash; scripts, copy and editing. What we need from you is raw footage: crews working, before and afters, you talking to the camera for sixty seconds. Phone video is fine and usually outperforms polished production. We'll send a shot list so nobody guesses.</p>
+          </details>
+          <details>
+            <summary>Am I locked into a contract?</summary>
+            <p class="a">A 90-day initial term, because ending sooner means paying for the learning period and leaving before the payoff. After that it's month to month with 30 days' notice.</p>
+          </details>
+          <details>
+            <summary>What if I already tried Facebook ads and it flopped?</summary>
+            <p class="a">Common, and usually one of four things: boosted posts instead of campaigns, a generic offer, no tracking so nothing could be optimized, or leads nobody called back. We'll pull up your old account on the call and tell you which one it was.</p>
+          </details>
+          <details>
+            <summary>What do you need from me each month?</summary>
+            <p class="a">Roughly an hour: a short check-in, whatever footage you gathered, and telling us which estimates closed. That last part is what lets us optimize toward revenue instead of leads.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CLOSE ===================== -->
+  <section class="close" id="book">
+    <div class="wrap close-in">
+      <div>
+        <h2>Book a 20-minute call</h2>
+        <p>
+          No pitch deck. We look at your ticket, your close rate and your capacity, rebuild
+          the job math with your numbers, and tell you plainly whether paid ads clear the bar
+          for your shop right now.
+        </p>
+      </div>
+      <div class="agenda">
+        <ul>
+          <li><span>00:00</span> Your trade, service radius, ticket size and how you get work today</li>
+          <li><span>00:07</span> The job math rebuilt live with your real numbers</li>
+          <li><span>00:14</span> What the first 30 days would look like &mdash; offer, creative, budget</li>
+          <li><span>00:19</span> A straight yes or no on fit, either direction</li>
+        </ul>
+        <div class="agenda-cta">
+          <a class="btn btn-lg" href="[BOOKING LINK]">Pick a time</a>
+          <p class="alt">Rather talk now? <a href="tel:[PHONE-DIGITS]">[PHONE]</a> &middot; <a href="mailto:[EMAIL]">[EMAIL]</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <span class="mark"><span aria-hidden="true">C</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></span>
+      <p>Meta advertising for contractors. Serving [SERVICE AREA].</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <span class="lbl">Company</span>
+        <a href="#work">What we run</a>
+        <a href="#build">The build</a>
+        <a href="#terms">Terms</a>
+      </div>
+      <div class="foot-col">
+        <span class="lbl">Contact</span>
+        <a href="tel:[PHONE-DIGITS]">[PHONE]</a>
+        <a href="mailto:[EMAIL]">[EMAIL]</a>
+        <a href="[BOOKING LINK]">Book a call</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-base">
+    <div class="wrap foot-base-in">
+      <p>&copy; [YEAR] C. Ads. All rights reserved.</p>
+      <p>Not affiliated with or endorsed by Meta Platforms, Inc.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
