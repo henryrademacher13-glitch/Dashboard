@@ -1,4 +1,4 @@
-# What C. Ads needs from you
+# What Contractor.Ads needs from you
 
 The site is built and every gap is marked. This is the list of what only you can answer,
 in the order it blocks you. Paste your answers back and I'll fill them in.
@@ -14,7 +14,7 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 | 3 | **Service area** | "Serving `[SERVICE AREA]`" — one metro, a state, a radius, or "Nationwide, remote". This also changes how the offer reads. |
 | 4 | **Pricing: build fee, monthly retainer, minimum ad spend** | Three numbers on the Terms section. If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
 | 5 | **The guarantee** | Currently `[GUARANTEE #] booked estimates in 60 days, or management is free.` Confirm the number, the window, and the conditions — or tell me to cut it. **Only publish a guarantee you will actually honor**; contractors screenshot these. |
-| 6 | **Legal business name + year** | Footer line. "C. Ads LLC"? Sole prop? |
+| 6 | **Legal business name + year** | Footer line. "Contractor.Ads LLC"? Sole prop? |
 
 ---
 

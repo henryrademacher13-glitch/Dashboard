@@ -1,4 +1,4 @@
-# C. Ads — website
+# Contractor.Ads — website
 
 A single, self-contained landing page for the agency. One file, no build step, no
 dependencies: `index.html` holds the markup, the CSS and the (very small) JS surface.
