@@ -32,7 +32,6 @@ Every editable value is wrapped in `[SQUARE BRACKETS]`. Open `index.html`, searc
 | `[SERVICE AREA]` | e.g. `Denver Metro` or `Nationwide` | 2 |
 | `[BUILD FEE]` | One-time build price | 1 |
 | `[RETAINER]` | Monthly management fee | 1 |
-| `[MIN SPEND]` | Minimum monthly ad spend | 3 |
 | `[GUARANTEE #]` | Booked estimates promised in 60 days | 1 |
 | `[$500k]`, `[2]` | Revenue floor, open slots this month | 2 |
 | `[CLIENT QUOTE 1–3]` | Real testimonials, with name, company, trade, city | 3 |
@@ -58,7 +57,8 @@ sed -i '' \
   whole `<section id="results">` block if you don't have any yet.
 - **The job math calculator (Sec. 04).** Visitors drag their own numbers and the sheet
   rebuilds live. What you set are the *starting* positions — the `value=""` on each
-  `<input type="range">` in `#calc-form`. Defaults are ad spend $3,000, management
+  `<input type="range">` in `#calc-form`. Defaults are ad spend $3,000 ($100/day, the top of
+  your stated $50–$100 floor; the slider bottoms out at $1,500 = $50/day), management
   $1,500 (set this to your real `[RETAINER]`), CPL $24, booking 40%, close 24%, ticket
   $9,400, margin 35%. They're chosen so the whole example resolves cleanly to $90 per
   booked estimate and 8.8× — if you change one, sanity-check the hero scorecard

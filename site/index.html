@@ -21,7 +21,6 @@
   [SERVICE AREA]      e.g. "Denver Metro" or "Nationwide"   (appears 2x)
   [BUILD FEE]         one-time build price, e.g. 1,500      (appears 1x)
   [RETAINER]          monthly management fee, e.g. 1,500    (appears 1x)
-  [MIN SPEND]         minimum monthly ad spend, e.g. 2,500  (appears 3x)
   [GUARANTEE #]       booked estimates promised in 60 days
   [CLIENT QUOTE 1-3]  real testimonials only — do not invent these
   [YEAR]              footer copyright year
@@ -857,7 +856,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           <li>
             <span class="n">02</span>
             <h3>Job-site creative</h3>
-            <p>We script and edit ads from footage of your crews, your trucks and your finished work &mdash; shot on a phone, directed by us. Homeowners are hiring people they will let into their house, and stock photos don't get that job. New creative every month, because ad fatigue is what kills accounts in month three.</p>
+            <p>Our in-house editor builds every ad from footage of your crews, your trucks and your finished work &mdash; shot on a phone, to our shot list. Nothing is outsourced to a freelancer who has never sold a roof, and nothing is left for you to edit at 9pm. Homeowners are hiring people they will let into their house, and stock photos don't get that job. New creative every month, because ad fatigue is what kills accounts in month three.</p>
           </li>
           <li>
             <span class="n">03</span>
@@ -909,7 +908,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               <h3>Creative production</h3>
               <p class="when">Week 1&ndash;2</p>
             </div>
-            <p>One shot list, one filming day on your job site &mdash; phone footage is fine. We cut it into a first batch of ads, write the copy, build the landing page and install tracking end to end.</p>
+            <p>One shot list, one filming day on your job site &mdash; phone footage is fine. Our in-house editor cuts it into a first batch of ads while we write the copy, build the landing page and install tracking end to end.</p>
           </article>
           <article class="phase">
             <span class="step">03</span>
@@ -953,8 +952,8 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
             <div class="calc-grp">
               <span class="lbl">Your spend</span>
               <div class="field">
-                <div class="field-top"><label for="i-spend">Monthly ad spend</label><output id="o-spend" for="i-spend">$3,000</output></div>
-                <input id="i-spend" name="spend" type="range" min="1000" max="20000" step="250" value="3000" />
+                <div class="field-top"><label for="i-spend">Monthly ad spend</label><output id="o-spend" for="i-spend">$3,000 &middot; $100/day</output></div>
+                <input id="i-spend" name="spend" type="range" min="1500" max="15000" step="150" value="3000" />
               </div>
               <div class="field">
                 <div class="field-top"><label for="i-mgmt">Management fee</label><output id="o-mgmt" for="i-mgmt">$1,500</output></div>
@@ -1059,7 +1058,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
             <tbody>
               <tr>
                 <th scope="row">Ad spend</th>
-                <td class="basis">Paid direct to Meta</td>
+                <td class="basis" id="b-spend">$100 a day, paid direct to Meta</td>
                 <td class="amt" id="t-spend" data-fmt="money">$3,000</td>
               </tr>
               <tr>
@@ -1152,7 +1151,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
               <li>Doing [$500k]+ a year and want the calendar full, not just busier</li>
               <li>Someone answers the phone during business hours &mdash; or will</li>
               <li>Crew capacity for 10&ndash;20 more estimates a month</li>
-              <li>Ad budget of $[MIN SPEND]+ a month, separate from our fee</li>
+              <li>Ad budget of at least $50 a day &mdash; about $1,500 a month &mdash; separate from our fee</li>
               <li>Licensed, insured, and proud enough of the work to put it on camera</li>
               <li>Willing to give it a full 90 days to compound</li>
             </ul>
@@ -1200,8 +1199,8 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           </div>
           <div class="term">
             <span class="k">Ad spend</span>
-            <span class="v">$[MIN SPEND] <small>/ month min.</small></span>
-            <p>Billed by Meta on your own card. Your ad account, your data, your audiences &mdash; you keep all of it.</p>
+            <span class="v">$50&ndash;$100 <small>a day, minimum</small></span>
+            <p>Roughly $1,500&ndash;$3,000 a month, billed by Meta on your own card. Your ad account, your data, your audiences &mdash; you keep all of it.</p>
           </div>
         </div>
 
@@ -1270,7 +1269,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         <div class="faq">
           <details open>
             <summary>How much do I need to spend on ads?</summary>
-            <p class="a">$[MIN SPEND] a month is the floor, and that's about learning speed, not greed &mdash; below it Meta doesn't get enough conversions to optimize and you spend three months finding out what two weeks should have told you. High-ticket trades like roofing and remodeling usually settle higher once the math works.</p>
+            <p class="a">$50 a day is the floor and $100 a day is where it starts moving &mdash; about $1,500 to $3,000 a month. That's a learning-speed number, not a greed number: below it Meta never gets enough conversions to optimize against, and you spend three months finding out what two weeks should have told you. High-ticket trades like roofing and remodeling usually settle above $100 a day once the math works.</p>
           </details>
           <details>
             <summary>Are the leads exclusive to me?</summary>
@@ -1286,7 +1285,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           </details>
           <details>
             <summary>Who makes the ads?</summary>
-            <p class="a">We do &mdash; scripts, copy and editing. What we need from you is raw footage: crews working, before and afters, you talking to the camera for sixty seconds. Phone video is fine and usually outperforms polished production. We'll send a shot list so nobody guesses.</p>
+            <p class="a">We do, in house. Our own editor cuts every ad &mdash; not a freelancer, not a template, and not you. All we need from you is raw footage against a shot list we send: crews working, before and afters, you talking to the camera for sixty seconds. Phone video is fine and usually outperforms polished production.</p>
           </details>
           <details>
             <summary>Am I locked into a contract?</summary>
@@ -1531,7 +1530,8 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       var v = {};
       keys.forEach(function (k) { v[k] = parseFloat($("i-" + k).value); });
 
-      $("o-spend").value  = fmt.money(v.spend);
+      var perDay = v.spend / 30;
+      $("o-spend").value  = fmt.money(v.spend) + " · " + fmt.money(perDay) + "/day";
       $("o-mgmt").value   = fmt.money(v.mgmt);
       $("o-cpl").value    = fmt.money(v.cpl);
       $("o-book").value   = pct(v.book);
@@ -1565,6 +1565,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       setVal($("t-ticket"), v.ticket, flash); setVal($("t-revenue"), revenue, flash);
       setVal($("t-profit"), profit, flash);   setVal($("t-roi"), roi, flash);
 
+      $("b-spend").textContent   = fmt.money(perDay) + " a day, paid direct to Meta";
       $("b-leads").textContent   = fmt.int(v.spend) + " ÷ " + fmt.int(v.cpl);
       $("b-booked").textContent  = v.book + "% of leads reached and scheduled";
       $("b-cpbe").textContent    = fmt.int(invest) + " ÷ " + fmt.int(booked);

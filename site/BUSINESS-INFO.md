@@ -12,13 +12,18 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 | 1 | **Booking link** (Calendly / GoHighLevel / Acuity URL) | Every CTA on the page points at `[BOOKING LINK]` — 5 buttons. Without it the site has no conversion path at all. |
 | 2 | **Phone + email** | Second and third contact paths, and the click-to-call in the mobile dock. |
 | 3 | **Service area** | "Serving `[SERVICE AREA]`" — one metro, a state, a radius, or "Nationwide, remote". This also changes how the offer reads. |
-| 4 | **Pricing: build fee, monthly retainer, minimum ad spend** | Three numbers on the Terms section. If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
+| 4 | **Pricing: build fee and monthly retainer** | Two numbers on the Terms section (ad spend minimum is set: $50–$100/day). If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
 | 5 | **The guarantee** | Currently `[GUARANTEE #] booked estimates in 60 days, or management is free.` Confirm the number, the window, and the conditions — or tell me to cut it. **Only publish a guarantee you will actually honor**; contractors screenshot these. |
 | 6 | **Legal business name + year** | Footer line. "Contractor.Ads LLC"? Sole prop? |
 
 ---
 
 ## 2. Decisions I made for you — correct any that are wrong
+
+> **Settled so far:** ad spend minimum is $50–$100/day (~$1,500–$3,000/month), and your
+> in-house editor produces all creative from client-supplied footage against your shot list.
+> The remaining assumption there: the *client* still shoots the raw footage on a phone. If
+> your editor also films on site, say so — that's a stronger claim and it changes Sec. 02.
 
 I had to take positions to write the copy. Each of these is a real business decision, not
 a wording choice, so read them as a list of things you're now committed to on the page:
@@ -30,7 +35,6 @@ a wording choice, so read them as a list of things you're now committed to on th
 | **90-day initial term, then month-to-month, 30 days' notice** | Your contract says something else. |
 | **$500k+/yr revenue floor** for a good-fit client | You'll take smaller shops. |
 | **Client needs 10–20 estimates/month of crew capacity** | Your typical client is bigger or smaller. |
-| **You film / direct creative from their job sites** | You expect the client to supply footage unmanaged, or you shoot it yourself on site. |
 | **You wire leads into their CRM (or set one up)** | You don't do CRM work — that changes deliverable #4. |
 | **Weekly Monday reporting** | You report monthly, or in a live dashboard. |
 | **20-minute strategy call** | Yours is 30 or 45 minutes. The call agenda block is timestamped to 20. |
@@ -111,7 +115,6 @@ Service area:
 Legal business name:
 Build fee:
 Monthly retainer:
-Minimum ad spend:
 Guarantee (number + window + conditions):
 Trades you actually want (or "all"):
 Slots open this month:
