@@ -44,17 +44,11 @@ cd site && python3 -m http.server 8000   # then visit http://localhost:8000
 
 ## Fill in your details
 
-Contact details, pricing, the booking link and the year are all set. Two cosmetic values
-are left, still wrapped in `[SQUARE BRACKETS]`.
-
-| Placeholder | What to put there | Times used |
-| --- | --- | --- |
-| `[2]` | Open contractor slots this month (hero note and mobile dock) | 2, `index.html` |
-| `[$500k]` | Revenue floor in the pricing notes | 1, `index.html` |
-
-Already live: phone `267-667-8665` (dialing `+12676678665`),
-`Contractor.adsagency@gmail.com`, $500 build, $2,000/mo management, $100/day ad spend
-minimum, © 2026, and Calendly booking.
+Nothing is left to fill in. Contact details, pricing, the booking calendar and the year
+are all real. The only numbers that are still illustrative are the job-math calculator's
+slider defaults (ad spend $3,000, CPL $24, booking 40%, close 24%, ticket $9,400, margin
+35%) — swap those for your own once you have real campaign data, and re-check the hero
+scorecard so the two agree.
 
 ## Booking
 
