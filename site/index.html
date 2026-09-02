@@ -346,23 +346,7 @@ strong{ color:var(--white); font-weight:600; }
 .lead{ font-size:1.08rem; color:var(--muted); max-width:64ch; }
 
 /* ==========================================================================
-   9. Problem list
-   ========================================================================== */
-.probs{ display:flex; flex-direction:column; }
-.prob{
-  display:grid; gap:6px 22px;
-  padding:24px 0;
-  border-top:1px solid var(--line);
-}
-@media (min-width:720px){
-  .prob{ grid-template-columns:240px minmax(0,1fr); align-items:start; }
-}
-.prob:last-child{ border-bottom:1px solid var(--line); }
-.prob h3{ font-size:1.12rem; font-weight:700; letter-spacing:-0.01em; color:var(--white); }
-.prob p{ color:var(--muted); max-width:62ch; }
-
-/* ==========================================================================
-   10. Deliverables
+   9. Deliverables
    ========================================================================== */
 .deliv{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
 @media (min-width:760px){ .deliv{ grid-template-columns:1fr 1fr; } }
@@ -377,7 +361,7 @@ strong{ color:var(--white); font-weight:600; }
 .deliv .wide{ grid-column:1 / -1; }
 
 /* ==========================================================================
-   11. Build phases — a genuine sequence, so it gets numbers
+   10. Build phases — a genuine sequence, so it gets numbers
    ========================================================================== */
 .phases{ display:flex; flex-direction:column; }
 .phase{
@@ -402,66 +386,9 @@ strong{ color:var(--white); font-weight:600; }
 .phase .when{ font-family:var(--f-mono); font-size:0.74rem; color:var(--rust); letter-spacing:0.1em; text-transform:uppercase; margin-top:6px; }
 .phase p{ color:var(--muted); max-width:60ch; }
 
-/* ==========================================================================
-   12. Job math — set as a contractor's estimate sheet
-   ========================================================================== */
-.sheet{ border:1px solid var(--line); background:var(--ink-2); overflow-x:auto; }
-.sheet table{ width:100%; border-collapse:collapse; min-width:540px; }
-.sheet caption{
-  text-align:left;
-  padding:16px 20px;
-  border-bottom:1px solid var(--line);
-  font-family:var(--f-mono);
-  font-size:0.72rem;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-.sheet th, .sheet td{ padding:12px 20px; text-align:left; border-bottom:1px solid var(--line); }
-.sheet thead th{
-  font-family:var(--f-mono);
-  font-size:0.68rem;
-  font-weight:500;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-.sheet tbody th{ font-weight:500; color:var(--text); font-size:0.97rem; }
-.sheet .basis{ font-family:var(--f-mono); font-size:0.82rem; color:var(--muted); }
-.sheet .amt{
-  font-family:var(--f-mono);
-  font-size:1rem;
-  color:var(--white);
-  text-align:right;
-  font-variant-numeric:tabular-nums;
-  white-space:nowrap;
-}
-.sheet tr.sum th, .sheet tr.sum td{ background:var(--ink-3); }
-.sheet tr.total th{ font-family:var(--f-display); font-weight:700; font-size:1.05rem; color:var(--white); }
-.sheet tr.total td{ font-size:1.3rem; color:var(--rust-lift); }
-.sheet tr.total th, .sheet tr.total td{ border-bottom:0; border-top:2px solid var(--rust); background:var(--ink-3); }
 .disclaim{ font-size:0.9rem; color:var(--muted); max-width:66ch; }
-
 /* ==========================================================================
-   13. Fit columns
-   ========================================================================== */
-.fit{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
-@media (min-width:760px){ .fit{ grid-template-columns:1fr 1fr; } }
-.fit-col{ background:var(--ink-2); padding:26px 24px; display:flex; flex-direction:column; gap:16px; }
-.fit-col h3{ font-size:1.05rem; font-weight:700; color:var(--white); }
-.fit-col ul{ display:flex; flex-direction:column; gap:12px; }
-.fit-col li{ display:flex; gap:12px; align-items:flex-start; color:var(--muted); font-size:0.97rem; }
-.fit-col li::before{
-  font-family:var(--f-mono);
-  font-size:0.9rem;
-  line-height:1.6;
-  flex:none;
-}
-.fit-yes li::before{ content:"+"; color:var(--rust); }
-.fit-no li::before{ content:"\2014"; color:var(--line-2); }
-
-/* ==========================================================================
-   14. Terms
+   11. Terms
    ========================================================================== */
 .terms{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); }
 @media (min-width:700px){ .terms{ grid-template-columns:repeat(3,1fr); } }
@@ -476,7 +403,7 @@ strong{ color:var(--white); font-weight:600; }
 .notes li::before{ content:"//"; font-family:var(--f-mono); font-size:0.82rem; color:var(--line-2); flex:none; }
 
 /* ==========================================================================
-   15. FAQ
+   12. FAQ
    ========================================================================== */
 .faq{ border-top:1px solid var(--line); }
 .faq details{ border-bottom:1px solid var(--line); }
@@ -505,7 +432,7 @@ strong{ color:var(--white); font-weight:600; }
 .faq .a{ padding:0 0 22px; color:var(--muted); max-width:70ch; }
 
 /* ==========================================================================
-   16. Closing CTA
+   13. Closing CTA
    ========================================================================== */
 .close{ background:var(--ink-2); border-bottom:1px solid var(--line); }
 .close-in{
@@ -527,7 +454,7 @@ strong{ color:var(--white); font-weight:600; }
 .agenda-cta .alt a:hover{ color:var(--rust-lift); border-color:var(--rust); }
 
 /* ==========================================================================
-   17. Footer
+   14. Footer
    ========================================================================== */
 .foot-in{ display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-start; padding-block:44px; }
 .foot .mark{ font-size:1.4rem; margin-bottom:12px; }
@@ -543,7 +470,7 @@ strong{ color:var(--white); font-weight:600; }
 .foot-base a:hover{ color:var(--white); }
 
 /* ==========================================================================
-   18. Scroll furniture — progress rail, header state, section fill
+   15. Scroll furniture — progress rail, header state, section fill
    ========================================================================== */
 .top{ transition:box-shadow .25s ease; }
 .top.is-stuck{ box-shadow:0 12px 34px rgba(0,0,0,.45); }
@@ -567,7 +494,7 @@ strong{ color:var(--white); font-weight:600; }
 }
 
 /* ==========================================================================
-   19. Reveal on scroll — only armed when JS runs, so no-JS keeps everything up
+   16. Reveal on scroll — only armed when JS runs, so no-JS keeps everything up
    ========================================================================== */
 :root.js .reveal{ opacity:0; transform:translateY(16px); }
 :root.js .reveal.is-in{
@@ -577,7 +504,7 @@ strong{ color:var(--white); font-weight:600; }
 }
 
 /* ==========================================================================
-   20. Trades ticker
+   17. Trades ticker
    ========================================================================== */
 .ticker{ overflow:hidden; flex:1; min-width:0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 5%,#000 92%,transparent); }
 .ticker-track{ display:flex; width:max-content; animation:ticker 52s linear infinite; }
@@ -592,7 +519,7 @@ strong{ color:var(--white); font-weight:600; }
 @keyframes ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
 /* ==========================================================================
-   21. Build sequence — rail that fills as you pass each phase
+   18. Build sequence — rail that fills as you pass each phase
    ========================================================================== */
 .phases{ position:relative; }
 .phase-rail{ display:none; }
@@ -616,7 +543,7 @@ strong{ color:var(--white); font-weight:600; }
 .phase.is-done .step{ color:var(--muted); }
 
 /* ==========================================================================
-   22. Deliverable hover
+   19. Deliverable hover
    ========================================================================== */
 .deliv li{ transition:background .2s ease; }
 .deliv li:hover{ background:var(--ink-3); }
@@ -624,7 +551,7 @@ strong{ color:var(--white); font-weight:600; }
 .deliv li:hover .n{ color:var(--rust-lift); }
 
 /* ==========================================================================
-   23. Job-math calculator
+   20. Job-math calculator
    ========================================================================== */
 .calc{ display:grid; gap:1px; background:var(--line); border:1px solid var(--line); grid-template-columns:minmax(0,1fr); }
 .calc > *, .calc-out > *, .fbar > *{ min-width:0; }
@@ -700,11 +627,9 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   font-family:var(--f-mono); font-size:1.05rem; color:var(--white);
   text-align:right; font-variant-numeric:tabular-nums;
 }
-.sheet .amt{ transition:color .35s ease; }
-.sheet tr td.amt.flash{ color:var(--rust-lift); }
 
 /* ==========================================================================
-   24. Mobile booking dock
+   21. Mobile booking dock
    ========================================================================== */
 .dock{
   position:fixed; left:0; right:0; bottom:0; z-index:55;
@@ -723,12 +648,12 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
 @media (max-width:899px){ .foot-base-in{ padding-bottom:72px; } }
 
 /* ==========================================================================
-   25. FAQ open animation
+   22. FAQ open animation
    ========================================================================== */
 .faq details[open] .a{ animation:rise .32s cubic-bezier(.2,.7,.3,1) both; }
 
 /* ==========================================================================
-   26. Load-in — plays immediately, ends visible
+   23. Load-in — plays immediately, ends visible
    ========================================================================== */
 .rise{ animation:rise .6s cubic-bezier(.2,.7,.3,1) both; }
 .rise-2{ animation-delay:.09s; }
@@ -747,10 +672,9 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   <div class="wrap top-in">
     <a class="mark" href="#top" aria-label="Contractor.Ads — home"><span aria-hidden="true">Contractor</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></a>
     <nav class="nav" id="nav" aria-label="Primary">
-      <a href="#work">What we run</a>
-      <a href="#build">The build</a>
-      <a href="#math">Job math</a>
-      <a href="#terms">Terms</a>
+      <a href="#work">What we do</a>
+      <a href="#build">How it works</a>
+      <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
       <span class="nav-sep" aria-hidden="true"></span>
       <a href="about.html">About</a>
@@ -774,44 +698,35 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           <span class="tick" aria-hidden="true"></span>
           <span class="lbl">Meta ads for contractors</span>
         </div>
-        <h1>You don't need more leads. You need <span class="hl">booked estimates.</span></h1>
+        <h1>Booked estimates. <span class="hl">Not more leads.</span></h1>
         <p class="hero-sub">
-          Contractor.Ads builds and runs one thing for contractors: a Facebook and Instagram ad system
-          that puts your crew in front of homeowners in your service radius, gets them on the
-          phone in minutes, and reports on the only number that pays you — cost per booked estimate.
+          We run Facebook and Instagram ads for contractors. One channel, done properly.
         </p>
         <div class="hero-cta">
           <a class="btn btn-lg" href="[BOOKING LINK]">Book a 20-minute call</a>
-          <a class="btn btn-lg btn-ghost" href="#math">See the job math</a>
+          <a class="btn btn-lg btn-ghost" href="#numbers">Run your numbers</a>
         </div>
-        <p class="hero-note"><span class="pulse" aria-hidden="true"></span> Taking [2] new contractor accounts this month &mdash; one per trade, per market.</p>
+        <p class="hero-note"><span class="pulse" aria-hidden="true"></span> Taking [2] new contractors this month.</p>
       </div>
 
-      <aside class="card-score rise rise-2" aria-label="Example monthly scorecard">
+      <aside class="card-score rise rise-2" aria-label="Example month">
         <div class="score-head">
-          <span class="lbl">Monthly scorecard</span>
+          <span class="lbl">A typical month</span>
           <span class="lbl">Example</span>
-        </div>
-        <div class="score-row">
-          <span class="k">Cost per booked estimate</span>
-          <span class="v" data-fmt="money" data-target="100">$100</span>
         </div>
         <div class="score-row">
           <span class="k">Booked estimates</span>
           <span class="v" data-fmt="int" data-target="50">50</span>
         </div>
         <div class="score-row">
-          <span class="k">Jobs closed</span>
-          <span class="v" data-fmt="int" data-target="12">12</span>
+          <span class="k">Cost per estimate</span>
+          <span class="v" data-fmt="money" data-target="100">$100</span>
         </div>
         <div class="score-row">
-          <span class="k">Return on marketing spend</span>
+          <span class="k">Return on spend</span>
           <span class="v up" data-fmt="mult" data-target="7.9">7.9&times;</span>
         </div>
-        <p class="score-foot">
-          This is the report you get every Monday &mdash; not impressions, not reach.
-          Figures shown are an illustration of the model; yours replace them once campaigns run.
-        </p>
+        <p class="score-foot">Example figures. Yours replace them once campaigns run.</p>
       </aside>
     </div>
   </section>
@@ -829,157 +744,139 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
     </div>
   </section>
 
-  <!-- ===================== PROBLEM ===================== -->
-  <section class="sec" id="problem">
-    <div class="wrap sec-in">
-      <div class="sec-mark">
-        <span class="num">SEC. 01</span>
-        <span class="nm">Existing conditions</span>
-        <span class="rule" aria-hidden="true"><i></i></span>
-      </div>
-      <div class="sec-body">
-        <h2>Why the lead problem never actually gets solved</h2>
-        <p class="lead">
-          Nothing here is a marketing problem in the abstract. It's four specific leaks,
-          and every contractor we talk to has at least two of them.
-        </p>
-        <div class="probs">
-          <article class="prob">
-            <h3>Shared lead marketplaces</h3>
-            <p>Angi, Thumbtack and Networx sell the same homeowner to four contractors at once. You're not selling your workmanship, you're bidding against three guys who will go lower. The lead cost is the small part; the margin you give up to win it is the real bill.</p>
-          </article>
-          <article class="prob">
-            <h3>Referrals don't forecast</h3>
-            <p>Word of mouth builds a great business and a terrible calendar. It shows up when it shows up. January doesn't care how good your July was, and neither does payroll.</p>
-          </article>
-          <article class="prob">
-            <h3>Boosting posts isn't advertising</h3>
-            <p>A boosted job-site photo reaches people who already follow you. It does not reach the homeowner two zip codes over whose roof started leaking last week. Different objective, different audience, different campaign structure.</p>
-          </article>
-          <article class="prob">
-            <h3>Leads go cold in the truck</h3>
-            <p>Contact rates fall off a cliff after the first five minutes, and most contractors return calls at 7pm from the cab. Half of what looks like a bad lead source is really a follow-up problem &mdash; and it's the cheapest one on this list to fix.</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SCOPE ===================== -->
+  <!-- ===================== WHAT WE DO ===================== -->
   <section class="sec" id="work">
     <div class="wrap sec-in">
       <div class="sec-mark">
-        <span class="num">SEC. 02</span>
-        <span class="nm">Scope of work</span>
+        <span class="num">01</span>
+        <span class="nm">What we do</span>
         <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
-        <h2>One channel, run properly</h2>
-        <p class="lead">
-          We only run Meta &mdash; Facebook and Instagram. No SEO retainers, no six-service
-          bundle where five of them get ten minutes a week. Paid social is where homeowners
-          who weren't searching yet can still be sold, and it is the whole job here.
-        </p>
+        <h2>Four things, every month</h2>
         <ul class="deliv">
           <li>
             <span class="n">01</span>
-            <h3>Offer engineering</h3>
-            <p>"Free estimate" is not an offer &mdash; every competitor on the block gives one. We build something a homeowner has to think about: a financing angle, a seasonal tune-up at a real price, a no-breakdown guarantee, an inspection with a written report. The offer moves cost per estimate further than targeting ever will.</p>
+            <h3>An offer that works</h3>
+            <p>Something better than "free estimate" &mdash; the part that moves your cost per lead most.</p>
           </li>
           <li>
             <span class="n">02</span>
-            <h3>Job-site creative</h3>
-            <p>Our in-house editor builds every ad from footage of your crews, your trucks and your finished work &mdash; shot on a phone, to our shot list. Nothing is outsourced to a freelancer who has never sold a roof, and nothing is left for you to edit at 9pm. Homeowners are hiring people they will let into their house, and stock photos don't get that job. New creative every month, because ad fatigue is what kills accounts in month three.</p>
+            <h3>Ads from your job sites</h3>
+            <p>Our in-house editor cuts your crew footage into ads. Fresh ones every month.</p>
           </li>
           <li>
             <span class="n">03</span>
-            <h3>Radius and ticket targeting</h3>
-            <p>Campaigns built around your actual service radius, the zip codes with the housing stock and home values that match your ticket, and exclusions for the areas your crews hate driving to. Your leads, exclusively yours &mdash; never resold.</p>
+            <h3>Targeting your radius</h3>
+            <p>Your zip codes, your ticket size. Leads are yours alone and never resold.</p>
           </li>
           <li>
             <span class="n">04</span>
-            <h3>Speed-to-lead follow-up</h3>
-            <p>Automatic text and email the second a form comes in, then a call script for whoever picks up your phone, and reminders until the estimate is on the calendar. We wire it into your CRM or set one up.</p>
-          </li>
-          <li class="wide">
-            <span class="n">05</span>
-            <h3>Reporting on the number that pays you</h3>
-            <p>Conversion tracking installed properly, every lead tagged back to the ad that produced it, and a Monday report that reads: spend, leads, booked estimates, cost per booked estimate, and jobs closed once you tell us what closed. Clicks and impressions are diagnostics, not results, and we don't dress them up as results.</p>
+            <h3>Follow-up in minutes</h3>
+            <p>Instant text and email on every lead, wired into your CRM. Plus a Monday report.</p>
           </li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===================== BUILD ===================== -->
+  <!-- ===================== HOW IT WORKS ===================== -->
   <section class="sec" id="build">
     <div class="wrap sec-in">
       <div class="sec-mark">
-        <span class="num">SEC. 03</span>
-        <span class="nm">Sequence of work</span>
+        <span class="num">02</span>
+        <span class="nm">How it works</span>
         <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
-        <h2>How the first 90 days run</h2>
-        <p class="lead">
-          These phases are in order because each one needs the one before it. Nobody scales
-          a campaign in week one, and anyone who tells you otherwise is spending your money to find out.
-        </p>
+        <h2>Live in two weeks</h2>
         <div class="phases">
           <span class="phase-rail" aria-hidden="true"><i></i></span>
           <article class="phase">
             <span class="step">01</span>
             <div>
-              <h3>Offer &amp; market audit</h3>
+              <h3>Plan the offer</h3>
               <p class="when">Week 1</p>
             </div>
-            <p>We go through your ticket sizes, close rate, service radius, capacity and what your competitors are already running in your market. Output is the offer, the audience, and the number we're driving to.</p>
+            <p>Your ticket, your radius, your capacity. We pick the offer and the target.</p>
           </article>
           <article class="phase">
             <span class="step">02</span>
             <div>
-              <h3>Creative production</h3>
+              <h3>Film and build</h3>
               <p class="when">Week 1&ndash;2</p>
             </div>
-            <p>One shot list, one filming day on your job site &mdash; phone footage is fine. Our in-house editor cuts it into a first batch of ads while we write the copy, build the landing page and install tracking end to end.</p>
+            <p>One filming day on your site. We cut the ads and build the landing page.</p>
           </article>
           <article class="phase">
             <span class="step">03</span>
             <div>
-              <h3>Launch &amp; learn</h3>
+              <h3>Launch and test</h3>
               <p class="when">Week 2&ndash;4</p>
             </div>
-            <p>Campaigns go live and we test angles against each other on real spend. Follow-up automations turn on the same day. Expect the first booked estimates inside two weeks and volatile numbers until the account has enough data.</p>
+            <p>Campaigns go live. First booked estimates usually land inside two weeks.</p>
           </article>
           <article class="phase">
             <span class="step">04</span>
             <div>
-              <h3>Scale what closed</h3>
-              <p class="when">Month 2 onward</p>
+              <h3>Scale what closes</h3>
+              <p class="when">Month 2 on</p>
             </div>
-            <p>Now we optimize against closed jobs instead of leads, kill the angles that book but never close, expand the radius or the budget where the margin is, and refresh creative monthly so the account doesn't fatigue.</p>
+            <p>We optimise against closed jobs, not clicks, and refresh creative monthly.</p>
           </article>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== MATH ===================== -->
-  <section class="sec" id="math">
+  <!-- ===================== PRICING ===================== -->
+  <section class="sec" id="pricing">
     <div class="wrap sec-in">
       <div class="sec-mark">
-        <span class="num">SEC. 04</span>
-        <span class="nm">Job math</span>
+        <span class="num">03</span>
+        <span class="nm">Pricing</span>
         <span class="rule" aria-hidden="true"><i></i></span>
       </div>
       <div class="sec-body">
-        <h2>Run the numbers like you'd price a job</h2>
-        <p class="lead">
-          You already cost jobs by the line. Advertising works the same way. Drag your own
-          cost per lead, close rate and ticket into the sliders and watch the month rebuild
-          itself &mdash; every number here is one you can check against your own books.
-        </p>
+        <h2>Two fees and your ad spend</h2>
+        <div class="terms">
+          <div class="term">
+            <span class="k">Build</span>
+            <span class="v">$500 <small>one time</small></span>
+            <p>Offer, creative, landing page, tracking, campaign build.</p>
+          </div>
+          <div class="term">
+            <span class="k">Management</span>
+            <span class="v">$2,000 <small>/ month</small></span>
+            <p>Daily optimisation, new creative monthly, weekly reporting.</p>
+          </div>
+          <div class="term">
+            <span class="k">Ad spend</span>
+            <span class="v">$100 <small>a day, minimum</small></span>
+            <p>About $3,000 a month, paid straight to Meta on your card.</p>
+          </div>
+        </div>
+        <ul class="notes">
+          <li>90 days, then month to month.</li>
+          <li>One contractor per trade, per market.</li>
+          <li>Your ad account and creative stay yours.</li>
+          <li>Best fit: [$500k]+ a year, someone answering the phone, room for more estimates.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
+  <!-- ===================== NUMBERS ===================== -->
+  <section class="sec" id="numbers">
+    <div class="wrap sec-in">
+      <div class="sec-mark">
+        <span class="num">04</span>
+        <span class="nm">Your numbers</span>
+        <span class="rule" aria-hidden="true"><i></i></span>
+      </div>
+      <div class="sec-body">
+        <h2>Run your own numbers</h2>
+        <p class="lead">Drag the sliders. Every figure is one you can check against your books.</p>
         <div class="calc" id="calc">
           <form class="calc-inputs" id="calc-form" autocomplete="off">
             <div class="calc-grp">
@@ -1071,177 +968,17 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
             </figure>
 
             <p class="calc-note">
-              Move a slider and the sheet below rebuilds. Bring your real cost per lead,
-              booking rate, close rate and ticket to the call and we'll run this against
-              your books &mdash; if it doesn't clear, we'll tell you.
+              Bring your real cost per lead, booking rate, close rate and ticket to the
+              call and we'll run it against your books.
             </p>
           </div>
         </div>
 
-        <div class="sheet">
-          <table>
-            <caption>The same month, line by line</caption>
-            <thead>
-              <tr>
-                <th scope="col">Line item</th>
-                <th scope="col">Basis</th>
-                <th scope="col" style="text-align:right;">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Ad spend</th>
-                <td class="basis" id="b-spend">$100 a day, paid direct to Meta</td>
-                <td class="amt" id="t-spend" data-fmt="money">$3,000</td>
-              </tr>
-              <tr>
-                <th scope="row">Management</th>
-                <td class="basis">Contractor.Ads retainer</td>
-                <td class="amt" id="t-mgmt" data-fmt="money">$2,000</td>
-              </tr>
-              <tr class="sum">
-                <th scope="row">Marketing investment</th>
-                <td class="basis">Spend + management</td>
-                <td class="amt" id="t-invest" data-fmt="money">$5,000</td>
-              </tr>
-              <tr>
-                <th scope="row">Cost per lead</th>
-                <td class="basis">Varies by trade and market</td>
-                <td class="amt" id="t-cpl" data-fmt="money">$24</td>
-              </tr>
-              <tr>
-                <th scope="row">Leads</th>
-                <td class="basis" id="b-leads">3,000 &divide; 24</td>
-                <td class="amt" id="t-leads" data-fmt="int">125</td>
-              </tr>
-              <tr>
-                <th scope="row">Booked estimates</th>
-                <td class="basis" id="b-booked">40% of leads reached and scheduled</td>
-                <td class="amt" id="t-booked" data-fmt="int">50</td>
-              </tr>
-              <tr class="sum">
-                <th scope="row">Cost per booked estimate</th>
-                <td class="basis" id="b-cpbe">5,000 &divide; 50</td>
-                <td class="amt" id="t-cpbe" data-fmt="money">$100</td>
-              </tr>
-              <tr>
-                <th scope="row">Jobs closed</th>
-                <td class="basis" id="b-jobs">24% close rate at the kitchen table</td>
-                <td class="amt" id="t-jobs" data-fmt="int">12</td>
-              </tr>
-              <tr>
-                <th scope="row">Average ticket</th>
-                <td class="basis">Your number &mdash; use your real one</td>
-                <td class="amt" id="t-ticket" data-fmt="money">$9,400</td>
-              </tr>
-              <tr>
-                <th scope="row">Revenue booked</th>
-                <td class="basis" id="b-revenue">12 &times; 9,400</td>
-                <td class="amt" id="t-revenue" data-fmt="money">$112,800</td>
-              </tr>
-              <tr>
-                <th scope="row">Gross profit</th>
-                <td class="basis" id="b-profit">At a 35% gross margin</td>
-                <td class="amt" id="t-profit" data-fmt="money">$39,480</td>
-              </tr>
-              <tr class="total">
-                <th scope="row">Return on marketing investment</th>
-                <td class="basis" id="b-roi">39,480 &divide; 5,000</td>
-                <td class="amt" id="t-roi" data-fmt="mult">7.9&times;</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
         <p class="disclaim">
-          <strong>These are illustrative figures, not a promise.</strong> Cost per lead swings with
-          trade, season and market; close rate is yours, not ours. On the call we rebuild this
-          table with your real ticket, margin and close rate before you spend a dollar &mdash;
-          and if the math doesn't clear, we'll say so.
+          <strong>An illustration, not a promise.</strong> Cost per lead moves with trade,
+          season and market, and the close rate is yours. We rebuild this with your real
+          numbers on the call.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FIT ===================== -->
-  <section class="sec" id="fit">
-    <div class="wrap sec-in">
-      <div class="sec-mark">
-        <span class="num">SEC. 05</span>
-        <span class="nm">Qualification</span>
-        <span class="rule" aria-hidden="true"><i></i></span>
-      </div>
-      <div class="sec-body">
-        <h2>Who this works for, and who it doesn't</h2>
-        <p class="lead">
-          We take a limited number of accounts and we don't run two contractors in the same
-          trade and market against each other. That means turning work down, so here's the line.
-        </p>
-        <div class="fit">
-          <div class="fit-col fit-yes">
-            <h3>Good fit</h3>
-            <ul>
-              <li>Doing [$500k]+ a year and want the calendar full, not just busier</li>
-              <li>Someone answers the phone during business hours &mdash; or will</li>
-              <li>Crew capacity for 10&ndash;20 more estimates a month</li>
-              <li>Ad budget of at least $100 a day &mdash; about $3,000 a month &mdash; separate from our fee</li>
-              <li>Licensed, insured, and proud enough of the work to put it on camera</li>
-              <li>Willing to give it a full 90 days to compound</li>
-            </ul>
-          </div>
-          <div class="fit-col fit-no">
-            <h3>Not a fit</h3>
-            <ul>
-              <li>Brand new with no crew and no jobs to show</li>
-              <li>Need booked work this week &mdash; a system takes two to four weeks to bite</li>
-              <li>Competing on being the cheapest bid in town</li>
-              <li>Leads will sit unanswered until the weekend</li>
-              <li>Looking for $5 leads or a per-lead pricing deal</li>
-              <li>Want six channels at once from one agency</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== TERMS ===================== -->
-  <section class="sec" id="terms">
-    <div class="wrap sec-in">
-      <div class="sec-mark">
-        <span class="num">SEC. 06</span>
-        <span class="nm">Terms</span>
-        <span class="rule" aria-hidden="true"><i></i></span>
-      </div>
-      <div class="sec-body">
-        <h2>Priced like a trade, not a mystery</h2>
-        <p class="lead">
-          Two line items and your ad spend. No percentage of spend, no per-lead pricing,
-          no bill that grows just because your budget did.
-        </p>
-        <div class="terms">
-          <div class="term">
-            <span class="k">Build &amp; launch</span>
-            <span class="v">$500 <small>one time</small></span>
-            <p>Offer, creative production, landing page, tracking, CRM and follow-up automations, campaign build.</p>
-          </div>
-          <div class="term">
-            <span class="k">Management</span>
-            <span class="v">$2,000 <small>/ month</small></span>
-            <p>Daily optimization, fresh creative every month, follow-up tuning, and the Monday scorecard.</p>
-          </div>
-          <div class="term">
-            <span class="k">Ad spend</span>
-            <span class="v">$100 <small>a day, minimum</small></span>
-            <p>About $3,000 a month, billed by Meta on your own card. Your ad account, your data, your audiences &mdash; you keep all of it.</p>
-          </div>
-        </div>
-
-        <ul class="notes">
-          <li>Month to month after the first 90 days &mdash; cancel with 30 days' notice.</li>
-          <li>One contractor per trade, per market. Your competitor doesn't get the same playbook.</li>
-          <li>Everything is built in your accounts. If we part ways, the ad account, page, pixel and creative stay with you.</li>
-        </ul>
       </div>
     </div>
   </section>
@@ -1250,7 +987,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   <section class="sec" id="faq">
     <div class="wrap sec-in">
       <div class="sec-mark">
-        <span class="num">SEC. 07</span>
+        <span class="num">05</span>
         <span class="nm">Questions</span>
         <span class="rule" aria-hidden="true"><i></i></span>
       </div>
@@ -1258,36 +995,28 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         <h2>Straight answers</h2>
         <div class="faq">
           <details open>
-            <summary>How much do I need to spend on ads?</summary>
-            <p class="a">$100 a day &mdash; about $3,000 a month. That's a learning-speed number, not a greed number: below it Meta never gets enough conversions to optimize against, and you spend three months finding out what two weeks should have told you. It is also the point where the math works for you rather than just for us: at $100 a day a typical account books enough estimates to cover the retainer several times over. High-ticket trades like roofing and remodeling usually settle above it once they see the return.</p>
+            <summary>How much do I need to spend?</summary>
+            <p class="a">$100 a day, about $3,000 a month. Below that Meta never gets enough data to optimise.</p>
           </details>
           <details>
-            <summary>Are the leads exclusive to me?</summary>
-            <p class="a">Yes. They come from your own ad account and go straight into your CRM. Nothing is resold, and nobody else in your trade and market is running our campaigns against you.</p>
+            <summary>Are the leads exclusive?</summary>
+            <p class="a">Yes. They come from your own ad account, go straight to your CRM, and are never resold.</p>
           </details>
           <details>
-            <summary>How fast will I see booked estimates?</summary>
-            <p class="a">First leads usually land within days of launch, first booked estimates inside two weeks. The number stabilizes around week four once the account has data, and month three is where it typically pays best. If you need work on the calendar this week, ads are the wrong tool &mdash; call your past customers.</p>
-          </details>
-          <details>
-            <summary>Do I need a website first?</summary>
-            <p class="a">No. We build a dedicated landing page for the campaign, which converts better than a homepage anyway. If you have a site, we'll use it where it helps and route ad traffic to the page built for it.</p>
+            <summary>How fast will I see estimates?</summary>
+            <p class="a">First leads within days, first booked estimates inside two weeks. Month three usually pays best.</p>
           </details>
           <details>
             <summary>Who makes the ads?</summary>
-            <p class="a">We do, in house. Our own editor cuts every ad &mdash; not a freelancer, not a template, and not you. All we need from you is raw footage against a shot list we send: crews working, before and afters, you talking to the camera for sixty seconds. Phone video is fine and usually outperforms polished production.</p>
+            <p class="a">Our in-house editor. You send phone footage against a shot list we give you.</p>
           </details>
           <details>
-            <summary>Am I locked into a contract?</summary>
-            <p class="a">A 90-day initial term, because ending sooner means paying for the learning period and leaving before the payoff. After that it's month to month with 30 days' notice.</p>
+            <summary>Am I locked in?</summary>
+            <p class="a">90 days to start, because ads need that long to prove out. After that, month to month.</p>
           </details>
           <details>
-            <summary>What if I already tried Facebook ads and it flopped?</summary>
-            <p class="a">Common, and usually one of four things: boosted posts instead of campaigns, a generic offer, no tracking so nothing could be optimized, or leads nobody called back. We'll pull up your old account on the call and tell you which one it was.</p>
-          </details>
-          <details>
-            <summary>What do you need from me each month?</summary>
-            <p class="a">Roughly an hour: a short check-in, whatever footage you gathered, and telling us which estimates closed. That last part is what lets us optimize toward revenue instead of leads.</p>
+            <summary>Do I need a website?</summary>
+            <p class="a">No. We build the landing page the ads point to.</p>
           </details>
         </div>
       </div>
@@ -1299,22 +1028,17 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
     <div class="wrap close-in">
       <div>
         <h2>Book a 20-minute call</h2>
-        <p>
-          No pitch deck. We look at your ticket, your close rate and your capacity, rebuild
-          the job math with your numbers, and tell you plainly whether paid ads clear the bar
-          for your shop right now.
-        </p>
+        <p>We run your numbers and tell you straight whether ads make sense for your shop.</p>
       </div>
       <div class="agenda">
         <ul>
-          <li><span>00:00</span> Your trade, service radius, ticket size and how you get work today</li>
-          <li><span>00:07</span> The job math rebuilt live with your real numbers</li>
-          <li><span>00:14</span> What the first 30 days would look like &mdash; offer, creative, budget</li>
-          <li><span>00:19</span> A straight yes or no on fit, either direction</li>
+          <li><span>01</span> Your trade, radius, ticket and how you get work now</li>
+          <li><span>02</span> The math, rebuilt with your real numbers</li>
+          <li><span>03</span> A yes or no on fit, either way</li>
         </ul>
         <div class="agenda-cta">
           <a class="btn btn-lg" href="[BOOKING LINK]">Pick a time</a>
-          <p class="alt">Rather talk now? <a href="tel:+12676678665">267-667-8665</a> &middot; <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a></p>
+          <p class="alt">Or call <a href="tel:+12676678665">267-667-8665</a></p>
         </div>
       </div>
     </div>
@@ -1331,9 +1055,9 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       <div class="foot-col">
         <span class="lbl">Company</span>
         <a href="about.html">About</a>
-        <a href="#work">What we run</a>
-        <a href="#build">The build</a>
-        <a href="#terms">Terms</a>
+        <a href="#work">What we do</a>
+        <a href="#build">How it works</a>
+        <a href="#pricing">Pricing</a>
       </div>
       <div class="foot-col">
         <span class="lbl">Contact</span>
@@ -1439,8 +1163,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   if (!reduce && "IntersectionObserver" in window) {
     var groups = [
       [".sec-body > h2", 0], [".sec-body > .lead", 0], [".disclaim", 0],
-      [".prob", 70], [".deliv li", 60], [".phase", 70], [".calc", 0],
-      [".sheet", 0], [".fit-col", 80], [".term", 80],
+      [".deliv li", 60], [".phase", 70], [".calc", 0], [".term", 80],
       [".notes", 0], [".faq details", 45],
       [".close-in > div", 90], [".agenda li", 55]
     ];
@@ -1473,7 +1196,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   var phaseFill = document.querySelector(".phase-rail i");
   var phaseEls = Array.prototype.slice.call(document.querySelectorAll(".phase"));
   var secs = Array.prototype.slice.call(document.querySelectorAll(".sec"));
-  var spy = ["work", "build", "math", "terms", "faq"].map(function (id) {
+  var spy = ["work", "build", "pricing", "faq"].map(function (id) {
     return { el: $(id), link: document.querySelector('.nav a[href="#' + id + '"]') };
   }).filter(function (o) { return o.el && o.link; });
   var ticking = false, lastActive = null;
@@ -1549,8 +1272,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       var v = {};
       keys.forEach(function (k) { v[k] = parseFloat($("i-" + k).value); });
 
-      var perDay = v.spend / 30;
-      $("o-spend").value  = fmt.money(v.spend) + " · " + fmt.money(perDay) + "/day";
+      $("o-spend").value  = fmt.money(v.spend) + " · " + fmt.money(v.spend / 30) + "/day";
       $("o-mgmt").value   = fmt.money(v.mgmt);
       $("o-cpl").value    = fmt.money(v.cpl);
       $("o-book").value   = pct(v.book);
@@ -1563,8 +1285,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       var jobs    = Math.round(booked * v.close / 100);
       var invest  = v.spend + v.mgmt;
       var cpbe    = booked > 0 ? invest / booked : 0;
-      var revenue = jobs * v.ticket;
-      var profit  = revenue * v.margin / 100;
+      var profit  = jobs * v.ticket * v.margin / 100;
       var roi     = invest > 0 ? profit / invest : 0;
 
       setVal($("k-cpbe"), cpbe);   setVal($("k-booked"), booked);
@@ -1577,21 +1298,6 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       $("r-booked").textContent = v.book + "% of leads";
       $("r-jobs").textContent = v.close + "% of estimates";
 
-      setVal($("t-spend"), v.spend, flash);   setVal($("t-mgmt"), v.mgmt, flash);
-      setVal($("t-invest"), invest, flash);   setVal($("t-cpl"), v.cpl, flash);
-      setVal($("t-leads"), leads, flash);     setVal($("t-booked"), booked, flash);
-      setVal($("t-cpbe"), cpbe, flash);       setVal($("t-jobs"), jobs, flash);
-      setVal($("t-ticket"), v.ticket, flash); setVal($("t-revenue"), revenue, flash);
-      setVal($("t-profit"), profit, flash);   setVal($("t-roi"), roi, flash);
-
-      $("b-spend").textContent   = fmt.money(perDay) + " a day, paid direct to Meta";
-      $("b-leads").textContent   = fmt.int(v.spend) + " ÷ " + fmt.int(v.cpl);
-      $("b-booked").textContent  = v.book + "% of leads reached and scheduled";
-      $("b-cpbe").textContent    = fmt.int(invest) + " ÷ " + fmt.int(booked);
-      $("b-jobs").textContent    = v.close + "% close rate at the kitchen table";
-      $("b-revenue").textContent = fmt.int(jobs) + " × " + fmt.int(v.ticket);
-      $("b-profit").textContent  = "At a " + v.margin + "% gross margin";
-      $("b-roi").textContent     = fmt.int(profit) + " ÷ " + fmt.int(invest);
     }
 
     form.addEventListener("input", function () { compute(true); });

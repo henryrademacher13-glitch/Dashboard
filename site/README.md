@@ -9,8 +9,8 @@ Privacy — so you can click between all three from any of them.
 
 | File | What it is |
 | --- | --- |
-| `index.html` | The landing page — hero, scope, build sequence, live job-math calculator, terms, FAQ, booking CTA |
-| `about.html` | Who we are, why contractors, Philadelphia, how we work, what we won't do |
+| `index.html` | The landing page — hero, what we do, how it works, pricing, live job-math calculator, FAQ, booking CTA |
+| `about.html` | Who we are, why one channel, how we work |
 | `privacy.html` | Privacy policy, 15 numbered clauses |
 
 **The `:root` token block is duplicated in all three files.** That's the cost of keeping
@@ -67,8 +67,8 @@ minimum, © 2026.
 
 ### One thing worth doing by hand
 
-- **The job math calculator (Sec. 04).** Visitors drag their own numbers and the sheet
-  rebuilds live. What you set are the *starting* positions — the `value=""` on each
+- **The job math calculator (section 04).** Visitors drag their own numbers and the KPI
+  tiles and funnel rebuild live. What you set are the *starting* positions — the `value=""` on each
   `<input type="range">` in `#calc-form`. Defaults are ad spend $3,000 — the slider floors
   there, because $3,000/mo is the $100/day minimum — management $2,000 (your retainer),
   CPL $24, booking 40%, close 24%, ticket $9,400, margin 35%. They resolve cleanly to
@@ -98,7 +98,7 @@ All vanilla JS in one `<script>` at the bottom of the file — no libraries, not
 | Nav scroll-spy | Active section's nav link gets the terracotta underline |
 | Trades ticker | CSS marquee, pauses on hover and focus |
 | Counting figures | Hero scorecard and calculator KPIs tween up the first time they're reached |
-| Live calculator | Seven sliders drive the KPIs, funnel bars and every line of the estimate sheet; changed amounts flash terracotta |
+| Live calculator | Seven sliders drive the KPI tiles and the funnel bars |
 | Mobile dock | Booking bar slides up after the hero, hides again over the real CTA |
 | Nav menu | Below 1010px the nav collapses into a hamburger panel — on all three pages. Closes on link click, Escape, an outside click, or a resize back to desktop |
 
