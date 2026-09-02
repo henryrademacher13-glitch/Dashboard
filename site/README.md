@@ -58,42 +58,26 @@ minimum, © 2026, and Calendly booking.
 
 ## Booking
 
-Every "Book a call" button points at
-`https://calendly.com/contractor-adsagency/30min?primary_color=43ff00` and opens Calendly
-in a popup over the page. Two pieces make that work, on all three pages:
+The Calendly calendar is embedded directly in the booking section at the bottom of
+`index.html` (`#book`), using Calendly's inline widget:
 
-- `widget.css` in the head and `widget.js` before `</body>`, both from `assets.calendly.com`
-- a delegated click handler that catches any link to `calendly.com` and calls
-  `Calendly.initPopupWidget()`
+```html
+<div class="calendly-inline-widget"
+     data-url="https://calendly.com/contractor-adsagency/30min?primary_color=c5563b"
+     style="min-width:320px;height:700px;"></div>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+```
 
-If `widget.js` is blocked or slow, the handler does nothing and the link opens Calendly in
-a new tab instead — booking still works. To change the event or its colour, edit the five
-`href`s in `index.html` and the ones in `about.html` and `privacy.html`; nothing else
-references the URL.
+Every "Book a call" button on the site scrolls to it — `href="#book"` on the landing page,
+`href="index.html#book"` from About and Privacy. The script tag lives only on
+`index.html`, since that is the only page with an embed.
 
-**`primary_color=43ff00` is neon green**, which is what your snippet specified. The site's
-accent is `#C5563B` — change the parameter to `primary_color=C5563B` in those hrefs if you
-want the scheduler to match the page.
+Under the calendar is an "Open it in a new tab" link to the same Calendly URL. That is the
+fallback: if `widget.js` is blocked or fails, the embed is an empty box, and the link is
+the way through. Don't delete it.
 
-### One thing worth doing by hand
-
-- **The job math calculator (section 04).** Visitors drag their own numbers and the KPI
-  tiles and funnel rebuild live. What you set are the *starting* positions — the `value=""` on each
-  `<input type="range">` in `#calc-form`. Defaults are ad spend $3,000 — the slider floors
-  there, because $3,000/mo is the $100/day minimum — management $2,000 (your retainer),
-  CPL $24, booking 40%, close 24%, ticket $9,400, margin 35%. They resolve cleanly to
-  $100 per booked estimate and 7.9× return. **If you change any of them, sanity-check the
-  hero scorecard** (`.card-score`, which carries matching `data-target` values) so the two
-  still agree — right now both say $100 and 7.9×.
-
-## Before you send traffic
-
-- [ ] Meta Pixel / Conversions API installed — paste the snippet before `</head>`
-- [ ] Booking link tested on a phone
-- [ ] `tel:` and `mailto:` links tested on a phone
-- [ ] Privacy policy page linked in the footer (required for Meta lead forms)
-- [ ] Open Graph image and tags added if you'll be sharing the URL in ads
-- [ ] Real title/description checked in a link preview
+To change the event or its colour, edit `data-url` on the widget div plus the fallback
+link beside it — two places, both in `index.html`.
 
 ## What moves
 
