@@ -9,11 +9,11 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 
 | # | Need | Why it blocks |
 | --- | --- | --- |
-| 1 | **Booking link** (Calendly / GoHighLevel / Acuity URL) | Every CTA on the page points at `[BOOKING LINK]` — 5 buttons. Without it the site has no conversion path at all. |
-| 2 | **Phone + email** | Second and third contact paths, and the click-to-call in the mobile dock. |
-| 3 | **Service area** | "Serving `[SERVICE AREA]`" — one metro, a state, a radius, or "Nationwide, remote". This also changes how the offer reads. |
+| 1 | **Booking link** (Calendly / GoHighLevel / Acuity URL) | Every CTA on the page points at `[BOOKING LINK]` — 5 buttons. Without it the site has no conversion path at all. **This is the last thing blocking launch.** |
+| ~~2~~ | ~~Phone + email~~ — **set**: 267-667-8665, Contractor.adsagency@gmail.com | Live in the CTA line and the footer. |
+| ~~3~~ | ~~Service area~~ — **removed** from the page | No geography claimed, so nothing limits who enquires. |
 | ~~4~~ | ~~Pricing~~ — **set**: $500 build, $2,000/mo retainer, $100/day ad spend minimum | Live on the Terms section. If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
-| 6 | **Legal business name + year** | Footer line. "Contractor.Ads LLC"? Sole prop? |
+| 6 | **Legal business name** | Footer currently reads "© 2026 Contractor.Ads". If you're an LLC or trade under a different registered name, that line should say so. |
 
 ---
 
@@ -115,10 +115,7 @@ Fill this in and send it back — it's everything in section 1, in one lump:
 
 ```
 Booking link:
-Phone:
-Email:
-Service area:
-Legal business name:
+Legal business name (if not just "Contractor.Ads"):
 Trades you actually want (or "all"):
 Slots open this month:
 Anything in section 2 that's wrong:

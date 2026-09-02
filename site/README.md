@@ -20,31 +20,26 @@ Point your domain at it and you're live.
 
 ## Fill in your details
 
-Every editable value is wrapped in `[SQUARE BRACKETS]`. Open `index.html`, search for
-`[`, and replace. The full list is also in an HTML comment at the top of the file.
+Contact details, pricing and the year are all set. Three editable values are left, still
+wrapped in `[SQUARE BRACKETS]` — open `index.html`, search for `[`, and replace.
 
 | Placeholder | What to put there | Times used |
 | --- | --- | --- |
 | `[BOOKING LINK]` | Your Calendly / GoHighLevel calendar URL | 5 |
-| `[PHONE]` | Display phone, e.g. `(555) 123-4567` | 2 |
-| `[PHONE-DIGITS]` | Digits only for `tel:` links, e.g. `5551234567` | 2 |
-| `[EMAIL]` | Contact email | 4 |
-| `[SERVICE AREA]` | e.g. `Denver Metro` or `Nationwide` | 2 |
-| `[$500k]`, `[2]` | Revenue floor, open slots this month | 2 |
-| `[YEAR]` | Footer copyright year | 1 |
+| `[2]` | Open contractor slots this month (hero note and mobile dock) | 2 |
+| `[$500k]` | Revenue floor in the qualification list | 1 |
 
-One-liner for the obvious ones:
+The booking link is the only one that blocks launch:
 
 ```bash
-sed -i '' \
-  -e 's|\[BOOKING LINK\]|https://calendly.com/your-handle/20min|g' \
-  -e 's|\[PHONE-DIGITS\]|5551234567|g' \
-  -e 's|\[PHONE\]|(555) 123-4567|g' \
-  -e 's|\[EMAIL\]|you@cads.com|g' \
-  site/index.html
+sed -i '' -e 's|\[BOOKING LINK\]|https://calendly.com/your-handle/20min|g' site/index.html
 ```
 
 (Drop the `''` after `-i` on Linux.)
+
+Already live in the page: phone `267-667-8665` (dialing `+12676678665`),
+`Contractor.adsagency@gmail.com`, $500 build, $2,000/mo management, $100/day ad spend
+minimum, © 2026.
 
 ### One thing worth doing by hand
 
