@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About Contractor.Ads</title>
+<meta name="description" content="Contractor.Ads is a small Philadelphia agency running Facebook and Instagram ad systems for contractors across the country." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%2316181C'/%3E%3Crect%20x='9'%20y='9'%20width='14'%20height='14'%20fill='%23C5563B'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+
+<!--
+  ============================================================================
+  CONTRACTOR.ADS — ABOUT PAGE
+  The :root token block below is duplicated in index.html and the other
+  subpage. Change a brand colour in one, change it in all three.
+  Remaining placeholder on this page: [BOOKING LINK]
+  ============================================================================
+-->
+
+<style>
+/* ==========================================================================
+   1. Tokens — identical to index.html
+   ========================================================================== */
+:root{
+  --ink:        #16181C;
+  --ink-2:      #1B1E23;
+  --ink-3:      #22262C;
+  --line:       #2C313A;
+  --line-2:     #3B424D;
+  --white:      #FFFFFF;
+  --text:       #E4E7EA;
+  --muted:      #98A0AB;
+  --rust:       #C5563B;
+  --rust-lift:  #DD6C4E;
+  --rust-deep:  #7C3222;
+
+  --w: 1200px;
+  --pad: clamp(20px, 4vw, 40px);
+  --gap: clamp(28px, 4vw, 56px);
+
+  --f-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:88px; -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+h1,h2,h3{
+  font-family:var(--f-display);
+  font-weight:800;
+  letter-spacing:-0.025em;
+  line-height:1.06;
+  text-wrap:balance;
+  margin:0;
+}
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+strong{ color:var(--white); font-weight:600; }
+:focus-visible{ outline:2px solid var(--rust-lift); outline-offset:3px; }
+.wrap{ width:100%; max-width:var(--w); margin-inline:auto; padding-inline:var(--pad); }
+.lbl{
+  font-family:var(--f-mono);
+  font-size:0.7rem;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ==========================================================================
+   3. The mark
+   ========================================================================== */
+.mark{
+  font-family:var(--f-display);
+  font-weight:800;
+  letter-spacing:-0.035em;
+  color:var(--white);
+  text-decoration:none;
+  display:inline-flex;
+  align-items:baseline;
+  line-height:1;
+  white-space:nowrap;
+}
+.mark-dot{
+  width:0.29em; height:0.29em;
+  background:var(--rust);
+  display:inline-block;
+  margin:0 0.24em 0 0.04em;
+  flex:none;
+}
+
+/* ==========================================================================
+   4. Header
+   ========================================================================== */
+.top{
+  position:sticky; top:0; z-index:50;
+  background:rgba(22,24,28,0.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.top-in{ display:flex; align-items:center; gap:28px; height:68px; }
+.top .mark{ font-size:1.15rem; }
+.nav{ display:none; gap:26px; margin-left:auto; }
+.nav a{
+  font-family:var(--f-mono);
+  font-size:0.74rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  padding-block:6px;
+  border-bottom:1px solid transparent;
+  transition:color .18s ease, border-color .18s ease;
+}
+.nav a:hover{ color:var(--white); border-bottom-color:var(--rust); }
+.nav a.is-active{ color:var(--white); border-bottom-color:var(--rust); }
+.top .btn{ margin-left:auto; }
+@media (min-width:1010px){
+  .nav{ display:flex; }
+  .top .btn{ margin-left:0; }
+}
+
+/* ==========================================================================
+   5. Buttons
+   ========================================================================== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:0.95rem;
+  letter-spacing:-0.01em;
+  padding:13px 22px;
+  background:var(--rust);
+  color:var(--white);
+  text-decoration:none;
+  border:1px solid var(--rust);
+  border-radius:2px;
+  transition:background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.btn:hover{ background:var(--rust-lift); border-color:var(--rust-lift); transform:translateY(-1px); }
+.btn-sm{ padding:9px 16px; font-size:0.85rem; }
+.btn-lg{ padding:17px 30px; font-size:1.05rem; }
+.btn-ghost{ background:transparent; color:var(--text); border-color:var(--line-2); }
+.btn-ghost:hover{ background:var(--ink-3); border-color:var(--muted); color:var(--white); }
+
+/* ==========================================================================
+   6. Page head
+   ========================================================================== */
+.page-head{ border-bottom:1px solid var(--line); }
+.page-head-in{ padding-block:clamp(48px, 7vw, 84px); display:flex; flex-direction:column; gap:22px; }
+.eyebrow{ display:flex; align-items:center; gap:12px; }
+.eyebrow .tick{ width:26px; height:1px; background:var(--rust); flex:none; }
+.page-head h1{ font-size:clamp(2.2rem, 5vw, 3.6rem); max-width:20ch; }
+.page-head .stand{ font-size:clamp(1.02rem, 1.5vw, 1.18rem); color:var(--muted); max-width:62ch; }
+
+/* ==========================================================================
+   7. Document body — annotation margin, same device as the main page
+   ========================================================================== */
+.doc{ border-bottom:1px solid var(--line); }
+.doc-in{
+  display:grid; gap:var(--gap);
+  grid-template-columns:minmax(0,1fr);
+  padding-block:clamp(48px, 6vw, 80px);
+}
+.doc-in > *{ min-width:0; }
+@media (min-width:1000px){ .doc-in{ grid-template-columns:190px minmax(0,1fr); } }
+.doc-mark{ display:flex; flex-direction:column; gap:8px; }
+@media (min-width:1000px){ .doc-mark{ position:sticky; top:100px; align-self:start; } }
+.doc-mark .num{ font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.16em; color:var(--rust); }
+.doc-mark .nm{ font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); }
+.doc-mark .rule{ height:1px; background:var(--line-2); margin-top:4px; }
+.doc-body{ display:flex; flex-direction:column; gap:26px; }
+.doc-body h2{ font-size:clamp(1.6rem, 2.8vw, 2.2rem); max-width:22ch; }
+.doc-body h3{ font-size:1.1rem; font-weight:700; color:var(--white); }
+.doc-body p{ color:var(--muted); max-width:68ch; }
+.doc-body p.lead{ font-size:1.06rem; }
+.doc-body a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line-2); }
+.doc-body a:hover{ color:var(--rust-lift); border-color:var(--rust); }
+.bullets{ display:flex; flex-direction:column; gap:12px; }
+.bullets li{ display:flex; gap:12px; color:var(--muted); max-width:66ch; }
+.bullets li::before{ content:"//"; font-family:var(--f-mono); font-size:0.82rem; color:var(--line-2); flex:none; line-height:1.7; }
+
+/* ==========================================================================
+   8. Footer
+   ========================================================================== */
+.foot-in{ display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-start; padding-block:44px; }
+.foot .mark{ font-size:1.4rem; margin-bottom:12px; }
+.foot p{ font-size:0.9rem; color:var(--muted); max-width:34ch; }
+.foot-cols{ display:flex; flex-wrap:wrap; gap:44px; }
+.foot-col{ display:flex; flex-direction:column; gap:10px; }
+.foot-col a{ font-size:0.92rem; color:var(--muted); text-decoration:none; }
+.foot-col a:hover{ color:var(--white); }
+.foot-base{ border-top:1px solid var(--line); }
+.foot-base-in{ display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between; padding-block:18px; }
+.foot-base p, .foot-base a{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); }
+.foot-base a{ text-decoration:none; }
+.foot-base a:hover{ color:var(--white); }
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ==========================================================================
+   9. Closing band
+   ========================================================================== */
+.close{ background:var(--ink-2); border-bottom:1px solid var(--line); }
+.close-in{
+  display:grid; gap:var(--gap);
+  grid-template-columns:minmax(0,1fr);
+  padding-block:clamp(52px, 6vw, 84px);
+}
+.close-in > *{ min-width:0; }
+@media (min-width:900px){ .close-in{ grid-template-columns:1.2fr auto; align-items:center; } }
+.close h2{ font-size:clamp(1.8rem, 3.4vw, 2.6rem); margin-bottom:14px; }
+.close p{ color:var(--muted); max-width:52ch; }
+.close-act{ display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+.close-act .alt{ font-family:var(--f-mono); font-size:0.78rem; color:var(--muted); }
+.close-act .alt a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line-2); }
+.close-act .alt a:hover{ color:var(--rust-lift); border-color:var(--rust); }
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="index.html" aria-label="Contractor.Ads &mdash; home"><span aria-hidden="true">Contractor</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#work">What we run</a>
+      <a href="index.html#build">The build</a>
+      <a href="index.html#math">Job math</a>
+      <a href="index.html#terms">Terms</a>
+      <a href="about.html" class="is-active">About</a>
+    </nav>
+    <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap page-head-in">
+      <div class="eyebrow">
+        <span class="tick" aria-hidden="true"></span>
+        <span class="lbl">About</span>
+      </div>
+      <h1>A small agency in Philadelphia, running ads for contractors everywhere.</h1>
+      <p class="stand">
+        We build and run Facebook and Instagram ad systems for contractors &mdash; roofers,
+        HVAC companies, remodelers and the trades around them. We take on a short list of
+        clients at a time, and we run one channel properly instead of six badly.
+      </p>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div class="wrap doc-in">
+      <div class="doc-mark">
+        <span class="num">SEC. 01</span>
+        <span class="nm">Who we are</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="doc-body">
+        <h2>Small on purpose</h2>
+        <p class="lead">
+          Contractor.Ads is a small agency. That is not an apology &mdash; it is the whole
+          operating model. A media buyer who is responsible for forty accounts is checking
+          yours on a Tuesday if something breaks. We keep the roster short enough that every
+          account gets looked at daily, by the same people who built it.
+        </p>
+        <p>
+          Strategy, copy, media buying and creative all sit under one roof, including our own
+          in-house editor. Nothing gets handed to a freelancer who has never sold a roof, and
+          nothing gets left on your desk to finish at nine at night.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div class="wrap doc-in">
+      <div class="doc-mark">
+        <span class="num">SEC. 02</span>
+        <span class="nm">Why contractors</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="doc-body">
+        <h2>Contracting is close to the ideal case for paid social</h2>
+        <p>
+          One job usually pays for a month of advertising several times over, so the math has
+          room to work. The buyer is a homeowner making the decision at their kitchen table,
+          not a procurement committee. The work is visual &mdash; a finished roof or a
+          gutted-to-tiled bathroom sells itself in six seconds of phone video. And the need is
+          often urgent, which means the job goes to whoever gets to the phone first rather
+          than whoever ranked first.
+        </p>
+        <p>
+          Most agencies treat contractors as one vertical on a list of twenty, and it shows in
+          the ads. We only do this, so we already know what a service radius is, why your
+          average ticket changes the whole plan, and why a lead at 6pm on a Friday is worth
+          less than the same lead at 9am.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div class="wrap doc-in">
+      <div class="doc-mark">
+        <span class="num">SEC. 03</span>
+        <span class="nm">Philadelphia</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="doc-body">
+        <h2>Based in Philadelphia. Working across the country.</h2>
+        <p>
+          Philadelphia is a contractor's city. Rows of flat roofs that fail on schedule,
+          heating systems older than the people who own them, and block after block of houses
+          that need something done to them. It is a good place to learn this trade, and it is
+          where we are.
+        </p>
+        <p>
+          But a Meta campaign does not care where the person running it sits. It cares about
+          the radius around your yard, the zip codes with the housing stock that matches your
+          ticket, and the homeowners inside them. We run campaigns for contractors well
+          outside our own market, and the only geography that matters on the account is yours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div class="wrap doc-in">
+      <div class="doc-mark">
+        <span class="num">SEC. 04</span>
+        <span class="nm">Why one channel</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="doc-body">
+        <h2>Meta only, and that is the point</h2>
+        <p>
+          Google captures demand that already exists &mdash; someone typing "roof leak repair
+          near me" at eleven at night. That demand is real, and it is also finite and
+          expensive. Meta does something different: it puts your work in front of the
+          homeowner who has been putting the roof off for two years and has not typed anything
+          into anything.
+        </p>
+        <p>
+          We could sell you a bundle with SEO and Google and a blog nobody reads. Six services
+          getting ten per cent of the attention each is how contractors end up paying a
+          retainer for a monthly report. One channel, run daily, is a better trade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div class="wrap doc-in">
+      <div class="doc-mark">
+        <span class="num">SEC. 05</span>
+        <span class="nm">How we work</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="doc-body">
+        <h2>The way the work actually runs</h2>
+        <ul class="bullets">
+          <li>A short client roster, so every account is managed daily rather than reviewed monthly.</li>
+          <li>One contractor per trade, per market &mdash; we will turn down your competitor.</li>
+          <li>Creative produced in house, refreshed every month before fatigue kills the account.</li>
+          <li>Reporting on cost per booked estimate and jobs closed. Impressions are a diagnostic, not a result.</li>
+          <li>A 90-day initial term, then month to month with 30 days' notice.</li>
+          <li>Everything built in your accounts. If we part ways, the ad account, page, pixel and creative stay with you.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div class="wrap doc-in">
+      <div class="doc-mark">
+        <span class="num">SEC. 06</span>
+        <span class="nm">What we won't do</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="doc-body">
+        <h2>The short list of things we say no to</h2>
+        <ul class="bullets">
+          <li>Sell you shared leads, or resell yours to anyone else.</li>
+          <li>Boost a post and describe it as an advertising campaign.</li>
+          <li>Put reach and impressions at the top of a report to pad it out.</li>
+          <li>Promise a number we cannot back. We would rather have no guarantee on this site than one we would have to argue about later.</li>
+          <li>Run two competing contractors in the same trade and market.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap close-in">
+      <div>
+        <h2>See whether the math works for your shop</h2>
+        <p>
+          Twenty minutes. We go through your ticket, your close rate and your capacity, rebuild
+          the job math with your real numbers, and give you a straight answer either way.
+        </p>
+      </div>
+      <div class="close-act">
+        <a class="btn btn-lg" href="[BOOKING LINK]">Book a 20-minute call</a>
+        <p class="alt">Or call <a href="tel:+12676678665">267-667-8665</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <span class="mark" role="img" aria-label="Contractor.Ads"><span aria-hidden="true">Contractor</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></span>
+      <p>Meta advertising for contractors. One channel, run properly.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <span class="lbl">Company</span>
+        <a href="about.html">About</a>
+        <a href="index.html#work">What we run</a>
+        <a href="index.html#build">The build</a>
+        <a href="index.html#terms">Terms</a>
+      </div>
+      <div class="foot-col">
+        <span class="lbl">Contact</span>
+        <a href="tel:+12676678665">267-667-8665</a>
+        <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
+        <a href="[BOOKING LINK]">Book a call</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-base">
+    <div class="wrap foot-base-in">
+      <p>&copy; 2026 Contractor.Ads. All rights reserved.</p>
+      <a href="privacy.html">Privacy policy</a>
+      <p>Not affiliated with or endorsed by Meta Platforms, Inc.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

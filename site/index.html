@@ -139,7 +139,7 @@ strong{ color:var(--white); font-weight:600; }
 }
 .nav a:hover{ color:var(--white); border-bottom-color:var(--rust); }
 .top .btn{ margin-left:auto; }
-@media (min-width:900px){
+@media (min-width:1010px){
   .nav{ display:flex; }
   .top .btn{ margin-left:0; }
 }
@@ -485,7 +485,9 @@ strong{ color:var(--white); font-weight:600; }
 .foot-col a:hover{ color:var(--white); }
 .foot-base{ border-top:1px solid var(--line); }
 .foot-base-in{ display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between; padding-block:18px; }
-.foot-base p{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); }
+.foot-base p, .foot-base a{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); }
+.foot-base a{ text-decoration:none; }
+.foot-base a:hover{ color:var(--white); }
 
 /* ==========================================================================
    18. Scroll furniture — progress rail, header state, section fill
@@ -697,6 +699,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       <a href="#math">Job math</a>
       <a href="#terms">Terms</a>
       <a href="#faq">FAQ</a>
+      <a href="about.html">About</a>
     </nav>
     <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
   </div>
@@ -1269,6 +1272,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
     <div class="foot-cols">
       <div class="foot-col">
         <span class="lbl">Company</span>
+        <a href="about.html">About</a>
         <a href="#work">What we run</a>
         <a href="#build">The build</a>
         <a href="#terms">Terms</a>
@@ -1284,6 +1288,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   <div class="foot-base">
     <div class="wrap foot-base-in">
       <p>&copy; 2026 Contractor.Ads. All rights reserved.</p>
+      <a href="privacy.html">Privacy policy</a>
       <p>Not affiliated with or endorsed by Meta Platforms, Inc.</p>
     </div>
   </div>

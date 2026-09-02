@@ -100,7 +100,7 @@ to something you can defend in a sales call:
 ## 6. Setup before you send traffic
 
 - [ ] **Meta Pixel + Conversions API** — paste the snippet before `</head>`; without it you're optimizing blind
-- [ ] **Privacy policy page** — Meta requires one for lead forms, and the footer should link it
+- [x] ~~Privacy policy page~~ — written, at `privacy.html`. **Read every clause before publishing** — see the note below
 - [ ] **Terms / earnings disclaimer** — you're showing an ROI calculator; the disclaimer under it stays
 - [ ] **Domain + hosting** — see `README.md` for the one-step deploys
 - [ ] **Booking link tested on a phone** — more than half of contractor traffic is mobile
@@ -108,6 +108,24 @@ to something you can defend in a sales call:
 - [ ] **A real email on a real domain** — `you@cads.com`, not a Gmail address, on a page selling marketing
 
 ---
+
+## 7. About the privacy policy
+
+`privacy.html` is a working policy, not a placeholder, and it is written to describe how a
+small agency site like this one normally operates. Two things are on you before it goes
+live:
+
+1. **Every clause has to be true of what you actually do.** The ones most likely to drift:
+   clause 05 assumes you install the Meta Pixel; clause 07 states you do not sell personal
+   information; clause 09 promises you will action deletion requests by email; clause 08
+   describes retention. If any of those aren't right, tell me and I'll change them.
+2. **It is not legal advice.** It covers the ground a US agency site normally needs —
+   CCPA/CPRA, a GDPR clause for overseas visitors, cookies, the pixel, children, retention
+   — but I am not your lawyer. If you take on clients in regulated trades or start
+   collecting more than enquiry details, have someone qualified read it.
+
+The date at the top of the page says September 2, 2026. Update it whenever you change the
+policy.
 
 ## 7. Paste-back block
 

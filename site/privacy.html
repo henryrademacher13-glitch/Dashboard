@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — Contractor.Ads</title>
+<meta name="description" content="How Contractor.Ads collects, uses, shares and protects information from visitors and enquiries." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%2316181C'/%3E%3Crect%20x='9'%20y='9'%20width='14'%20height='14'%20fill='%23C5563B'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+
+<!--
+  ============================================================================
+  CONTRACTOR.ADS — PRIVACY POLICY
+  The :root token block below is duplicated in index.html and the other
+  subpage. Change a brand colour in one, change it in all three.
+  Remaining placeholder on this page: [BOOKING LINK]
+  ============================================================================
+-->
+
+<style>
+/* ==========================================================================
+   1. Tokens — identical to index.html
+   ========================================================================== */
+:root{
+  --ink:        #16181C;
+  --ink-2:      #1B1E23;
+  --ink-3:      #22262C;
+  --line:       #2C313A;
+  --line-2:     #3B424D;
+  --white:      #FFFFFF;
+  --text:       #E4E7EA;
+  --muted:      #98A0AB;
+  --rust:       #C5563B;
+  --rust-lift:  #DD6C4E;
+  --rust-deep:  #7C3222;
+
+  --w: 1200px;
+  --pad: clamp(20px, 4vw, 40px);
+  --gap: clamp(28px, 4vw, 56px);
+
+  --f-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+/* ==========================================================================
+   2. Base
+   ========================================================================== */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:88px; -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+h1,h2,h3{
+  font-family:var(--f-display);
+  font-weight:800;
+  letter-spacing:-0.025em;
+  line-height:1.06;
+  text-wrap:balance;
+  margin:0;
+}
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+strong{ color:var(--white); font-weight:600; }
+:focus-visible{ outline:2px solid var(--rust-lift); outline-offset:3px; }
+.wrap{ width:100%; max-width:var(--w); margin-inline:auto; padding-inline:var(--pad); }
+.lbl{
+  font-family:var(--f-mono);
+  font-size:0.7rem;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ==========================================================================
+   3. The mark
+   ========================================================================== */
+.mark{
+  font-family:var(--f-display);
+  font-weight:800;
+  letter-spacing:-0.035em;
+  color:var(--white);
+  text-decoration:none;
+  display:inline-flex;
+  align-items:baseline;
+  line-height:1;
+  white-space:nowrap;
+}
+.mark-dot{
+  width:0.29em; height:0.29em;
+  background:var(--rust);
+  display:inline-block;
+  margin:0 0.24em 0 0.04em;
+  flex:none;
+}
+
+/* ==========================================================================
+   4. Header
+   ========================================================================== */
+.top{
+  position:sticky; top:0; z-index:50;
+  background:rgba(22,24,28,0.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.top-in{ display:flex; align-items:center; gap:28px; height:68px; }
+.top .mark{ font-size:1.15rem; }
+.nav{ display:none; gap:26px; margin-left:auto; }
+.nav a{
+  font-family:var(--f-mono);
+  font-size:0.74rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  padding-block:6px;
+  border-bottom:1px solid transparent;
+  transition:color .18s ease, border-color .18s ease;
+}
+.nav a:hover{ color:var(--white); border-bottom-color:var(--rust); }
+.nav a.is-active{ color:var(--white); border-bottom-color:var(--rust); }
+.top .btn{ margin-left:auto; }
+@media (min-width:1010px){
+  .nav{ display:flex; }
+  .top .btn{ margin-left:0; }
+}
+
+/* ==========================================================================
+   5. Buttons
+   ========================================================================== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:0.95rem;
+  letter-spacing:-0.01em;
+  padding:13px 22px;
+  background:var(--rust);
+  color:var(--white);
+  text-decoration:none;
+  border:1px solid var(--rust);
+  border-radius:2px;
+  transition:background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.btn:hover{ background:var(--rust-lift); border-color:var(--rust-lift); transform:translateY(-1px); }
+.btn-sm{ padding:9px 16px; font-size:0.85rem; }
+.btn-lg{ padding:17px 30px; font-size:1.05rem; }
+.btn-ghost{ background:transparent; color:var(--text); border-color:var(--line-2); }
+.btn-ghost:hover{ background:var(--ink-3); border-color:var(--muted); color:var(--white); }
+
+/* ==========================================================================
+   6. Page head
+   ========================================================================== */
+.page-head{ border-bottom:1px solid var(--line); }
+.page-head-in{ padding-block:clamp(48px, 7vw, 84px); display:flex; flex-direction:column; gap:22px; }
+.eyebrow{ display:flex; align-items:center; gap:12px; }
+.eyebrow .tick{ width:26px; height:1px; background:var(--rust); flex:none; }
+.page-head h1{ font-size:clamp(2.2rem, 5vw, 3.6rem); max-width:20ch; }
+.page-head .stand{ font-size:clamp(1.02rem, 1.5vw, 1.18rem); color:var(--muted); max-width:62ch; }
+
+/* ==========================================================================
+   7. Document body — annotation margin, same device as the main page
+   ========================================================================== */
+.doc{ border-bottom:1px solid var(--line); }
+.doc-in{
+  display:grid; gap:var(--gap);
+  grid-template-columns:minmax(0,1fr);
+  padding-block:clamp(48px, 6vw, 80px);
+}
+.doc-in > *{ min-width:0; }
+@media (min-width:1000px){ .doc-in{ grid-template-columns:190px minmax(0,1fr); } }
+.doc-mark{ display:flex; flex-direction:column; gap:8px; }
+@media (min-width:1000px){ .doc-mark{ position:sticky; top:100px; align-self:start; } }
+.doc-mark .num{ font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.16em; color:var(--rust); }
+.doc-mark .nm{ font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); }
+.doc-mark .rule{ height:1px; background:var(--line-2); margin-top:4px; }
+.doc-body{ display:flex; flex-direction:column; gap:26px; }
+.doc-body h2{ font-size:clamp(1.6rem, 2.8vw, 2.2rem); max-width:22ch; }
+.doc-body h3{ font-size:1.1rem; font-weight:700; color:var(--white); }
+.doc-body p{ color:var(--muted); max-width:68ch; }
+.doc-body p.lead{ font-size:1.06rem; }
+.doc-body a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line-2); }
+.doc-body a:hover{ color:var(--rust-lift); border-color:var(--rust); }
+.bullets{ display:flex; flex-direction:column; gap:12px; }
+.bullets li{ display:flex; gap:12px; color:var(--muted); max-width:66ch; }
+.bullets li::before{ content:"//"; font-family:var(--f-mono); font-size:0.82rem; color:var(--line-2); flex:none; line-height:1.7; }
+
+/* ==========================================================================
+   8. Footer
+   ========================================================================== */
+.foot-in{ display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-start; padding-block:44px; }
+.foot .mark{ font-size:1.4rem; margin-bottom:12px; }
+.foot p{ font-size:0.9rem; color:var(--muted); max-width:34ch; }
+.foot-cols{ display:flex; flex-wrap:wrap; gap:44px; }
+.foot-col{ display:flex; flex-direction:column; gap:10px; }
+.foot-col a{ font-size:0.92rem; color:var(--muted); text-decoration:none; }
+.foot-col a:hover{ color:var(--white); }
+.foot-base{ border-top:1px solid var(--line); }
+.foot-base-in{ display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between; padding-block:18px; }
+.foot-base p, .foot-base a{ font-family:var(--f-mono); font-size:0.72rem; color:var(--muted); }
+.foot-base a{ text-decoration:none; }
+.foot-base a:hover{ color:var(--white); }
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ==========================================================================
+   9. Numbered clauses — a policy really is a sequence, so it gets numbers
+   ========================================================================== */
+.clauses{ display:flex; flex-direction:column; gap:0; }
+.clause{
+  display:grid; gap:10px;
+  padding:26px 0;
+  border-top:1px solid var(--line);
+}
+.clause:last-child{ border-bottom:1px solid var(--line); }
+.clause h2{
+  display:flex; gap:14px; align-items:baseline;
+  font-size:1.18rem; font-weight:700; color:var(--white);
+  letter-spacing:-0.015em;
+  text-wrap:normal;
+}
+.clause h2 .n{
+  font-family:var(--f-mono); font-size:0.78rem; font-weight:500;
+  color:var(--rust); flex:none; letter-spacing:0.1em;
+  font-variant-numeric:tabular-nums;
+}
+.clause p, .clause ul{ padding-left:36px; }
+.clause p{ color:var(--muted); max-width:70ch; }
+.clause .bullets li{ max-width:64ch; }
+.stamp-date{
+  font-family:var(--f-mono); font-size:0.76rem; color:var(--muted);
+  border:1px solid var(--line); padding:12px 16px; align-self:flex-start;
+}
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="mark" href="index.html" aria-label="Contractor.Ads &mdash; home"><span aria-hidden="true">Contractor</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#work">What we run</a>
+      <a href="index.html#build">The build</a>
+      <a href="index.html#math">Job math</a>
+      <a href="index.html#terms">Terms</a>
+      <a href="about.html">About</a>
+    </nav>
+    <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap page-head-in">
+      <div class="eyebrow">
+        <span class="tick" aria-hidden="true"></span>
+        <span class="lbl">Legal</span>
+      </div>
+      <h1>Privacy policy</h1>
+      <p class="stand">
+        This policy explains what Contractor.Ads collects when you use this site or contact
+        us, what we do with it, who else sees it, and how to get it removed. Plain language,
+        no small print at the bottom.
+      </p>
+      <p class="stamp-date">Last updated: September 2, 2026</p>
+    </div>
+  </section>
+
+  <section class="doc">
+    <div class="wrap doc-in">
+      <div class="doc-mark">
+        <span class="num">POLICY</span>
+        <span class="nm">15 clauses</span>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="doc-body">
+        <div class="clauses">
+
+          <section class="clause">
+            <h2><span class="n">01</span>Who this covers</h2>
+            <p>
+              Contractor.Ads ("we", "us") is a Philadelphia-based advertising agency serving
+              contractors. This policy covers this website and the enquiries that come through
+              it &mdash; the booking form, the phone number and the email address published on
+              these pages. It does not cover the separate privacy practices of any client whose
+              own campaigns we run.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">02</span>Information you give us</h2>
+            <p>
+              When you book a call, email us or pick up the phone, you give us information
+              yourself. Typically that is your name, business name, phone number, email
+              address, trade, service area, and whatever you tell us about your budget,
+              revenue or current marketing. We only ask for what we need to tell you whether
+              we can help.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">03</span>Information collected automatically</h2>
+            <p>
+              Like most websites, this one records basic technical information when you visit:
+              IP address, browser and device type, referring page, the pages you looked at and
+              how long you stayed. This is collected by our hosting provider and any analytics
+              or advertising tools described below, and we use it to understand how the site is
+              performing.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">04</span>Cookies and similar technologies</h2>
+            <p>
+              Cookies and pixels are small files placed on your device. We use them to keep the
+              site working, to measure traffic, and to measure the performance of our own
+              advertising. You can block or delete cookies in your browser settings; parts of
+              the site may not work as intended if you do.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">05</span>Advertising and the Meta Pixel</h2>
+            <p>
+              We advertise our own services on Facebook and Instagram, and this site may carry
+              the Meta Pixel and Meta's Conversions API so we can measure which ads lead to
+              enquiries. That means Meta Platforms, Inc. receives information about your visit
+              and may match it to a Meta account. You can control how Meta uses this in your
+              Meta ad preferences and in your device's tracking settings.
+            </p>
+            <p>
+              Contractor.Ads is an independent business. We are not affiliated with, endorsed
+              by, or an agent of Meta Platforms, Inc.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">06</span>How we use your information</h2>
+            <ul class="bullets">
+              <li>To answer your enquiry and schedule a call.</li>
+              <li>To prepare a proposal and, if you become a client, to deliver the work.</li>
+              <li>To send you information you asked for, and occasional follow-up about your enquiry.</li>
+              <li>To measure and improve this site and our own advertising.</li>
+              <li>To keep business records and meet legal and tax obligations.</li>
+            </ul>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">07</span>When we share information</h2>
+            <p>
+              We do not sell your personal information, and we do not share it with other
+              contractors. We do share it with the service providers we use to run the
+              business &mdash; scheduling, email, CRM, hosting, analytics and advertising
+              platforms &mdash; and only so they can perform that service for us. We will also
+              disclose information where the law requires it, or to protect our legal rights.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">08</span>How long we keep it</h2>
+            <p>
+              Enquiry records are kept for as long as we might reasonably do business together,
+              and client records for as long as we are required to keep business and tax
+              records after the engagement ends. You can ask us to delete yours sooner &mdash;
+              see clause 09.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">09</span>Your choices and your rights</h2>
+            <p>
+              Email <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
+              and we will action any of the following: send you a copy of what we hold about
+              you, correct it, delete it, or stop contacting you. You can also reply STOP to
+              any text message or use the unsubscribe link in any marketing email. We will not
+              treat you differently for asking.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">10</span>California residents</h2>
+            <p>
+              If you live in California, the CCPA as amended by the CPRA gives you the right to
+              know what personal information we collect and why, to request a copy, to request
+              deletion or correction, and to opt out of the sale or sharing of personal
+              information. We do not sell personal information. To exercise any of these
+              rights, use the contact details in clause 15.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">11</span>Visitors outside the United States</h2>
+            <p>
+              We operate in the United States and information you send us is processed here. If
+              you contact us from outside the US, you are consenting to that transfer. Where
+              the GDPR or UK GDPR applies to you, our lawful basis is your consent for
+              marketing, and legitimate interest or the performance of a contract for
+              everything else.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">12</span>Security</h2>
+            <p>
+              We use reputable providers and standard safeguards to protect the information we
+              hold, including encrypted connections to this site. No method of transmission or
+              storage is completely secure, so we cannot guarantee absolute security, and we
+              will tell you promptly if a breach affects your information.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">13</span>Children</h2>
+            <p>
+              This site is for business owners and is not directed at children. We do not
+              knowingly collect information from anyone under 16. If you believe a child has
+              given us information, contact us and we will delete it.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">14</span>Other sites we link to</h2>
+            <p>
+              Our booking link, and any other outbound link on this site, takes you to a service
+              we do not control. Their privacy practices are their own, and we would encourage
+              you to read them.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">15</span>How to contact us</h2>
+            <p>
+              Questions about this policy, or about anything we hold on you:<br />
+              Email <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a><br />
+              Phone <a href="tel:+12676678665">267-667-8665</a><br />
+              Contractor.Ads, Philadelphia, Pennsylvania, USA
+            </p>
+            <p>
+              If we change this policy we will update the date at the top of this page. Material
+              changes will be flagged on this page before they take effect.
+            </p>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <span class="mark" role="img" aria-label="Contractor.Ads"><span aria-hidden="true">Contractor</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></span>
+      <p>Meta advertising for contractors. One channel, run properly.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <span class="lbl">Company</span>
+        <a href="about.html">About</a>
+        <a href="index.html#work">What we run</a>
+        <a href="index.html#build">The build</a>
+        <a href="index.html#terms">Terms</a>
+      </div>
+      <div class="foot-col">
+        <span class="lbl">Contact</span>
+        <a href="tel:+12676678665">267-667-8665</a>
+        <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
+        <a href="[BOOKING LINK]">Book a call</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-base">
+    <div class="wrap foot-base-in">
+      <p>&copy; 2026 Contractor.Ads. All rights reserved.</p>
+      <a href="privacy.html">Privacy policy</a>
+      <p>Not affiliated with or endorsed by Meta Platforms, Inc.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

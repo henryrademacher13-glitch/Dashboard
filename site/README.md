@@ -1,38 +1,49 @@
 # Contractor.Ads — website
 
-A single, self-contained landing page for the agency. One file, no build step, no
-dependencies: `index.html` holds the markup, the CSS and the (very small) JS surface.
-Fonts load from Google Fonts; everything else ships inside the file.
+Three self-contained pages. No build step, no dependencies, no shared asset files: each
+`.html` file holds its own markup, CSS and (on the landing page only) JS. Fonts load from
+Google Fonts; everything else ships inside the files.
+
+| File | What it is |
+| --- | --- |
+| `index.html` | The landing page — hero, scope, build sequence, live job-math calculator, terms, FAQ, booking CTA |
+| `about.html` | Who we are, why contractors, Philadelphia, how we work, what we won't do |
+| `privacy.html` | Privacy policy, 15 numbered clauses |
+
+**The `:root` token block is duplicated in all three files.** That's the cost of keeping
+each page independently droppable — change `--rust` and you change it three times. If that
+becomes annoying, pull the shared block into a `brand.css` and link it from each page.
 
 ## Deploy it
 
-Any static host works. Pick one:
+Upload the whole `site/` folder, not just one file — the pages link to each other by
+relative path.
 
 | Host | How |
 | --- | --- |
 | Netlify | Drag the `site/` folder onto app.netlify.com/drop |
 | Vercel | `vercel deploy site --prod` |
 | Cloudflare Pages | New project → upload `site/` |
-| GoDaddy / cPanel / any FTP | Upload `index.html` to the web root |
+| GoDaddy / cPanel / any FTP | Upload all three `.html` files to the web root |
 | GitHub Pages | Push, then set Pages source to `/site` on this branch |
 
-Point your domain at it and you're live.
+Point your domain at it and you're live at `/`, `/about.html` and `/privacy.html`.
 
 ## Fill in your details
 
 Contact details, pricing and the year are all set. Three editable values are left, still
-wrapped in `[SQUARE BRACKETS]` — open `index.html`, search for `[`, and replace.
+wrapped in `[SQUARE BRACKETS]`.
 
 | Placeholder | What to put there | Times used |
 | --- | --- | --- |
-| `[BOOKING LINK]` | Your Calendly / GoHighLevel calendar URL | 5 |
-| `[2]` | Open contractor slots this month (hero note and mobile dock) | 2 |
-| `[$500k]` | Revenue floor in the qualification list | 1 |
+| `[BOOKING LINK]` | Your Calendly / GoHighLevel calendar URL | 10, across all three pages |
+| `[2]` | Open contractor slots this month (hero note and mobile dock) | 2, `index.html` |
+| `[$500k]` | Revenue floor in the qualification list | 1, `index.html` |
 
-The booking link is the only one that blocks launch:
+The booking link is the only one that blocks launch, and it's in every page:
 
 ```bash
-sed -i '' -e 's|\[BOOKING LINK\]|https://calendly.com/your-handle/20min|g' site/index.html
+sed -i '' -e 's|\[BOOKING LINK\]|https://calendly.com/your-handle/20min|g' site/*.html
 ```
 
 (Drop the `''` after `-i` on Linux.)
