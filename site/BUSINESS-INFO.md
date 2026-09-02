@@ -9,7 +9,7 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 
 | # | Need | Why it blocks |
 | --- | --- | --- |
-| 1 | **Booking link** (Calendly / GoHighLevel / Acuity URL) | Every CTA on the page points at `[BOOKING LINK]` — 5 buttons. Without it the site has no conversion path at all. **This is the last thing blocking launch.** |
+| ~~1~~ | ~~Booking link~~ — **set**: Calendly `contractor-adsagency/30min`, opening in a popup | Live on every "Book a call" button across all three pages. |
 | ~~2~~ | ~~Phone + email~~ — **set**: 267-667-8665, Contractor.adsagency@gmail.com | Live in the CTA line and the footer. |
 | ~~3~~ | ~~Service area~~ — **removed** from the page | No geography claimed, so nothing limits who enquires. |
 | ~~4~~ | ~~Pricing~~ — **set**: $500 build, $2,000/mo retainer, $100/day ad spend minimum | Live on the Terms section. If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
@@ -103,7 +103,7 @@ to something you can defend in a sales call:
 - [x] ~~Privacy policy page~~ — written, at `privacy.html`. **Read every clause before publishing** — see the note below
 - [ ] **Terms / earnings disclaimer** — you're showing an ROI calculator; the disclaimer under it stays
 - [ ] **Domain + hosting** — see `README.md` for the one-step deploys
-- [ ] **Booking link tested on a phone** — more than half of contractor traffic is mobile
+- [ ] **Booking link tested on a phone** — more than half of contractor traffic is mobile. Tap a "Book a call" button on a real phone once the site is deployed and check the Calendly popup opens and scrolls
 - [ ] **Open Graph image** — for when the URL gets shared or run in an ad
 - [ ] **A real email on a real domain** — `you@cads.com`, not a Gmail address, on a page selling marketing
 

@@ -6,6 +6,7 @@
 <title>About Contractor.Ads</title>
 <meta name="description" content="Contractor.Ads is a small Philadelphia agency running Facebook and Instagram ad systems for contractors across the country." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%2316181C'/%3E%3Crect%20x='9'%20y='9'%20width='14'%20height='14'%20fill='%23C5563B'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
@@ -15,7 +16,6 @@
   CONTRACTOR.ADS — ABOUT PAGE
   The :root token block below is duplicated in index.html and the other
   subpage. Change a brand colour in one, change it in all three.
-  Remaining placeholder on this page: [BOOKING LINK]
   ============================================================================
 -->
 
@@ -297,7 +297,7 @@ strong{ color:var(--white); font-weight:600; }
       <a href="about.html" class="is-active">About</a>
       <a href="privacy.html">Privacy</a>
     </nav>
-    <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+    <a class="btn btn-sm" href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Book a call</a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
       <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
     </button>
@@ -386,10 +386,10 @@ strong{ color:var(--white); font-weight:600; }
     <div class="wrap close-in">
       <div>
         <h2>See if the math works for your shop</h2>
-        <p>Twenty minutes. Your numbers, and a straight answer either way.</p>
+        <p>Thirty minutes. Your numbers, and a straight answer either way.</p>
       </div>
       <div class="close-act">
-        <a class="btn btn-lg" href="[BOOKING LINK]">Book a call</a>
+        <a class="btn btn-lg" href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Book a call</a>
         <p class="alt">Or call <a href="tel:+12676678665">267-667-8665</a></p>
       </div>
     </div>
@@ -415,7 +415,7 @@ strong{ color:var(--white); font-weight:600; }
         <span class="lbl">Contact</span>
         <a href="tel:+12676678665">267-667-8665</a>
         <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
-        <a href="[BOOKING LINK]">Book a call</a>
+        <a href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Book a call</a>
       </div>
     </div>
   </div>
@@ -447,8 +447,23 @@ strong{ color:var(--white); font-weight:600; }
     if (!nav.contains(e.target) && !btn.contains(e.target)) setMenu(false);
   });
   window.addEventListener("resize", function () { if (window.innerWidth >= 1010) setMenu(false); });
+
+  /* ------------------------------------------------------------------
+     Calendly — every booking link opens the scheduler in a popup.
+     If widget.js has not loaded, the link just goes to Calendly instead.
+     ------------------------------------------------------------------ */
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="calendly.com"]') : null;
+    if (!a) return;
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === "function") {
+      e.preventDefault();
+      window.Calendly.initPopupWidget({ url: a.getAttribute("href") });
+    }
+  });
 })();
 </script>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
 </body>
 </html>

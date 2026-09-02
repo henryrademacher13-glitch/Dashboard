@@ -44,26 +44,36 @@ cd site && python3 -m http.server 8000   # then visit http://localhost:8000
 
 ## Fill in your details
 
-Contact details, pricing and the year are all set. Three editable values are left, still
-wrapped in `[SQUARE BRACKETS]`.
+Contact details, pricing, the booking link and the year are all set. Two cosmetic values
+are left, still wrapped in `[SQUARE BRACKETS]`.
 
 | Placeholder | What to put there | Times used |
 | --- | --- | --- |
-| `[BOOKING LINK]` | Your Calendly / GoHighLevel calendar URL | 10, across all three pages |
 | `[2]` | Open contractor slots this month (hero note and mobile dock) | 2, `index.html` |
-| `[$500k]` | Revenue floor in the qualification list | 1, `index.html` |
+| `[$500k]` | Revenue floor in the pricing notes | 1, `index.html` |
 
-The booking link is the only one that blocks launch, and it's in every page:
-
-```bash
-sed -i '' -e 's|\[BOOKING LINK\]|https://calendly.com/your-handle/20min|g' site/*.html
-```
-
-(Drop the `''` after `-i` on Linux.)
-
-Already live in the page: phone `267-667-8665` (dialing `+12676678665`),
+Already live: phone `267-667-8665` (dialing `+12676678665`),
 `Contractor.adsagency@gmail.com`, $500 build, $2,000/mo management, $100/day ad spend
-minimum, © 2026.
+minimum, © 2026, and Calendly booking.
+
+## Booking
+
+Every "Book a call" button points at
+`https://calendly.com/contractor-adsagency/30min?primary_color=43ff00` and opens Calendly
+in a popup over the page. Two pieces make that work, on all three pages:
+
+- `widget.css` in the head and `widget.js` before `</body>`, both from `assets.calendly.com`
+- a delegated click handler that catches any link to `calendly.com` and calls
+  `Calendly.initPopupWidget()`
+
+If `widget.js` is blocked or slow, the handler does nothing and the link opens Calendly in
+a new tab instead — booking still works. To change the event or its colour, edit the five
+`href`s in `index.html` and the ones in `about.html` and `privacy.html`; nothing else
+references the URL.
+
+**`primary_color=43ff00` is neon green**, which is what your snippet specified. The site's
+accent is `#C5563B` — change the parameter to `primary_color=C5563B` in those hrefs if you
+want the scheduler to match the page.
 
 ### One thing worth doing by hand
 

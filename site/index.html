@@ -6,6 +6,7 @@
 <title>Contractor.Ads — Meta Ads That Book Estimates</title>
 <meta name="description" content="Contractor.Ads builds and runs Meta ad systems for contractors — exclusive leads, five-minute follow-up, and reporting on cost per booked estimate." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%2316181C'/%3E%3Crect%20x='9'%20y='9'%20width='14'%20height='14'%20fill='%23C5563B'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
@@ -14,7 +15,6 @@
   ============================================================================
   CONTRACTOR.ADS — PLACEHOLDERS TO REPLACE (search for the square brackets)
   ============================================================================
-  [BOOKING LINK]      your Calendly / GHL calendar URL      (appears 5x)
   [2]                 open contractor slots this month      (appears 2x)
   [$500k]             revenue floor in the fit list         (appears 1x)
   All figures in the "Job math" table are clearly labeled examples.
@@ -680,7 +680,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       <a href="about.html">About</a>
       <a href="privacy.html">Privacy</a>
     </nav>
-    <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+    <a class="btn btn-sm" href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Book a call</a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
       <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
     </button>
@@ -703,7 +703,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           We run Facebook and Instagram ads for contractors. One channel, done properly.
         </p>
         <div class="hero-cta">
-          <a class="btn btn-lg" href="[BOOKING LINK]">Book a 20-minute call</a>
+          <a class="btn btn-lg" href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Book a 30-minute call</a>
           <a class="btn btn-lg btn-ghost" href="#numbers">Run your numbers</a>
         </div>
         <p class="hero-note"><span class="pulse" aria-hidden="true"></span> Taking [2] new contractors this month.</p>
@@ -1027,7 +1027,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   <section class="close" id="book">
     <div class="wrap close-in">
       <div>
-        <h2>Book a 20-minute call</h2>
+        <h2>Book a 30-minute call</h2>
         <p>We run your numbers and tell you straight whether ads make sense for your shop.</p>
       </div>
       <div class="agenda">
@@ -1037,7 +1037,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           <li><span>03</span> A yes or no on fit, either way</li>
         </ul>
         <div class="agenda-cta">
-          <a class="btn btn-lg" href="[BOOKING LINK]">Pick a time</a>
+          <a class="btn btn-lg" href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Pick a time</a>
           <p class="alt">Or call <a href="tel:+12676678665">267-667-8665</a></p>
         </div>
       </div>
@@ -1063,7 +1063,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         <span class="lbl">Contact</span>
         <a href="tel:+12676678665">267-667-8665</a>
         <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
-        <a href="[BOOKING LINK]">Book a call</a>
+        <a href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Book a call</a>
       </div>
     </div>
   </div>
@@ -1078,7 +1078,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
 
 <div class="dock" id="dock">
   <p>Booking [2] contractor<br />slots this month</p>
-  <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+  <a class="btn btn-sm" href="https://calendly.com/contractor-adsagency/30min?primary_color=43ff00" target="_blank" rel="noopener">Book a call</a>
 </div>
 
 <script>
@@ -1088,6 +1088,20 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   root.classList.add("js");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $ = function (id) { return document.getElementById(id); };
+
+
+  /* ------------------------------------------------------------------
+     Calendly — every booking link opens the scheduler in a popup.
+     If widget.js has not loaded, the link just goes to Calendly instead.
+     ------------------------------------------------------------------ */
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="calendly.com"]') : null;
+    if (!a) return;
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === "function") {
+      e.preventDefault();
+      window.Calendly.initPopupWidget({ url: a.getAttribute("href") });
+    }
+  });
 
   /* ------------------------------------------------------------------
      Mobile menu
@@ -1330,6 +1344,8 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   });
 })();
 </script>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
 </body>
 </html>
