@@ -30,9 +30,7 @@ Every editable value is wrapped in `[SQUARE BRACKETS]`. Open `index.html`, searc
 | `[PHONE-DIGITS]` | Digits only for `tel:` links, e.g. `5551234567` | 2 |
 | `[EMAIL]` | Contact email | 4 |
 | `[SERVICE AREA]` | e.g. `Denver Metro` or `Nationwide` | 2 |
-| `[GUARANTEE #]` | Booked estimates promised in 60 days | 1 |
 | `[$500k]`, `[2]` | Revenue floor, open slots this month | 2 |
-| `[CLIENT QUOTE 1–3]` | Real testimonials, with name, company, trade, city | 3 |
 | `[YEAR]` | Footer copyright year | 1 |
 
 One-liner for the obvious ones:
@@ -48,11 +46,8 @@ sed -i '' \
 
 (Drop the `''` after `-i` on Linux.)
 
-### Two things worth doing by hand
+### One thing worth doing by hand
 
-- **Testimonials (Sec. 07).** Left as visible placeholders on purpose. Use real quotes
-  from clients who gave permission — contractors call each other to check. Delete the
-  whole `<section id="results">` block if you don't have any yet.
 - **The job math calculator (Sec. 04).** Visitors drag their own numbers and the sheet
   rebuilds live. What you set are the *starting* positions — the `value=""` on each
   `<input type="range">` in `#calc-form`. Defaults are ad spend $3,000 — the slider floors
@@ -99,7 +94,6 @@ of the stylesheet — change `--rust` in one place and the whole page follows.
 | --- | --- | --- |
 | `--ink` | `#16181C` | Page ground, taken from the logo |
 | `--rust` | `#C5563B` | The square in the mark; the only loud color |
-| `--hivis` | `#E9B949` | Safety amber, used once — the guarantee block |
 | `--muted` | `#98A0AB` | Secondary text |
 
 Type is Archivo (display, matching the logo's heavy grotesque), IBM Plex Sans (body) and

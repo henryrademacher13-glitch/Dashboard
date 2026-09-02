@@ -13,7 +13,6 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 | 2 | **Phone + email** | Second and third contact paths, and the click-to-call in the mobile dock. |
 | 3 | **Service area** | "Serving `[SERVICE AREA]`" — one metro, a state, a radius, or "Nationwide, remote". This also changes how the offer reads. |
 | ~~4~~ | ~~Pricing~~ — **set**: $500 build, $2,000/mo retainer, $100/day ad spend minimum | Live on the Terms section. If you'd rather not publish price, say so and I'll swap that section for a "pricing on the call" treatment — but published pricing filters tire-kickers hard, which is the whole point of the Terms section. |
-| 5 | **The guarantee** | Currently `[GUARANTEE #] booked estimates in 60 days, or management is free.` Confirm the number, the window, and the conditions — or tell me to cut it. **Only publish a guarantee you will actually honor**; contractors screenshot these. |
 | 6 | **Legal business name + year** | Footer line. "Contractor.Ads LLC"? Sole prop? |
 
 ---
@@ -22,7 +21,8 @@ in the order it blocks you. Paste your answers back and I'll fill them in.
 
 > **Settled so far:** pricing is $500 to build, $2,000/month management, and a $100/day
 > (~$3,000/month) ad spend minimum. Your in-house editor produces all creative from
-> client-supplied footage against your shot list.
+> client-supplied footage against your shot list. The guarantee block and the testimonial
+> section are **removed** from the page until you have something real to put in them.
 > The remaining assumption there: the *client* still shoots the raw footage on a phone. If
 > your editor also films on site, say so — that's a stronger claim and it changes Sec. 02.
 
@@ -44,12 +44,14 @@ a wording choice, so read them as a list of things you're now committed to on th
 
 ---
 
-## 3. Proof — the highest-leverage thing you can send
+## 3. Proof — the highest-leverage thing you can add later
 
-The References section (Sec. 07) is sitting empty on purpose. Fabricated testimonials are
-the fastest way to lose a contractor's trust, and they check with each other.
+The References section is gone from the page rather than sitting there empty, which is the
+right call: fabricated testimonials are the fastest way to lose a contractor's trust, and
+they check with each other. But it does mean the page currently carries **no third-party
+proof at all** — the math, the process and the terms are doing all of the convincing.
 
-Send whatever you actually have, in rough priority:
+The moment you have any of the following, tell me and I'll put the section back:
 
 1. **Client quotes with permission** — name, company, trade, city. A quote naming a number
    ("booked 31 estimates in March") beats "great to work with" by a mile.
@@ -60,9 +62,11 @@ Send whatever you actually have, in rough priority:
 4. **Your own numbers**: how many contractor accounts you've run, total ad spend managed,
    the range of cost-per-booked-estimate you actually see by trade.
 
-If you have none of this yet, say so — there's an honest version of the page for a new
-agency (founder's note, a beta-client offer, a stronger guarantee doing the trust work
-instead of testimonials). That's a rewrite of Sec. 07, not a patch.
+Until then, the honest substitutes available to a new agency are a founder's note (who you
+are, why contractors specifically, what you'll do differently), a first-client offer priced
+or structured to reflect the risk they're taking on you, and the risk reversals you can
+already back today — month-to-month after 90 days, everything built in their accounts. The
+last two are on the page now, under Terms. Say the word and I'll add the founder's note.
 
 ---
 
@@ -115,7 +119,6 @@ Phone:
 Email:
 Service area:
 Legal business name:
-Guarantee (number + window + conditions):
 Trades you actually want (or "all"):
 Slots open this month:
 Anything in section 2 that's wrong:
