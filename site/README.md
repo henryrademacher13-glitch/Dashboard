@@ -17,7 +17,28 @@ Privacy — so you can click between all three from any of them.
 each page independently droppable — change `--rust` and you change it three times. If that
 becomes annoying, pull the shared block into a `brand.css` and link it from each page.
 
-## Deploy it
+## Live
+
+**https://contractor-ads-scaliagrowth-7855s-projects.vercel.app**
+
+Hosted on Vercel (team `scaliagrowth-7855s-projects`, project `contractor-ads`), deployed
+as static files to production. Two things about that URL:
+
+- Vercel sends `x-robots-tag: noindex` on every `*.vercel.app` address, so **Google will
+  not index this URL**. That is Vercel's default for deployment URLs and it disappears the
+  moment you attach a real domain.
+- Vercel Authentication (SSO protection) was on by default for this team, which meant the
+  URL asked visitors to log in to Vercel. It is now **off** for this project so the site is
+  publicly reachable.
+
+Buy a domain (`contractorads.com` or similar), add it in Vercel under
+Project → Settings → Domains, and both points go away.
+
+**This deploy was a direct file upload, not a git connection**, so pushing to GitHub does
+not update the live site. To redeploy after changing the files, either connect the repo in
+Vercel (Project → Settings → Git) or upload the folder again.
+
+## Deploy it elsewhere
 
 Upload the whole `site/` folder, not just one file — the pages link to each other by
 relative path.
