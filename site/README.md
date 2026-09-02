@@ -32,6 +32,16 @@ relative path.
 
 Point your domain at it and you're live at `/`, `/about.html` and `/privacy.html`.
 
+**Until you deploy, the page-to-page links only work where all three files sit side by
+side.** They're relative (`href="privacy.html"`), which is what a real host needs — but it
+means a single page opened on its own, or previewed in isolation, has nothing to resolve
+them against and will say "not found". To try the links before deploying, open the files
+from the folder (`open site/index.html`) or serve it locally:
+
+```bash
+cd site && python3 -m http.server 8000   # then visit http://localhost:8000
+```
+
 ## Fill in your details
 
 Contact details, pricing and the year are all set. Three editable values are left, still
