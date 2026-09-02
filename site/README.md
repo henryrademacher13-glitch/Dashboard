@@ -4,6 +4,9 @@ Three self-contained pages. No build step, no dependencies, no shared asset file
 `.html` file holds its own markup, CSS and (on the landing page only) JS. Fonts load from
 Google Fonts; everything else ships inside the files.
 
+Every page carries the same top nav — the landing page's five sections, then About and
+Privacy — so you can click between all three from any of them.
+
 | File | What it is |
 | --- | --- |
 | `index.html` | The landing page — hero, scope, build sequence, live job-math calculator, terms, FAQ, booking CTA |
@@ -87,6 +90,7 @@ All vanilla JS in one `<script>` at the bottom of the file — no libraries, not
 | Counting figures | Hero scorecard and calculator KPIs tween up the first time they're reached |
 | Live calculator | Seven sliders drive the KPIs, funnel bars and every line of the estimate sheet; changed amounts flash terracotta |
 | Mobile dock | Booking bar slides up after the hero, hides again over the real CTA |
+| Nav menu | Below 1010px the nav collapses into a hamburger panel — on all three pages. Closes on link click, Escape, an outside click, or a resize back to desktop |
 
 Everything above is disabled under `prefers-reduced-motion: reduce` — values render at their
 final state, the ticker stops, nothing translates.

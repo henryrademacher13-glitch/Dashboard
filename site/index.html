@@ -121,11 +121,11 @@ strong{ color:var(--white); font-weight:600; }
   border-bottom:1px solid var(--line);
 }
 .top-in{
-  display:flex; align-items:center; gap:28px;
+  display:flex; align-items:center; gap:16px;
   height:68px;
 }
+@media (min-width:1010px){ .top-in{ gap:28px; } }
 .top .mark{ font-size:1.15rem; }
-.nav{ display:none; gap:26px; margin-left:auto; }
 .nav a{
   font-family:var(--f-mono);
   font-size:0.74rem;
@@ -133,14 +133,67 @@ strong{ color:var(--white); font-weight:600; }
   text-transform:uppercase;
   color:var(--muted);
   text-decoration:none;
-  padding-block:6px;
-  border-bottom:1px solid transparent;
-  transition:color .18s ease, border-color .18s ease;
+  transition:color .18s ease, border-color .18s ease, background .18s ease;
 }
-.nav a:hover{ color:var(--white); border-bottom-color:var(--rust); }
+.nav a:hover{ color:var(--white); }
+.nav a.is-active{ color:var(--white); }
+.nav-sep{ display:none; }
+
+/* --- under 1010px the nav is a drop panel behind the menu button --------- */
+.nav{
+  display:none;
+  position:absolute; top:100%; left:0; right:0;
+  flex-direction:column; align-items:stretch;
+  background:var(--ink-2);
+  border-bottom:1px solid var(--line);
+  padding:6px 0 10px;
+  box-shadow:0 20px 44px rgba(0,0,0,0.5);
+}
+.nav.is-open{ display:flex; }
+.nav a{
+  padding:13px var(--pad);
+  border-left:2px solid transparent;
+}
+.nav a:hover{ background:var(--ink-3); border-left-color:var(--rust); }
+.nav a.is-active{ border-left-color:var(--rust); }
+
+.menu-btn{
+  margin-left:14px;
+  display:inline-flex; flex-direction:column; justify-content:center; gap:4px;
+  width:42px; height:38px; flex:none;
+  background:none; border:1px solid var(--line-2); border-radius:2px;
+  cursor:pointer;
+  transition:border-color .18s ease;
+}
+.menu-btn:hover{ border-color:var(--muted); }
+.menu-btn i{
+  display:block; width:17px; height:1.5px; margin:0 auto;
+  background:var(--text);
+  transition:transform .22s ease, opacity .18s ease;
+}
+.menu-btn[aria-expanded="true"] i:nth-child(1){ transform:translateY(5.5px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] i:nth-child(2){ opacity:0; }
+.menu-btn[aria-expanded="true"] i:nth-child(3){ transform:translateY(-5.5px) rotate(-45deg); }
+
 .top .btn{ margin-left:auto; }
+
+/* --- from 1010px it is a plain row again --------------------------------- */
 @media (min-width:1010px){
-  .nav{ display:flex; }
+  .nav{
+    display:flex; position:static;
+    flex-direction:row; align-items:center;
+    gap:22px; margin-left:auto;
+    background:none; border:0; padding:0; box-shadow:none;
+  }
+  .nav a{
+    padding:6px 0;
+    border-left:0;
+    border-bottom:1px solid transparent;
+  }
+  .nav a:hover{ background:none; border-bottom-color:var(--rust); }
+  .nav a.is-active{ border-bottom-color:var(--rust); }
+  .nav-sep{ display:block; width:1px; height:14px; background:var(--line-2); flex:none; }
+  .menu-btn{ display:none; }
   .top .btn{ margin-left:0; }
 }
 
@@ -693,15 +746,20 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
 <header class="top">
   <div class="wrap top-in">
     <a class="mark" href="#top" aria-label="Contractor.Ads — home"><span aria-hidden="true">Contractor</span><span class="mark-dot" aria-hidden="true"></span><span aria-hidden="true">Ads</span></a>
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav" id="nav" aria-label="Primary">
       <a href="#work">What we run</a>
       <a href="#build">The build</a>
       <a href="#math">Job math</a>
       <a href="#terms">Terms</a>
       <a href="#faq">FAQ</a>
+      <span class="nav-sep" aria-hidden="true"></span>
       <a href="about.html">About</a>
+      <a href="privacy.html">Privacy</a>
     </nav>
     <a class="btn btn-sm" href="[BOOKING LINK]">Book a call</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
+      <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
+    </button>
   </div>
   <div class="top-progress" aria-hidden="true"><i></i></div>
 </header>
@@ -1306,6 +1364,33 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
   root.classList.add("js");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $ = function (id) { return document.getElementById(id); };
+
+  /* ------------------------------------------------------------------
+     Mobile menu
+     ------------------------------------------------------------------ */
+  var menuBtn = $("menu-btn"), navEl = $("nav");
+  if (menuBtn && navEl) {
+    var setMenu = function (open) {
+      navEl.classList.toggle("is-open", open);
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    menuBtn.addEventListener("click", function () {
+      setMenu(menuBtn.getAttribute("aria-expanded") !== "true");
+    });
+    navEl.addEventListener("click", function (e) {
+      if (e.target.tagName === "A") setMenu(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setMenu(false);
+    });
+    document.addEventListener("click", function (e) {
+      if (!navEl.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 1010) setMenu(false);
+    });
+  }
 
   /* ------------------------------------------------------------------
      Number formatting and animated value swaps
