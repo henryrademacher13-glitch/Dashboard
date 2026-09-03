@@ -6,6 +6,7 @@
 <title>Contractor.Ads — Meta Ads That Book Estimates</title>
 <meta name="description" content="Contractor.Ads builds and runs Meta ad systems for contractors — exclusive leads, five-minute follow-up, and reporting on cost per booked estimate." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%2316181C'/%3E%3Crect%20x='9'%20y='9'%20width='14'%20height='14'%20fill='%23C5563B'/%3E%3C/svg%3E" />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
@@ -450,12 +451,6 @@ strong{ color:var(--white); font-weight:600; }
 .agenda-cta .alt{ font-family:var(--f-mono); font-size:0.8rem; color:var(--muted); text-align:center; }
 .agenda-cta .alt a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line-2); }
 .agenda-cta .alt a:hover{ color:var(--rust-lift); border-color:var(--rust); }
-.cal{ display:flex; flex-direction:column; gap:12px; }
-@media (min-width:960px){ .cal{ grid-column:1 / -1; } }
-.cal .calendly-inline-widget{ border:1px solid var(--line); background:var(--ink); }
-.cal-alt{ font-family:var(--f-mono); font-size:0.78rem; color:var(--muted); text-align:center; }
-.cal-alt a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line-2); }
-.cal-alt a:hover{ color:var(--rust-lift); border-color:var(--rust); }
 
 /* ==========================================================================
    14. Footer
@@ -684,7 +679,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
       <a href="about.html">About</a>
       <a href="privacy.html">Privacy</a>
     </nav>
-    <a class="btn btn-sm" href="#book">Book a call</a>
+    <a class="btn btn-sm" href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a call</a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
       <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
     </button>
@@ -707,7 +702,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           We run Facebook and Instagram ads for contractors. One channel, done properly.
         </p>
         <div class="hero-cta">
-          <a class="btn btn-lg" href="#book">Book a 30-minute call</a>
+          <a class="btn btn-lg" href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a 30-minute call</a>
           <a class="btn btn-lg btn-ghost" href="#numbers">Run your numbers</a>
         </div>
         <p class="hero-note"><span class="pulse" aria-hidden="true"></span> Taking a limited number of new contractors this month.</p>
@@ -1041,17 +1036,9 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
           <li><span>03</span> A yes or no on fit, either way</li>
         </ul>
         <div class="agenda-cta">
+          <a class="btn btn-lg" href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Pick a time</a>
           <p class="alt">Or call <a href="tel:+12676678665">267-667-8665</a></p>
         </div>
-      </div>
-
-      <div class="cal">
-        <!-- Calendly inline widget begin -->
-        <div class="calendly-inline-widget" data-url="https://calendly.com/contractor-adsagency/30min" style="min-width:320px;height:700px;"></div>
-        <!-- Calendly inline widget end -->
-        <p class="cal-alt">
-          Calendar not loading? <a href="https://calendly.com/contractor-adsagency/30min" target="_blank" rel="noopener">Open it in a new tab</a>
-        </p>
       </div>
     </div>
   </section>
@@ -1075,7 +1062,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
         <span class="lbl">Contact</span>
         <a href="tel:+12676678665">267-667-8665</a>
         <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
-        <a href="#book">Book a call</a>
+        <a href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a call</a>
       </div>
     </div>
   </div>
@@ -1090,7 +1077,7 @@ input[type="range"]:focus-visible{ outline:2px solid var(--rust-lift); outline-o
 
 <div class="dock" id="dock">
   <p>Booking a few slots<br />this month</p>
-  <a class="btn btn-sm" href="#book">Book a call</a>
+  <a class="btn btn-sm" href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a call</a>
 </div>
 
 <script>

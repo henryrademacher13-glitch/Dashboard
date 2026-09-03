@@ -79,28 +79,29 @@ scorecard so the two agree.
 
 ## Booking
 
-The Calendly calendar is embedded directly in the booking section at the bottom of
-`index.html` (`#book`), using Calendly's inline widget:
+Every "Book a call" button opens the Calendly scheduler in a popup over the page, using
+Calendly's link widget:
 
 ```html
-<div class="calendly-inline-widget"
-     data-url="https://calendly.com/contractor-adsagency/30min"
-     style="min-width:320px;height:700px;"></div>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<a href="https://calendly.com/contractor-adsagency/30min"
+   onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a call</a>
 ```
 
-Every "Book a call" button on the site scrolls to it — `href="#book"` on the landing page,
-`href="index.html#book"` from About and Privacy. The script tag lives only on
-`index.html`, since that is the only page with an embed.
+`widget.css` sits in the head and `widget.js` before `</body>` on **all three pages**, since
+every page has booking buttons. There are 10 of them in total — 5 on the landing page
+(nav, hero, the Pick a time button, footer, mobile dock), 3 on About, 2 on Privacy.
 
-Under the calendar is an "Open it in a new tab" link to the same Calendly URL. That is the
-fallback: if `widget.js` is blocked or fails, the embed is an empty box, and the link is
-the way through. Don't delete it.
+**Each button carries a real `href` to the Calendly URL, not `href=""`.** That matters: if
+`widget.js` is blocked or still loading, `onclick` throws, `return false` never runs, and
+the browser follows the href to Calendly instead. With `href=""` the same failure would
+reload the page and the visitor could never book. Keep the href.
 
-To change the event or its colour, edit `data-url` on the widget div plus the fallback
-link beside it — two places, both in `index.html`. Appending
-`?primary_color=c5563b` to both makes the scheduler match the site's accent; it currently
-runs on Calendly's own default colour.
+To change the event, update both the `href` and the URL inside `initPopupWidget` on every
+button — a find-and-replace on `contractor-adsagency/30min` across the three files does it.
+Appending `?primary_color=c5563b` to those URLs makes the scheduler match the site's
+accent; it currently runs on Calendly's default colour.
 
 ## What moves
 
