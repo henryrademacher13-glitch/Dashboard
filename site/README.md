@@ -84,7 +84,7 @@ The Calendly calendar is embedded directly in the booking section at the bottom 
 
 ```html
 <div class="calendly-inline-widget"
-     data-url="https://calendly.com/contractor-adsagency/30min?primary_color=c5563b"
+     data-url="https://calendly.com/contractor-adsagency/30min"
      style="min-width:320px;height:700px;"></div>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 ```
@@ -98,7 +98,9 @@ fallback: if `widget.js` is blocked or fails, the embed is an empty box, and the
 the way through. Don't delete it.
 
 To change the event or its colour, edit `data-url` on the widget div plus the fallback
-link beside it — two places, both in `index.html`.
+link beside it — two places, both in `index.html`. Appending
+`?primary_color=c5563b` to both makes the scheduler match the site's accent; it currently
+runs on Calendly's own default colour.
 
 ## What moves
 
