@@ -19,20 +19,26 @@ becomes annoying, pull the shared block into a `brand.css` and link it from each
 
 ## Live
 
-**https://contractor-ads-scaliagrowth-7855s-projects.vercel.app**
+**https://contractor-ads.vercel.app**
 
 Hosted on Vercel (team `scaliagrowth-7855s-projects`, project `contractor-ads`), deployed
-as static files to production. Two things about that URL:
+as static files to production. The project answers on two addresses:
 
-- Vercel sends `x-robots-tag: noindex` on every `*.vercel.app` address, so **Google will
-  not index this URL**. That is Vercel's default for deployment URLs and it disappears the
-  moment you attach a real domain.
-- Vercel Authentication (SSO protection) was on by default for this team, which meant the
-  URL asked visitors to log in to Vercel. It is now **off** for this project so the site is
-  publicly reachable.
+| URL | Use it? |
+| --- | --- |
+| `contractor-ads.vercel.app` | **Yes** — short, no team name in it, and indexable |
+| `contractor-ads-scaliagrowth-7855s-projects.vercel.app` | No — Vercel's auto-generated deployment URL. Long, and it sends `x-robots-tag: noindex`, so Google ignores it |
 
-Buy a domain (`contractorads.com` or similar), add it in Vercel under
-Project → Settings → Domains, and both points go away.
+Both serve the same files. Only the long one is de-indexed, so always hand out the short
+one.
+
+Vercel Authentication (SSO protection) was on by default for this team, which meant the
+site asked visitors to log in to Vercel. It is now **off** for this project so the site is
+publicly reachable.
+
+A real domain (`contractor-ads.com` was $11.25/yr when checked) is still worth buying when
+you're ready — add it under Project → Settings → Domains. But it's an upgrade now, not a
+fix: the short vercel.app URL works and gets indexed.
 
 **This deploy was a direct file upload, not a git connection**, so pushing to GitHub does
 not update the live site. To redeploy after changing the files, either connect the repo in
