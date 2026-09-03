@@ -103,6 +103,24 @@ button — a find-and-replace on `contractor-adsagency/30min` across the three f
 Appending `?primary_color=c5563b` to those URLs makes the scheduler match the site's
 accent; it currently runs on Calendly's default colour.
 
+## Chat widget
+
+All three pages load the LeadConnector (GoHighLevel) chat widget as the last script in the
+body:
+
+```html
+<script src="https://widgets.leadconnectorhq.com/loader.js"
+  data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+  data-widget-id="6a99ba4039356933b8f041f3" data-source="WEB_USER"></script>
+```
+
+The bubble's position, colours, greeting and routing are configured in the LeadConnector
+dashboard against that widget id, not in this repo. The script is `async` and appears after
+the page content, so a slow or blocked load leaves the rest of the site working.
+
+Note: on phones the bubble sits in the same bottom-right corner as the mobile booking dock
+(`.dock`). If they collide, either turn the dock off or lift the widget above it.
+
 ## What moves
 
 All vanilla JS in one `<script>` at the bottom of the file — no libraries, nothing to build.
