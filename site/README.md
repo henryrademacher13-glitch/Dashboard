@@ -12,6 +12,7 @@ Privacy — so you can click between all three from any of them.
 | `index.html` | The landing page — hero, what we do, how it works, pricing, live job-math calculator, FAQ, booking CTA |
 | `about.html` | Who we are, why one channel, how we work |
 | `privacy.html` | Privacy policy, 15 numbered clauses |
+| `terms.html` | Terms of service, 17 numbered clauses (generated from the privacy shell) |
 
 **The `:root` token block is duplicated in all three files.** That's the cost of keeping
 each page independently droppable — change `--rust` and you change it three times. If that
@@ -57,7 +58,8 @@ relative path.
 | GoDaddy / cPanel / any FTP | Upload all three `.html` files to the web root |
 | GitHub Pages | Push, then set Pages source to `/site` on this branch |
 
-Point your domain at it and you're live at `/`, `/about.html` and `/privacy.html`.
+Point your domain at it and you're live at `/`, `/about.html`, `/privacy.html` and
+`/terms.html`.
 
 **Until you deploy, the page-to-page links only work where all three files sit side by
 side.** They're relative (`href="privacy.html"`), which is what a real host needs — but it
@@ -120,6 +122,29 @@ the page content, so a slow or blocked load leaves the rest of the site working.
 
 Note: on phones the bubble sits in the same bottom-right corner as the mobile booking dock
 (`.dock`). If they collide, either turn the dock off or lift the widget above it.
+
+## A2P / carrier compliance
+
+The site is built to pass the GoHighLevel "Business Website Compliance Checklist" that
+A2P 10DLC brand registration puts in front of you:
+
+| Requirement | Where it's satisfied |
+| --- | --- |
+| Live, no 404s | Four pages, all internal links relative and resolving |
+| TOS **and** privacy policy | `terms.html` and `privacy.html`, linked from the nav and the footer of every page |
+| Address + phone present | Footer contact column on every page: `267-667-8665` and Philadelphia, Pennsylvania |
+| No affiliate / lead-buying language | Deliberate — the copy says leads are never resold or shared, and terms clause 02 states we are not a lead broker |
+| Chat widget integrated | See **Chat widget** above |
+| No phone/SMS-opt-in forms on widget pages | The only `<form>` is the calculator, which has range sliders and nothing else — no text inputs, no iframes |
+
+`terms.html` clause 12 carries the SMS language carriers look for: consent is not a
+condition of purchase, message frequency varies, rates may apply, STOP to opt out, HELP
+for help. **If you ever add a contact or lead form that takes a phone number, the last row
+above stops being true** — a form collecting phone numbers must not sit on a page that also
+embeds the chat widget.
+
+The terms and privacy pages are drafted from the facts of the business, not reviewed by a
+lawyer. Have counsel read them before you rely on them.
 
 ## What moves
 

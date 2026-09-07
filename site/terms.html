@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About Contractor.Ads</title>
-<meta name="description" content="Contractor.Ads is a small Philadelphia agency running Facebook and Instagram ad systems for contractors across the country." />
+<title>Terms of Service — Contractor.Ads</title>
+<meta name="description" content="The terms that govern Contractor.Ads's Meta advertising services — fees, term, ownership, messaging and liability." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20fill='%2316181C'/%3E%3Crect%20x='9'%20y='9'%20width='14'%20height='14'%20fill='%23C5563B'/%3E%3C/svg%3E" />
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,7 +13,7 @@
 
 <!--
   ============================================================================
-  CONTRACTOR.ADS — ABOUT PAGE
+  CONTRACTOR.ADS — TERMS OF SERVICE
   The :root token block below is duplicated in index.html and the other
   subpage. Change a brand colour in one, change it in all three.
   ============================================================================
@@ -264,22 +264,32 @@ strong{ color:var(--white); font-weight:600; }
 }
 
 /* ==========================================================================
-   9. Closing band
+   9. Numbered clauses — a policy really is a sequence, so it gets numbers
    ========================================================================== */
-.close{ background:var(--ink-2); border-bottom:1px solid var(--line); }
-.close-in{
-  display:grid; gap:var(--gap);
-  grid-template-columns:minmax(0,1fr);
-  padding-block:clamp(52px, 6vw, 84px);
+.clauses{ display:flex; flex-direction:column; gap:0; }
+.clause{
+  display:grid; gap:10px;
+  padding:26px 0;
+  border-top:1px solid var(--line);
 }
-.close-in > *{ min-width:0; }
-@media (min-width:900px){ .close-in{ grid-template-columns:1.2fr auto; align-items:center; } }
-.close h2{ font-size:clamp(1.8rem, 3.4vw, 2.6rem); margin-bottom:14px; }
-.close p{ color:var(--muted); max-width:52ch; }
-.close-act{ display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
-.close-act .alt{ font-family:var(--f-mono); font-size:0.78rem; color:var(--muted); }
-.close-act .alt a{ color:var(--text); text-decoration:none; border-bottom:1px solid var(--line-2); }
-.close-act .alt a:hover{ color:var(--rust-lift); border-color:var(--rust); }
+.clause:last-child{ border-bottom:1px solid var(--line); }
+.clause h2{
+  display:flex; gap:14px; align-items:baseline;
+  font-size:1.18rem; font-weight:700; color:var(--white);
+  letter-spacing:-0.015em;
+}
+.clause h2 .n{
+  font-family:var(--f-mono); font-size:0.78rem; font-weight:500;
+  color:var(--rust); flex:none; letter-spacing:0.1em;
+  font-variant-numeric:tabular-nums;
+}
+.clause p, .clause ul{ padding-left:36px; }
+.clause p{ color:var(--muted); max-width:70ch; }
+.clause .bullets li{ max-width:64ch; }
+.stamp-date{
+  font-family:var(--f-mono); font-size:0.76rem; color:var(--muted);
+  border:1px solid var(--line); padding:12px 16px; align-self:flex-start;
+}
 
 </style>
 </head>
@@ -294,9 +304,9 @@ strong{ color:var(--white); font-weight:600; }
       <a href="index.html#pricing">Pricing</a>
       <a href="index.html#faq">FAQ</a>
       <span class="nav-sep" aria-hidden="true"></span>
-      <a href="about.html" class="is-active">About</a>
+      <a href="about.html">About</a>
       <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
+      <a href="terms.html" class="is-active">Terms</a>
     </nav>
     <a class="btn btn-sm" href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a call</a>
     <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">
@@ -306,92 +316,228 @@ strong{ color:var(--white); font-weight:600; }
 </header>
 
 <main>
-
   <section class="page-head">
     <div class="wrap page-head-in">
       <div class="eyebrow">
         <span class="tick" aria-hidden="true"></span>
-        <span class="lbl">About</span>
+        <span class="lbl">Legal</span>
       </div>
-      <h1>A small agency in Philadelphia. Contractors across the country.</h1>
+      <h1>Terms of service</h1>
       <p class="stand">
-        We run Facebook and Instagram ads for contractors. That is all we do.
+        The terms we work under: what we provide, what it costs, how long it runs,
+        who owns what, and how we contact you. Plain language, no small print at
+        the bottom.
       </p>
+      <p class="stamp-date">Last updated: September 7, 2026</p>
     </div>
   </section>
 
   <section class="doc">
     <div class="wrap doc-in">
       <div class="doc-mark">
-        <span class="num">01</span>
-        <span class="nm">Who we are</span>
+        <span class="num">TERMS</span>
+        <span class="nm">17 clauses</span>
         <span class="rule" aria-hidden="true"></span>
       </div>
       <div class="doc-body">
-        <h2>Small on purpose</h2>
-        <p class="lead">
-          A buyer with forty accounts checks yours on a Tuesday if something breaks. We keep
-          the roster short enough that every account gets looked at daily.
-        </p>
-        <p>
-          Strategy, copy, media buying and creative all sit in house, our own editor included.
-          We are in Philadelphia; your campaigns run wherever your trucks do.
-        </p>
-      </div>
-    </div>
-  </section>
+        <div class="clauses">
 
-  <section class="doc">
-    <div class="wrap doc-in">
-      <div class="doc-mark">
-        <span class="num">02</span>
-        <span class="nm">Why one channel</span>
-        <span class="rule" aria-hidden="true"></span>
-      </div>
-      <div class="doc-body">
-        <h2>Meta only, and that is the point</h2>
-        <p class="lead">
-          Google catches people already searching. Meta reaches the homeowner who has been
-          putting the roof off for two years.
-        </p>
-        <p>
-          Six services getting ten per cent of the attention each is how contractors end up
-          paying for a monthly report. One channel, run daily, is a better trade.
-        </p>
-      </div>
-    </div>
-  </section>
+          <section class="clause">
+            <h2><span class="n">01</span>These terms</h2>
+            <p>
+              These Terms of Service govern the advertising services Contractor.Ads
+              (“we”, “us”) provides to a client (“you”), and your use of this website. By
+              engaging us, or by booking a call through this site, you agree to them. If we
+              sign a separate written agreement with you, that agreement controls wherever
+              it differs from these terms.
+            </p>
+          </section>
 
-  <section class="doc">
-    <div class="wrap doc-in">
-      <div class="doc-mark">
-        <span class="num">03</span>
-        <span class="nm">How we work</span>
-        <span class="rule" aria-hidden="true"></span>
-      </div>
-      <div class="doc-body">
-        <h2>The short version</h2>
-        <ul class="bullets">
-          <li>One contractor per trade, per market. We turn down your competitor.</li>
-          <li>Creative made in house, refreshed monthly.</li>
-          <li>We report booked estimates and closed jobs, not impressions.</li>
-          <li>90 days, then month to month.</li>
-          <li>Your ad account, pixel and creative stay yours.</li>
-          <li>No shared leads, and no guarantee we cannot back.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+          <section class="clause">
+            <h2><span class="n">02</span>What we provide</h2>
+            <p>
+              We plan, build and run Facebook and Instagram advertising campaigns for
+              contractors. A standard engagement covers offer strategy, ad creative produced
+              by our in-house editor, a landing page, conversion tracking, campaign build and
+              ongoing daily management with regular reporting. We advertise on Meta platforms
+              only. We are not a lead broker: we do not buy, sell, share or resell leads.
+            </p>
+          </section>
 
-  <section class="close">
-    <div class="wrap close-in">
-      <div>
-        <h2>See if the math works for your shop</h2>
-        <p>Thirty minutes. Your numbers, and a straight answer either way.</p>
-      </div>
-      <div class="close-act">
-        <a class="btn btn-lg" href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a call</a>
-        <p class="alt">Or call <a href="tel:+12676678665">267-667-8665</a></p>
+          <section class="clause">
+            <h2><span class="n">03</span>Fees</h2>
+            <p>
+              Our current fees are a one-time build fee of $500, a management fee of $2,000
+              per month, and a minimum advertising budget of $100 per day (about $3,000 a
+              month). Advertising budget is not paid to us — it is charged by Meta directly to
+              your own payment method on your own ad account. Fees are quoted in US dollars
+              and are exclusive of any applicable taxes. We may change our fees for future
+              terms on 30 days' written notice.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">04</span>Billing</h2>
+            <p>
+              The build fee is due before work begins. Management fees are billed monthly in
+              advance and are non-refundable once the month has begun, because the work and
+              the ad spend commitment start immediately. If a payment fails or is more than
+              seven days late, we may pause campaign management until it is resolved.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">05</span>Term and cancellation</h2>
+            <p>
+              The initial term is 90 days, because advertising needs roughly that long to
+              produce a fair read. After the initial term the engagement continues month to
+              month, and either of us may end it with 30 days' written notice. Ending the
+              engagement does not refund fees already billed for the current month, and does
+              not waive amounts already owed.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">06</span>Exclusivity</h2>
+            <p>
+              We work with one contractor per trade, per market. For as long as you are an
+              active client, we will not take on a direct competitor in your trade in your
+              service area. That protection ends when the engagement ends.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">07</span>What we need from you</h2>
+            <p>
+              Results depend on your participation. You agree to give us timely access to the
+              accounts and assets we need, to supply job-site footage against the shot list we
+              provide, to respond to approval requests within a reasonable time, and to
+              contact inbound leads promptly. We are not responsible for underperformance
+              caused by delays in access, approvals or lead follow-up.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">08</span>Your accounts and your property</h2>
+            <p>
+              Campaigns run in your own Meta ad account. Your ad account, pixel, audiences,
+              page, domain and the creative we produce for you remain yours, during the
+              engagement and after it ends. We claim no ownership over them. We retain
+              ownership of our own internal templates, processes and tooling.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">09</span>Your content and permissions</h2>
+            <p>
+              You grant us a licence to use the footage, photos, logos, testimonials and other
+              material you supply for the purpose of building and running your campaigns. You
+              confirm that you own that material or have permission to use it, and that it
+              does not infringe anyone else's rights. You are responsible for the accuracy of
+              the claims, pricing, licence numbers and guarantees you ask us to advertise.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">10</span>Platform rules</h2>
+            <p>
+              All campaigns are subject to Meta's advertising policies and terms, which Meta
+              controls and can change without notice. Meta may reject an ad, restrict or
+              disable an ad account for reasons outside our control. We will work to resolve
+              such issues, but we cannot guarantee reinstatement and we are not liable for
+              losses caused by a platform's decision.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">11</span>No guarantee of results</h2>
+            <p>
+              We do not guarantee any particular number of leads, booked estimates, closed
+              jobs, cost per lead or return on ad spend. Any figures shown on this site,
+              including those produced by the calculator, are illustrative examples using
+              assumptions you set — they are not projections, forecasts or promises. Results
+              vary with trade, season, market, offer, budget and your own sales process.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">12</span>Communications and text messages</h2>
+            <p>
+              By giving us your phone number — on a call, by email, or through our chat widget
+              — you agree that we may contact you at that number about your enquiry and your
+              account, including by SMS text message. Consent to receive text messages is not
+              a condition of purchasing anything from us.
+              <br /><br />
+              Message frequency varies. Message and data rates may apply. Reply STOP to any
+              text to opt out, and HELP for help. You can also opt out by emailing us at the
+              address in clause 17. We will honour an opt-out promptly, though we may still
+              contact you by phone or email about an active engagement. Mobile carriers are
+              not liable for delayed or undelivered messages. See our
+              <a href="privacy.html">privacy policy</a> for how we handle your information.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">13</span>Confidentiality</h2>
+            <p>
+              Each of us may learn confidential information about the other — your pricing,
+              margins and customer data on one side, our methods and reporting on the other.
+              Neither of us will disclose the other's confidential information to a third
+              party except to people who need it to do this work, or where the law requires
+              disclosure. With your permission we may reference your business and results as
+              a case study; without it, we will not.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">14</span>Limitation of liability</h2>
+            <p>
+              To the fullest extent the law allows, neither party is liable to the other for
+              indirect, incidental, special or consequential damages, or for lost profits or
+              lost business opportunity. Our total liability arising out of or relating to the
+              engagement is limited to the management fees you paid us in the three months
+              before the claim arose. Nothing in these terms limits liability that cannot be
+              limited by law.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">15</span>Indemnity</h2>
+            <p>
+              You agree to indemnify us against claims, damages and reasonable legal costs
+              arising from material you supplied, from claims you asked us to advertise, from
+              your products and services, or from your breach of these terms. We agree to
+              indemnify you on the same basis for our own breach or negligence.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">16</span>Governing law</h2>
+            <p>
+              These terms are governed by the laws of the Commonwealth of Pennsylvania,
+              without regard to its conflict-of-laws rules. Any dispute will be brought in the
+              state or federal courts located in Philadelphia County, Pennsylvania, and both
+              parties consent to that venue. We will each try in good faith to resolve a
+              dispute directly before starting proceedings.
+            </p>
+          </section>
+
+          <section class="clause">
+            <h2><span class="n">17</span>Changes, and how to reach us</h2>
+            <p>
+              We may update these terms; the date below shows when they last changed, and
+              material changes will be flagged on this page before they take effect.
+              Continuing to work with us after a change means you accept it.
+              <br /><br />
+              Contractor.Ads<br />
+              Philadelphia, Pennsylvania, United States<br />
+              Email <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
+        <p class="foot-addr">Philadelphia, Pennsylvania<br />United States</p><br />
+              Phone <a href="tel:+12676678665">267-667-8665</a>
+            </p>
+          </section>
+
+        </div>
       </div>
     </div>
   </section>
@@ -416,7 +562,6 @@ strong{ color:var(--white); font-weight:600; }
         <span class="lbl">Contact</span>
         <a href="tel:+12676678665">267-667-8665</a>
         <a href="mailto:Contractor.adsagency@gmail.com">Contractor.adsagency@gmail.com</a>
-        <p class="foot-addr">Philadelphia, Pennsylvania<br />United States</p>
         <a href="https://calendly.com/contractor-adsagency/30min" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/contractor-adsagency/30min'});return false;">Book a call</a>
       </div>
     </div>
