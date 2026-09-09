@@ -65,8 +65,8 @@ no Gmail tools, and do nothing — so it is off until the two steps below are do
    offers no way to attach a connector to an existing Routine, delete it and
    recreate it there, pasting the prompt from `.claude/skills/email-scanner/SKILL.md`.
 3. **Enable the Routine** once Gmail is attached.
-4. **Watch the first live run.** Replies auto-send with no review step, so the
-   first real email is the only cheap chance to check the tone and format.
+4. **Send a test email** from the watched address once it is live, so the first
+   real reply is one you chose to trigger.
 
 Also worth clearing: setup left one draft in the account, subject
 `[AutoAnswer] scope test — safe to delete`, no recipient. It cannot send.
@@ -83,13 +83,19 @@ Also worth clearing: setup left one draft in the account, subject
 
 Routine id: `trig_01PtDnN6nNgD9qnvuHWaXDCW` (hourly, `5 * * * *` UTC).
 
-## Cadence limit
+## Settled decisions
 
-You asked for every 15 minutes. Claude Routines enforce a **1-hour minimum**, so
-this runs hourly. Sub-hourly needs a different runtime: a Python script using the
-Gmail API plus the Anthropic API, on cron or a GitHub Actions schedule. That
-costs a Google Cloud project, OAuth credentials, an `ANTHROPIC_API_KEY`, and a
-host — worth it only if the hour of latency is actually a problem in practice.
+**Cadence: hourly.** Claude Routines enforce a 1-hour minimum, so a sub-hourly
+sweep would have meant a different runtime entirely (a Python script on cron
+using the Gmail API plus the Anthropic API, with its own GCP project, OAuth
+credentials and host). Hourly on the connector path was accepted instead. Worst
+case latency is therefore about an hour from send to reply.
+
+**Send mode: auto-send, no review step.** Replies go out in-thread under the
+owner's name with no draft stage and no approval. This was chosen deliberately.
+The consequence to keep in mind: a misread PDF or a wrong answer is sent, not
+caught — the runbook's step 5 exists precisely so unreadable input produces an
+honest "resend this" line instead of a fabricated answer.
 
 ## Safety model
 
