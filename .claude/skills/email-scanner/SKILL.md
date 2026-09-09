@@ -154,3 +154,4 @@ name, driven entirely by untrusted inbound content.
 | Gmail tools missing entirely | Connector disconnected / needs re-auth | Stop, report that Gmail needs re-authorization. |
 | Same message answered twice | Reply was not detected in thread order | Check timestamp comparison in step 2 before sending anything further. |
 | Attachment has `id` but no `content` | Connector did not inline bytes | Reply asking for a re-send, per step 5. |
+| Inline-pasted screenshot unreadable | Images pasted into the body arrive with no readable bytes (confirmed 2026-09-09) | Reply asking for it to be re-sent as an attached file, not pasted inline. Never guess at the contents. |

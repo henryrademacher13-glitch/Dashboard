@@ -97,6 +97,27 @@ The consequence to keep in mind: a misread PDF or a wrong answer is sent, not
 caught — the runbook's step 5 exists precisely so unreadable input produces an
 honest "resend this" line instead of a fabricated answer.
 
+## Known limitation: inline-pasted images
+
+The first live run (2026-09-09) hit this immediately. The sender pasted a
+worksheet screenshot **inline** into the message body rather than attaching it
+as a file. It arrived with an attachment entry but **no readable bytes**, so the
+scanner could not see any of the questions and correctly replied asking for a
+re-send instead of fabricating answers.
+
+This connector exposes no attachment-fetch call, so when bytes are not inlined
+there is no second way to retrieve them.
+
+**Workaround:** have the sender attach the file (PDF or photo attached as a file)
+rather than pasting the image into the body.
+
+**Untested:** whether a true file attachment carries readable bytes through this
+connector. One inline paste failed; a real attachment has not been through the
+path yet. If real attachments also come back empty, the connector cannot read
+attachments at all, and answering anything that is not plain body text would
+require the Gmail API path (`messages.attachments.get`), which fetches bytes
+directly.
+
 ## Safety model
 
 The scanner sends mail automatically under your name based on content written by
