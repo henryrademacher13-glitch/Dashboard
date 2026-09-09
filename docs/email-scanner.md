@@ -1,5 +1,11 @@
 # Email Auto-Answer Scanner
 
+> **The Python scanner in [`scanner/`](../scanner/README.md) is now the live
+> system.** It runs on GitHub Actions every 15 minutes and — unlike the connector
+> path documented below — it can actually read PDF and image attachments. The
+> hourly Claude Routine is **disabled**; this document is kept for the history of
+> why, and the connector-based skill remains for manual `/email-scanner` runs.
+
 Watches the Gmail inbox for mail from **`s036407@students.lmsd.org`**, reads the
 message and any PDF attachments, answers the questions, and replies in the same
 thread automatically.
@@ -39,37 +45,18 @@ for dedup, so a failed `git push` never blocks a reply or causes a double-send.
 
 ## Current status
 
-**Not yet running.** Everything is built; two account-level prerequisites block it.
-
 | Component | State |
 | --- | --- |
-| Skill + runbook | Committed |
-| Routine `trig_01PtDnN6nNgD9qnvuHWaXDCW` | Created, hourly at :05 UTC, **disabled on purpose** |
-| Gmail read + send scope | Confirmed working (draft compose succeeded) |
-| Gmail label scope | Missing — not required by this design |
-| Gmail connector auth | **Disconnected** — needs re-authorization |
-| Connectors attached to Routine | **None** — this org cannot attach them via API |
+| **Python scanner (`scanner/`)** | **Live path** — GitHub Actions, every 15 min, reads attachments |
+| Claude Routine `trig_01PtDnN6nNgD9qnvuHWaXDCW` | **Disabled** — superseded, kept for reference |
+| Connector skill (`/email-scanner`) | Works for manual runs; cannot read attachments |
 
-The Routine is deliberately disabled. It fires a fresh session with **no
-connector tools attached**, because this organization does not permit attaching
-connectors to a Routine through the API. Left enabled it would wake hourly, find
-no Gmail tools, and do nothing — so it is off until the two steps below are done.
+Setup for the Python path is in [`scanner/README.md`](../scanner/README.md) —
+four secrets and a Google Cloud project.
 
-## Turning it on
-
-1. **Re-authorize Gmail.** claude.ai -> Settings -> Connectors -> Gmail ->
-   reconnect. It disconnected during setup.
-2. **Attach Gmail to the Routine, in the claude.ai Routines UI.** Open
-   `Email auto-answer — s036407@students.lmsd.org` and add Gmail to its
-   connectors. This cannot be done from a coding session on this org. If the UI
-   offers no way to attach a connector to an existing Routine, delete it and
-   recreate it there, pasting the prompt from `.claude/skills/email-scanner/SKILL.md`.
-3. **Enable the Routine** once Gmail is attached.
-4. **Send a test email** from the watched address once it is live, so the first
-   real reply is one you chose to trigger.
-
-Also worth clearing: setup left one draft in the account, subject
-`[AutoAnswer] scope test — safe to delete`, no recipient. It cannot send.
+The Routine was disabled deliberately: two systems sweeping the same mailbox
+could each reply before seeing the other's reply, and the thread-ordering dedup
+cannot protect against that race.
 
 ## Changing the configuration
 
