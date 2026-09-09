@@ -97,26 +97,49 @@ The consequence to keep in mind: a misread PDF or a wrong answer is sent, not
 caught — the runbook's step 5 exists precisely so unreadable input produces an
 honest "resend this" line instead of a fabricated answer.
 
-## Known limitation: inline-pasted images
+## Blocking limitation: the connector cannot read attachments
 
-The first live run (2026-09-09) hit this immediately. The sender pasted a
-worksheet screenshot **inline** into the message body rather than attaching it
-as a file. It arrived with an attachment entry but **no readable bytes**, so the
-scanner could not see any of the questions and correctly replied asking for a
-re-send instead of fabricating answers.
+**Settled by two live runs on 2026-09-09. This is structural, not a fluke.**
 
-This connector exposes no attachment-fetch call, so when bytes are not inlined
-there is no second way to retrieve them.
+| Run | Attachment | How sent | Result |
+| --- | --- | --- | --- |
+| 22:17 | worksheet screenshot | pasted inline | attachment entry, **no readable bytes** |
+| 22:22 | `Screenshot ... .png` (image/png) | **true file attachment** | `id` only, **no base64 `content`** |
 
-**Workaround:** have the sender attach the file (PDF or photo attached as a file)
-rather than pasting the image into the body.
+The second run was the deciding test: a proper file attachment behaves exactly
+like an inline paste. The connector returns an attachment `id` and never the
+bytes. The Gmail `Attachment` schema says an `id` means the content "can be
+retrieved in a separate `GetMessageAttachment` request" — and this connector
+exposes no such tool. There is no second way to fetch it.
 
-**Untested:** whether a true file attachment carries readable bytes through this
-connector. One inline paste failed; a real attachment has not been through the
-path yet. If real attachments also come back empty, the connector cannot read
-attachments at all, and answering anything that is not plain body text would
-require the Gmail API path (`messages.attachments.get`), which fetches bytes
-directly.
+**Consequence: the scanner can read message bodies and nothing else.** Every
+worksheet sent as a PDF or an image — which is how they are normally sent — will
+produce a polite "please re-send" reply rather than answers. The reply half works
+perfectly; the reading half only works for plain body text.
+
+PDFs specifically were not tested, but the mechanism is identical: the connector
+hands back an `id` and withholds `content` regardless of type.
+
+### The only fix
+
+Read attachments through the Gmail API directly, via
+`users.messages.attachments.get`, which returns the bytes. That means the Python
+runtime originally scoped out:
+
+- a Google Cloud project with the Gmail API enabled
+- OAuth credentials for the mailbox
+- an `ANTHROPIC_API_KEY`
+- a host to run it (cron box, or GitHub Actions on a schedule)
+
+That path also removes the 1-hour floor, so the 15-minute cadence becomes
+available again as a side effect.
+
+### Meanwhile
+
+The hourly Routine is live and safe to leave running. It answers anything sent as
+body text and asks for a re-send on anything it cannot read. It never fabricates.
+If the sender can paste worksheet questions as text instead of a screenshot, it
+works today.
 
 ## Safety model
 
