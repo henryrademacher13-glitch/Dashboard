@@ -39,23 +39,37 @@ for dedup, so a failed `git push` never blocks a reply or causes a double-send.
 
 ## Current status
 
+**Not yet running.** Everything is built; two account-level prerequisites block it.
+
 | Component | State |
 | --- | --- |
 | Skill + runbook | Committed |
-| Routine (hourly) | Created — see `Routines` in claude.ai |
-| Gmail read + send scope | Confirmed working |
-| Gmail label scope | **Missing** — not required by this design |
-| Gmail connector auth | **Needs re-authorization** (disconnected during setup) |
+| Routine `trig_01PtDnN6nNgD9qnvuHWaXDCW` | Created, hourly at :05 UTC, **disabled on purpose** |
+| Gmail read + send scope | Confirmed working (draft compose succeeded) |
+| Gmail label scope | Missing — not required by this design |
+| Gmail connector auth | **Disconnected** — needs re-authorization |
+| Connectors attached to Routine | **None** — this org cannot attach them via API |
 
-## Setup you still need to do
+The Routine is deliberately disabled. It fires a fresh session with **no
+connector tools attached**, because this organization does not permit attaching
+connectors to a Routine through the API. Left enabled it would wake hourly, find
+no Gmail tools, and do nothing — so it is off until the two steps below are done.
 
-1. **Re-authorize the Gmail connector.** It disconnected partway through setup.
-   claude.ai -> Settings -> Connectors -> Gmail -> reconnect. Until this is done
-   the Routine will fire and find no Gmail tools.
-2. **Delete the scope-test draft.** Setup left one draft in the account, subject
-   `[AutoAnswer] scope test — safe to delete`, with no recipient. It cannot send.
-3. **Watch the first live run** before trusting it unattended, since replies
-   auto-send with no review step.
+## Turning it on
+
+1. **Re-authorize Gmail.** claude.ai -> Settings -> Connectors -> Gmail ->
+   reconnect. It disconnected during setup.
+2. **Attach Gmail to the Routine, in the claude.ai Routines UI.** Open
+   `Email auto-answer — s036407@students.lmsd.org` and add Gmail to its
+   connectors. This cannot be done from a coding session on this org. If the UI
+   offers no way to attach a connector to an existing Routine, delete it and
+   recreate it there, pasting the prompt from `.claude/skills/email-scanner/SKILL.md`.
+3. **Enable the Routine** once Gmail is attached.
+4. **Watch the first live run.** Replies auto-send with no review step, so the
+   first real email is the only cheap chance to check the tone and format.
+
+Also worth clearing: setup left one draft in the account, subject
+`[AutoAnswer] scope test — safe to delete`, no recipient. It cannot send.
 
 ## Changing the configuration
 
@@ -66,6 +80,8 @@ for dedup, so a failed `git push` never blocks a reply or causes a double-send.
 | Answer style / length | "Compose the answer" section of `SKILL.md` |
 | Schedule | The Routine's cron in claude.ai -> Routines |
 | Pause it | Disable the Routine in claude.ai -> Routines |
+
+Routine id: `trig_01PtDnN6nNgD9qnvuHWaXDCW` (hourly, `5 * * * *` UTC).
 
 ## Cadence limit
 
