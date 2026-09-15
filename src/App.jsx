@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Plus, ChevronLeft, ChevronRight, LayoutGrid, CalendarDays, BarChart2 } from 'lucide-react';
+import { Plus, ChevronLeft, ChevronRight, LayoutGrid, CalendarDays, BarChart2, Globe } from 'lucide-react';
 import { useHabitStore } from './store';
+import { useScrapes } from './useScrapes';
 import HabitCard from './components/HabitCard';
 import WeekView from './components/WeekView';
 import StatsPanel from './components/StatsPanel';
 import AddHabitModal from './components/AddHabitModal';
+import ScrapeFeed from './components/ScrapeFeed';
 import './App.css';
 
 function formatDate(d) {
@@ -16,6 +18,7 @@ export default function App() {
   const [showAdd, setShowAdd] = useState(false);
   const [weekOffset, setWeekOffset] = useState(0);
   const store = useHabitStore();
+  const scrapes = useScrapes();
 
   const today = new Date();
   const completedToday = store.habits.filter(h => store.isComplete(h.id)).length;
@@ -46,6 +49,9 @@ export default function App() {
         </button>
         <button className={view === 'stats' ? 'active' : ''} onClick={() => setView('stats')}>
           <BarChart2 size={15} /> Stats
+        </button>
+        <button className={view === 'feed' ? 'active' : ''} onClick={() => setView('feed')}>
+          <Globe size={15} /> Feed
         </button>
       </nav>
 
@@ -117,6 +123,17 @@ export default function App() {
                 </div>
               ))}
             </div>
+          </section>
+        )}
+
+        {view === 'feed' && (
+          <section>
+            <ScrapeFeed
+              status={scrapes.status}
+              feed={scrapes.feed}
+              error={scrapes.error}
+              onReload={scrapes.reload}
+            />
           </section>
         )}
       </main>

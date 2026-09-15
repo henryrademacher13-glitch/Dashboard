@@ -1,0 +1,25 @@
+{
+  "$comment": "Edit this file to change what the dashboard feed shows. Field reference: scraper/README.md. The prompt IS the schema — name the fields you want.",
+  "sources": [
+    {
+      "id": "daily-quote",
+      "label": "Daily quote",
+      "emoji": "💬",
+      "color": "#f59e0b",
+      "url": "https://quotes.toscrape.com/",
+      "prompt": "Return a JSON object with keys 'quote' (the text of the first quote on the page, without surrounding quotation marks), 'author' (the author's name), and 'tags' (an array of the tag strings listed under that quote).",
+      "note": "Sample source — a site published expressly for scraping practice.",
+      "enabled": true
+    },
+    {
+      "id": "hn-top",
+      "label": "Top of Hacker News",
+      "emoji": "📰",
+      "color": "#10b981",
+      "url": "https://news.ycombinator.com/",
+      "prompt": "Return a JSON object with a key 'stories' holding an array of the top 5 stories. Each element must have 'title' (string), 'url' (the story's link, absolute), and 'points' (integer). Do not invent stories that are not on the page.",
+      "note": "Sample source — swap in whatever you actually want to track.",
+      "enabled": true
+    }
+  ]
+}

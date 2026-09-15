@@ -1,0 +1,36 @@
+# The vendored library itself is imported from vendor/scrapegraph-ai/ (see
+# scraper/main.py), so scrapegraphai is NOT installed from PyPI here — only its
+# dependencies, pinned to the floors declared in
+# vendor/scrapegraph-ai/pyproject.toml.
+#
+# Requires Python 3.12+ (upstream's requires-python).
+
+# --- Anthropic backend ---
+# Not an upstream dependency: scrapegraphai routes "anthropic/..." through
+# langchain's init_chat_model, which needs this package present.
+langchain-anthropic>=1.0.0
+
+# --- upstream core ---
+langchain>=1.2.0
+langchain-classic>=1.0.0
+langchain-openai>=1.1.6
+langchain-mistralai>=1.1.1
+langchain_community>=0.4.0
+langchain-aws>=1.1.0
+langchain-ollama>=1.0.1
+html2text>=2025.4.15
+beautifulsoup4>=4.14.3
+python-dotenv>=1.2.1
+tiktoken>=0.12.0
+tqdm>=4.67.1
+minify-html>=0.18.1
+free-proxy>=1.1.3
+playwright>=1.57.0
+undetected-playwright>=0.3.0
+semchunk>=3.2.5
+async-timeout>=4.0.0
+simpleeval>=1.0.3
+jsonschema>=4.25.1
+ddgs>=9.0.0
+pydantic>=2.12.5
+scrapegraph-py>=2.0.0
