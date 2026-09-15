@@ -1,0 +1,19 @@
+{
+  "$comment": "Your qualifying rules. Edit these, not the code. Matching is case-insensitive substring, so 'roof' catches 'Roofing Contractor' and 'Commercial Roofer'.",
+  "geography": {
+    "states": ["PA"],
+    "cities": [],
+    "$note": "Empty cities = anywhere in the listed states. Both empty = no geographic filter at all."
+  },
+  "trades": [
+    "roofing",
+    "hvac",
+    "plumbing",
+    "electrical",
+    "landscaping",
+    "remodeling",
+    "painting",
+    "concrete"
+  ],
+  "require_contactable": true
+}
