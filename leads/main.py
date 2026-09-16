@@ -18,7 +18,7 @@ from pathlib import Path
 
 from .filters import CRITERIA_PATH, Criteria, CriteriaError, qualify
 from .models import dedupe
-from .sources import apollo
+from .sources import apollo, apollo_orgs
 from .spreadsheet import write_workbook
 
 DEFAULT_OUTPUT = Path("leads") / "out" / "leads.xlsx"
@@ -43,6 +43,10 @@ def main(argv: list[str] | None = None) -> int:
                         help="raw JSON payload from the source")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--criteria", type=Path, default=CRITERIA_PATH)
+    parser.add_argument("--source", choices=("apollo", "apollo-orgs"),
+                        default="apollo",
+                        help="payload shape: 'apollo' for People Search records, "
+                             "'apollo-orgs' for company-enrichment records")
     parser.add_argument("--inspect", action="store_true",
                         help="report field mapping coverage and exit")
     parser.add_argument("--keep-rejected", action="store_true", default=True,
@@ -59,8 +63,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"{args.input} is not valid JSON: {exc}", file=sys.stderr)
         return 2
 
-    leads = apollo.from_response(payload)
-    unmapped = apollo.unmapped_keys(payload)
+    adapter = apollo_orgs if args.source == "apollo-orgs" else apollo
+    leads = adapter.from_response(payload)
+    unmapped = adapter.unmapped_keys(payload)
 
     if args.inspect:
         print(f"records parsed:      {len(leads)}")
