@@ -1,17 +1,20 @@
 """Fetch Google Maps search results via scrape.do and save the raw JSON.
 
-Run this where api.scrape.do is reachable — it is blocked by the egress policy
-inside the Claude Code session, so this script is written to run on your own
-machine and hand the payload back.
+api.scrape.do is blocked by the egress policy inside Claude Code sessions, so
+run this on a machine that can reach it.
 
-    export SCRAPEDO_TOKEN=...          # never pass the token as an argument
-    python leads/fetch_gmaps.py --query "roofing contractor" --near "Trenton, NJ" --pages 3
+    export SCRAPEDO_TOKEN=...
+    python3 leads/fetch_gmaps.py --probe --query "roofing contractor Trenton NJ"
+    python3 leads/fetch_gmaps.py --query "roofing contractor" --near "Trenton, NJ"
 
-This deliberately does NOT parse anything. It writes the payload verbatim to
-leads/in/gmaps-raw/ so the field mapping can be written against a real
-response. sources/apollo.py was written against documented field names without
-a live payload and mapped 0 of 10 company names on its first real run; the
-whole point of saving raw first is not to repeat that.
+--probe walks a small matrix of parameter spellings and prints the status and
+response body for each, so the API itself tells us the correct shape. Use it
+once; after that the working spelling is known.
+
+This never maps fields. It writes the payload verbatim to leads/in/gmaps-raw/
+and reports only the key names it actually observed. sources/apollo.py was
+written against documented field names with no live payload and mapped 0 of 10
+company names on its first real run; raw-first exists so that cannot recur.
 """
 from __future__ import annotations
 
@@ -21,6 +24,7 @@ import os
 import re
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -33,71 +37,126 @@ def slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:60]
 
 
-def fetch(token: str, params: dict, timeout: int = 90) -> dict:
+def call(token: str, params: dict, timeout: int = 90) -> tuple[int, str]:
+    """Return (status, body). Never raises on HTTP error — the body is the point."""
     url = f"{ENDPOINT}?{urllib.parse.urlencode({**params, 'token': token})}"
     req = urllib.request.Request(url, headers={"Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        body = resp.read().decode("utf-8")
-    return json.loads(body)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status, resp.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as exc:
+        # HTTPError *is* the response; its body carries the actual complaint.
+        return exc.code, exc.read().decode("utf-8", "replace")
+    except urllib.error.URLError as exc:
+        return 0, f"URLError: {exc.reason}"
+
+
+def describe(payload) -> None:
+    """Report observed shape only — no assumptions about field names."""
+    if isinstance(payload, dict):
+        print(f"    top-level keys: {sorted(payload)}")
+        for key, val in payload.items():
+            if isinstance(val, list) and val and isinstance(val[0], dict):
+                print(f"    {key}[{len(val)}] record keys: {sorted(val[0])}")
+    elif isinstance(payload, list) and payload and isinstance(payload[0], dict):
+        print(f"    list[{len(payload)}] record keys: {sorted(payload[0])}")
+    else:
+        print(f"    payload is {type(payload).__name__}")
+
+
+def probe(token: str, query: str) -> int:
+    """Try plausible parameter spellings; print status + body for each."""
+    variants = [
+        ("q only",             {"q": query}),
+        ("query only",         {"query": query}),
+        ("q + geo",            {"q": query, "hl": "en", "gl": "us"}),
+        ("query + geo",        {"query": query, "hl": "en", "gl": "us"}),
+        ("q + ll",             {"q": query, "ll": "@40.2206,-74.7597,11z"}),
+        ("search_query",       {"search_query": query}),
+        ("keyword",            {"keyword": query}),
+    ]
+    winner = None
+    for label, params in variants:
+        status, body = call(token, params)
+        snippet = body[:300].replace("\n", " ")
+        print(f"\n[{label}] HTTP {status}\n    params: {params}\n    body: {snippet}")
+        if status == 200 and winner is None:
+            winner = (label, params, body)
+
+    if not winner:
+        print("\nNo variant returned 200. Paste the bodies above back and the "
+              "parameter names can be corrected from the API's own message.")
+        return 1
+
+    label, params, body = winner
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    path = OUT_DIR / f"probe-{slug(query)}.json"
+    try:
+        payload = json.loads(body)
+        path.write_text(json.dumps(payload, indent=1), encoding="utf-8")
+        print(f"\nWORKING VARIANT: [{label}] -> {params}")
+        print(f"saved {path}")
+        describe(payload)
+    except json.JSONDecodeError:
+        path.write_text(body, encoding="utf-8")
+        print(f"\nWORKING VARIANT: [{label}] but body is not JSON; saved raw to {path}")
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--query", required=True, help='e.g. "roofing contractor"')
-    ap.add_argument("--near", default="", help='e.g. "Trenton, NJ" (appended to query)')
-    ap.add_argument("--ll", default="", help="pin to @lat,lng,zoom — e.g. @40.2206,-74.7597,11z")
-    ap.add_argument("--pages", type=int, default=1, help="pages to walk (20 results each)")
+    ap.add_argument("--query", required=True)
+    ap.add_argument("--near", default="", help='appended to query, e.g. "Trenton, NJ"')
+    ap.add_argument("--probe", action="store_true",
+                    help="try parameter spellings and print each response body")
+    ap.add_argument("--param", default="q", help="query parameter name (default: q)")
+    ap.add_argument("--ll", default="", help="@lat,lng,zoom")
+    ap.add_argument("--pages", type=int, default=1)
     ap.add_argument("--hl", default="en")
     ap.add_argument("--gl", default="us")
-    ap.add_argument("--sleep", type=float, default=1.5, help="seconds between pages")
+    ap.add_argument("--sleep", type=float, default=1.5)
     args = ap.parse_args(argv)
 
     token = os.environ.get("SCRAPEDO_TOKEN", "").strip()
     if not token:
-        print("SCRAPEDO_TOKEN is not set. export it first — do not paste the token "
-              "into a shell argument or a chat window.", file=sys.stderr)
+        print("SCRAPEDO_TOKEN is not set.", file=sys.stderr)
         return 2
 
     query = f"{args.query} {args.near}".strip()
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    written: list[Path] = []
 
+    if args.probe:
+        return probe(token, query)
+
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     for page in range(args.pages):
-        params = {"query": query, "hl": args.hl, "gl": args.gl}
+        params = {args.param: query, "hl": args.hl, "gl": args.gl}
         if args.ll:
             params["ll"] = args.ll
         if page:
             params["start"] = page * 20
 
-        try:
-            payload = fetch(token, params)
-        except Exception as exc:                      # noqa: BLE001 - report and stop
-            print(f"page {page + 1}: request failed: {exc}", file=sys.stderr)
-            print("If this is a 403 at CONNECT, the host is blocked by a network "
-                  "policy rather than by your token.", file=sys.stderr)
+        status, body = call(token, params)
+        if status != 200:
+            print(f"page {page + 1}: HTTP {status}", file=sys.stderr)
+            print(f"  body: {body[:500]}", file=sys.stderr)
+            print("  re-run with --probe to find the correct parameter names.",
+                  file=sys.stderr)
             return 1
 
         path = OUT_DIR / f"{slug(query)}-p{page + 1}.json"
-        path.write_text(json.dumps(payload, indent=1), encoding="utf-8")
-        written.append(path)
-
-        # Report shape only — no mapping, no assumptions about field names.
-        if isinstance(payload, dict):
-            top = sorted(payload.keys())
-            listy = [k for k, v in payload.items() if isinstance(v, list) and v]
-            print(f"page {page + 1}: wrote {path.name} | top-level keys: {top}")
-            for key in listy:
-                first = payload[key][0]
-                if isinstance(first, dict):
-                    print(f"    {key}[{len(payload[key])}] record keys: {sorted(first)}")
-        else:
-            print(f"page {page + 1}: wrote {path.name} | payload is {type(payload).__name__}")
+        try:
+            payload = json.loads(body)
+            path.write_text(json.dumps(payload, indent=1), encoding="utf-8")
+            print(f"page {page + 1}: wrote {path.name}")
+            describe(payload)
+        except json.JSONDecodeError:
+            path.write_text(body, encoding="utf-8")
+            print(f"page {page + 1}: non-JSON body saved to {path.name}")
 
         if page + 1 < args.pages:
             time.sleep(args.sleep)
 
-    print(f"\n{len(written)} file(s) in {OUT_DIR}")
-    print("Send these back and the mapping gets written against the real shape.")
+    print(f"\nfiles in {OUT_DIR}")
     return 0
 
 
