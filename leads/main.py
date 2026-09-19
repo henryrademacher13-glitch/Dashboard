@@ -19,7 +19,6 @@ from pathlib import Path
 from .filters import CRITERIA_PATH, Criteria, CriteriaError, qualify
 from .models import dedupe
 from .sources import apollo, apollo_orgs, gmaps
-from .spreadsheet import write_workbook
 
 DEFAULT_OUTPUT = Path("leads") / "out" / "leads.xlsx"
 
@@ -94,6 +93,10 @@ def main(argv: list[str] | None = None) -> int:
     before = len(leads)
     leads = dedupe(leads)
     qualified, rejected = qualify(leads, criteria)
+
+    # Imported here, not at module scope: --inspect writes no spreadsheet and
+    # must stay runnable on a machine without openpyxl installed.
+    from .spreadsheet import write_workbook
 
     path = write_workbook(
         args.output, qualified,
