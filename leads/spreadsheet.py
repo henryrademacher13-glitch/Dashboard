@@ -40,6 +40,7 @@ COLUMNS: list[tuple[str, str | None, int]] = [
     ("Contactable", None,            12),  # formula
     ("Status",      None,            14),  # you fill in
     ("Notes",       None,            30),  # you fill in
+    ("Source Notes","notes",         34),  # written by the adapter; overwritten on export
     ("Source",      "source",        12),
     ("Retrieved",   "retrieved_at",  20),
     ("Source ID",   "source_id",     14),
