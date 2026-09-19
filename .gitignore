@@ -28,3 +28,7 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+leads/in/gmaps-raw/*.json
+!leads/in/gmaps-raw/.gitkeep
+.env
+.env.*
