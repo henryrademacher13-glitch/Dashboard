@@ -120,7 +120,7 @@ def from_response(payload: Any) -> list[Lead]:
 
 def unmapped_keys(payload: Any) -> set[str]:
     read = {"title", "address", "website", "phone", "rating", "reviews",
-            "types", "type", "place_id", "data_cid"}
+            "types", "type", "place_id", "data_cid", "unclaimed_listing"}
     seen: set[str] = set()
     for record in _records(payload):
         seen |= set(record.keys())
