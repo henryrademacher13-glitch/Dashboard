@@ -50,23 +50,29 @@ def _records(payload: Any) -> list[dict]:
     return []
 
 
-def _split_address(address: str) -> tuple[str, str]:
-    """('123 Main St, Trenton, NJ 08608') -> ('Trenton', 'NJ').
+def _split_address(address: str) -> tuple[str, str, str]:
+    """('123 Main St, Trenton, NJ 08608') -> ('123 Main St', 'Trenton', 'NJ').
+
+    Street is returned separately because a CRM import wants it in its own
+    column: repeating the city and state inside the street line duplicates the
+    dedicated fields and confuses column auto-mapping on the way in.
 
     Maps writes the state as a two-letter code already, which is what
     criteria.json matches on, so no normalization table is needed here.
     """
     address = (address or "").strip()
     if not address:
-        return "", ""
+        return "", "", ""
     match = STATE_RE.search(address)
     if not match:
-        return "", ""
+        # No parseable state: keep the whole string as street rather than
+        # discarding an address that a human could still read and use.
+        return address, "", ""
     state = match.group(1)
-    head = address[: match.start()]
-    parts = [p.strip() for p in head.split(",") if p.strip()]
+    parts = [p.strip() for p in address[: match.start()].split(",") if p.strip()]
     city = parts[-1] if parts else ""
-    return city, state
+    street = ", ".join(parts[:-1]) if len(parts) > 1 else ""
+    return street, city, state
 
 
 def _trade(record: dict) -> str:
@@ -104,10 +110,11 @@ def from_response(payload: Any) -> list[Lead]:
         company = str(record.get("title") or "").strip()
         if not company:
             continue
-        city, state = _split_address(str(record.get("address") or ""))
+        street, city, state = _split_address(str(record.get("address") or ""))
         leads.append(Lead(
             company=company,
             trade=_trade(record),
+            address=street,
             city=city,
             state=state,
             country="United States",

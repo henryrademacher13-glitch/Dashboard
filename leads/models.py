@@ -26,6 +26,7 @@ class Lead:
 
     company: str
     trade: str = ""
+    address: str = ""
     city: str = ""
     state: str = ""
     country: str = "United States"

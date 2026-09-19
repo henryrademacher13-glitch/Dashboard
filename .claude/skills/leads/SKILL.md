@@ -125,12 +125,38 @@ These are observed failures, not hypotheticals:
   yellow user-input column; `Source Notes` is the read-only one bound to
   `lead.notes`. Flags written to the wrong one vanish from the export.
 
+## Exporting to a CRM
+
+`--output` ending in `.csv` writes a GoHighLevel-importable file instead of a
+workbook: GHL takes CSV, and the column names in `leads/ghl.py` match its own
+so the import mapping auto-resolves rather than needing manual pairing.
+
+Phones are converted to E.164 (`+1XXXXXXXXXX`) because GHL matches and dials
+on that reliably and rejects some display formats. Tags carry state, primary
+trade, and `unclaimed-listing`, which is what makes the list segmentable into
+workflows once it lands. A Maps listing is a business with no person, so
+Company Name also fills Full Name — otherwise rows import nameless and are
+hard to find afterwards.
+
+The CSV path never imports `openpyxl` and prints no formula warning, because
+a CSV has no formulas.
+
 ## Scaling a run
 
-Maps returns 20 results per page, so coverage comes from many narrow queries —
-trade × city — rather than one broad sweep. Dedup on `place_id` across
-queries; `leads/models.py` already dedupes on domain then name+city, which
-handles most of it. Apollo's free `apollo_organizations_lookup` is the cheap
+`leads/fetch_gmaps_batch.py` does this: it walks trade × metro combinations
+for a state, saves each response, dedupes on `place_id` as it goes, and stops
+the moment the target is reached so you are not buying requests you do not
+need. It caps total requests and aborts after three consecutive failures
+rather than burning a budget on a broken run.
+
+`--input` accepts a directory, so a batch of ~40 files is one command. Merging
+happens before the adapter so adapters still see a single payload shape;
+unreadable files are counted and skipped rather than killing the run.
+
+Note that `leads/models.py` dedupes on domain before name+city, so a
+multi-location contractor sharing one website collapses to a single row. For a
+call sheet that is usually right — you are not dialling one company five
+times — but say so rather than letting the count look like a shortfall. Apollo's free `apollo_organizations_lookup` is the cheap
 way to size a list before spending: it costs nothing and returns candidates,
 so you can count what exists before confirming an enrichment spend.
 

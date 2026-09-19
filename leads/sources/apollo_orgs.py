@@ -112,6 +112,7 @@ def from_response(payload: Any) -> list[Lead]:
         leads.append(Lead(
             company=company,
             trade=_trade(record),
+            address=str(record.get("street_address") or "").strip(),
             city=str(record.get("city") or "").strip(),
             state=_state(record),
             country=str(record.get("country") or "United States").strip(),
@@ -135,7 +136,8 @@ def unmapped_keys(payload: Any) -> set[str]:
         "name", "city", "state", "country", "website_url", "primary_domain",
         "phone", "sanitized_phone", "estimated_num_employees", "linkedin_url",
         "id", "_note", "_data_quality_note", "industry", "keywords_sample",
-        "street_address", "founded_year", "organization_revenue",
+        "street_address",
+        "founded_year", "organization_revenue",
     }
     seen: set[str] = set()
     for record in _records(payload):

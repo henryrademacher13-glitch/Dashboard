@@ -57,11 +57,37 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Input not found: {args.input}", file=sys.stderr)
         return 2
 
-    try:
-        payload = json.loads(args.input.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        print(f"{args.input} is not valid JSON: {exc}", file=sys.stderr)
-        return 2
+    # A batch run writes one file per query, so a directory is the normal unit
+    # of input. Merging here rather than in each adapter keeps the adapters
+    # working on a single payload shape.
+    if args.input.is_dir():
+        files = sorted(args.input.glob("*.json"))
+        if not files:
+            print(f"No .json files in {args.input}", file=sys.stderr)
+            return 2
+        merged: list = []
+        bad = 0
+        for f in files:
+            try:
+                blob = json.loads(f.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                bad += 1
+                continue
+            for key in ("local_results", "organizations", "accounts",
+                        "results", "data", "people", "contacts"):
+                chunk = blob.get(key) if isinstance(blob, dict) else None
+                if isinstance(chunk, list):
+                    merged.extend(chunk)
+                    break
+        print(f"merged {len(merged)} record(s) from {len(files)} file(s)"
+              + (f", {bad} unreadable" if bad else ""))
+        payload = {"local_results": merged}
+    else:
+        try:
+            payload = json.loads(args.input.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            print(f"{args.input} is not valid JSON: {exc}", file=sys.stderr)
+            return 2
 
     adapter = {"apollo-orgs": apollo_orgs, "gmaps": gmaps}.get(args.source, apollo)
     leads = adapter.from_response(payload)
@@ -96,20 +122,25 @@ def main(argv: list[str] | None = None) -> int:
 
     # Imported here, not at module scope: --inspect writes no spreadsheet and
     # must stay runnable on a machine without openpyxl installed.
-    from .spreadsheet import write_workbook
-
-    path = write_workbook(
-        args.output, qualified,
-        rejected if args.keep_rejected else [],
-        criteria_note=describe(criteria),
-    )
+    if args.output.suffix.lower() == ".csv":
+        # CSV means a CRM import, so skip the workbook entirely - no
+        # openpyxl, no formulas, just rows GoHighLevel can ingest.
+        from .ghl import write_csv
+        path = write_csv(args.output, qualified)
+    else:
+        from .spreadsheet import write_workbook
+        path = write_workbook(
+            args.output, qualified,
+            rejected if args.keep_rejected else [],
+            criteria_note=describe(criteria),
+        )
 
     print(f"parsed {before} record(s), {before - len(leads)} duplicate(s) removed")
     print(f"qualified {len(qualified)}, rejected {len(rejected)}")
     print(f"wrote {path}")
-    if qualified:
-        print("\nRun scripts/recalc.py on the output before sharing it — openpyxl")
-        print("writes formulas without cached values.")
+    if qualified and path.suffix.lower() != ".csv":
+        print("\nOpen the workbook once in Excel before reading it with pandas —")
+        print("openpyxl writes the Contactable formula without a cached value.")
     return 0 if qualified else 1
 
 
