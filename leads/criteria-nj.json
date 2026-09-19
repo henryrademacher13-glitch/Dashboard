@@ -1,19 +1,30 @@
 {
-  "$comment": "Your qualifying rules. Edit these, not the code. Matching is case-insensitive substring, so 'roof' catches 'Roofing Contractor' and 'Commercial Roofer'.",
+  "$comment": "Trade terms are STEMS so one entry matches both source vocabularies: 'plumb' catches Apollo's 'plumbing services' and Google Maps' 'Plumber'. Full words like 'plumbing' silently reject every Maps listing categorised 'Plumber', which is how a 25% rejection rate went unnoticed. Matching is case-insensitive substring against the trade AND the company name.",
   "geography": {
-    "states": ["NJ"],
+    "states": [
+      "NJ"
+    ],
     "cities": [],
     "$note": "Empty cities = anywhere in the listed states. Both empty = no geographic filter at all."
   },
   "trades": [
-    "roofing",
+    "roof",
     "hvac",
-    "plumbing",
-    "electrical",
-    "landscaping",
-    "remodeling",
-    "painting",
-    "concrete"
+    "heating",
+    "air conditioning",
+    "plumb",
+    "electric",
+    "landscap",
+    "remodel",
+    "renovat",
+    "paint",
+    "concrete",
+    "mason",
+    "siding",
+    "gutter",
+    "deck",
+    "general contractor",
+    "home improvement"
   ],
   "require_contactable": true
 }

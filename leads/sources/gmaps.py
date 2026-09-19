@@ -95,6 +95,10 @@ def _notes(record: dict) -> str:
     bits = []
     if record.get("unclaimed_listing"):
         bits.append("UNCLAIMED LISTING")
+    if record.get("book_online"):
+        # Online booking signals a digitally mature operator - useful as the
+        # inverse of unclaimed_listing when sizing up how much help they need.
+        bits.append("has online booking")
     rating, reviews = record.get("rating"), record.get("reviews")
     if rating is not None:
         bits.append(f"{rating}★")
@@ -135,7 +139,8 @@ def from_response(payload: Any) -> list[Lead]:
 
 def unmapped_keys(payload: Any) -> set[str]:
     read = {"title", "address", "website", "phone", "rating", "reviews",
-            "types", "type", "place_id", "data_cid", "unclaimed_listing"}
+            "types", "type", "place_id", "data_cid", "unclaimed_listing",
+            "book_online"}
     seen: set[str] = set()
     for record in _records(payload):
         seen |= set(record.keys())
