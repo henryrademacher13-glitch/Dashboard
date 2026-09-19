@@ -79,8 +79,16 @@ def _trade(record: dict) -> str:
 
 
 def _notes(record: dict) -> str:
-    """Rating and review count: a qualification signal Apollo never gave us."""
+    """Qualification signals Apollo never provided.
+
+    unclaimed_listing is the commercially interesting one: the owner has not
+    claimed their Google Business Profile, so nobody is managing their online
+    presence. For anyone selling marketing services that is a pre-qualified
+    prospect, so it leads the string rather than being buried after the rating.
+    """
     bits = []
+    if record.get("unclaimed_listing"):
+        bits.append("UNCLAIMED LISTING")
     rating, reviews = record.get("rating"), record.get("reviews")
     if rating is not None:
         bits.append(f"{rating}★")
