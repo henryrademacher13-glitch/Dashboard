@@ -1,0 +1,13 @@
+{
+  "name": "Two Homes",
+  "short_name": "Two Homes",
+  "description": "Coordination for families across two households.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf9f7",
+  "theme_color": "#faf9f7",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
