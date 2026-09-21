@@ -149,6 +149,20 @@ the moment the target is reached so you are not buying requests you do not
 need. It caps total requests and aborts after three consecutive failures
 rather than burning a budget on a broken run.
 
+## Asking for *more* leads
+
+"I need 300 more" is not the same request as "I need 300". The batch script
+resumes by default: it loads every `place_id` already saved under
+`leads/in/gmaps-<state>/` before the first request, and skips any trade × metro
+query whose response file is already on disk. So `--target` counts *new* unique
+businesses on top of the existing corpus, and a rerun does not pay again for
+ground the last run already covered. `--no-resume` re-issues everything.
+
+Before spending anything on a "more leads" request, re-export what is already
+on disk. A criteria fix or a mapping fix can recover dozens of leads from
+payloads already paid for, at zero request cost, and that changes how many new
+ones actually need fetching.
+
 `--input` accepts a directory, so a batch of ~40 files is one command. Merging
 happens before the adapter so adapters still see a single payload shape;
 unreadable files are counted and skipped rather than killing the run.

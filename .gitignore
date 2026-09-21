@@ -32,3 +32,6 @@ leads/in/gmaps-raw/*.json
 !leads/in/gmaps-raw/.gitkeep
 .env
 .env.*
+leads/in/gmaps-*/*.json
+leads/out/*.csv
+leads/out/*.xlsx
