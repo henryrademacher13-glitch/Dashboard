@@ -113,7 +113,7 @@ body:
 ```html
 <script src="https://widgets.leadconnectorhq.com/loader.js"
   data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-  data-widget-id="6a99ba4039356933b8f041f3" data-source="WEB_USER"></script>
+  data-widget-id="6ab13a8e2251fa7952eee49d" data-source="WEB_USER"></script>
 ```
 
 The bubble's position, colours, greeting and routing are configured in the LeadConnector
