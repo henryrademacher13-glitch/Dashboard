@@ -28,3 +28,8 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Raw lead payloads — contain personal contact data, keep them local
+leads/in/
+leads/out/*.xlsx
+!leads/out/sample-leads.xlsx

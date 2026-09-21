@@ -1,0 +1,5 @@
+{
+  "$comment": "Domains and Apollo person ids already pulled. The lead prompt reads this to guarantee a new batch is actually new. Append to it after every export.",
+  "domains": [],
+  "apollo_person_ids": []
+}
