@@ -158,6 +158,18 @@ query whose response file is already on disk. So `--target` counts *new* unique
 businesses on top of the existing corpus, and a rerun does not pay again for
 ground the last run already covered. `--no-resume` re-issues everything.
 
+When they want the new ones in their own file rather than mixed into the full
+list, `--exclude` takes what was already delivered - the raw `.json` payloads a
+previous run read, a directory of them, or a CSV a previous run wrote - and
+emits only what is not in it. It matches on `Lead.dedup_key`, the same identity
+`dedupe()` uses, so "already delivered" and "duplicate" can never drift apart.
+Exclusions are reported on their own line, never folded into the duplicate
+count. Exporting both files from the same corpus costs nothing extra: the raw
+payloads are already paid for.
+
+To identify which raw files a previous run produced, sort by mtime - a resumed
+run skips the files it already has, so their timestamps stay put.
+
 Before spending anything on a "more leads" request, re-export what is already
 on disk. A criteria fix or a mapping fix can recover dozens of leads from
 payloads already paid for, at zero request cost, and that changes how many new
