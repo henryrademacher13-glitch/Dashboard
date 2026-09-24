@@ -167,8 +167,21 @@ Exclusions are reported on their own line, never folded into the duplicate
 count. Exporting both files from the same corpus costs nothing extra: the raw
 payloads are already paid for.
 
-To identify which raw files a previous run produced, sort by mtime - a resumed
-run skips the files it already has, so their timestamps stay put.
+The reliable way to set that boundary is to snapshot the delivered CSV before
+fetching more:
+
+    python3 -m leads.main --source gmaps --input leads/in/gmaps-<state> \
+        --output leads/out/<state>-all.csv
+    cp leads/out/<state>-all.csv leads/out/<state>-delivered.csv
+    python3 leads/fetch_gmaps_batch.py --state <STATE> --target <N>
+    python3 -m leads.main --source gmaps --input leads/in/gmaps-<state> \
+        --exclude leads/out/<state>-delivered.csv \
+        --output leads/out/<state>-new.csv
+
+The snapshot is what "already delivered" means, and it survives any number of
+later fetches. Sorting raw files by mtime also works - a resumed run skips the
+files it already has, so their timestamps stay put - but it depends on knowing
+how many files the earlier run wrote, which nothing records.
 
 Before spending anything on a "more leads" request, re-export what is already
 on disk. A criteria fix or a mapping fix can recover dozens of leads from
