@@ -37,6 +37,24 @@ def describe(criteria: Criteria) -> str:
     return "Filters applied — " + ("; ".join(bits) if bits else "none")
 
 
+def only_ids(path: Path) -> set[str]:
+    """Source ids from a fetch run's manifest - the businesses new to that run.
+
+    A run's response files also contain businesses earlier runs already found,
+    so exporting the files a run wrote is not the same as exporting what that
+    run discovered. The manifest is what makes the difference expressible.
+    """
+    try:
+        blob = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"--only: cannot read {path}: {exc}")
+    ids = blob.get("new_place_ids") if isinstance(blob, dict) else None
+    if not isinstance(ids, list) or not ids:
+        raise SystemExit(f"--only: {path} has no new_place_ids. Expected a run "
+                         f"manifest from leads/fetch_gmaps_batch.py.")
+    return {str(i) for i in ids}
+
+
 def exclusion_keys(paths: list[Path], adapter) -> tuple[set[str], int]:
     """Identities from already-delivered leads, so a rerun can emit only new ones.
 
@@ -99,6 +117,10 @@ def main(argv: list[str] | None = None) -> int:
                              "export: raw .json payloads, a directory of them, "
                              "or a CSV a previous run wrote. Turns a rerun into "
                              "'only what is new since last time'.")
+    parser.add_argument("--only", type=Path, metavar="MANIFEST",
+                        help="a run manifest from leads/in/gmaps-<state>/runs/. "
+                             "Exports only the businesses that fetch run found, "
+                             "so each run lands in its own file.")
     parser.add_argument("--inspect", action="store_true",
                         help="report field mapping coverage and exit")
     parser.add_argument("--keep-rejected", action="store_true", default=True,
@@ -167,6 +189,17 @@ def main(argv: list[str] | None = None) -> int:
     except CriteriaError as exc:
         print(f"Criteria error: {exc}", file=sys.stderr)
         return 2
+
+    if args.only:
+        wanted = only_ids(args.only)
+        kept = [lead for lead in leads if lead.source_id in wanted]
+        print(f"kept {len(kept)} of {len(leads)} record(s) from run "
+              f"{args.only.stem} ({len(wanted)} business(es) in that run)")
+        leads = kept
+        if not leads:
+            print("--only matched nothing. Is the manifest from this state's "
+                  "directory?", file=sys.stderr)
+            return 1
 
     before = len(leads)
     leads = dedupe(leads)

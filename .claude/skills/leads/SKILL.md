@@ -167,8 +167,20 @@ Exclusions are reported on their own line, never folded into the duplicate
 count. Exporting both files from the same corpus costs nothing extra: the raw
 payloads are already paid for.
 
-The reliable way to set that boundary is to snapshot the delivered CSV before
-fetching more:
+Each fetch run writes a manifest to `leads/in/gmaps-<state>/runs/<timestamp>.json`
+naming the businesses that were new to it, and `--only <manifest>` exports
+exactly those. That is the direct answer to "put the new ones in their own
+file" - no snapshot to remember, and the fetcher prints the command when it
+finishes.
+
+The manifest matters because a run's response files are not the same as a run's
+discoveries: a query issued in run 3 returns businesses run 1 already found, so
+exporting the files run 3 wrote would include run 1's leads. Only the manifest
+knows the difference.
+
+An alternative that does not depend on the manifest - useful for a boundary
+drawn after the fact, across several runs - is to snapshot the delivered CSV
+before fetching more:
 
     python3 -m leads.main --source gmaps --input leads/in/gmaps-<state> \
         --output leads/out/<state>-all.csv
