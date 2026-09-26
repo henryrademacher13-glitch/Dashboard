@@ -149,6 +149,28 @@ the moment the target is reached so you are not buying requests you do not
 need. It caps total requests and aborts after three consecutive failures
 rather than burning a budget on a broken run.
 
+## A different vertical
+
+A new niche needs two things, and they are not the same list. `--niche` on the
+fetcher holds the terms typed into the Maps search box ("car detailing",
+"ceramic coating"); the criteria file holds stems matched against the returned
+trade and company name ("detail", "auto spa"). Each niche gets its own corpus
+directory, so one vertical's leads never mix into another's:
+
+    python3 leads/fetch_gmaps_batch.py --state PA --niche detailing --target 300
+    python3 -m leads.main --source gmaps --input leads/in/gmaps-pa-detailing \
+        --criteria leads/criteria-detailing.json \
+        --output leads/out/pa-detailing.csv
+
+Forgetting `--criteria` is the trap: the default file lists building trades, so
+every detailer gets rejected and the run looks like the source was empty.
+
+Maps categories do not respect the vertical's boundaries - plenty of real
+detailers are filed under "Car wash". That is why the criteria stems match the
+company name too, and why "car wash" itself is not a criteria term: as a term
+it admits automatic tunnel washes, which are a different business. A detailer
+miscategorised as a car wash still qualifies through its name.
+
 ## Asking for *more* leads
 
 "I need 300 more" is not the same request as "I need 300". The batch script

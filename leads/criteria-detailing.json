@@ -1,0 +1,19 @@
+{
+  "$comment": "Car detailing in PA. Trade terms are STEMS matched case-insensitively as substrings against the declared trade AND the company name, so 'detail' catches both Google Maps' 'Car detailing service' and a business named 'Elite Auto Detailing' that Maps happens to file under 'Car wash'. 'car wash' is deliberately absent: as a term it drags in automatic tunnel washes, which are a different business from a detailer. A real detailer filed under 'Car wash' still qualifies through its name.",
+  "geography": {
+    "states": [
+      "PA"
+    ],
+    "cities": [],
+    "$note": "Empty cities = anywhere in the listed states."
+  },
+  "trades": [
+    "detail",
+    "ceramic coating",
+    "paint correction",
+    "auto spa",
+    "auto recon",
+    "mobile wash"
+  ],
+  "require_contactable": true
+}

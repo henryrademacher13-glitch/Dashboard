@@ -47,6 +47,15 @@ TRADES = ["roofing contractor", "hvac contractor", "plumber",
           "electrician", "landscaping", "remodeling contractor",
           "painting contractor", "concrete contractor"]
 
+# A niche is a set of search terms plus its own corpus directory, so one
+# vertical's leads never land in another's. Query wording is Maps' wording,
+# not the criteria file's stems: these go to the search box.
+NICHES = {
+    "contractors": TRADES,
+    "detailing": ["car detailing", "auto detailing", "mobile detailing",
+                  "ceramic coating", "paint correction", "auto spa"],
+}
+
 # Ordered by population: the earlier metros return denser results, so the
 # target is usually met before the tail is reached. The list runs long on
 # purpose - a resumed run has already exhausted the head of it.
@@ -108,7 +117,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--state", required=True, choices=sorted(METROS))
     ap.add_argument("--target", type=int, default=200,
                     help="NEW unique businesses to collect before stopping")
-    ap.add_argument("--trades", nargs="*", default=TRADES)
+    ap.add_argument("--niche", default="contractors", choices=sorted(NICHES),
+                    help="which vertical to search. Each gets its own corpus "
+                         "directory and its own default search terms.")
+    ap.add_argument("--trades", nargs="*", default=None,
+                    help="override the niche's search terms")
     ap.add_argument("--metros", nargs="*", default=None)
     ap.add_argument("--sleep", type=float, default=1.5)
     ap.add_argument("--max-requests", type=int, default=90,
@@ -123,7 +136,13 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     metros = args.metros or METROS[args.state]
-    out_dir = Path(__file__).resolve().parent / "in" / f"gmaps-{args.state.lower()}"
+    trades = args.trades or NICHES[args.niche]
+    # "contractors" keeps the bare gmaps-<state> path it has always used; a
+    # rename would orphan a corpus that took real requests to build.
+    stem = args.state.lower()
+    if args.niche != "contractors":
+        stem = f"{stem}-{args.niche}"
+    out_dir = Path(__file__).resolve().parent / "in" / f"gmaps-{stem}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     if args.no_resume:
@@ -142,7 +161,7 @@ def main(argv: list[str] | None = None) -> int:
     # City-major: sweeping all trades in one metro before moving on keeps the
     # list geographically balanced if the target is met early.
     for metro in metros:
-        for trade in args.trades:
+        for trade in trades:
             if len(new_ids) >= args.target or requests >= args.max_requests:
                 break
             query = f"{trade} {metro}, {args.state}"
@@ -192,6 +211,7 @@ def main(argv: list[str] | None = None) -> int:
             suffix += 1
         manifest.write_text(json.dumps({
             "state": args.state,
+            "niche": args.niche,
             "started": started.isoformat(timespec="seconds"),
             "requests": requests,
             "queries": issued,
@@ -220,10 +240,10 @@ def main(argv: list[str] | None = None) -> int:
     print("\nNext - this run's leads in their own file:")
     print(f"  python3 -m leads.main --source gmaps --input {rel_in} \\\n"
           f"    --only {rel_manifest} \\\n"
-          f"    --output leads/out/{args.state.lower()}-batch-{stamp}.csv")
+          f"    --output leads/out/{stem}-batch-{stamp}.csv")
     print("\n  ...or the full list, every run merged:")
     print(f"  python3 -m leads.main --source gmaps --input {rel_in} \\\n"
-          f"    --output leads/out/{args.state.lower()}-contractors-ghl.csv")
+          f"    --output leads/out/{stem}-all.csv")
     return 0
 
 
