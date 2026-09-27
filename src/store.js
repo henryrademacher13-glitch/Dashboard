@@ -1,156 +1,211 @@
-import { useState, useCallback } from 'react';
+import { createContext, useContext } from 'react';
 
-const STORAGE_KEY = 'habit_dashboard_v1';
+export const STORAGE_KEY = 'productivity_app_v1';
 
-function today() {
-  return new Date().toISOString().slice(0, 10);
+// ---------- date helpers (local timezone, not UTC) ----------
+
+export function toDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
-function loadState() {
+export function todayStr() {
+  return toDateStr(new Date());
+}
+
+export function formatDateLabel(dateStr) {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  const today = todayStr();
+  const tomorrow = toDateStr(new Date(Date.now() + 86400000));
+  const yesterday = toDateStr(new Date(Date.now() - 86400000));
+  if (dateStr === today) return 'Today';
+  if (dateStr === tomorrow) return 'Tomorrow';
+  if (dateStr === yesterday) return 'Yesterday';
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: y !== new Date().getFullYear() ? 'numeric' : undefined });
+}
+
+export function formatTime(hhmm) {
+  if (!hhmm) return '';
+  const [h, m] = hhmm.split(':').map(Number);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return m === 0 ? `${h12} ${ampm}` : `${h12}:${String(m).padStart(2, '0')} ${ampm}`;
+}
+
+export function uid() {
+  return (crypto.randomUUID && crypto.randomUUID()) || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+// ---------- state ----------
+
+const initialState = {
+  tasks: [],     // {id, title, dueDate, priority, done, createdAt, completedAt}
+  events: [],    // {id, title, date, start, end, taskId, color}
+  notes: [],     // {id, title, body, taskId, pinned, createdAt, updatedAt}
+  sessions: [],  // {id, taskId, minutes, startedAt, endedAt}
+  timer: null,   // {taskId, mode:'focus'|'break', duration(sec), startedAt(ms), pausedAt(ms)|null}
+};
+
+export function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return null;
+    if (raw) return { ...initialState, ...JSON.parse(raw) };
+  } catch { /* corrupted storage — start fresh */ }
+  return initialState;
 }
 
-function saveState(state) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch {}
-}
-
-const DEFAULT_HABITS = [
-  { id: '1', name: 'Exercise', emoji: '🏃', color: '#6366f1', createdAt: '2026-05-01' },
-  { id: '2', name: 'Read', emoji: '📚', color: '#10b981', createdAt: '2026-05-01' },
-  { id: '3', name: 'Meditate', emoji: '🧘', color: '#f59e0b', createdAt: '2026-05-01' },
-  { id: '4', name: 'Drink water', emoji: '💧', color: '#3b82f6', createdAt: '2026-05-01' },
-];
-
-// Pre-populate some sample completions for the demo
-function generateSampleCompletions(habits) {
-  const completions = {};
-  const now = new Date();
-  habits.forEach(h => {
-    for (let d = 1; d <= 28; d++) {
-      const date = new Date(2026, 4, d); // May 2026
-      if (date <= now && Math.random() > 0.3) {
-        const key = `${h.id}_${date.toISOString().slice(0, 10)}`;
-        completions[key] = true;
-      }
+export function reducer(state, action) {
+  switch (action.type) {
+    // ----- tasks -----
+    case 'task/add': {
+      const { title, dueDate = null, priority = 'medium' } = action;
+      const task = { id: uid(), title, dueDate, priority, done: false, createdAt: Date.now(), completedAt: null };
+      return { ...state, tasks: [task, ...state.tasks] };
     }
-  });
-  return completions;
-}
-
-export function useHabitStore() {
-  const [state, setState] = useState(() => {
-    const saved = loadState();
-    if (saved) return saved;
-    const habits = DEFAULT_HABITS;
-    return { habits, completions: generateSampleCompletions(habits) };
-  });
-
-  const persist = useCallback((next) => {
-    setState(next);
-    saveState(next);
-  }, []);
-
-  const toggleCompletion = useCallback((habitId, date = today()) => {
-    setState(s => {
-      const key = `${habitId}_${date}`;
-      const next = {
-        ...s,
-        completions: { ...s.completions, [key]: !s.completions[key] },
+    case 'task/toggle':
+      return {
+        ...state,
+        tasks: state.tasks.map(t =>
+          t.id === action.id ? { ...t, done: !t.done, completedAt: t.done ? null : Date.now() } : t
+        ),
       };
-      if (!next.completions[key]) delete next.completions[key];
-      saveState(next);
-      return next;
-    });
-  }, []);
+    case 'task/update':
+      return {
+        ...state,
+        tasks: state.tasks.map(t => (t.id === action.id ? { ...t, ...action.patch } : t)),
+      };
+    case 'task/delete':
+      return {
+        ...state,
+        tasks: state.tasks.filter(t => t.id !== action.id),
+        // unlink rather than cascade-delete: notes and sessions keep their own value
+        notes: state.notes.map(n => (n.taskId === action.id ? { ...n, taskId: null } : n)),
+        events: state.events.map(e => (e.taskId === action.id ? { ...e, taskId: null } : e)),
+        sessions: state.sessions.map(s => (s.taskId === action.id ? { ...s, taskId: null } : s)),
+        timer: state.timer?.taskId === action.id ? { ...state.timer, taskId: null } : state.timer,
+      };
 
-  const addHabit = useCallback((name, emoji, color) => {
-    const habit = {
-      id: Date.now().toString(),
-      name,
-      emoji,
-      color,
-      createdAt: today(),
-    };
-    setState(s => {
-      const next = { ...s, habits: [...s.habits, habit] };
-      saveState(next);
-      return next;
-    });
-  }, []);
-
-  const deleteHabit = useCallback((id) => {
-    setState(s => {
-      const completions = { ...s.completions };
-      Object.keys(completions).forEach(k => {
-        if (k.startsWith(id + '_')) delete completions[k];
-      });
-      const next = { ...s, habits: s.habits.filter(h => h.id !== id), completions };
-      saveState(next);
-      return next;
-    });
-  }, []);
-
-  const isComplete = useCallback((habitId, date = today()) => {
-    return !!state.completions[`${habitId}_${date}`];
-  }, [state.completions]);
-
-  const getStreak = useCallback((habitId) => {
-    let streak = 0;
-    const d = new Date();
-    // If not done today, start counting from yesterday
-    if (!state.completions[`${habitId}_${d.toISOString().slice(0, 10)}`]) {
-      d.setDate(d.getDate() - 1);
+    // ----- events -----
+    case 'event/add': {
+      const { title, date, start = null, end = null, taskId = null, color = '#6366f1' } = action;
+      const event = { id: uid(), title, date, start, end, taskId, color };
+      return { ...state, events: [...state.events, event] };
     }
-    while (state.completions[`${habitId}_${d.toISOString().slice(0, 10)}`]) {
-      streak++;
-      d.setDate(d.getDate() - 1);
-    }
-    return streak;
-  }, [state.completions]);
+    case 'event/update':
+      return {
+        ...state,
+        events: state.events.map(e => (e.id === action.id ? { ...e, ...action.patch } : e)),
+      };
+    case 'event/delete':
+      return { ...state, events: state.events.filter(e => e.id !== action.id) };
 
-  const getCompletionRate = useCallback((habitId, days = 30) => {
-    let completed = 0;
-    const d = new Date();
-    const habit = state.habits.find(h => h.id === habitId);
-    for (let i = 0; i < days; i++) {
-      const dateStr = d.toISOString().slice(0, 10);
-      if (new Date(dateStr) >= new Date(habit?.createdAt || '2000-01-01')) {
-        if (state.completions[`${habitId}_${dateStr}`]) completed++;
-      }
-      d.setDate(d.getDate() - 1);
+    // ----- notes -----
+    case 'note/add': {
+      const { title = 'Untitled note', body = '', taskId = null } = action;
+      const note = { id: action.id || uid(), title, body, taskId, pinned: false, createdAt: Date.now(), updatedAt: Date.now() };
+      return { ...state, notes: [note, ...state.notes] };
     }
-    return Math.round((completed / days) * 100);
-  }, [state.completions, state.habits]);
+    case 'note/update':
+      return {
+        ...state,
+        notes: state.notes.map(n => (n.id === action.id ? { ...n, ...action.patch, updatedAt: Date.now() } : n)),
+      };
+    case 'note/delete':
+      return { ...state, notes: state.notes.filter(n => n.id !== action.id) };
 
-  // Returns array of {date, count} for past N days
-  const getDailyTotals = useCallback((days = 14) => {
-    const result = [];
-    const d = new Date();
-    for (let i = days - 1; i >= 0; i--) {
-      const nd = new Date(d);
-      nd.setDate(nd.getDate() - i);
-      const dateStr = nd.toISOString().slice(0, 10);
-      const count = state.habits.filter(h => state.completions[`${h.id}_${dateStr}`]).length;
-      result.push({ date: dateStr, count, label: nd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) });
+    // ----- focus timer -----
+    case 'timer/start':
+      return {
+        ...state,
+        timer: {
+          taskId: action.taskId ?? null,
+          mode: action.mode || 'focus',
+          duration: action.duration,
+          startedAt: Date.now(),
+          pausedAt: null,
+        },
+      };
+    case 'timer/pause':
+      if (!state.timer || state.timer.pausedAt) return state;
+      return { ...state, timer: { ...state.timer, pausedAt: Date.now() } };
+    case 'timer/resume': {
+      if (!state.timer || !state.timer.pausedAt) return state;
+      const pausedFor = Date.now() - state.timer.pausedAt;
+      return { ...state, timer: { ...state.timer, startedAt: state.timer.startedAt + pausedFor, pausedAt: null } };
     }
-    return result;
-  }, [state]);
+    case 'timer/cancel':
+      return { ...state, timer: null };
+    case 'timer/complete': {
+      // logs the session (focus mode only) and clears the timer
+      if (!state.timer) return state;
+      const { timer } = state;
+      const elapsedMs = (timer.pausedAt ?? Date.now()) - timer.startedAt;
+      const minutes = Math.max(1, Math.round(Math.min(elapsedMs / 60000, timer.duration / 60)));
+      const sessions =
+        timer.mode === 'focus'
+          ? [...state.sessions, { id: uid(), taskId: timer.taskId, minutes, startedAt: timer.startedAt, endedAt: Date.now() }]
+          : state.sessions;
+      return { ...state, sessions, timer: null };
+    }
 
-  return {
-    habits: state.habits,
-    completions: state.completions,
-    toggleCompletion,
-    addHabit,
-    deleteHabit,
-    isComplete,
-    getStreak,
-    getCompletionRate,
-    getDailyTotals,
-  };
+    default:
+      return state;
+  }
+}
+
+// ---------- selectors ----------
+
+export function timerRemaining(timer, now = Date.now()) {
+  if (!timer) return 0;
+  const elapsed = ((timer.pausedAt ?? now) - timer.startedAt) / 1000;
+  return Math.max(0, Math.round(timer.duration - elapsed));
+}
+
+export function tasksDueOn(state, dateStr) {
+  return state.tasks.filter(t => t.dueDate === dateStr);
+}
+
+export function eventsOn(state, dateStr) {
+  return state.events
+    .filter(e => e.date === dateStr)
+    .sort((a, b) => (a.start || '99') < (b.start || '99') ? -1 : 1);
+}
+
+export function sessionsOn(state, dateStr) {
+  return state.sessions.filter(s => toDateStr(new Date(s.startedAt)) === dateStr);
+}
+
+export function focusMinutesOn(state, dateStr) {
+  return sessionsOn(state, dateStr).reduce((sum, s) => sum + s.minutes, 0);
+}
+
+export function taskFocusMinutes(state, taskId) {
+  return state.sessions.filter(s => s.taskId === taskId).reduce((sum, s) => sum + s.minutes, 0);
+}
+
+export function noteForTask(state, taskId) {
+  return state.notes.find(n => n.taskId === taskId) || null;
+}
+
+export function taskById(state, id) {
+  return state.tasks.find(t => t.id === id) || null;
+}
+
+export function overdueTasks(state) {
+  const today = todayStr();
+  return state.tasks.filter(t => !t.done && t.dueDate && t.dueDate < today);
+}
+
+// ---------- context ----------
+
+export const StoreContext = createContext(null);
+
+export function useStore() {
+  const ctx = useContext(StoreContext);
+  if (!ctx) throw new Error('useStore must be used inside StoreProvider');
+  return ctx;
 }
