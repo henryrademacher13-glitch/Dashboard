@@ -75,16 +75,13 @@ def to_lines(fragment):
     return [re.sub(r"\s+", " ", line).strip() for line in text.split("\n") if line.strip()]
 
 
-def find_name(html_text, pos):
-    window = html_text[max(0, pos - 3000):pos]
-    for pattern in (r'<span class="OSrXXb"[^>]*>(.*?)</span>',
-                    r'role="heading"[^>]*>(.*?)</div>'):
-        matches = re.findall(pattern, window, re.S)
-        if matches:
-            name = " ".join(to_lines(matches[-1]))
-            if name:
-                return name
-    return ""
+HEADING_RE = re.compile(r'<div[^>]*role="heading"[^>]*>(.*?)</div>', re.S)
+
+
+def find_name(block):
+    """The business name is the heading inside the listing's details block."""
+    m = HEADING_RE.search(block)
+    return " ".join(to_lines(m.group(1))) if m else ""
 
 
 def parse_block(lines):
@@ -112,10 +109,15 @@ def parse(html_text):
     starts = [m.start() for m in re.finditer(r'class="[^"]*\brllt__details\b', html_text)]
     for i, pos in enumerate(starts):
         end = starts[i + 1] if i + 1 < len(starts) else pos + 4000
-        lead = parse_block(to_lines(html_text[pos:end])[:6])
-        lead["name"] = find_name(html_text, pos)
-        if lead["name"]:
-            leads.append(lead)
+        block = html_text[pos:end]
+        name = find_name(block)
+        if not name:
+            continue
+        # Drop the heading so the name isn't read as a category, then keep the
+        # rating/category, address and hours/phone lines (skip the review quote).
+        lead = parse_block(to_lines(HEADING_RE.sub("", block, count=1))[:4])
+        lead["name"] = name
+        leads.append(lead)
     return leads
 
 
