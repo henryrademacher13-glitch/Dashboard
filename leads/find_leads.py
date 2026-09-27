@@ -119,6 +119,39 @@ def to_row(item, city):
     }
 
 
+def find_phone(data):
+    """Pull a phone number from a search for one specific business.
+
+    Google usually answers a business-name search with a knowledge panel
+    whose "Phone" factoid holds the number; fall back to any listing.
+    """
+    for result in (data or {}).get("results", []):
+        results = (result.get("content") or {}).get("results") or {}
+        for fact in (results.get("knowledge") or {}).get("factoids") or []:
+            if (fact.get("title") or "").lower() == "phone" and fact.get("content"):
+                return fact["content"].strip()
+    for item in find_listings(data):
+        if item.get("phone"):
+            return item["phone"]
+    return ""
+
+
+def fill_phones(user, password, leads, state, state_name, max_requests):
+    missing = [r for r in leads if not r["phone"].strip()]
+    print(f"{len(missing)} of {len(leads)} leads have no phone; looking them up.")
+    requests_made = 0
+    for row in missing:
+        if requests_made >= max_requests:
+            break
+        where = row["address"] or row["city_searched"]
+        query = f'{row["name"]} {where} {state}'
+        geo = f'{row["city_searched"]},{state_name},United States'
+        row["phone"] = find_phone(search(user, password, query, geo, False))
+        requests_made += 1
+        print(f"[{requests_made:>2}] {row['name']}: {row['phone'] or 'not found'}")
+    return requests_made
+
+
 def dedupe_key(row):
     digits = re.sub(r"\D", "", row["phone"])
     if len(digits) >= 10:
@@ -135,6 +168,8 @@ def main():
     p.add_argument("--out", help="CSV path (default: <niche>_<state>.csv)")
     p.add_argument("--resume", action="store_true",
                    help="keep leads already in the CSV and continue after the last city searched")
+    p.add_argument("--fill-phones", action="store_true",
+                   help="don't search for new leads; look up phone numbers missing from the CSV (1 request each)")
     args = p.parse_args()
 
     user, password = os.environ.get("OXY_USER"), os.environ.get("OXY_PASS")
@@ -143,6 +178,18 @@ def main():
 
     state_name = STATE_NAMES[args.state]
     out = args.out or f"{re.sub(r'[^a-z0-9]+', '_', args.niche.lower()).strip('_')}_{args.state.lower()}.csv"
+
+    if args.fill_phones:
+        with open(out, newline="") as f:
+            leads = list(csv.DictReader(f))
+        used = fill_phones(user, password, leads, args.state, state_name, args.max_requests)
+        with open(out, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=FIELDS)
+            writer.writeheader()
+            writer.writerows(leads)
+        have = sum(1 for r in leads if r["phone"].strip())
+        print(f"\n{have} of {len(leads)} leads now have phones; saved to {out} using {used} API requests.")
+        return
 
     leads, seen = [], set()
     cities = CITIES[args.state]
