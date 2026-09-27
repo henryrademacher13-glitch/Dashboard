@@ -175,10 +175,10 @@ card(2306, 680, 430, 620, ORANGE, 'C', 'You get 0 / 0', f'''
 <div class="ex">{LIM('x→−2')} {F('x² + 5x + 6', 'x² − 4')} → {F('0', '0')}</div>
 <div class="note">0/0 usually means a <b>hole</b> (a shared factor). Rewrite, then plug in again.</div>
 <div class="toolhint">
-<div>Polynomials? → <b>Factor</b></div>
+<div>Polynomials? → <b>Factor</b> (or <b>Expand</b> first)</div>
 <div>Square roots? → <b>Conjugate</b></div>
 <div>Fractions in fractions? → <b>Common denominator</b></div>
-<div>sin, cos, tan? → <b>Special trig limits</b></div>
+<div>sin, cos, tan? → <b>Trig limits / identities</b></div>
 <div>Trapped by bounds? → <b>Squeeze</b></div>
 </div>
 <div class="down">Go to the 0/0 Toolbox ↓</div>
@@ -199,10 +199,10 @@ card(2760, 680, 430, 620, PINK, 'D', 'Piecewise, |x|, or a split point', f'''
 
 # ============ TOOLBOX ============
 TY = 1435; TH = 625
-g_fac = graph(420, 140, (-5, 1.8), (-3, 2),
+g_fac = graph(400, 140, (-5, 1.8), (-3, 2),
     curves=[(lambda x: (x + 3) / (x - 2), -5, 1.8, ORANGE)], dots=[(-2, -0.25, ORANGE, True)],
     labels=[(-2, 0.35, 'hole (−2, −¼)', SLATE, 'middle')], ystep=1)
-card(1400, TY, 464, TH, ORANGE, '1', 'Factor & cancel', f'''
+card(1070, TY, 441, TH, ORANGE, '1', 'Factor & cancel', f'''
 <div class="ex">{LIM('x→−2')} {F('x² + 5x + 6', 'x² − 4')}</div>
 <div class="ex">= {LIM('x→−2')} {F('(x + 2)(x + 3)', '(x + 2)(x − 2)')}</div>
 <div class="ex">= {LIM('x→−2')} {F('x + 3', 'x − 2')} = {F('1', '−4')} = <b>−¼</b></div>
@@ -211,10 +211,22 @@ card(1400, TY, 464, TH, ORANGE, '1', 'Factor & cancel', f'''
 <div class="note">Know your patterns: a² − b², trinomials, a³ ± b³ = (a ± b)(a² ∓ ab + b²).</div>
 ''')
 
-g_con = graph(420, 130, (-0.2, 9), (0, 0.55),
+g_exp = graph(400, 140, (-4, 3), (0, 10),
+    curves=[(lambda x: x + 6, -4, 3, ORANGE)], dots=[(0, 6, ORANGE, True)],
+    labels=[(0.3, 7.6, 'hole (0, 6)', SLATE)], ystep=2)
+card(1527, TY, 441, TH, ORANGE, '2', 'Expand & simplify', f'''
+<div class="ex">{LIM('x→0')} {F('(x + 3)² − 9', 'x')}</div>
+<div class="ex">= {LIM('x→0')} {F('x² + 6x + 9 − 9', 'x')}</div>
+<div class="ex">= {LIM('x→0')} {F('x(x + 6)', 'x')} = {LIM('x→0')} (x + 6) = <b>6</b></div>
+{g_exp}
+{table(['−0.01', '0.01'], ['5.99', '6.01'], cls='sm')}
+<div class="note">Can't factor yet? <b>Multiply out</b> the powers/products first, let the constants cancel, then factor out x.</div>
+''')
+
+g_con = graph(400, 110, (-0.2, 9), (0, 0.55),
     curves=[(lambda x: 1 / (math.sqrt(x) + 2), 0, 9, ORANGE)], dots=[(4, 0.25, ORANGE, True)],
     labels=[(4, 0.33, '(4, ¼)', SLATE, 'middle')], ystep=0.25)
-card(1884, TY, 464, TH, ORANGE, '2', 'Rationalize (conjugate)', f'''
+card(1984, TY, 441, TH, ORANGE, '3', 'Rationalize (conjugate)', f'''
 <div class="ex">{LIM('x→4')} {F(SQ('x') + ' − 2', 'x − 4')} · {F(SQ('x') + ' + 2', SQ('x') + ' + 2')}</div>
 <div class="ex">= {LIM('x→4')} {F('x − 4', '(x − 4)(' + SQ('x') + ' + 2)')}</div>
 <div class="ex">= {LIM('x→4')} {F('1', SQ('x') + ' + 2')} = <b>¼</b></div>
@@ -223,7 +235,7 @@ card(1884, TY, 464, TH, ORANGE, '2', 'Rationalize (conjugate)', f'''
 <div class="note">Multiply top &amp; bottom by the conjugate (a − b → a + b). <b>Don't</b> multiply out the side you want to cancel.</div>
 ''')
 
-card(2368, TY, 464, TH, ORANGE, '3', 'Common denominator', f'''
+card(2441, TY, 441, TH, ORANGE, '4', 'Common denominator', f'''
 <div class="ex">{LIM('x→0')} {F(F('1', 'x + 2') + ' − ' + F('1', '2'), 'x')}</div>
 <div class="ex">= {LIM('x→0')} {F(F('2 − (x + 2)', '2(x + 2)'), 'x')}</div>
 <div class="ex">= {LIM('x→0')} {F('−x', '2x(x + 2)')} = {LIM('x→0')} {F('−1', '2(x + 2)')}</div><div class="ex">= {F('−1', '2(0 + 2)')} = <b>−¼</b></div>
@@ -231,22 +243,23 @@ card(2368, TY, 464, TH, ORANGE, '3', 'Common denominator', f'''
 <div class="note">Use this for a <b>complex fraction</b>: combine the little fractions into one, then cancel the x.</div>
 ''')
 
-g_trig = graph(420, 130, (-10, 10), (-0.4, 1.3),
+g_trig = graph(400, 95, (-10, 10), (-0.4, 1.3),
     curves=[(lambda x: math.sin(x) / x if x != 0 else None, -10, 10, ORANGE, 4, 700)], dots=[(0, 1, ORANGE, True)],
     labels=[(0.6, 1.08, '(0, 1)', SLATE)], xstep=2, ystep=0.5)
-card(2852, TY, 464, TH, ORANGE, '4', 'Special trig limits', f'''
-<div class="keybox">{LIM('x→0')} {F('sin x', 'x')} = 1 &nbsp;&nbsp; {LIM('x→0')} {F('1 − cos x', 'x')} = 0</div>
+card(2898, TY, 441, TH, ORANGE, '5', 'Trig limits & identities', f'''
+<div class="keybox">{LIM('x→0')} {F('sin x', 'x')} = 1 &nbsp; {LIM('x→0')} {F('1 − cos x', 'x')} = 0</div>
 {g_trig}
-{table(['±0.1', '±0.01'], ['0.99833', '0.99998'], cls='sm')}
-<div class="ex">{LIM('x→0')} {F('sin 5x', '3x')} = {F('5', '3')} · {LIM('x→0')} {F('sin 5x', '5x')} = {F('5', '3')} · 1 = <b>{F('5', '3')}</b></div>
-<div class="note">Match the angle and the denominator. Also: tan x = {F('sin x', 'cos x')}, so {LIM('x→0')} {F('tan x', 'x')} = 1.</div>
+<div class="ex">{LIM('x→0')} {F('sin 5x', '3x')} = {F('5', '3')} · {LIM('x→0')} {F('sin 5x', '5x')} = <b>{F('5', '3')}</b></div>
+<div class="sub"><b>Identity:</b> sin²θ = 1 − cos²θ</div>
+<div class="ex">{LIM('θ→0')} {F('1 − cos θ', 'sin²θ')} = {LIM('θ→0')} {F('1 − cos θ', '(1 − cos θ)(1 + cos θ)')}</div>
+<div class="ex">= {LIM('θ→0')} {F('1', '1 + cos θ')} = {F('1', '1 + 1')} = <b>½</b></div>
 ''')
 
-g_sq = graph(420, 130, (-0.5, 0.5), (-0.27, 0.27),
+g_sq = graph(400, 130, (-0.5, 0.5), (-0.27, 0.27),
     curves=[(lambda x: x*x, -0.5, 0.5, '#94a3b8', 3), (lambda x: -x*x, -0.5, 0.5, '#94a3b8', 3),
             (lambda x: x*x*math.sin(1/x) if x != 0 else 0, -0.5, 0.5, ORANGE, 3, 3000)],
     labels=[(0.3, 0.14, 'y = x²', SLATE, 'end'), (0.3, -0.17, 'y = −x²', SLATE, 'end')], xstep=0.25, ystep=0.1)
-card(3336, TY, 464, TH, ORANGE, '5', 'Squeeze theorem', f'''
+card(3355, TY, 441, TH, ORANGE, '6', 'Squeeze theorem', f'''
 <div class="sub">If g(x) ≤ f(x) ≤ h(x) near c and {LIM('x→c')} g = {LIM('x→c')} h = L, then {LIM('x→c')} f = L.</div>
 <div class="ex">{LIM('x→0')} x² sin({F('1', 'x')}):</div>
 <div class="ex">−1 ≤ sin({F('1', 'x')}) ≤ 1 &nbsp;⇒&nbsp; <span style="white-space:nowrap">−x² ≤ x² sin({F('1', 'x')}) ≤ x²</span></div>
@@ -256,12 +269,12 @@ card(3336, TY, 464, TH, ORANGE, '5', 'Squeeze theorem', f'''
 ''')
 
 # ============ CONTINUITY / DNE ============
-mw, mh = 290, 150
+mw, mh = 220, 120
 g_rem = graph(mw, mh, (-1, 4), (-1, 4.5), curves=[(lambda x: 0.8*x + 0.6, -1, 4, PURPLE)], dots=[(2, 2.2, PURPLE, True), (2, 3.8, PURPLE, False)])
 g_jmp = graph(mw, mh, (-1, 4), (-1, 4.5), curves=[(lambda x: 1, -1, 2, PURPLE), (lambda x: 3, 2, 4, PURPLE)], dots=[(2, 1, PURPLE, False), (2, 3, PURPLE, True)])
 g_inf2 = graph(mw, mh, (-1, 4), (-4, 4), curves=[(lambda x: 1 / (x - 1.5), -1, 4, PURPLE, 3.5, 600)], vlines=[(1.5, RED)])
 g_osc = graph(mw, mh, (-1, 1), (-1.4, 1.4), curves=[(lambda x: math.sin(1 / x) if x != 0 else None, -1, 1, PURPLE, 2.5, 6000)], xstep=0.5, ystep=0.5)
-card(40, 1360, 1330, 700, PURPLE, 'CHECK', 'Continuity & when a limit does not exist', f'''
+card(40, 1360, 1000, 700, PURPLE, 'CHECK', 'Continuity & when a limit does not exist', f'''
 <div class="cols2">
 <div>
 <div class="sub"><b>f is continuous at x = c</b> if all 3 are true:</div>
@@ -295,7 +308,7 @@ nodes = f'''
 <div class="node dec" style="left:1600px;top:290px;width:640px;height:70px">How is the function given?</div>
 <div class="node dec" style="left:1860px;top:420px;width:860px;height:72px">Given an EXPRESSION: is x → ±∞?</div>
 <div class="node step" style="left:1400px;top:548px;width:1790px;height:86px"><span class="stepn">STEP 1</span> Direct substitution: plug x = c into f(x). What do you get?</div>
-<div class="band" style="left:1400px;top:1362px;width:2400px;height:60px">0/0 TOOLBOX: rewrite the function, then plug in again. Still 0/0? Try another tool.</div>
+<div class="band" style="left:1070px;top:1362px;width:2730px;height:60px">0/0 TOOLBOX: rewrite the function, then plug in again. Still 0/0? Try another tool.</div>
 '''
 
 # ============ ARROWS ============
@@ -370,7 +383,7 @@ body{{width:{W}px;height:{H}px;background:#eef2f7;font-family:"DejaVu Sans","Lib
 .types{{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:4px}}
 .types > div{{display:flex;flex-direction:column;align-items:center;gap:4px}}
 .tt{{font-weight:900;font-size:22px;color:{PURPLE}}}
-.tc{{font-size:18px;text-align:center;line-height:1.25}}
+.tc{{font-size:16px;text-align:center;line-height:1.25}}
 .node{{position:absolute;display:flex;align-items:center;justify-content:center;font-weight:800;text-align:center;box-shadow:0 5px 12px rgba(15,23,42,.14)}}
 .start{{background:#0f172a;color:#fff;border-radius:44px;font-size:36px}}
 .dec{{background:#fef9c3;border:4px solid #ca8a04;border-radius:16px;font-size:30px;color:#713f12}}
