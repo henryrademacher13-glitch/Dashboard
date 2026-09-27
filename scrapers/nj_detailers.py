@@ -126,7 +126,11 @@ def search_url(town, page):
 
 
 def looks_blocked(status, body):
-    return status != 200 or "unusual traffic" in body or "/sorry/" in body
+    # Only trust the text check when the page has no listings at all; normal
+    # result pages can mention "unusual traffic" in their bundled scripts.
+    if status != 200:
+        return True
+    return "rllt__details" not in body and "Our systems have detected unusual traffic" in body
 
 
 def fetch_page(token, url, state):
@@ -135,6 +139,7 @@ def fetch_page(token, url, state):
     for mode in modes:
         state["requests"] += 1
         status, body = fetch(token, url, mode)
+        state["last_body"] = body
         label = ", ".join(f"{k}={v}" for k, v in mode.items()) or "standard"
         if looks_blocked(status, body):
             print(f"  [{label}] blocked or failed (HTTP {status})")
@@ -144,7 +149,6 @@ def fetch_page(token, url, state):
             state["mode"] = MODES.index(mode)
             return leads, body
         print(f"  [{label}] page loaded but no listings found, trying next mode")
-        state["last_body"] = body
     return [], state.get("last_body", "")
 
 
