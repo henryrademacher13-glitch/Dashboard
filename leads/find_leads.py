@@ -133,6 +133,8 @@ def main():
     p.add_argument("--count", type=int, default=100, help="stop after this many unique leads")
     p.add_argument("--max-requests", type=int, default=40, help="hard cap on paid API calls")
     p.add_argument("--out", help="CSV path (default: <niche>_<state>.csv)")
+    p.add_argument("--resume", action="store_true",
+                   help="keep leads already in the CSV and continue after the last city searched")
     args = p.parse_args()
 
     user, password = os.environ.get("OXY_USER"), os.environ.get("OXY_PASS")
@@ -143,10 +145,21 @@ def main():
     out = args.out or f"{re.sub(r'[^a-z0-9]+', '_', args.niche.lower()).strip('_')}_{args.state.lower()}.csv"
 
     leads, seen = [], set()
-    local_mode = True  # try the 20-per-page Places view; fall back if it yields nothing
+    cities = CITIES[args.state]
+    if args.resume and os.path.exists(out):
+        with open(out, newline="") as f:
+            leads = list(csv.DictReader(f))
+        seen = {dedupe_key(r) for r in leads}
+        searched = {r["city_searched"] for r in leads}
+        last = max((i for i, c in enumerate(cities) if c in searched), default=-1)
+        cities = cities[last + 1:]
+        print(f"Resuming with {len(leads)} leads; starting at {cities[0] if cities else '(no cities left)'}.")
+    # Oxylabs rejects tbm=lcl (it wants the google_maps source, which can't be
+    # parsed), so plain search with its 3-business local pack is what works.
+    local_mode = False
     requests_made = 0
 
-    for city in CITIES[args.state]:
+    for city in cities:
         if len(leads) >= args.count or requests_made >= args.max_requests:
             break
         query = f"{args.niche} {city} {args.state}"
