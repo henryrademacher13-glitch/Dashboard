@@ -152,9 +152,11 @@ def fetch_page(token, url, state):
     return [], state.get("last_body", "")
 
 
-def key(lead):
+def keys(lead):
+    """A lead is a duplicate if its phone or its name was already seen."""
     digits = re.sub(r"\D", "", lead["phone"])
-    return digits or lead["name"].lower()
+    name = re.sub(r"\W+", " ", lead["name"].lower()).strip()
+    return {k for k in (digits and "p" + digits, name and "n" + name) if k}
 
 
 def save(path, leads):
@@ -170,7 +172,21 @@ def main():
     ap.add_argument("--limit", type=int, default=200, help="stop after this many leads")
     ap.add_argument("--max-requests", type=int, default=80, help="credit safety cap")
     ap.add_argument("--out", default="nj_detailers.csv")
+    ap.add_argument("--file", help="parse a saved results page instead (uses no credits)")
     args = ap.parse_args()
+
+    if args.file:
+        with open(args.file, errors="ignore") as f:
+            leads = parse(f.read())
+        seen, unique = set(), 0
+        for lead in leads:
+            if keys(lead) & seen:
+                continue
+            seen |= keys(lead)
+            unique += 1
+            print({k: lead[k] for k in ("name", "phone", "address", "rating", "reviews")})
+        print(f"\n{unique} unique leads parsed from {args.file}")
+        return
 
     token = os.environ.get("SCRAPEDO_TOKEN")
     if not token:
@@ -202,9 +218,9 @@ def main():
             leads, _ = fetch_page(token, search_url(town, page), state)
             new = 0
             for lead in leads:
-                k = key(lead)
-                if k and k not in seen and len(found) < args.limit:
-                    seen.add(k)
+                k = keys(lead)
+                if k and not k & seen and len(found) < args.limit:
+                    seen |= k
                     lead["search_town"] = town
                     found.append(lead)
                     new += 1
